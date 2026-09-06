@@ -505,6 +505,51 @@ body {
     .sevadaara-info {
         font-size: 0.85rem;
     }
+
+    .hero-banner {
+        padding: 1.75rem 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1.75rem;
+    }
+
+    .hero-title {
+        font-size: 1.45rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .cta-btn {
+        padding: 8px 18px;
+        font-size: 0.88rem;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .about-card {
+        padding: 1.25rem 1.25rem;
+        border-radius: 10px;
+    }
+
+    .about-text {
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+    .feature-card {
+        padding: 1rem 1.15rem;
+    }
+
+    .feature-icon {
+        font-size: 1.8rem;
+    }
+
+    .feature-info h3 {
+        font-size: 1.1rem;
+    }
 }
 
 /* Next Upcoming Event Highlight Styling */
@@ -543,4 +588,198 @@ body {
         box-shadow: 0 8px 32px rgba(217, 119, 6, 0.38);
         border-color: #f59e0b;
     }
+}
+
+/* Hero Banner Section */
+.hero-banner {
+    background: linear-gradient(135deg, #800020, #580016);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(128, 0, 32, 0.2);
+    border-bottom: 5px solid #f59e0b;
+    margin-bottom: 2.5rem;
+}
+
+.hero-badge {
+    background: rgba(245, 158, 11, 0.2);
+    border: 1px solid #f59e0b;
+    color: #fde68a;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+}
+
+.hero-title {
+    font-family: var(--font-serif-kannada);
+    font-size: 2rem;
+    margin: 0.25rem 0 0.5rem 0;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #f1f5f9;
+    margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+}
+
+.cta-btn.primary {
+    background-color: #f59e0b;
+    color: #1e293b;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.cta-btn.primary:hover {
+    background-color: #d97706;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.cta-btn.secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cta-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Section Header Divider */
+.section-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.7rem;
+    color: #800020;
+    margin-bottom: 0.3rem;
+}
+
+.heading-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #800020, #f59e0b);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* About Temple Section */
+.about-section {
+    margin-bottom: 3rem;
+}
+
+.about-card {
+    background: #fffdfa;
+    border: 1px solid #fde68a;
+    border-left: 5px solid #d97706;
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.about-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #334155;
+    margin-bottom: 1rem;
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Quick Features Grid */
+.features-section {
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: #f59e0b;
+}
+
+.feature-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.feature-info h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.2rem;
+    color: #1e293b;
+    font-family: var(--font-serif-kannada);
+}
+
+.feature-info p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.92rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.feature-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #d97706;
+}
+
+/* Footer Styling */
+.site-footer {
+    background: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
 }
