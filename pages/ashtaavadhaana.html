@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಅಷ್ಟಾವಧಾನ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link active">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ಅಷ್ಟಾವಧಾನ ಸೇವೆ</h2>
+            <p class="kn-subheading">ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಅಷ್ಟಾವಧಾನ ಸೇವೆಯ ಶ್ಲೋಕಗಳು</p>
+        </div>
+
+        <!-- Search / Filter Box for Sevas
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+                type="text" 
+                id="sevaSearch" 
+                placeholder="ಸೇವೆಯ ಹೆಸರನ್ನು ಹುಡುಕಿ (ಉದಾ: ಋಗ್ವೇದ, ಯಜುರ್ವೇದ)..." 
+                onkeyup="filterSevas()"
+            />
+        </div> -->
+
+        <div class="seva-list" id="sevaContainer">
+
+            <!-- Rigveda Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಋಗ್ವೇದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಸ್ವರ್ಗವನಾಳ್ವನತನಯನ ತೇರ್ಗುದುರೆಯ ಪಿಡಿದು ಪೊರೆದ ದೇವರ ದೇವ |</p>
+                        <p class="verse-line">ರುಕ್ಮಿಣಿಪ್ರಾಣನಾಥನೆ ಋಗ್ವೇದವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಋಗ್ವೇದ ಸೇವಪ್ರಿಯ ಋಗ್ವೇದ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಸ್ವರ್ಗವನಾಳ್ವನ-ತನಯನ:</strong> ಸ್ವರ್ಗವನ್ನು ಆಳುವವನು ಇಂದ್ರ; ಅವನ ತನಯ (ಮಗ) ಅರ್ಜುನ.</p>
+                        <p><strong>ತೇರ್-ಕುದುರೆಯ ಪಿಡಿದು:</strong> ಯುದ್ಧರಂಗದಲ್ಲಿ ಆ ಅರ್ಜುನನ ರಥದ ಕುದುರೆಗಳ ಲಗಾಮನ್ನು ಕೈಯಲ್ಲಿ ಹಿಡಿದು.</p>
+                        <p><strong>ಪೊರೆದ:</strong> ರಕ್ಷಿಸಿದ.</p>
+                        <p><strong>ದೇವರ ದೇವ:</strong> ದೇವತೆಗಳಿಗೂ ದೇವನಾದವನೇ.</p>
+                        <p><strong>ರುಕ್ಮಿಣಿ-ಪ್ರಾಣನಾಥನೆ:</strong> ಶ್ರೀ ಕೃಷ್ಣನೇ.</p>
+                        <p><strong>ಋಗ್ವೇದವನೇ ಕೇಳು:</strong> ಅತ್ಯಂತ ಪುರಾತನವಾದ ಈ ಋಗ್ವೇದ ಮಂತ್ರಗಳನ್ನು ಆಲಿಸು.</p>
+                        <p><strong>ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ:</strong> ದಯೆಯೇ ಒಂದು ಆಂಗವಾಗಿ ಉಳ್ಳ ಭಗವಂತನೇ.</p>
+                        <p><strong>ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ:</strong> ಪ್ರಭುಗಳೇ, ಪರಾಕು.</p>
+                        <p><strong>ಸೇವಮವಧಾರಯ:</strong> ಈ ಸೇವೆಯನ್ನು ದಯವಿಟ್ಟು ಸ್ವೀಕರಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Yajurveda Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಯಜುರ್ವೇದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಅಜಜನಕನಿತ್ಯಾರ್ಚಿತ ಭಜಕರವಾಂಛಿತವನೀವ ತ್ರಿಜಗನ್ನಾಯಕ |</p>
+                        <p class="verse-line">ಭುಜಗನ ಮೇಲೊರಗಿದ ದೇವನೇ ಯಜುರ್ವೇದವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಯಜುರ್ವೇದ ಸೇವಪ್ರಿಯ ಯಜುರ್ವೇದ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಅಜ-ಜನಕ:</strong> 'ಅಜ' ಎಂದರೆ ಜನ್ಮವಿಲ್ಲದ ಬ್ರಹ್ಮದೇವ; ಅವನನ್ನು ಸೃಷ್ಟಿಸಿದ ತಂದೆ.</p>
+                        <p><strong>ನಿತ್ಯಾರ್ಚಿತ:</strong> ಪ್ರತಿದಿನವೂ ಮುನಿ-ದೇವತೆಗಳಿಂದ ಪೂಜಿಸಲ್ಪಡುವವನೇ.</p>
+                        <p><strong>ಭಜಕರ-ವಾಂಛಿತವನು-ಈವ:</strong> ನಿನ್ನನ್ನು ಭಜಿಸುವ ಭಕ್ತರ ಇಷ್ಟಾರ್ಥಗಳನ್ನು (ವಾಂಛಿತ) ಕರುಣಿಸುವ (ಈವ) ದಾತನೇ.</p>
+                        <p><strong>ತ್ರಿಜಗನ್ನಾಯಕ:</strong> ಮೂರು ಲೋಕಗಳ ಒಡೆಯ.</p>
+                        <p><strong>ಭುಜಗನ ಮೇಲೊರಗಿದ:</strong> ಸರ್ಪರಾಜನಾದ ಆದಿಶೇಷನ ಮೇಲೆ ಮಲಗಿರುವ (ಕ್ಷೀರಾಬ್ಧಿಶಯನ).</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Saamaveda Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಸಾಮವೇದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ವಾಮನನೆನಿಸಿ ಬಲಿಯೊಳು ಭೂಮಿಯ ಬೇಡುತ ಭಂಗವ ಬಿಡಿಸಿದ ದೇವರ ದೇವ |</p>
+                        <p class="verse-line">ಸಾಮವೇದಾಗಮವನೇ ಪ್ರೇಮದಿ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಸಾಮವೇದ ಸೇವಪ್ರಿಯ ಸಾಮವೇದ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ವಾಮನನೆನಿಸಿ:</strong> ವಾಮನ ಅವತಾರವನ್ನು ತಾಳಿ.</p>
+                        <p><strong>ಬಲಿಯೊಳು ಭೂಮಿಯ ಬೇಡುತ:</strong> ಬಲಿಚಕ್ರವರ್ತಿಯ ಬಳಿ ಬಂದು ಮೂರು ಹೆಜ್ಜೆ ಭೂಮಿಯನ್ನು ಭಿಕ್ಷೆಯಾಗಿ ಬೇಡುತ್ತಾ.</p>
+                        <p><strong>ಭಂಗವ ಬಿಡಿಸಿದ:</strong> ದೇವತೆಗಳಿಗಿದ್ದ ಕಷ್ಟ/ಅಪಮಾನವನ್ನು (ಭಂಗ) ನಿವಾರಿಸಿದವನೇ (ಅಥವಾ ಬಲಿಯ ಅಹಂಕಾರವನ್ನು ಮುರಿದವನೇ).</p>
+                        <p><strong>ಸಾಮವೇದ-ಆಗಮವನೇ:</strong> ಸಂಗೀತಮಯವಾದ ಸಾಮವೇದದ ಶ್ರುತಿಗಳನ್ನು.</p>
+                        <p><strong>ಪ್ರೇಮದಿ ಕೇಳು:</strong> ಅತ್ಯಂತ ಪ್ರೀತಿಯಿಂದ ಆಲಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Atharvanaveda Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಅಥರ್ವಣವೇದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಪೃಥ್ವೀಶರ ವಂಶವನೆಲ್ಲ ಮತ್ತಹನನವ ಮಾಡಿ ಮೆರೆದ ಭಾರ್ಗವ ರೂಪನೇ |</p>
+                        <p class="verse-line">ಅಥರ್ವಣವೇದಾಗಮವನೇ ಪ್ರತಿವಿದ್ಯವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಅಥರ್ವಣವೇದ ಸೇವಪ್ರಿಯ ಅಥರ್ವಣವೇದ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಪೃಥ್ವೀಶರ ವಂಶವನೆಲ್ಲ:</strong> ಭೂಮಿಯನ್ನು ಆಳುತ್ತಿದ್ದ ದುಷ್ಟ ಕ್ಷತ್ರಿಯ ರಾಜರ ವಂಶಗಳನ್ನೆಲ್ಲಾ.</p>
+                        <p><strong>ಮತ್ತ-ಹನನವ ಮಾಡಿ:</strong> ಮದೋನ್ಮತ್ತರಾಗಿದ್ದ (ಮತ್ತ) ರಾಜರನ್ನು ಸಂಹಾರ (ಹನನ) ಮಾಡಿ.</p>
+                        <p><strong>ಮೆರೆದ ಭಾರ್ಗವ ರೂಪನೇ:</strong> ಭೃಗು ವಂಶದ ಪರಶುರಾಮನಾಗಿ (ಭಾರ್ಗವ) ವಿಜೃಂಭಿಸಿದವನೇ.</p>
+                        <p><strong>ಪ್ರತಿವಿದ್ಯವನೇ ಕೇಳು:</strong> ಶತ್ರುನಾಶಕ ಹಾಗೂ ರಕ್ಷಣಾತ್ಮಕವಾದ ಈ ಸರ್ವೋಚ್ಚ ವಿದ್ಯೆಯನ್ನು (ಅಥರ್ವಣ) ಆಲಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Vedantashaastra Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ವೇದಾಂತ ಶಾಸ್ತ್ರ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ವಸ್ತ್ರವ ಸೆಳೆಯಲು ದ್ರುಪದಪುತ್ರಿಯ ಮಾನವ ಕಾಯ್ದೆ ಕರುಣಾಕರನೇ |</p>
+                        <p class="verse-line">ಶಸ್ತ್ರಜಿತಾತ್ಮಜ ಪ್ರಿಯನೇ ಶಾಸ್ತ್ರವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ವೇದಾಂತ ಶಾಸ್ತ್ರ ಸೇವಪ್ರಿಯ ವೇದಾಂತಶಾಸ್ತ್ರ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ವಸ್ತ್ರವ ಸೆಳೆಯಲು:</strong> ಕೌರವರ ಸಭೆಯಲ್ಲಿ ಸೀರೆಯನ್ನು ಎಳೆಯುತ್ತಿದ್ದಾಗ.</p>
+                        <p><strong>ದ್ರುಪದಪುತ್ರಿಯ:</strong> ದ್ರುಪದ ರಾಜನ ಮಗಳಾದ ದ್ರೌಪದಿಯ.</p>
+                        <p><strong>ಮಾನವ ಕಾಯ್ದೆ:</strong> ಮಾನವನ್ನು ಅಕ್ಷಯ ವಸ್ತ್ರ ನೀಡಿ ರಕ್ಷಿಸಿದ.</p>
+                        <p><strong>ಕರುಣಾಕರನೇ:</strong> ದಯಾಸಾಗರನೇ.</p>
+                        <p><strong>ಶಸ್ತ್ರಜಿತಾತ್ಮಜ ಪ್ರಿಯನೇ:</strong> 'ಶಸ್ತ್ರಜಿತ್' ಎಂದರೆ ಯುದ್ಧದಲ್ಲಿ ಶಸ್ತ್ರಗಳಿಂದ ಗೆಲ್ಲುವ ಅರ್ಜುನ; ಅವನ ಆತ್ಮಜ (ಮಗ) ಅಭಿಮನ್ಯು, ಅಥವಾ ಅರ್ಜುನನಿಗೆ ಪ್ರಿಯನಾದವನೇ ಕೃಷ್ಣ.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Purana Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಪುರಾಣ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ವಾರಿಜನಾಭನೆ ವಿಶ್ವ ಪ್ರೇರಕ ಪಾವನಚರಿತ ಪಂಕಜನೇತ್ರಾ |</p>
+                        <p class="verse-line">ಕಾರಣಿಕ ನಿಗಮಾಗಮ ಪುರಾಣವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಪುರಾಣ ಸೇವಪ್ರಿಯ ಪುರಾಣ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ವಾರಿಜ-ನಾಭನೆ:</strong> ನಾಭಿಯಲ್ಲಿ (ಹೊಕ್ಕಳಿನಲ್ಲಿ) ತಾವರೆಯನ್ನು (ವಾರಿಜ) ಹೊಂದಿರುವ ವಿಷ್ಣುವೇ.</p>
+                        <p><strong>ವಿಶ್ವ ಪ್ರೇರಕ:</strong> ಜಗತ್ತಿನ ಸಮಸ್ತ ಜೀವಿಗಳನ್ನು ಮುನ್ನಡೆಸುವ ಶಕ್ತಿಯೇ.</p>
+                        <p><strong>ಪಾವನ-ಚರಿತ:</strong> ಕೇಳುಗರನ್ನು ಪವಿತ್ರಗೊಳಿಸುವ ಇತಿಹಾಸವುಳ್ಳವನೇ.</p>
+                        <p><strong>ಪಂಕಜ-ನೇತ್ರಾ:</strong> ತಾವರೆಯಂತಹ ಕಣ್ಣುಳ್ಳವನೇ.</p>
+                        <p><strong>ಕಾರಣಿಕ ನಿಗಮ-ಆಗಮ:</strong> ವೇದ (ನಿಗಮ) ಮತ್ತು ತಂತ್ರಗಳಿಗೆ (ಆಗಮ) ಮೂಲ ಕಾರಣನಾದವನೇ.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Gadya Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಗದ್ಯಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಶ್ರದ್ಧಾನ್ವಿತನೆನಿಸಿ ಅನವರತವು ಹೃನ್ಮನದೊಳಿದ್ದು ಸಲಹಿದಾತನೇ|</p>
+                        <p class="verse-line">ಉದ್ಧರಿಸಿ ಕಾವ ದೇವನೇ ಗದ್ಯವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಗದ್ಯಸೇವ ಸೇವಪ್ರಿಯ ಗದ್ಯಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಶ್ರದ್ಧಾನ್ವಿತನೆನಿಸಿ:</strong> ಭಕ್ತರ ಶ್ರದ್ಧೆಯನ್ನು ಮೆಚ್ಚುವವನಾಗಿ.</p>
+                        <p><strong>ಅನವರತವು:</strong> ಯಾವುದೇ ಬಿಡುವಿಲ್ಲದೆ ನಿರಂತರವಾಗಿ.</p>
+                        <p><strong>ಹೃನ್-ಮನದೊಳಿದ್ದು:</strong> ಹೃದಯ ಮತ್ತು ಮನಸ್ಸುಗಳ ಒಳಗೆ ಅಂತರ್ಯಾಮಿಯಾಗಿ ನೆಲೆಸಿ.</p>
+                        <p><strong>ಸಲಹಿದಾತನೇ:</strong> ನಮ್ಮನ್ನು ಸಾಕಿ ಸಲಹುವವನೇ.</p>
+                        <p><strong>ಉದ್ಧರಿಸಿ ಕಾವ:</strong> ಸಂಸಾರದ ಸಾಗರದಿಂದ ಮೇಲಕ್ಕೆತ್ತಿ (ಉದ್ಧರಿಸಿ) ರಕ್ಷಿಸುವ ದೇವನೇ.</p>
+                        <p><strong>ಗದ್ಯವನೇ ಕೇಳು:</strong> ಛಂದಸ್ಸಿನ ಬಂಧನವಿಲ್ಲದ, ನೇರವಾದ ಭಕ್ತಿಭಾವದ ಗದ್ಯ ಕಾವ್ಯವನ್ನು ಆಲಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Sangeetha Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಸಂಗೀತ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಗಂಗೆಯನುಂಗುಟದಿಂಪಡೆದ ಅಂಗಜಪಿತ ರಂಗನಾಥ ಮಂಗಳ ಮಹಿಮಾ |</p>
+                        <p class="verse-line">ಸಂಗರಾಂಗಣಧೀರನೇ ಸಂಗೀತವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಸಂಗೀತ ಸೇವಪ್ರಿಯ ಸಂಗೀತ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                    <details class="collapsible-section">
+                        <summary class="collapsible-toggle">
+                            <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                            <span class="toggle-icon">▼</span>
+                        </summary>
+                        <div class="collapsible-content">
+                            <p><strong>ಗಂಗೆಯನ್-ಉಂಗುಟದಿಂ-ಪಡೆದ:</strong> ತ್ರಿವಿಕ್ರಮಾವತಾರದಲ್ಲಿ ಬ್ರಹ್ಮಾಂಡದ ತುದಿಯನ್ನು ಮುಟ್ಟಿದ ತನ್ನ ಕಾಲಿನ ಹೆಬ್ಬೆರಳಿನಿಂದ (ಉಂಗುಟ) ಪವಿತ್ರ ಗಂಗೆಯನ್ನು ಸೃಷ್ಟಿಸಿದವನೇ.</p>
+                            <p><strong>ಅಂಗಜ-ಪಿತ:</strong> ಮನ್ಮಥನ (ಅಂಗಜ) ತಂದೆಯಾದವನೇ (ಕೃಷ್ಣನ ಮಗ ಪ್ರದ್ಯುಮ್ನನೇ ಮನ್ಮಥನ ಅವತಾರ).</p>
+                            <p><strong>ಮಂಗಳ ಮಹಿಮಾ:</strong> ಅತ್ಯಂತ ಶುಭಪ್ರದವಾದ ಕೀರ್ತಿಯುಳ್ಳವನೇ.</p>
+                            <p><strong>ಸಂಗರ-ಅಂಗಣ-ಧೀರನೇ:</strong> ಯುದ್ಧರಂಗದಲ್ಲಿ (ಸಂಗರ) ಅತ್ಯಂತ ಧೀರನಾಗಿ ನಿಲ್ಲುವವನೇ.</p>
+                    </details>
+
+                    <!-- Seva Sub-Body for Extra Verses -->
+                    <div class="seva-sub-body">
+                        <div class="verse-box">
+                            <p class="verse-line">ಪೂರ್ವಂ ರಾಮ ತಪೋವನಾಭಿಗಮನಂ ಹತ್ವಾ ಮೃಗಂ ಕಾಂಚನಂ |</p>
+                            <p class="verse-line">ವೈದೇಹೀಹರಣಂ ಜಟಾಯುಮರಣಂ ಸುಗ್ರೀವಸಂಭಾಷಣಂ |</p>
+                            <p class="verse-line">ವಾಲೀನಿಗ್ರಹಣಂ ಸಮುದ್ರತರಣಂ ಲಂಕಾಪುರೀದಹನಂ |</p>
+                            <p class="verse-line">ಪಶ್ಚಾದ್ರಾವಣಕುಂಭಕರ್ಣಮಥನಂ ಏತದ್ಧಿ ರಾಮಾಯಣಂ ||</p>
+                        </div>
+                        <details class="collapsible-section">
+                        <summary class="collapsible-toggle">
+                            <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ಏಕಶ್ಲೋಕಿ ರಾಮಾಯಣ)</span>
+                            <span class="toggle-icon">▼</span>
+                        </summary>
+                        <div class="collapsible-content">
+                            <p><strong>ಪೂರ್ವಂ:</strong> ಮೊದಲಿಗೆ, ಆರಂಭದಲ್ಲಿ.</p>
+                            <p><strong>ರಾಮ ತಪೋವನ-ಅಭಿಗಮನಂ:</strong> ಶ್ರೀರಾಮನು ತಪಸ್ವಿಗಳು ವಾಸಿಸುವ ಅರಣ್ಯಕ್ಕೆ (ತಪೋವನ) ತೆರಳುವುದು.</p>
+                            <p><strong>ಹತ್ವಾ ಮೃಗಂ ಕಾಂಚನಂ:</strong> ಚಿನ್ನದ (ಕಾಂಚನ) ಮಾಯಾ ಜಿಂಕೆಯನ್ನು ಸಂಹರಿಸುವುದು.</p>
+                            <p><strong>ವೈದೇಹೀ-ಹರಣಂ:</strong> ವಿದೇಹ ರಾಜನ ಮಗಳಾದ ಸೀತೆಯ (ವೈದೇಹಿ) ಅಪಹರಣ.</p>
+                            <p><strong>ಜಟಾಯು-ಮರಣಂ:</strong> ಸೀತೆಯನ್ನು ರಕ್ಷಿಸಲು ಹೋರಾಡಿ ಜಟಾಯು ಪಕ್ಷಿ ಪ್ರಾಣತ್ಯಾಗ ಮಾಡುವುದು.</p>
+                            <p><strong>ಸುಗ್ರೀವ-ಸಂಭಾಷಣಂ:</strong> ಕಿಷ್ಕಿಂಧೆಯಲ್ಲಿ ಸುಗ್ರೀವನೊಂದಿಗೆ ಸ್ನೇಹದ ಮಾತುಕತೆ.</p>
+                            <p><strong>ವಾಲೀ-ನಿಗ್ರಹಣಂ:</strong> ಅಧರ್ಮಿಯಾದ ವಾಲಿಯ ಸಂಹಾರ.</p>
+                            <p><strong>ಸಮುದ್ರ-ತರಣಂ:</strong> ಲಂಕೆಗೆ ಹೋಗಲು ಸಮುದ್ರವನ್ನು ದಾಟುವುದು (ಸೇತುಬಂಧನ).</p>
+                            <p><strong>ಲಂಕಾಪುರೀ-ದಹನಂ:</strong> ಹನುಮಂತನಿಂದ ರಾಕ್ಷಸರ ನಗರಿ ಲಂಕೆಯ ದಹನ.</p>
+                            <p><strong>ಪಶ್ಚಾತ್-ರಾವಣ-ಕುಂಭಕರ್ಣ-ಮಥನಂ:</strong> ತದನಂತರ (ಪಶ್ಚಾತ್) ಮಹಾಘೋರ ರಾಕ್ಷಸರಾದ ಕುಂಭಕರ್ಣ ಮತ್ತು ರಾವಣರನ್ನು ಸದೆಬಡಿಯುವುದು (ಮಥನಂ).</p>
+                            <p><strong>ಏತತ್-ಹಿ ರಾಮಾಯಣಂ:</strong> ಇದೇ ಇಡೀ ರಾಮಾಯಣದ ಪವಿತ್ರ ಚರಿತ್ರೆ.</p>
+                        </div>
+                    </details>
+
+                        <div class="verse-box">
+                            <p class="verse-line">ನಾಗಾನಾಮಯುತಂ ತುರಗನಿಯುತಂ ಸಾರ್ಧಂ ರಥಾನಾಂ ಶತಂ ।</p>
+                            <p class="verse-line">ಪದಾತಿಂ ಶತಕೋಟಿ ಸೈನ್ಯನೃಪತೇ ಏಕಾಕಿಬಂಧೌ ರಣೇ ॥</p>
+                            <p class="verse-line">ಏವಂ ಕೋಟಿಕಬಂಧನರ್ತನವಿಭೋಃ ಕಿಂಚಿದ್ದ್ವನಿ ಕಿಂಕಿಣೀ |</p>
+                            <p class="verse-line">ಯಾಮಾರ್ಥಂ ಪರಮಾತ್ಮನೇ ರಘುಪತೇ ಕೋದಂಡ ಕಂಠಾರವಃ ॥</p>
+                        </div>
+                        <details class="collapsible-section">
+                        <summary class="collapsible-toggle">
+                            <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ಶ್ರೀರಾಮ ಕೋದಂಡ ಸ್ತುತಿ)</span>
+                            <span class="toggle-icon">▼</span>
+                        </summary>
+                        <div class="collapsible-content">
+                            <p><strong>ನಾಗಾನಾಂ-ಅಯುತಂ:</strong> ಹತ್ತು ಸಾವಿರ (ಅಯುತಂ) ಆನೆಗಳ ಸೇನೆ.</p>
+                            <p><strong>ತುರಗ-ನಿಯುತಂ:</strong> ಒಂದು ಲಕ್ಷ (ನಿಯುತಂ) ಕುದುರೆಗಳ ಸೇನೆ.</p>
+                            <p><strong>ಸಾರ್ಧಂ ರಥಾನಾಂ ಶತಂ:</strong> ನೂರಾರು ರಥಗಳ ಮಹಾ ವ್ಯೂಹದೊಂದಿಗೆ.</p>
+                            <p><strong>ಪದಾತಿಂ ಶತಕೋಟಿ:</strong> ನೂರು ಕೋಟಿಯಷ್ಟಿರುವ ಕಾಲಾಳುಗಳ (ಪದಾತಿಂ) ಸೈನಿಕರು.</p>
+                            <p><strong>ಸೈನ್ಯ-ನೃಪತೇ:</strong> ಇಂತಹ ಪ್ರಚಂಡ ರಾಕ್ಷಸ ಸೈನ್ಯದ ರಾಜರ ನಡುವೆ (ರಾವಣಾದಿಗಳು).</p>
+                            <p><strong>ಏಕಾಕಿ-ಬಂಧೌ ರಣೇ:</strong> ರಣರಂಗದಲ್ಲಿ ಯಾವುದೇ ಸೈನ್ಯವಿಲ್ಲದೆ ಏಕಾಂಗಿಯಾಗಿ ನಿಂತು, ಎಲ್ಲರಿಗೂ ಏಕೈಕ ರಕ್ಷಕನಾದ (ಬಂಧು) ಶ್ರೀರಾಮನು.</p>
+                            <p><strong>ಏವಂ ಕೋಟಿ-ಕಬಂಧ-ನರ್ತನ-ವಿಭೋಃ:</strong> ರಾಮನ ಬಾಣಗಳಿಂದ ತಲೆ ಕತ್ತರಿಸಲ್ಪಟ್ಟು ಬಿದ್ದ ಕೋಟ್ಯಂತರ ಮುಂಡಗಳು (ಕಬಂಧ) ಕುಣಿಯುವಂತೆ ಮಾಡಿದ ಪ್ರಭುವೇ.</p>
+                            <p><strong>ಕಿಂಚಿತ್-ಧ್ವನಿ ಕಿಂಕಿಣೀ:</strong> ಆ ಯುದ್ಧದಲ್ಲಿ ಶ್ರೀರಾಮನ ಬಿಲ್ಲು ಮಾಡಿದ ಸಣ್ಣ ಧ್ವನಿ (ಕಿಂಚಿತ್ ಧ್ವನಿ) ಕಾಲಿನ ಗೆಜ್ಜೆಯ (ಕಿಂಕಿಣಿ) ನಾದದಂತಿತ್ತು!</p>
+                            <p><strong>ಯಾಮ-ಅರ್ಥಂ:</strong> ಕೇವಲ ಅರ್ಧ ಜಾವದಷ್ಟು ಕಾಲದಲ್ಲಿ (ಯಾಮ = ೩ ಗಂಟೆ, ಯಾಮಾರ್ಥಂ = ಒಂದೂವರೆ ಗಂಟೆ).</p>
+                            <p><strong>ರಘುಪತೇ ಕೋದಂಡ ಕಂಠಾರವಃ:</strong> ರಘುಕುಲದ ಒಡೆಯನಾದ ರಾಮನ 'ಕೋದಂಡ' ಧನುಸ್ಸಿನ ಗಂಟಲಿನ ಘರ್ಜನೆ (ಕಂಠಾರವಃ) ಆ ಇಡೀ ಸೈನ್ಯವನ್ನು ಧೂಳೀಪಟ ಮಾಡಿತು.</p>
+                        </div>
+                    </details>
+
+                        <div class="invocation-box">
+                            <p>ಅಹಲ್ಯಾಶಾಪವಿಮೋಚನ | ಶರಧಿಬಂಧನ | ರಾವಣಮರ್ದನ ವಿಭೀಷಣಸಾಮ್ರಾಜ್ಯಪರಿಪಾಲಕ ||</p>
+                        </div>
+                         <details class="collapsible-section">
+                        <summary class="collapsible-toggle">
+                            <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ರಾಮ ಮಂತ್ರೋಪಚಾರ ಗದ್ಯ) </span>
+                            <span class="toggle-icon">▼</span>
+                        </summary>
+                        <div class="collapsible-content">
+                            <p><strong>ಅಹಲ್ಯಾ-ಶಾಪ-ವಿಮೋಚನ:</strong> ಗೌತಮ ಮುನಿಯ ಶಾಪದಿಂದ ಕಲ್ಲಾಗಿದ್ದ ಅಹಲ್ಯೆಗೆ ತನ್ನ ಪಾದದ ಧೂಳಿನಿಂದ ಶಾಪಮುಕ್ತಿ (ವಿಮೋಚನೆ) ನೀಡಿದವನೇ.</p>
+                            <p><strong>ಶರಧಿ-ಬಂಧನ:</strong> ಲಂಕೆಗೆ ತಲುಪಲು ಲವಣ ಸಮುದ್ರಕ್ಕೆ (ಶರಧಿ) ಸೇತುವೆಯನ್ನು ನಿರ್ಮಿಸಿ ಬಂಧಿಸಿದವನೇ.</p>
+                            <p><strong>ರಾವಣ-ಮರ್ದನ:</strong> ಅಹಂಕಾರದ ಮೂರ್ತಿಯಾದ ರಾವಣನನ್ನು ಯುದ್ಧದಲ್ಲಿ ಮರ್ದಿಸಿದವನೇ (ಸಂಹರಿಸಿದವನೇ).</p>
+                            <p><strong>ವಿಭೀಷಣ-ಸಾಮ್ರಾಜ್ಯ-ಪರಿಪಾಲಕ:</strong> ಶರಣು ಬಂದ ರಾಕ್ಷಸರಾಜ ವಿಭೀಷಣನಿಗೆ ಲಂಕಾಧಿಪತಿಯನ್ನಾಗಿ ಪಟ್ಟಾಭಿಷೇಕ ಮಾಡಿ ಅವನ ಸಾಮ್ರಾಜ್ಯವನ್ನು ಕಾಪಾಡಿದವನೇ.</p>
+                        </div>
+                    </details>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Ashtaka Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಅಷ್ಟಕ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ದುಷ್ಟದಾನವರ ಮರ್ದಿಸಿ ಸೃಷ್ಟಿಯ ಭಾರವನೇ ಕಳೆದು ಇಷ್ಟಾರ್ಥವನಿವ ದೇವನೇ |</p>
+                        <p class="verse-line">ಸೃಷ್ಟಿಪತಿ ಕಷ್ಟನಾಶನೇ ಅಷ್ಟಕವನು ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಅಷ್ಟಕ ಸೇವಪ್ರಿಯ ಅಷ್ಟಕ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                    <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ದುಷ್ಟ ದಾನವರ ಮರ್ದಿಸಿ:</strong> ರಾಕ್ಷಸರನ್ನು ಸಂಹರಿಸಿ.</p>
+                        <p><strong>ಸೃಷ್ಟಿಯ ಭಾರವನೇ ಕಳೆದು:</strong> ಭೂದೇವಿಯ ಮೇಲಿದ್ದ ಪಾಪಿಗಳ ಭಾರವನ್ನು ಇಳಿಸಿದವನೇ.</p>
+                        <p><strong>ಇಷ್ಟಾರ್ಥವನಿವ:</strong> ಭಕ್ತರು ಬಯಸಿದ್ದನ್ನು ಕೊಡುವ ದೇವನೇ.</p>
+                        <p><strong>ಸೃಷ್ಟಿಪತಿ ಕಷ್ಟನಾಶನೇ:</strong> ಈ ಜಗತ್ತಿನ ಒಡೆಯನೇ, ನಮ್ಮ ಸಂಕಟಗಳನ್ನು ದೂರಮಾಡುವವನೇ.</p>
+                        <p><strong>ಅಷ್ಟಕವನು ಕೇಳು:</strong> ಎಂಟು ಶ್ಲೋಕಗಳ ಭಕ್ತಿಮಾಲಿಕೆಯನ್ನು (ಅಷ್ಟಕ) ಆಲಿಸು.</p>
+                    </div>
+                </details>
+
+                    <!-- Seva Sub-Body for Extra Verses -->
+                    <div class="seva-sub-body">
+                        <div class="verse-box">
+                            <p class="verse-line">ಆದೌ ದೇವಕಿದೇವಿಗರ್ಭಜನನಂ ಗೋಪೀಗೃಹೇ ವರ್ಧನಮ್ |</p>
+                            <p class="verse-line">ಮಾಯಾಪೂತನಿಜೀವಿತಾಪಹರಣಂ ಗೋವರ್ಧನೋದ್ಧಾರಣಮ್ ||</p>
+                            <p class="verse-line">ಕಂಸಚ್ಛೇದನಕೌರವಾದಿಮಥನಂ ಕುಂತೀಸುತಾಪಾಲನಮ್ |</p>
+                            <p class="verse-line">ಏತದ್ಭಾಗವತಪುರಾಣಪುಣ್ಯಕಥಿತಂ ಶ್ರೀಕೃಷ್ಣಲೀಲಾಮೃತಮ್ ||</p>
+                        </div>
+                        <details class="collapsible-section">
+                            <summary class="collapsible-toggle">
+                                <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ಏಕಶ್ಲೋಕಿ ಭಾಗವತ)</span>
+                                <span class="toggle-icon">▼</span>
+                            </summary>
+                            <div class="collapsible-content">
+                                <p><strong>ಆದೌ:</strong> ಆರಂಭದಲ್ಲಿ.</p>
+                                <p><strong>ದೇವಕಿ-ದೇವಿ-ಗರ್ಭ-ಜನನಂ:</strong> ಮಥುರಾದ ಕಾರಾಗೃಹದಲ್ಲಿ ದೇವಕಿಯ ಗರ್ಭದಲ್ಲಿ ಜನಿಸಿದ್ದು.</p>
+                                <p><strong>ಗೋಪೀ-ಗೃಹೇ ವರ್ಧನಮ್:</strong> ಗೋಕುಲದ ಯಶೋದೆಯ ಹೆಣ್ಣುಮಕ್ಕಳ (ಗೋಪಿಯರ) ಮನೆಯಲ್ಲಿ ಬೆಳೆದದ್ದು (ವರ್ಧನಮ್).</p>
+                                <p><strong>ಮಾಯಾ-ಪೂತನಿ-ಜೀವಿತ-ಅಪಹರಣಂ:</strong> ವಿಷದ ಹಾಲೂಡಿಸಲು ಬಂದ ಮಾಯಾವಿ ರಾಕ್ಷಸಿ ಪೂತನಿಯ ಪ್ರಾಣವನ್ನೇ (ಜೀವಿತ) ಹೀರಿ ಸಂಹರಿಸಿದ್ದು.</p>
+                                <p><strong>ಗೋವರ್ಧನ-ಉದ್ಧಾರಣಮ್:</strong> ಇಂದ್ರನ ಕೋಪದ ಮಳೆಯಿಂದ ಗೋಕುಲವನ್ನು ಕಾಯಲು ಗೋವರ್ಧನ ಗಿರಿಯನ್ನು ಕಿರುಬೆರಳಿನಲ್ಲಿ ಎತ್ತಿ ಹಿಡಿದದ್ದು.</p>
+                                <p><strong>ಕಂಸ-ಚ್ಛೇದನ:</strong> ಸೋದರಮಾವ ಹಾಗೂ ಕ್ರೂರ ರಾಜನಾದ ಕಂಸನನ್ನು ಕತ್ತರಿಸಿ ಕೊಂದದ್ದು.</p>
+                                <p><strong>ಕೌರವ-ಆದಿ-ಮಥನಂ:</strong> ಮಹಾಭಾರತ ಯುದ್ಧದಲ್ಲಿ ದುಷ್ಟ ಕೌರವರ ಸೈನ್ಯವನ್ನು ನಾಶ ಮಾಡಿದ್ದು.</p>
+                                <p><strong>ಕುಂತೀ-ಸುತ-ಪಾಲನಮ್:</strong> ಕುಂತಿಯ ಮಕ್ಕಳಾದ ಪಾಂಡವರನ್ನು (ವಿಶೇಷವಾಗಿ ಅರ್ಜುನನನ್ನು) ಹೆಜ್ಜೆ ಹೆಜ್ಜೆಗೂ ರಕ್ಷಿಸಿದ್ದು (ಪಾಲನಮ್).</p>
+                                <p><strong>ಏತತ್-ಭಾಗವತ-ಪುರಾಣ-ಪುಣ್ಯ-ಕಥಿತಂ:</strong> ಇವೆಲ್ಲವೂ ಪುಣ್ಯದಾಯಕವಾದ ಭಾಗವತ ಪುರಾಣದಲ್ಲಿ ಹೇಳಲ್ಪಟ್ಟಿರುವ.</p>
+                                <p><strong>ಶ್ರೀಕೃಷ್ಣ-ಲೀಲಾಮೃತಮ್:</strong> ಶ್ರೀಕೃಷ್ಣನ ಮಧುರವಾದ ಲೀಲಾಮೃತವಾಗಿದೆ.</p>
+                            </div>
+                        </details>
+
+                        <div class="verse-box">
+                            <p class="verse-line">ಕಸ್ತೂರೀತಿಲಕಂ ಲಲಾಟಫಲಕೇ ವಕ್ಷಸ್ಥಳೇ ಕೌಸ್ತುಭಂ।</p>
+                            <p class="verse-line">ನಾಸಾಗ್ರ ನವಮೌಕ್ತಿಕಂ ಕರತಲೇವೇಣು ಕರೇಕಂಕಣಂ ||</p>
+                            <p class="verse-line">ಸರ್ವಾಂಗೇ ಹರಿಚಂದನಂ ಕುವಲಯೇ(ಸುಲಲಿತಂ) ಕಂಠೇ ಸುಮುಕ್ತಾವಳಿ।</p>
+                            <p class="verse-line">ಗೋಪಸ್ಕ್ರಿಪರಿವೇಷ್ಟಿತೋ ವಿಜಯತೇ ಗೋಪಾಲ ಚೂಡಾಮಣೀಃ ॥</p>
+                        </div>
+                        <details class="collapsible-section">
+                            <summary class="collapsible-toggle">
+                                <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ಶ್ರೀ ಕೃಷ್ಣ ಅಲಂಕಾರ ಸ್ತುತಿ )</span>
+                                <span class="toggle-icon">▼</span>
+                            </summary>
+                            <div class="collapsible-content">
+                                <p><strong>ಕಸ್ತೂರೀ-ತಿಲಕಂ ಲಲಾಟ-ಫಲಕೇ:</strong> ವಿಶಾಲವಾದ ಹಣೆ ಎಂಬ ಫಲಕದ (ಲಲಾಟ) ಮೇಲೆ ಕಸ್ತೂರಿಯ ತಿಲಕವನ್ನು ಧರಿಸಿರುವ.</p>
+                                <p><strong>ವಕ್ಷಸ್ಥಲೇ ಕೌಸ್ತುಭಂ:</strong> ಎದೆಯ ಭಾಗದಲ್ಲಿ (ವಕ್ಷಸ್ಥಲ) ಪ್ರಕಾಶಮಾನವಾದ ಕೌಸ್ತುಭ ಮಣಿಯನ್ನು ಧರಿಸಿರುವ.</p>
+                                <p><strong>ನಾಸಾಗ್ರೇ ನವ-ಮೌಕ್ತಿಕಂ:</strong> ಮೂಗಿನ ತುದಿಯಲ್ಲಿ (ನಾಸಾಗ್ರೇ) ಹೊಳೆಯುವ ಹೊಸ ಮುತ್ತಿನ (ಮೌಕ್ತಿಕ) ನತ್ತನ್ನು ಧರಿಸಿರುವ.</p>
+                                <p><strong>ಕರತಲೇವೇಣುಂ:</strong> ಅಂಗೈಯಲ್ಲಿ (ಕರತಲೇ) ವೇಣು ಅಂದರೆ ಕೊಳಲನ್ನು ಹಿಡಿದಿರುವ.</p>
+                                <p><strong>ಕರೇ ಕಂಕಣಮ್:</strong> ಮಣಿಕಟ್ಟಿನ ಕೈಗಳಲ್ಲಿ ಸುಂದರವಾದ ಬಳೆಗಳನ್ನು/ಕಂಕಣಗಳನ್ನು ಧರಿಸಿರುವ.</p>
+                                <p><strong>ಸರ್ವಾಂಗೇ ಹರಿಚಂದನಂ:</strong> ಇಡೀ ದೇಹದ ತುಂಬ (ಸರ್ವಾಂಗೇ) ಸುವಾಸಿತ ಶ್ರೀಗಂಧವನ್ನು (ಹರಿಚಂದನ) ಲೇಪಿಸಿಕೊಂಡಿರುವ.</p>
+                                <p><strong>ಕಂಠೇ ಚ ಮುಕ್ತಾವಲೀ:</strong> ಕೊರಳಿನಲ್ಲಿ ಮುತ್ತುಗಳ ಹಾರವನ್ನು (ಮುಕ್ತಾವಲೀ) ಧರಿಸಿರುವ.</p>
+                                <p><strong>ಗೋಪಸ್ತ್ರೀ-ಪರಿವೇಷ್ಟಿತೋ:</strong> ಗೋಪಿಕೆಯರಿಂದ ಸುತ್ತುವರಿಯಲ್ಪಟ್ಟಿರುವ (ಪರಿವೇಷ್ಟಿತ).</p>
+                                <p><strong>ವಿಜಯತೇ ಗೋಪಾಲ-ಚೂಡಾಮಣಿಃ:</strong> ಇಂತಹ ಗೋಪಾಲಕರ ಶ್ರೇಷ್ಠ ರತ್ನನಾದ (ಚೂಡಾಮಣಿ) ಕೃಷ್ಣನು ಸರ್ವೋತ್ಕೃಷ್ಟನಾಗಿ ವಿರಾಜಿಸುತ್ತಿದ್ದಾನೆ.</p>
+                            </div>
+                        </details>
+
+                        <div class="verse-box">
+                            <p class="verse-line">ಶಾಂತಾಕಾರಂ ಭುಜಗಶಯನಂ ಪದ್ಮನಾಭಂ ಸುರೇಶಂ |</p>
+                            <p class="verse-line">ವಿಶ್ವಾಧಾರಂ ಗಗನಸದೃಶಂ ಮೇಘವರ್ಣಂ ಶುಭಾಂಗಂ ॥</p>
+                            <p class="verse-line">ಲಕ್ಷ್ಮೀಕಾಂತಂ ಕಮಲನಯನಂ ಯೋಗಿಭಿರ್ಧ್ಯಾ ನಗಮ್ಯಂ ।</p>
+                            <p class="verse-line">ವಂದೇ ವಿಷ್ಣುಂ ಭವಭಯಹರಂ ಸರ್ವಲೋಕೈಕನಾಥಮ್ ॥</p>
+                        </div>
+                        <details class="collapsible-section">
+                            <summary class="collapsible-toggle">
+                                <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ (ವಿಷ್ಣು ಧ್ಯಾನ ಶ್ಲೋಕ)</span>
+                                <span class="toggle-icon">▼</span>
+                            </summary>
+                            <div class="collapsible-content">
+                                <p><strong>ಶಾಂತ-ಆಕಾರಂ:</strong> ಎಂತಹ ಕಷ್ಟದ ಪರಿಸ್ಥಿತಿಯಲ್ಲೂ ಅತ್ಯಂತ ಶಾಂತವಾದ ಮತ್ತು ಪ್ರಸನ್ನವಾದ ಮುಖಭಾವವುಳ್ಳವನೇ.</p>
+                                <p><strong>ಭುಜಗ-ಶಯನಂ:</strong> ಸಾವಿರ ಹೆಡೆಗಳ ಸರ್ಪರಾಜನಾದ ಆದಿಶೇಷನನ್ನೇ ಹಾಸಿಗೆಯನ್ನಾಗಿ ಮಾಡಿಕೊಂಡು ಮಲಗಿರುವವನೇ.</p>
+                                <p><strong>ಪದ್ಮ-ನಾಭಂ:</strong> ಬ್ರಹ್ಮದೇವನ ಸೃಷ್ಟಿಗೆ ಕಾರಣವಾದ ಕಮಲವನ್ನು ತನ್ನ ನಾಭಿಯಲ್ಲಿ (ಹೊಕ್ಕಳಿನಲ್ಲಿ) ಹೊಂದಿರುವವನೇ.</p>
+                                <p><strong>ಸುರೇಶಂ:</strong> ಸಮಸ್ತ ದೇವತೆಗಳಿಗೂ ಅಧಿಪತಿಯಾದವನೇ (ಸುರ + ಈಶ).</p>
+                                <p><strong>ವಿಶ್ವ-ಆಧಾರಂ:</strong> ಈ ಇಡೀ ಬ್ರಹ್ಮಾಂಡಕ್ಕೆ ಏಕೈಕ ಆಧಾರ ಸ್ತಂಭವಾಗಿರುವವನೇ.</p>
+                                <p><strong>ಗಗನ-ಸದೃಶಂ:</strong> ಆಕಾಶದಂತೆ ಕೊನೆಯಿಲ್ಲದ, ಅನಂತವಾಗಿ ವ್ಯಾಪಿಸಿರುವವನೇ.</p>
+                                <p><strong>ಮೇಘ-ವರ್ಣಂ:</strong> ಮಳೆ ಸುರಿಸುವ ನೀಲಿ ಮೇಘದಂತಹ (ಮೋಡ) ಶ್ಯಾಮಲ ಬಣ್ಣವುಳ್ಳವನೇ.</p>
+                                <p><strong>ಶುಭಾಂಗಮ್:</strong> ಅತ್ಯಂತ ಮಂಗಳಕರವಾದ, ಸುಂದರವಾದ ಶರೀರ ಅಂಗವುಳ್ಳವನೇ.</p>
+                                <p><strong>ಲಕ್ಷ್ಮೀ-ಕಾಂತಂ:</strong> ಸಂಪತ್ತಿನ ದೇವತೆಯಾದ ಮಹಾಲಕ್ಷ್ಮಿಯ ಪ್ರೀತಿಯ ಪತಿಯೇ.</p>
+                                <p><strong>ಕಮಲ-ನಯನಂ:</strong> ತಾವರೆ ಎಸಳಿನಂತಹ ವಿಶಾಲ ಹಾಗೂ ಕರುಣಾಭರಿತ ಕಣ್ಣುಳ್ಳವನೇ.</p>
+                                <p><strong>ಯೋಗಿಭಿಃ-ಧ್ಯಾನ-ಗಮ್ಯಂ:</strong> ಮಹಾನ್ ಯೋಗಿಗಳು ಕಣ್ಣು ಮುಚ್ಚಿ ಧ್ಯಾನ ಮಾಡಿದಾಗ ಅವರ ಅಂತರಂಗದಲ್ಲಿ ಗೋಚರಿಸುವವನೇ.</p>
+                                <p><strong>ವಂದೇ ವಿಷ್ಣುಂ:</strong> ಅಂತಹ ಮಹಾವಿಷ್ಣುವಿಗೆ ನಾನು ನಮಸ್ಕರಿಸುತ್ತೇನೆ.</p>
+                                <p><strong>ಭವ-ಭಯ-ಹರಂ:</strong> ಸಂಸಾರವೆಂಬ ಜನ್ಮ-ಮರಣಗಳ ಭಯವನ್ನು (ಭವಭಯ) ನಾಶಮಾಡುವವನೇ (ಹರಂ).</p>
+                                <p><strong>ಸರ್ವ-ಲೋಕ-ಏಕ-ನಾಥಮ್:</strong> ಸಮಸ್ತ ಲೋಕಗಳಿಗೂ ಇರುವ ಏಕೈಕ ರಕ್ಷಕ ಪ್ರಭುವೇ.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Shankhanaada Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಶಂಖನಾದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಶಂಖ ಚಕ್ರಾಂಕಿತನೆ ಪೊಳೆವ ಕೌಸ್ತುಭಧರ ಪಂಕಜನಾಭ |</p>
+                        <p class="verse-line">ಓಂಕಾರದಿ ಘುಡಿಘುಡಿಸುವ ಶಂಖ ಧ್ವನಿಯನು ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಶಂಖನಾದ ಸೇವಪ್ರಿಯ ಶಂಖನಾದ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಶಂಖ ಚಕ್ರ-ಅಂಕಿತನೆ:</strong> ಕೈಗಳಲ್ಲಿ ಶಂಖ ಮತ್ತು ಚಕ್ರಗಳ ಮುದ್ರೆ/ಲಾಂಛನ ಧರಿಸಿದವನೇ.</p>
+                        <p><strong>ಪೊಳೆವ ಕೌಸ್ತುಭ-ಧರ:</strong> ಎದೆಯ ಮೇಲೆ ಹೊಳೆಯುವ ಕೌಸ್ತುಭ ಮಣಿಯನ್ನು ಧರಿಸಿದವನೇ.</p>
+                        <p><strong>ಓಂಕಾರದಿ ಘುಡಿಘುಡಿಸುವ:</strong> ಬ್ರಹ್ಮಾಂಡದ ಆದಿ ನಾದವಾದ 'ಓಂಕಾರ'ದಂತೆ ಗಂಭೀರವಾಗಿ ಮೊಳಗುವ (ಘುಡಿಘುಡಿಸುವ).</p>
+                        <p><strong>ಶಂಖ ಧ್ವನಿಯನು ಕೇಳು:</strong> ನಿನ್ನ ಪಾಂಚಜನ್ಯದಂತಿರುವ ಈ ಶಂಖದ ಧ್ವನಿಯನ್ನು ಆಲಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- ShruthiMouri Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಶೃತಿ ಮೌರಿ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಕೌರವಭೂಮಿ ಶರಪಾಲರ ಶೌರ್ಯವನೇ ಸೆಳೆದು ಶರಣುಹೊಕ್ಕ ಸಲಹಿದಾತನೇ |</p>
+                        <p class="verse-line">ಮೌರಿಸೇವೆಯನು ಕೇಳ್ವುದು ಶೌರಿ ಸುಜನಾಂತಕರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಶೃತಿ ಮೌರಿ ಸೇವೆ ಸೇವಪ್ರಿಯ ಶೃತಿ ಮೌರಿ ಸೇವೆ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಕೌರವಭೂಮಿ ಶರಪಾಲರ:</strong> ಕೌರವರ ಸೇನೆಯಲ್ಲಿದ್ದ ಮಹಾ ಮಹಾ ಬಿಲ್ಲುಗಾರರ (ಶರಪಾಲರಾದ ಭೀಷ್ಮ, ದ್ರೋಣ ಮುಂತಾದವರ).</p>
+                        <p><strong>ಶೌರ್ಯವನೇ ಸೆಳೆದು:</strong> ಅಹಂಕಾರ ಮತ್ತು ಪರಾಕ್ರಮವನ್ನು ಧೂಳೀಪಟ ಮಾಡಿ.</p>
+                        <p><strong>ಶರಣುಹೊಕ್ಕ ಸಲಹಿದಾತನೇ:</strong> ತನ್ನನ್ನು ನಂಬಿ ಶರಣಾಗತಿಯಾದ ಪಾಂಡವರನ್ನು ರಕ್ಷಿಸಿದವನೇ.</p>
+                        <p><strong>ಮೌರಿ ಸೇವೆಯನು ಕೇಳ್ವುದು:</strong> ಈ 'ಮೌರಿ' ವಾದ್ಯದ ಗಂಭೀರವಾದ ಮಧುರ ನಾದವನ್ನು ಆಲಿಸು.</p>
+                        <p><strong>ಶೌರಿ:</strong> ಶೂರಸೇನನ ಮೊಮ್ಮಗನಾದ ಕೃಷ್ಣನೇ.</p>
+                        <p><strong>ಸುಜನಾಂತಕರ:</strong> ಇದು ಕಾವ್ಯದ ಲಯಕ್ಕಾಗಿ ಬಂದಿದೆ; ಇದರ ನಿಜವಾದ ಅರ್ಥ 'ಸುಜನ-ಅಂತರಂಗ' (ಸಜ್ಜನರ ಹೃದಯದಲ್ಲಿ ಇರುವವನೇ) ಅಥವಾ ದುಷ್ಟರ ಅಂತಕ (ಕಾಲ) ಎಂದಾಗಬೇಕು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Sarvavaadya Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ಸರ್ವವಾದ್ಯಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಶ್ರುತಿಮೌರಿ ತಾಳತಂಬಟ ಅತಿರವಸದೊಳುಲಿವ ಕೊಂಬು ಕಹಳಾರವದಿಂ |</p>
+                        <p class="verse-line">ಜೊತೆಯೆನಿಪ ಸರ್ವವಾದ್ಯವ ರತಿಪತಿಪಿತ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||</p>
+                        <p class="verse-line">ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಸರ್ವವಾದ್ಯ ಸೇವಪ್ರಿಯ ಸರ್ವವಾದ್ಯ ಸೇವಮವಧಾರಯ ||</p>
+                    </div>
+                </div>
+                <details class="collapsible-section">
+                    <summary class="collapsible-toggle">
+                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                        <span class="toggle-icon">▼</span>
+                    </summary>
+                    <div class="collapsible-content">
+                        <p><strong>ಶ್ರುತಿಮೌರಿ:</strong> ಶ್ರುತಿಯನ್ನು ಕೊಡುವ 'ಮೌರಿ' ಎಂಬ ವಿಶಿಷ್ಟ ನಾದಸ್ವರ ಮಾದರಿಯ ಸುಷಿರ ವಾದ್ಯ.</p>
+                        <p><strong>ತಾಳ-ತಂಬಟ:</strong> ರಿದಂ ಕೊಡುವ ಕೈತಾಳಗಳು ಹಾಗೂ 'ತಂಬಟ' (ಒಂದು ಬಗೆಯ ಚರ್ಮವಾದ್ಯ/ಡೋಲು).</p>
+                        <p><strong>ಅತಿ-ರವಸದೊಳು-ಉಲಿವ:</strong> ಅತ್ಯಂತ ವೇಗವಾಗಿ ಮತ್ತು ಉತ್ಸಾಹದ ರಭಸದಿಂದ (ರವಸ) ಶಬ್ದ ಮಾಡುವ/ಮೊಳಗುವ (ಉಲಿವ).</p>
+                        <p><strong>ಕೊಂಬು ಕಹಳ-ಆರವದಿಂ:</strong> ರಾಜಮರ್ಯಾದೆಯ ಸಂಕೇತವಾಗಿ ಊದುವ 'ಕೊಂಬು' ಮತ್ತು 'ಕಹಳೆ' ಎಂಬ ವಾದ್ಯಗಳ ಮಹಾ ಧ್ವನಿಯೊಂದಿಗೆ (ಆರವ = ಧ್ವನಿ/ನಾದ).</p>
+                        <p><strong>ಜೊತೆಯೆನಿಪ ಸರ್ವವಾದ್ಯವ:</strong> ಇವೆಲ್ಲವೂ ಒಟ್ಟಿಗೆ ಸೇರಿ ಸೃಷ್ಟಿಯಾಗುತ್ತಿರುವ ಈ ಜುಗಲಬಂದಿಯ ಎಲ್ಲ ವಾದ್ಯಗಳ ನಾದವನ್ನು.</p>
+                        <p><strong>ರತಿಪತಿ-ಪಿತ:</strong> ರತಿ ದೇವಿಯ ಪತಿಯಾದ ಮನ್ಮಥನಿಗೆ ತಂದೆಯಾದವನೇ (ಶ್ರೀಕೃಷ್ಣ/ಮಹಾವಿಷ್ಣು).</p>
+                        <p><strong>ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ:</strong> ದಯಾಮಯನಾದ ಶ್ರೀರಂಗನಾಥನೇ ಆಲಿಸು.</p>
+                        <p><strong>ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ...:</strong> ಸರ್ವವಾದ್ಯಗಳ ಸೇವೆಯನ್ನು ಪ್ರೀತಿಸುವ ಪ್ರಭುವೇ, ಈ ಮಹಾ ಸಮರ್ಪಣೆಯನ್ನು ದಯವಿಟ್ಟು ಸ್ವೀಕರಿಸು.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- Narthana Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ನರ್ತನ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಅಖಿಲಾಂಡಕೋಟಿ ಬ್ರಹ್ಮಾಂಡನಾಯಕ ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ನರ್ತನ ಸೇವಪ್ರಿಯ ನರ್ತನ ಸೇವಮವಧಾರಯ</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Venunaada Seva -->
+            <article class="seva-card">
+                <div class="seva-header">
+                    <h3 class="seva-title">ವೇಣುನಾದ ಸೇವೆ</h3>
+                </div>
+                <div class="seva-body">
+                    <div class="verse-box">
+                        <p class="verse-line">ಅಖಿಲಾಂಡಕೋಟಿ ಬ್ರಹ್ಮಾಂಡನಾಯಕ ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ವೇಣುನಾದ ಸೇವೆಪ್ರಿಯ ವೇಣುನಾದ ಸೇವೆಮವಧಾರಯ</p>
+                    </div>
+                </div>
+
+            </article>
+
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/back-to-top.js"></script>
+
+    <footer class="site-footer">
+        <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಉತ್ಸವಗಳು ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳು | Festival Events</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="events.html" class="nav-link active">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ಉತ್ಸವಗಳು ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳ ವಿವರ</h2>
+            <p class="kn-subheading">ಮುಂಬರುವ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು ಮತ್ತು ಸೇವಾದಾರರ ಪಟ್ಟಿ</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+                type="text" 
+                id="eventSearch" 
+                placeholder="ಉತ್ಸವ, ದಿನಾಂಕ ಅಥವಾ ಸೇವಾದಾರರ ಹೆಸರನ್ನು ಹುಡುಕಿ..." 
+                onkeyup="filterCards()"
+            />
+        </div>
+
+        <!-- Empty Results Message -->
+        <div id="noResultsMsg" class="no-events-found" style="display: none;">
+            🔍 ಯಾವುದೇ ಕಾರ್ಯಕ್ರಮಗಳು ಕಂಡುಬಂದಿಲ್ಲ
+        </div>
+
+        <!-- Festival Event Cards Container -->
+        <div class="festival-card-list" id="eventsContainer">
+        <article class="festival-card" data-date="2026-03-19" data-keywords="Chandramana Yugadi Ugadi New Year Chaitra Shuddha Padya Pratipada T R Srinivasa Prabhu and children makkalu March 2026 19-03-2026">
+            <div class="date-badge">
+                <span class="day">19</span>
+                <span class="month-year">March 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಚಾಂದ್ರಮಾನ ಯುಗಾದಿ</h3>
+                    <span class="tithi-tag">ಚೈತ್ರ ಶುದ್ಧ ಪಾಡ್ಯ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">T R ಶ್ರೀನಿವಾಸ ಪ್ರಭು ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-03-27" data-keywords="Sri Rama Navami Ramnavami Ram Navami Chaitra Shuddha Navami K S Sadananda Kamath and children makkalu March 2026 27-03-2026">
+            <div class="date-badge">
+                <span class="day">27</span>
+                <span class="month-year">March 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶ್ರೀ ರಾಮ ನವಮಿ</h3>
+                    <span class="tithi-tag">ಚೈತ್ರ ಶುದ್ಧ ನವಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">K S ಸದಾನಂದ ಕಾಮತ್ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-04-02" data-keywords="Chitra Poornima Chithra Pournami Chaitra Shuddha Pournami Poornima K V Vasantakumar Pai and children makkalu April 2026 02-04-2026">
+            <div class="date-badge">
+                <span class="day">2</span>
+                <span class="month-year">April 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಚಿತ್ರಾ ಪೌರ್ಣಮಿ</h3>
+                    <span class="tithi-tag">ಚೈತ್ರ ಶುದ್ಧ ಪೌರ್ಣಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">K V ವಸಂತಕುಮಾರ್ ಪೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-04-30" data-keywords="Nrusimha Jayanthi Narasimha Jayanti Jayanti Vaishakha Shuddha Chaturdashi Srinivasa Shenoy and children makkalu Devarapalu April 2026 30-04-2026">
+            <div class="date-badge">
+                <span class="day">30</span>
+                <span class="month-year">April 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ನೃಸಿಂಹ ಜಯಂತಿ</h3>
+                    <span class="tithi-tag">ವೈಶಾಖ ಶುದ್ಧ ಚತುರ್ದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಶ್ರೀನಿವಾಸ ಶೆಣೈ ಮತ್ತು ಮಕ್ಕಳು, ದೇವರಪಾಲು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-05-01" data-keywords="Vaishakha Poornima Pournami Vaishakha Shuddha Pournami Poornima A Ramanatha Pai and children makkalu May 2026 01-05-2026">
+            <div class="date-badge">
+                <span class="day">1</span>
+                <span class="month-year">May 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ವೈಶಾಖ ಪೌರ್ಣಮಿ</h3>
+                    <span class="tithi-tag">ವೈಶಾಖ ಶುದ್ಧ ಪೌರ್ಣಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">A ರಮಾನಾಥ ಪೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-06-22" data-keywords="Sri Devara Pratishta Vardhanti Vardanti Pratista Jyeshtha Shuddha Ashtami Hattu Samastarinda All Devotees Public June 2026 22-06-2026">
+            <div class="date-badge">
+                <span class="day">22</span>
+                <span class="month-year">June 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶ್ರೀ ದೇವರ ಪ್ರತಿಷ್ಠಾ ವರ್ಧಂತಿ</h3>
+                    <span class="tithi-tag">ಜ್ಯೇಷ್ಠ ಶುದ್ಧ ಅಷ್ಟಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-07-24" data-keywords="Chaturmasarambha Chaturmasa Arambha Ashadha Shuddha Dashami  July 2026 24-07-2026">
+            <div class="date-badge">
+                <span class="day">24</span>
+                <span class="month-year">July 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಚಾತುರ್ಮಾಸರಂಭ</h3>
+                    <span class="tithi-tag">ಆಷಾಢ ಶುದ್ಧ ದಶಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-08-26" data-keywords="Rigupakarma Rgu Upakarma Shravana Shuddha Trayodashi  August 2026 26-08-2026">
+            <div class="date-badge">
+                <span class="day">26</span>
+                <span class="month-year">August 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಋಗುಪಾಕರ್ಮ</h3>
+                    <span class="tithi-tag">ಶ್ರಾವಣ ಶುದ್ಧ ತ್ರಯೋದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-08-28" data-keywords="Varamahalakshmi Vrata Varalakshmi Vratam Shravana Eradane Shukravara Second Friday  August 2026 28-08-2026">
+            <div class="date-badge">
+                <span class="day">28</span>
+                <span class="month-year">August 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ವರಮಹಾಕ್ಷ್ಮಿ ವ್ರತ</h3>
+                    <span class="tithi-tag">ಶ್ರಾವಣ ಎರಡನೇ ಶುಕ್ರವಾರ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-09-04" data-keywords="Sri Krishna Janmashtami Krishnashtami Gokulashtami Shravana Bahula Ashtami  September 2026 04-09-2026">
+            <div class="date-badge">
+                <span class="day">4</span>
+                <span class="month-year">September 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶ್ರೀ ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ</h3>
+                    <span class="tithi-tag">ಶ್ರಾವಣ ಬಹುಳ ಅಷ್ಟಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-09-14" data-keywords="Sri Ganesha Chaturthi Ganesh Chavithi Vinayaka Chaturthi Bhadrapada Shuddha Chaturthi Chouthi Uttamkumar Pai and children makkalu Mysore Mysuru September 2026 14-09-2026">
+            <div class="date-badge">
+                <span class="day">14</span>
+                <span class="month-year">September 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶ್ರೀ ಗಣೇಶ ಚತುರ್ಥಿ</h3>
+                    <span class="tithi-tag">ಭಾದ್ರಪದ ಶುದ್ಧ ಚತುರ್ಥಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಉತ್ತಮಕುಮಾರ್ ಪೈ ಮತ್ತು ಮಕ್ಕಳು , ಮೈಸೂರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-09-25" data-keywords="Sri Anantha Chaturdashi Anant Chaturdashi Bhadrapada Shuddha Chaturdashi K S Prabhu and T Trivikram Prabhu and brothers sahodararu September 2026 25-09-2026">
+            <div class="date-badge">
+                <span class="day">25</span>
+                <span class="month-year">September 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶ್ರೀ ಅನಂತ ಚತುರ್ದಶಿ</h3>
+                    <span class="tithi-tag">ಭಾದ್ರಪದ ಶುದ್ಧ ಚತುರ್ದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">K S ಪ್ರಭು ಮತ್ತು T ತ್ರಿವಿಕ್ರಮ್ ಪ್ರಭು ಮತ್ತು ಸಹೋದರರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-10-21" data-keywords="Paschima Pakshi Jagara Pooja Puja Ashwayuja Shuddha Dashami  October 2026 21-10-2026">
+            <div class="date-badge">
+                <span class="day">21</span>
+                <span class="month-year">October 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪಶ್ಚಿಮ (ಪಕ್ಷಿ) ಜಾಗರ ಪೂಜೆ</h3>
+                    <span class="tithi-tag">ಆಶ್ವಯುಜ ಶುದ್ಧ ದಶಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-20" data-keywords="Vishwaroopa Darshana Vishwarupa Darshan Karthika Shuddha Dashami Kartika  November 2026 20-11-2026">
+            <div class="date-badge">
+                <span class="day">20</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ವಿಶ್ವರೂಪ ದರ್ಶನ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಶುದ್ಧ ದಶಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಸಾರ್ವಜನಿಕ ಸೇವೆ / ಹತ್ತು ಸಮಸ್ತರಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-22" data-keywords="Utthana Dwadashi Ekadashi Tulsi Pooja Puja Karthika Shuddha Dwadashi Kademane Ramachandra Pai and children makkalu November 2026 22-11-2026">
+            <div class="date-badge">
+                <span class="day">22</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಉತ್ಥಾನ ದ್ವಾದಶಿ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಶುದ್ಧ ದ್ವಾದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಕಡೇಮನೆ ರಾಮಚಂದ್ರ ಪೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-23" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Shuddha Trayodashi K A Govardhana Pai November 2026 23-11-2026">
+            <div class="date-badge">
+                <span class="day">23</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಶುದ್ಧ ತ್ರಯೋದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಕೆ. ಎ. ಗೋವರ್ಧನ ಪೈ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-24" data-keywords="ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ , ವನಭೋಜನ, ಹರಿಹರ ಸಮಾಗಮ Karthika Shuddha Pournami Poornima T R Srinivasa Prabhu and brothers sahodararu and children makkalu November 2026 24-11-2026">
+            <div class="date-badge">
+                <span class="day">24</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ , ವನಭೋಜನ, ಹರಿಹರ ಸಮಾಗಮ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಶುದ್ಧ ಪೌರ್ಣಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">T R ಶ್ರೀನಿವಾಸ ಪ್ರಭು ಮತ್ತು ಸಹೋದರರು ಹಾಗೂ ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-25" data-keywords="Avabhrutha Snana Avabritha Snanam Bath Karthika Bahula Padya Rudrapada Deity Trust November 2026 25-11-2026">
+            <div class="date-badge">
+                <span class="day">25</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಅವಭೃತ ಸ್ನಾನ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಪಾಡ್ಯ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ರುದ್ರಪಾದ ಡೈಟಿ ಟ್ರಸ್ಟ್</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-26" data-keywords="Pete Utsava Madhyahna Samaradhana Annadana Feast Karthika Bahula Bidige Dwitiya Devarapalu Venkataraya Shenoy and children makkalu November 2026 26-11-2026">
+            <div class="date-badge">
+                <span class="day">26</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ, ಮಧ್ಯಾಹ್ನ ಸಮಾರಾಧನೆ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಬಿದಿಗೆ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ದೇವರಪಾಲು ವೆಂಕಟರಾಯ ಶೆಣೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-27" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Bahula Tadige Tritiya R Satyanarayana Shenoy and children makkalu November 2026 27-11-2026">
+            <div class="date-badge">
+                <span class="day">27</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ತದಿಗೆ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">R ಸತ್ಯನಾರಾಯಣ ಶೆಣೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-28" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Bahula Chouthi Chaturthi Srimathi Radha G Prabhu and children makkalu November 2026 28-11-2026">
+            <div class="date-badge">
+                <span class="day">28</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಚೌತಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಶ್ರೀಮತಿ ರಾಧಾ G ಪ್ರಭು ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-29" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Bahula Panchami T A Manohara Prabhu and children makkalu November 2026 29-11-2026">
+            <div class="date-badge">
+                <span class="day">29</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಪಂಚಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">T A ಮನೋಹರ ಪ್ರಭು ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-11-30" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Bahula Shasthi Shashti S Uttamkumar Pai and children makkalu Mysore Mysuru November 2026 30-11-2026">
+            <div class="date-badge">
+                <span class="day">30</span>
+                <span class="month-year">November 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಷಷ್ಠಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">S ಉತ್ತಮಕುಮಾರ್ ಪೈ ಮತ್ತು ಮಕ್ಕಳು, ಮೈಸೂರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-12-01" data-keywords="Pete Utsava Madhyahna Samaradhana Annadana Feast Karthika Bahula Saptami R Krishnakumar Shenoy and children makkalu Bangalore Bengaluru December 2026 01-12-2026">
+            <div class="date-badge">
+                <span class="day">1</span>
+                <span class="month-year">December 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ, ಮಧ್ಯಾಹ್ನ ಸಮಾರಾಧನೆ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಸಪ್ತಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">R ಕೃಷ್ಣಕುಮಾರ್ ಶೆಣೈ ಮತ್ತು ಮಕ್ಕಳು, ಬೆಂಗಳೂರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-12-02" data-keywords="Shikhara Pratishta Vardhanti Shikhara Pratista Vardanti Shikara Karthika Bahula Ashtami Hattu Samastaru All Devotees Public December 2026 02-12-2026">
+            <div class="date-badge">
+                <span class="day">2</span>
+                <span class="month-year">December 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶಿಖರ ಪ್ರತಿಷ್ಠಾ ವರ್ಧಂತಿ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ಅಷ್ಟಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಹತ್ತು ಸಮಸ್ತರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-12-03" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Karthika Bahula Navami K P Ravalanatha Prabhu children makkala makkalinda December 2026 03-12-2026">
+            <div class="date-badge">
+                <span class="day">3</span>
+                <span class="month-year">December 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ನವಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಕೆ. ಪಿ. ರವಳನಾಥ ಪ್ರಭು ಇವರ ಮಕ್ಕಳಿಂದ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-12-05" data-keywords="Shuddha Samprokshane Samprokshana Purification Karthika Bahula Dashami Shridhar Shanbhag Shanubhoug and children makkalu December 2026 05-12-2026">
+            <div class="date-badge">
+                <span class="day">5</span>
+                <span class="month-year">December 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಶುದ್ಧ ಸಂಪ್ರೋಕ್ಷಣೆ</h3>
+                    <span class="tithi-tag">ಕಾರ್ತಿಕ ಬಹುಳ ದಶಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಶ್ರೀಧರ್ ಶಾನುಭೋಗ್ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2026-12-21" data-keywords="Mukkoti Dwadashi Vaikuntha Dwadashi Margashira Shuddha Dwadashi P Padmanabha Bhat and brothers sahodararu December 2026 21-12-2026">
+            <div class="date-badge">
+                <span class="day">21</span>
+                <span class="month-year">December 2026</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಮುಕ್ಕೋಟಿ ದ್ವಾದಶಿ</h3>
+                    <span class="tithi-tag">ಮಾರ್ಗಶಿರ ಶುದ್ಧ ದ್ವಾದಶಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">P ಪದ್ಮನಾಭ ಭಟ್ ಮತ್ತು ಸಹೋದರರು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2027-02-12" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Magha Shuddha Shasthi Shashti T Vamana Prabhu and children makkalu February 2027 12-02-2027">
+            <div class="date-badge">
+                <span class="day">12</span>
+                <span class="month-year">February 2027</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಮಾಘ ಶುದ್ಧ ಷಷ್ಠಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಟಿ. ವಾಮನ ಪ್ರಭು ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2027-02-13" data-keywords="Ratha Saptami Rath Saptami Chariot Festival Magha Shuddha Saptami Purushottama Rao Nanda and family DM Venkataraya Shenoy and children makkalu February 2027 13-02-2027">
+            <div class="date-badge">
+                <span class="day">13</span>
+                <span class="month-year">February 2027</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ರಥ ಸಪ್ತಮಿ</h3>
+                    <span class="tithi-tag">ಮಾಘ ಶುದ್ಧ ಸಪ್ತಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ತಿಂ।। ಪುರುಷೋತ್ತಮ ರಾವ್ ನಂದ ಮತ್ತು ಕುಟುಂಬ D M ವೆಂಕಟರಾಯ ಶೆಣೈ ಮತ್ತು ಮಕ್ಕಳು</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2027-02-14" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Magha Shuddha Ashtami Laxman Lakshmana Bhandarkar and children makkalu Hassan February 2027 14-02-2027">
+            <div class="date-badge">
+                <span class="day">14</span>
+                <span class="month-year">February 2027</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಮಾಘ ಶುದ್ಧ ಅಷ್ಟಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಲಕ್ಷ್ಮಣ ಭಂಡಾರ್‌ಕಾರ್‌ ಮತ್ತು ಮಕ್ಕಳು, ಹಾಸನ</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="festival-card" data-date="2027-02-15" data-keywords="Pete Utsava Pete Utsav Festival Street Utsav Magha Shuddha Navami ಕೆ. ಎನ್‌. ಮುರಳಿಧರ್‌ ಭಟ್‌ ಮತ್ತು ಮಕ್ಕಳು, ಹಿರೇಬೈಲ್‌ February 2027 15-02-2027">
+            <div class="date-badge">
+                <span class="day">15</span>
+                <span class="month-year">February 2027</span>
+            </div>
+            <div class="card-content">
+                <div class="card-top">
+                    <h3 class="event-title">ಪೇಟೆ ಉತ್ಸವ</h3>
+                    <span class="tithi-tag">ಮಾಘ ಶುದ್ಧ ನವಮಿ</span>
+                </div>
+                <div class="card-bottom">
+                    <div class="sevadaara-info">
+                        <span class="label"> ಸೇವಾದಾರರು:</span>
+                        <span class="name">ಕೆ. ಎನ್‌. ಮುರಳಿಧರ್‌ ಭಟ್‌ ಮತ್ತು ಮಕ್ಕಳು, ಹಿರೇಬೈಲ್‌</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/back-to-top.js"></script>
+
+    <footer class="site-footer">
+        <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
+    </footer>
+
+</body>
+</html>
