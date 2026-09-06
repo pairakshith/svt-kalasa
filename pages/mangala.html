@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಉತ್ಸವಗಳು ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳು | Festival Events</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link active">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="pages/events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="pages/deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="pages/ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="pages/mangala.html" class="nav-link">ಮಂಗಳ</a>
+        <a href="pages/traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ಉತ್ಸವಗಳು ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳ ವಿವರ</h2>
+            <p class="kn-subheading">ಮುಂಬರುವ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು ಮತ್ತು ಸೇವಾದಾರರ ಪಟ್ಟಿ</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input 
+                type="text" 
+                id="eventSearch" 
+                placeholder="ಉತ್ಸವ, ದಿನಾಂಕ ಅಥವಾ ಸೇವಾದಾರರ ಹೆಸರನ್ನು ಹುಡುಕಿ..." 
+                onkeyup="filterCards()"
+            />
+        </div>
