@@ -1,0 +1,58 @@
+/* Floating Navigation Controls: Back to Top & Home Buttons */
+
+/* 1. Back to Top Button (Bottom-Right) */
+#backToTopBtn {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 25px !important;
+    z-index: 999999 !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #8b0000 !important; /* Deep temple red */
+    color: #ffffff !important;
+    border: 2px solid #ffd700 !important; /* Gold accent border */
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+#backToTopBtn:hover {
+    transform: translateY(-3px) !important;
+    background-color: #a00000 !important;
+}
+
+#backToTopBtn.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 2. Back to Home Button (Bottom-Left) */
+.home-btn {
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 25px !important;
+    z-index: 999999 !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #8b0000 !important; /* Deep temple red */
+    color: #ffffff !important;
+    border: 2px solid #ffd700 !important; /* Gold accent border */
+    border-radius: 50% !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.home-btn:hover {
+    transform: translateY(-3px) !important;
+    background-color: #a00000 !important;
+}
