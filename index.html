@@ -3,30 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ನನ್ನ ಜಾಲತಾಣ (My Website)</title>
+    <title>ಮುಖ್ಯ ಪುಟ | Main Page</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header>
-        <h1>ಸ್ವಾಗತ (Welcome)</h1>
-        <p>ನನ್ನ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಸ್ವಾಗತ</p>
+    <header class="site-header">
+        <h1 class="kn-heading">ನಮ್ಮ ಜಾಲತಾಣ</h1>
+        <p class="kn-subheading">ಇಲ್ಲಿ ನೀವು ಮುಖ್ಯ ಮಾಹಿತಿಯನ್ನು ವೀಕ್ಷಿಸಬಹುದು</p>
     </header>
 
-    <main class="container">
-        <h2>ವಿಭಾಗಗಳು (Sections)</h2>
-        <div class="nav-buttons">
-            <a href="pages/subsection-1.html" class="btn">ವಿಭಾಗ ೧ (Section 1)</a>
-            <a href="pages/subsection-2.html" class="btn">ವಿಭಾಗ ೨ (Section 2)</a>
-        </div>
-    </main>
+    <nav class="main-nav">
+        <a href="index.html" class="nav-link active">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="pages/events.html" class="nav-link">ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ</a>
+        <!-- <a href="pages/section-2.html" class="nav-link">ವಿಭಾಗ ೨</a>
+        <a href="pages/section-3.html" class="nav-link">ವಿಭಾಗ ೩</a>
+        <a href="pages/section-4.html" class="nav-link">ವಿಭಾಗ ೪</a>
+        <a href="pages/section-5.html" class="nav-link">ವಿಭಾಗ ೫</a> -->
+    </nav>
 
-    <footer>
-        <p>&copy; 2026 ನನ್ನ ಜಾಲತಾಣ. All Rights Reserved.</p>
-    </footer>
+    <main class="container">
+        <section class="hero-card">
+            <h2 class="kn-heading">ಮುಖ್ಯ ವಿಭಾಗಗಳು</h2>
+            <div class="card-grid">
+                <a href="pages/events.html" class="card">
+                    <h3>📅 ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ</h3>
+                    <p>ಮುಂಬರುವ ಕಾರ್ಯಕ್ರಮಗಳ ವಿವರಗಳು ಮತ್ತು ದಿನಾಂಕಗಳು.</p>
+                </a>
+                <!-- <a href="pages/section-2.html" class="card">
+                    <h3>📘 ವಿಭಾಗ ೨</h3>
+                    <p>ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಹಾಗೂ ವಿವರಣೆ ಇಲ್ಲಿದೆ.</p>
+                </a> -->
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
