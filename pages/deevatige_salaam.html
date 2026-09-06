@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ಅಷ್ಟಾವಧಾನ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    <title>ದೀವಟಿಗೆ ಸಲಾಂ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
     <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/back-to-top.css">
+
+    <!-- Marked.js for rendering markdown bullet lists -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
-    <header class="site-header">
-        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </div>
+        </div>
     </header>
 
     <nav class="main-nav">
@@ -26,154 +34,111 @@
         <a href="deevatige_salaam.html" class="nav-link active">ದೀವಟಿಗೆ ಸಲಾಂ</a>
         <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
         <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ದೀವಟಿಗೆ ಸಲಾಂ </h2>
-            <p class="kn-subheading"> ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ</p>
+            <h2 class="kn-heading">ದೀವಟಿಗೆ ಸಲಾಂ</h2>
+            <p class="kn-subheading">ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ</p>
         </div>
-
-        <!-- Search / Filter Box for Sevas
-        <div class="search-wrapper">
-            <span class="search-icon">🔍</span>
-            <input 
-                type="text" 
-                id="sevaSearch" 
-                placeholder="ಸೇವೆಯ ಹೆಸರನ್ನು ಹುಡುಕಿ (ಉದಾ: ಋಗ್ವೇದ, ಯಜುರ್ವೇದ)..." 
-                onkeyup="filterSevas()"
-            />
-        </div> -->
 
         <div class="seva-list" id="sevaContainer">
-
-            <article class="seva-card">
-                <div class="seva-body">
-                    <div class="verse-box">
-                        <p class="verse-line">ಶ್ರೀ ಮದ್ರಮಾರಮಣ ವೆಂಕಟಶೈಲವರ್ಯಾತ್। ದಾಗತ್ಯ ಅಗಸ್ತ್ಯಯನಿರ್ಮಿತ ಕಲಶಶಾಖ್ಯೆ॥</p>
-                        <p class="verse-line">ತದ್ಧೇಶಕೇ ಪುರವರೋತ್ತಮ ಕಲಶಾಖ್ಯೇ । ತಿಷ್ಟನ್ ತ್ವದೀಯಭಜಕಾನವಲೋಕಯಸ್ವ ॥</p>
-                    </div>
-                </div>
-                <details class="collapsible-section">
-                    <summary class="collapsible-toggle">
-                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                        <span class="toggle-icon">▼</span>
-                    </summary>
-                    <div class="collapsible-content">
-                        <p><strong>ಶ್ರೀಮತ್-ರಮಾರಮಣ:</strong> ಲಕ್ಷ್ಮಿಯ (ರಮಾ) ಮನಸ್ಸನ್ನು ರಂಜಿಸುವ ಒಡೆಯನೇ.</p>
-                        <p><strong>ವೆಂಕಟ-ಶೈಲ-ವರ್ಯಾತ್ ದಾಗತ್ಯ:</strong> ಶ್ರೇಷ್ಠವಾದ ವೆಂಕಟಾಚಲ ಪರ್ವತದಿಂದ (ತಿರುಪತಿಯಿಂದ) ಇಲ್ಲಿಗೆ ದಯಮಾಡಿ (ಆಗತ್ಯ).</p>
-                        <p><strong>ಹ್ಯಗಸ್ತ್ಯ-ಮುನಿ-ನಿರ್ಮಿತ-ಕಲಶಾಖ್ಯೇ:</strong> ಅಗಸ್ತ್ಯ ಮಹರ್ಷಿಗಳಿಂದ ನಿರ್ಮಿಸಲ್ಪಟ್ಟ/ಸ್ಥಾಪಿಸಲ್ಪಟ್ಟ 'ಕಲಶ' (ಕಳಸ) ಎಂಬ ಹೆಸರಿನ.</p>
-                        <p><strong>ತತ್-ದೇಶಕೇ ಪುರ-ವರ-ಉತ್ತಮ-ಕಲಶಾಖ್ಯೇ:</strong> ಆ ಪುಣ್ಯಭೂಮಿಯ, ಪಟ್ಟಣಗಳಲ್ಲೇ ಅತ್ಯಂತ ಶ್ರೇಷ್ಠವಾದ ಕಳಸಾಪುರದಲ್ಲಿ.</p>
-                        <p><strong>ತಿಷ್ಠನ್:</strong> ನೆಲೆಸಿ ನಿಂತಿರುವವನೇ.</p>
-                        <p><strong>ತ್ವದೀಯ-ಭಜಕಾನ್-ಅವಲೋಕಯಸ್ವ:</strong> ನಿನ್ನನ್ನು ನಂಬಿ ಪೂಜಿಸುತ್ತಿರುವ ಭಕ್ತರನ್ನು (ತ್ವದೀಯ ಭಜಕಾನ್) ನಿನ್ನ ಕರುಣಾ ದೃಷ್ಟಿಯಿಂದ ನೋಡು/ರಕ್ಷಿಸು (ಅವಲೋಕಯಸ್ವ).</p>
-                    </div>
-                </details>
-            </article>
-
-            <article class="seva-card">
-                <div class="seva-body">
-                    <div class="verse-box">
-                        <p class="verse-line">ಶ್ರೀವಾರಿಜೋದ್ಭವಭವೇಂದ್ರಖಗೇಂದ್ರಪೂರ್ವ | ಮೌಳಿಸ್ಥಸನ್ಮುಕುಟಘಟ್ಟಿತಪಾದಪೀಠ ||</p>
-                        <p class="verse-line">ಸಂತಪ್ತಹಾಟಕವಿನಿರ್ಮಿತಮಂಟಪಸ್ಥ | ಶ್ರೀಕಳಶಾಖ್ಯಪುರನಾಯಕ ಸನ್ನಮಾಮಿ ||</p>
-                    </div>
-                </div>
-                <details class="collapsible-section">
-                    <summary class="collapsible-toggle">
-                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                        <span class="toggle-icon">▼</span>
-                    </summary>
-                    <div class="collapsible-content">
-                      <p><strong>ಶ್ರೀ-ವಾರಿಜೋದ್ಭವ:</strong> ತಾವರೆಯಲ್ಲಿ ಜನಿಸಿದ ಬ್ರಹ್ಮದೇವ (ವಾರಿಜ + ಉದ್ಭವ).</p>
-                      <p><strong>ಭವ:</strong> ಜಗತ್ತಿನ ಸೃಷ್ಟಿಕರ್ತ ಶಿವ.</p>
-                      <p><strong>ಇಂದ್ರ:</strong> ದೇವತೆಗಳ ರಾಜ ಇಂದ್ರ.</p>
-                      <p><strong>ಖಗೇಂದ್ರ:</strong> ಪಕ್ಷಿರಾಜನಾದ ಗರುಡದೇವ.</p>
-                      <p><strong>ಪೂರ್ವ ಮೌಳಿಸ್ಥ-ಸನ್ಮುಕುಟ-ಘಟ್ಟಿತ-ಪಾದಪೀಠ:</strong> ಇವರೆಲ್ಲರೂ ಸಾಲಾಗಿ ಬಂದು ತಲೆಬಾಗಿ ನಮಸ್ಕರಿಸುವಾಗ, ಅವರ ಕಿರೀಟಗಳು (ಮೌಳಿ/ಮುಕುಟ) ಭಗವಂತನ ಪಾದ ಇಡುವ ಪೀಠಕ್ಕೆ (ಪಾದಪೀಠ) ತಾಗಿ ಘರ್ಷಣೆಯಾಗುತ್ತಿದೆ (ಘಟ್ಟಿತ).</p>
-                      <p><strong>ಸಂತಪ್ತ-ಹಾಟಕ-ವಿನಿರ್ಮಿತ-ಮಂಟಪಸ್ಥ:</strong> ಚೆನ್ನಾಗಿ ಕಾಯಿಸಿ ಕರಗಿಸಿದ ಶುದ್ಧ ಚಿನ್ನದಿಂದ (ಹಾಟಕ) ನಿರ್ಮಿಸಲಾದ ಭವ್ಯ ಮಂಟಪದಲ್ಲಿ ವಿರಾಜಮಾನನಾಗಿರುವವನೇ.</p>
-                      <p><strong>ಶ್ರೀಕಳಶಾಖ್ಯಪುರನಾಯಕ ಸನ್ನಮಾಮಿ:</strong> ಕಳಸ ಎಂಬ ಸುಂದರ ಪುರಕ್ಕೆ ನಾಯಕನಾದ ನಿನಗೆ ಸಾಷ್ಟಾಂಗ ನಮಸ್ಕಾರಗಳನ್ನು (ಸನ್ನಮಾಮಿ) ಅರ್ಪಿಸುತ್ತೇನೆ.</p>
-                    </div>
-                </details>
-            </article>
-
-            <article class="seva-card">
-                <div class="seva-body">
-                    <div class="verse-box">
-                        <p class="verse-line">ಕುಂದೇಂದುಗೋಕ್ಷೀರಸಮಾನವರ್ಣಂ | ಸದ್ಧೇಮದಂಡಾನ್ವಿತಚಾಮರದ್ವಯಮ್ ||</p>
-                        <p class="verse-line">ಭೋಗೀಂದ್ರಭೋಗೋಪಮವೇತ್ರಯುಗ್ಮಂ | ದಯಾನಿಧೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ ||</p>
-                    </div>
-                </div>
-                <details class="collapsible-section">
-                    <summary class="collapsible-toggle">
-                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                        <span class="toggle-icon">▼</span>
-                    </summary>
-                    <div class="collapsible-content">
-                      <p><strong>ಕುಂದ-ಇಂದು-ಗೋಕ್ಷೀರ-ಸಮಾನ-ವರ್ಣಂ:</strong> ಕುಂದ ರತ್ನ (ಬಿಳಿ ಹೂವು), ಇಂದು (ಚಂದ್ರ) ಮತ್ತು ಹಸುವಿನ ಹಾಲು (ಗೋಕ್ಷೀರ) ಇವುಗಳಂತೆ ಪರಮ ಬಿಳಿಯಾದ ಬಣ್ಣವನ್ನು ಹೊಂದಿರುವ.</p>
-                      <p><strong>ಸತ್-ಹೇಮದಂಡ-ಅನ್ವಿತ-ಚಾಮರ-ದ್ವಯಮ್:</strong> ಶ್ರೇಷ್ಠವಾದ ಚಿನ್ನದ ಹಿಡಿಕೆಯನ್ನು (ಹೇಮದಂಡ) ಹೊಂದಿರುವ ಎರಡು ಬಿಳಿ ಚಾಮರಗಳ ಸೇವೆ.</p>
-                      <p><strong>ಭೋಗೀಂದ್ರ-ಭೋಗ-ಉಪಮ-ವೇತ್ರ-ಯುಗ್ಮಂ:</strong> ಆದಿಶೇಷನ (ಭೋಗೀಂದ್ರ) ವಿಶಾಲವಾದ ದೇಹದಂತೆ ಸುಂದರವಾಗಿರುವ ಎರಡು ರಾಜದಂಡ/ಬೆತ್ತಗಳು (ವೇತ್ರ ಯುಗ್ಮಂ).</p>
-                      <p><strong>ದಯಾನಿಧೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ:</strong> ಎಲೈ ದಯಾಸಾಗರನೇ, ನಿನ್ನ ಮುಂದೆ ನಡೆಯುತ್ತಿರುವ ಈ ಭವ್ಯ ಸೇವೆಯನ್ನು ಕರುಣೆಯಿಂದ ಆಲಿಸು/ನೋಡು.</p>
-                    </div>
-                </details>
-            </article>
-
-            <article class="seva-card">
-                <div class="seva-body">
-                    <div class="verse-box">
-                        <p class="verse-line">ಸಮಸ್ತಪ್ರಧ್ವಾಂತಭಿದೇ ಪ್ರದೀಪ್ತೇ | ತಿಗ್ಮಾಂಶುವೈಶ್ವಾನರಸನ್ನಿಕಾಶೇ ||</p>
-                        <p class="verse-line">ರೌಪ್ಯಾತ್ಮಕೇ ಪಂಚಶಿರಃಪ್ರದೀಪಿಕೇ |ರಮಾಪತೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ ||</p>
-                    </div>
-                </div>
-                <details class="collapsible-section">
-                    <summary class="collapsible-toggle">
-                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                        <span class="toggle-icon">▼</span>
-                    </summary>
-                    <div class="collapsible-content">
-                      <p><strong>ಸಮಸ್ತ-ಪ್ರಧ್ವಾಂತ-ಭಿದೇ:</strong> ಜಗತ್ತಿನ ಸಮಸ್ತ ಅಂಧಕಾರವನ್ನು/ಕತ್ತಲನ್ನು ಸೀಳಿ ನಾಶಮಾಡುವ (ಭಿದೇ).</p>
-                      <p><strong>ಪ್ರದೀಪ್ತೇ:</strong> ಪ್ರಜ್ವಲಿಸುತ್ತಿರುವ.</p>
-                      <p><strong>ತಿಗ್ಮಾಂಶು-ವೈಶ್ವಾನರ-ಸನ್ನಿಕಾಶೇ:</strong> ಸೂರ್ಯನ (ತಿಗ್ಮಾಂಶು) ಹಾಗೂ ಉರಿಯುವ ಅಗ್ನಿಯ (ವೈಶ್ವಾನರ) ತೇಜಸ್ಸಿಗೆ ಸಮಾನವಾಗಿ ಪ್ರಕಾಶಿಸುತ್ತಿರುವ.</p>
-                      <p><strong>ರೌಪ್ಯಾತ್ಮಕೇ:</strong> ಸಂಪೂರ್ಣವಾಗಿ ಬೆಳ್ಳಿಯಿಂದ (ರೌಪ್ಯ) ಮಾಡಲ್ಪಟ್ಟಿರುವ.</p>
-                      <p><strong>ಪಂಚ-ಶಿರಃ-ಪ್ರದೀಪಿಕೇ:</strong> ಐದು ಮುಖಗಳನ್ನು/ಶಿರಸ್ಸುಗಳನ್ನು ಹೊಂದಿರುವ ಈ ಮಹಾ ಆರತಿಯನ್ನು.</p>
-                      <p><strong>ರಮಾಪತೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ:</strong> ಲಕ್ಷ್ಮೀರಮಣನೇ, ಈ ಮಂಗಳಕರ ದೀಪಾರತಿಯನ್ನು ಕರುಣೆಯಿಂದ ಸ್ವೀಕರಿಸು.</p>
-                    </div>
-                </details>
-            </article>
-
-            <article class="seva-card">
-                <div class="seva-body">
-                    <div class="verse-box">
-                        <p class="verse-line">ಭೇರೀಮೃದಂಗಾನಕವೇಣುವೀಣಾ | ನಿಸ್ಸಾಳಶಂಖಶ್ರುತಿಡಿಂಡಿಮಾನಿ ||</p>
-                        <p class="verse-line">ವಾದ್ಯಾನಿ ಚಿತ್ರಾಣಿ ಚ ಝರ್ಝರಾಣಿ | ಆಕರ್ಣ್ಯತಾಂ ಸುಸ್ವರರಂಜಿತಾನಿ ||</p>
-                    </div>
-                </div>
-                <details class="collapsible-section">
-                    <summary class="collapsible-toggle">
-                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                        <span class="toggle-icon">▼</span>
-                    </summary>
-                    <div class="collapsible-content">
-                      <p><strong>ಭೇರೀ:</strong> ನಗಾರಿ ಅಥವಾ ದೊಡ್ಡ ನಗರಾ ವಾದ್ಯ.</p>
-                      <p><strong>ಮೃದಂಗ:</strong> ಶಾಸ್ತ್ರೀಯ ಮೃದಂಗ.</p>
-                      <p><strong>ಆನಕ:</strong> ದೊಡ್ಡ ಡೋಲು.</p>
-                      <p><strong>ವೇಣು:</strong> ಕೊಳಲು.</p>
-                      <p><strong>ವೀಣಾ:</strong> ತಂತಿ ವಾದ್ಯವಾದ ವೀಣೆ.</p>
-                      <p><strong>ನಿಸ್ಸಾಳ:</strong> ಕಂಚಿನ ದೊಡ್ಡ ತಾಳಗಳು.</p>
-                      <p><strong>ಶಂಖ:</strong> ಪವಿತ್ರ ಶಂಖನಾದ.</p>
-                      <p><strong>ಶ್ರುತಿ:</strong> ಹಿನ್ನೆಲೆಯ ಶ್ರುತಿ ವಾದ್ಯ.</p>
-                      <p><strong>ಡಿಂಡಿಮಾನಿ:</strong> ಡಮರುಗ ಅಥವಾ ಡೋಲಕ ಮಾದರಿಯ ಸಣ್ಣ ವಾದ್ಯ.</p>
-                      <p><strong>ವಾದ್ಯಾನಿ ಚಿತ್ರಾಣಿ ಚ ಝರ್ಝರಾಣಿ:</strong> ಇವುಗಳ ಜೊತೆಗೆ ವಿಭಿನ್ನ ವಿನ್ಯಾಸದ 'ಝರ್ಝರ' (ಝೇಂಕಾರ ಮಾಡುವ ಕಂಚಿನ ಜಾಗಟೆಗಳು).</p>
-                      <p><strong>ಆಕರ್ಣ್ಯತಾಂ ಸುಸ್ವರ-ರಂಜಿತಾನಿ:</strong> ಸುಂದರವಾದ ಸ್ವರಗಳಿಂದ ಕೂಡಿ ಕಿವಿಗೊಡುವಂತಿರುವ (ಆಕರ್ಣ್ಯತಾಂ) ಈ ಎಲ್ಲ ವಾದ್ಯಗಳ ನಾದವನ್ನು ಪ್ರಭು ಆಲಿಸಲಿ.</p>
-                    </div>
-                </details>
-            </article>
+            <p style="text-align: center; color: #666;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
         </div>
     </main>
-
-    <script src="../js/main.js"></script>
-    <script src="../js/back-to-top.js"></script>
 
     <footer class="site-footer">
         <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
     </footer>
 
+    <script src="../js/main.js"></script>
+    <script src="../js/back-to-top.js"></script>
+
+    <script>
+        async function loadMarkdownContent() {
+            const container = document.getElementById('sevaContainer');
+            
+            try {
+                const response = await fetch('../data/deevatige_salaam.md');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const markdownText = await response.text();
+                container.innerHTML = '';
+
+                // Split sections by '## ' headers
+                const sections = markdownText.split(/^##\s+/m);
+
+                sections.forEach((section, index) => {
+                    // Skip the top title block (H1)
+                    if (index === 0) return;
+
+                    const rawLines = section.split('\n');
+                    const sectionTitle = rawLines.shift().trim(); // First line is section heading
+                    
+                    const verseLines = [];
+                    const explanationLines = [];
+
+                    rawLines.forEach(line => {
+                        const trimmedLine = line.trim();
+                        if (!trimmedLine) return; // Skip empty lines
+
+                        // Bullet point lines start with '*'
+                        if (trimmedLine.startsWith('*')) {
+                            explanationLines.push(line);
+                        } else {
+                            // Any line that isn't a bullet point is treated as part of the verse
+                            verseLines.push(trimmedLine);
+                        }
+                    });
+
+                    // Build html for verse lines
+                    const verseHtml = verseLines
+                        .map(line => `<p class="verse-line">${line}</p>`)
+                        .join('');
+
+                    // Parse explanation bullets using marked.js
+                    const explanationHtml = typeof marked !== 'undefined' 
+                        ? marked.parse(explanationLines.join('\n')) 
+                        : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
+
+                    // Build card element matching your original CSS structure
+                    const card = document.createElement('article');
+                    card.className = 'seva-card';
+                    card.innerHTML = `
+                        <div class="seva-body">
+                            <h3 style="color: #800000; margin-bottom: 12px; font-family: 'Noto Serif Kannada', serif;">${sectionTitle}</h3>
+                            <div class="verse-box">
+                                ${verseHtml}
+                            </div>
+                        </div>
+                        <details class="collapsible-section">
+                            <summary class="collapsible-toggle">
+                                <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                                <span class="toggle-icon">▼</span>
+                            </summary>
+                            <div class="collapsible-content">
+                                ${explanationHtml}
+                            </div>
+                        </details>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Error loading markdown:", error);
+                container.innerHTML = `
+                    <div style="text-align: center; color: #cc0000; padding: 20px;">
+                        <p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
+                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/deevatige_salaam.md</code> ಸರಿಯಾಗಿದೆಯೇ ಮತ್ತು ಸ್ಥಳೀಯ ಸರ್ವರ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರೀಕ್ಷಿಸಿ)</p>
+                    </div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMarkdownContent);
+    </script>
 </body>
 </html>

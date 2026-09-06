@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+    
+    <!-- Marked.js Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+
+        .tab-btn {
+            background-color: #fff;
+            color: #800000;
+            border: 2px solid #800000;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-family: 'Noto Sans Kannada', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background-color: #800000;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2);
+        }
+
+        .markdown-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #800000;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .markdown-card h2 {
+            color: #800000;
+            font-family: 'Noto Serif Kannada', serif;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .markdown-card p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .loading-text {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="history.html" class="nav-link active">ಇತಿಹಾಸ</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ಪೌರಾಣಿಕ ಹಾಗೂ ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ</h2>
+            <p class="kn-subheading">ಕಳಸ ಸೀಮೆಯ ವೈಭವ, ಸಾರಸ್ವತರ ಆಗಮನ ಹಾಗೂ ಸಾನ್ನಿಧ್ಯದ ಮಹಿಮೆ</p>
+        </div>
+
+        <!-- Filter Buttons Bar -->
+        <div class="filter-tabs">
+            <button class="tab-btn" onclick="filterContent('history', this)">ಸಂಕ್ಷಿಪ್ತ ಇತಿಹಾಸ</button>
+            <button class="tab-btn" onclick="filterContent('migration', this)">ಸಾರಸ್ವತರ ಪಯಣ</button>
+            <button class="tab-btn" onclick="filterContent('kalasa', this)">ಕಳಸ ಕ್ಷೇತ್ರ (ದಕ್ಷಿಣ ಕಾಶಿ)</button>
+            <button class="tab-btn" onclick="filterContent('venkataramana', this)">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</button>
+        </div>
+
+        <!-- Dynamic Content Output Area -->
+        <div id="content-display">
+            <div class="loading-text">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
+    </footer>
+
+    <!-- Global Floating Navigation JS -->
+    <script src="../js/back-to-top.js"></script>
+
+    <!-- JavaScript Engine to load and parse markdown -->
+    <script>
+        let parsedSections = [];
+
+        async function loadMarkdownData() {
+            try {
+                const response = await fetch('../data/temple_background.md');
+                const rawMarkdown = await response.text();
+
+                // Split markdown file by "---" separator
+                const rawBlocks = rawMarkdown.split('---');
+
+                parsedSections = rawBlocks.map(block => {
+                    // Extract category from tag "# CATEGORY: category_name"
+                    const categoryMatch = block.match(/# CATEGORY:\s*(\w+)/);
+                    const category = categoryMatch ? categoryMatch[1].trim() : 'all';
+
+                    // Clean out the category tag line before parsing
+                    const cleanMarkdown = block.replace(/# CATEGORY:\s*\w+/, '').trim();
+
+                    return {
+                        category: category,
+                        htmlContent: marked.parse(cleanMarkdown)
+                    };
+                }).filter(sec => sec.htmlContent.length > 0);
+
+                // Render all categories by default on load
+                renderFilteredHtml('all');
+
+            } catch (error) {
+                console.error("Markdown load error:", error);
+                document.getElementById('content-display').innerHTML = 
+                    `<p style="color:red; text-align:center;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ.</p>`;
+            }
+        }
+
+        function filterContent(targetCategory, buttonElement) {
+            // Update Active tab styling
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if(buttonElement) buttonElement.classList.add('active');
+
+            renderFilteredHtml(targetCategory);
+        }
+
+        function renderFilteredHtml(targetCategory) {
+            const displayContainer = document.getElementById('content-display');
+
+            const filteredList = (targetCategory === 'all') 
+                ? parsedSections 
+                : parsedSections.filter(sec => sec.category === targetCategory);
+
+            if (filteredList.length === 0) {
+                displayContainer.innerHTML = `<p class="loading-text">ಯಾವುದೇ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ.</p>`;
+                return;
+            }
+
+            displayContainer.innerHTML = filteredList.map(sec => `
+                <article class="markdown-card">
+                    ${sec.htmlContent}
+                </article>
+            `).join('');
+        }
+
+        // Initialize fetching on window load
+        window.onload = loadMarkdownData;
+    </script>
+</body>
+</html>

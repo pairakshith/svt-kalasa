@@ -9,42 +9,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/images/icon_image.jpg">
     
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
 </head>
 <body>
 
-    <header class="site-header">
-        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಕಳಸ</span>
+                <span class="dot"></span>
+                <span class="eng">Amgel Devasthana</span>
+            </div>
+        </div>
     </header>
 
-    <nav class="main-nav">
-        <a href="index.html" class="nav-link active">ಮುಖ್ಯ ಪುಟ</a>
+    <!-- <nav class="main-nav">
+        <a href="index.html" class="nav-link active">ಮುಖ ಪುಟ</a>
         <a href="pages/events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
         <a href="pages/deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
         <a href="pages/ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
         <a href="pages/mangala.html" class="nav-link">ಮಂಗಳ</a>
-    </nav>
+        <a href="pages/traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+        <a href="pages/temple_background.html" class="nav-link">ಇತಿಹಾಸ</a>
+    </nav> -->
 
     <main class="container">
-        <!-- Hero Section -->
-        <section class="hero-banner">
-            <div class="hero-content">
-                <!-- <span class="hero-badge">🚩 ದಿವ್ಯ ಸನ್ನಿಧಿ</span> -->
-                <h2 class="hero-title">ಶ್ರೀ ವೆಂಕಟರಮಣ ಸ್ವಾಮಿ ದೇವಸ್ಥಾನ, ಕಳಸ</h2>
-                <p class="hero-subtitle">ಕಳಸ ಮೇಲಂಗಡಿಯ ಪವಿತ್ರ ಧಾರ್ಮಿಕ ಕ್ಷೇತ್ರಕ್ಕೆ ನಿಮಗೆ ಆದರದ ಸುಸ್ವಾಗತ</p>
-                <div class="hero-actions">
-                    <a href="pages/events.html" class="cta-btn primary">📅 ಮುಂಬರುವ ಉತ್ಸವಗಳು</a>
-                    <a href="#about-temple" class="cta-btn secondary">📖 ದೇವಸ್ಥಾನದ ಹಿನ್ನೆಲೆ</a>
-                </div>
+
+        <!-- Quick Access Feature Cards Grid -->
+        <section class="features-section" style="margin-top: 1.5rem;">
+
+            <div class="feature-grid">
+                <!-- Highlighted Events Section Card -->
+                <!-- <a href="pages/events.html" class="feature-card highlight-events"> -->
+                <a href="pages/events.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</h3>
+                        <p>ವರ್ಷದ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು, ತಿಥಿಗಳು, ದಿನಾಂಕಗಳು ಮತ್ತು ಸೇವಾದಾರರ ಪೂರ್ಣ ವಿವರಗಳು.</p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="pages/temple_background.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ದೇವಸ್ಥಾನದ ಹಿನ್ನೆಲೆ ಮತ್ತು ಇತರ ಮಾಹಿತಿ</h3>
+                        <p>ವಿವೇಕಾನಂದ ಭಟ್ ಇವರ ಭಕ್ತಿ ಮಾಲಾ ಪುಸ್ತಕ ಮತ್ತು ಸ್ಥಳೀಯರ ಮಾಹಿತಿಯ ಮೇರೆಗೆ.</p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="pages/deevatige_salaam.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ದೀವಟಿಗೆ ಸಲಾಂ</h3>
+                        <p>ದೇವಸ್ಥಾನದ ಸಾಂಪ್ರದಾಯಿಕ ದೀವಟಿಗೆ ಸಲಾಂ ಪ್ರಾರ್ಥನೆಗಳು.</p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="pages/ashtaavadhaana.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ಅಷ್ಟಾವಧಾನ</h3>
+                        <p>ದೇವಸ್ಥಾನದ ಅಷ್ಟಾವಧಾನ ಸೇವೆ ಮತ್ತು ಶ್ಲೋಕಗಳು.</p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="pages/mangala.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ಮಂಗಳ</h3>
+                        <p>ದೇವಸ್ಥಾನದ ಉತ್ಸವಗಳ ಮಂಗಳ<div class=""></div></p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- <a href="pages/photos.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ಛಾಯಾಚಿತ್ರಗಳು & ಮಾಧ್ಯಮ</h3>
+                        <p>ದೇವಸ್ಥಾನದ ಉತ್ಸವಗಳು ಮತ್ತು ಧಾರ್ಮಿಕ ಕಾರ್ಯಕ್ರಮಗಳ ಸುಂದರ ಚಿತ್ರಗಳು.</p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a> -->
             </div>
         </section>
 
-        <!-- About Temple Section -->
-        <section id="about-temple" class="about-section">
+        <!-- About Temple Section (Moved to End) -->
+        <section id="about-temple" class="about-section" style="margin-top: 3rem;">
             <div class="section-header">
-                <h2 class="kn-heading">🚩 ನಮ್ಮ ದೇವಸ್ಥಾನ</h2>
+                <h2 class="kn-heading"> ನಮ್ಮ ದೇವಸ್ಥಾನ</h2>
                 <div class="heading-divider"></div>
             </div>
             <div class="about-card">
@@ -60,55 +114,6 @@
             </div>
         </section>
 
-        <!-- Quick Access Feature Cards Grid -->
-        <section class="features-section">
-            <div class="section-header">
-                <h2 class="kn-heading">ಮುಖ್ಯ ವಿಭಾಗಗಳು</h2>
-                <div class="heading-divider"></div>
-            </div>
-
-            <div class="feature-grid">
-                <a href="pages/events.html" class="feature-card">
-                    <div class="feature-info">
-                        <h3>ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</h3>
-                        <p>ವರ್ಷದ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು, ತಿಥಿಗಳು ಮತ್ತು ಸೇವಾದಾರರ ವಿವರಗಳು.</p>
-                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
-                    </div>
-                </a>
-
-                <!-- <a href="pages/traditions.html" class="feature-card">
-                    <div class="feature-info">
-                        <h3>ಆಚರಣೆಗಳು & ಪೂಜೆಗಳು</h3>
-                        <p>ದೇವಸ್ಥಾನದ ಸಾಂಪ್ರದಾಯಿಕ ಆಚರಣೆಗಳು ಮತ್ತು ವಿಶೇಷ ದಿನಗಳ ಮಾಹಿತಿ.</p>
-                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
-                    </div>
-                </a> -->
-
-                <a href="pages/deevatige_salaam.html" class="feature-card">
-                    <div class="feature-info">
-                        <h3>ದೀವಟಿಗೆ ಸಲಾಂ </h3>
-                        <p>ದೇವಸ್ಥಾನದ ದೀವಟಿಗೆ ಸಲಾಂ.</p>
-                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="pages/ashtaavadhaana.html" class="feature-card">
-                    <div class="feature-info">
-                        <h3>ಅಷ್ಟಾವಧಾನ</h3>
-                        <p>ದೇವಸ್ಥಾನದ ಅಷ್ಟಾವಧಾನ.</p>
-                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="pages/photos.html" class="feature-card">
-                    <div class="feature-info">
-                        <h3>ಛಾಯಾಚಿತ್ರಗಳು & ಮಾಧ್ಯಮ</h3>
-                        <p>ದೇವಸ್ಥಾನದ ಉತ್ಸವಗಳು ಮತ್ತು ಧಾರ್ಮಿಕ ಕಾರ್ಯಕ್ರಮಗಳ ಸುಂದರ ಚಿತ್ರಗಳು.</p>
-                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
-                    </div>
-                </a>
-            </div>
-        </section>
     </main>
 
     <footer class="site-footer">
