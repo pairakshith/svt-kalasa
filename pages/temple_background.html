@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
     
     <!-- Marked.js Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -77,9 +79,13 @@
 </head>
 <body>
 
-    <header class="site-header">
-        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </div>
+        </div>
     </header>
 
     <nav class="main-nav">
@@ -111,13 +117,16 @@
         <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
     </footer>
 
+    <!-- Global Floating Navigation JS -->
+    <script src="../js/back-to-top.js"></script>
+
     <!-- JavaScript Engine to load and parse markdown -->
     <script>
         let parsedSections = [];
 
         async function loadMarkdownData() {
             try {
-                const response = await fetch('../data/history.md');
+                const response = await fetch('../data/temple_background.md');
                 const rawMarkdown = await response.text();
 
                 // Split markdown file by "---" separator

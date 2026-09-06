@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Header & Sub-Navigation Header Bar Styles
+   ========================================================================== */
+
+.site-header--glass {
+    background: linear-gradient(135deg, #7a0016, #b3122e);
+    padding: 2.2rem 1.2rem 1.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.site-header--glass::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.header-container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.kn-heading {
+    font-family: 'Noto Serif Kannada', serif;
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.3;
+}
+
+.subheading-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 5px 16px;
+    border-radius: 30px;
+    margin-top: 0.6rem;
+    color: #ffeb3b;
+    font-size: 0.95rem;
+    font-family: 'Noto Sans Kannada', sans-serif;
+}
+
+.subheading-pill .dot {
+    width: 5px;
+    height: 5px;
+    background-color: #ffeb3b;
+    border-radius: 50%;
+}
+
+/* Header Sub-Sections Shortcuts */
+.header-subsections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+.header-subsections a {
+    color: #fff8e7;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-family: 'Noto Sans Kannada', sans-serif;
+    text-decoration: none;
+    transition: all 0.25 ease;
+}
+
+.header-subsections a:hover,
+.header-subsections a.active {
+    background: #ffeb3b;
+    color: #7a0016;
+    border-color: #ffeb3b;
+    font-weight: 600;
+}
+
+/* Responsive Scaling */
+@media (max-width: 600px) {
+    .kn-heading {
+        font-size: 1.6rem;
+    }
+    .subheading-pill {
+        font-size: 0.85rem;
+    }
+    .header-subsections a {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+}

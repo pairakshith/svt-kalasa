@@ -65,7 +65,7 @@ function initUpcomingEvents() {
             if (cardTop && !cardTop.querySelector(".upcoming-badge")) {
                 const badge = document.createElement("span");
                 badge.className = "upcoming-badge";
-                badge.innerHTML = "🌟 ಮುಂದಿನ ಉತ್ಸವ / Next Event";
+                badge.innerHTML = "🌟 ಮುಂದಿನ ಉತ್ಸವ ";
                 cardTop.appendChild(badge);
             }
 

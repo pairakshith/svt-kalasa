@@ -855,43 +855,92 @@ body {
     margin-top: 0.5rem;
 }
 
-/* Header Background with Adjustable Image Transparency */
-/* .site-header {
+/* Highlight styles for upcoming event */
+.festival-card.upcoming-highlight {
+    border: 2px solid #d32f2f;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.25);
+    background-color: #fff9f9;
+}
+
+.upcoming-tag {
+    background-color: #d32f2f;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.tag-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.site-header--glass {
+    background: linear-gradient(135deg, #7a0016, #b3122e);
+    padding: 2.8rem 1.5rem;
+    text-align: center;
     position: relative;
     overflow: hidden;
-    background-color: #ececec00; 
-    color: #ffffff;
-    padding: 2.5rem 1rem;
-    text-align: center;
-    z-index: 1;
-} */
+}
 
-/* Pseudo-element for background image & opacity control */
-/* .site-header::before {
-    content: "";
+.site-header--glass::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-     */
-    /* REPLACE with your exact image path in the repo */
-    /* background-image: url('../assets/images/icon_image');
-    
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-     */
-    /* ADJUST TRANSPARENCY HERE (0.1 = very subtle, 0.5 = medium, 0.8 = vivid) */
-    /* opacity: 0.55; 
-    
-    z-index: -1; /* Keeps image behind header text */ /*
-} */
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
 
-/* Ensure Header Text stays crisp and readable */
-/* .site-header .kn-heading,
-.site-header .kn-subheading {
+.header-container {
     position: relative;
-    z-index: 2;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Adds shadow for contrast *//*
-} */
+    z-index: 1;
+}
+
+.top-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+}
+
+.kn-heading {
+    font-family: 'Noto Serif Kannada', serif;
+    font-size: 2.4rem;
+    color: #ffffff;
+    margin: 0.2rem 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.subheading-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-top: 0.5rem;
+    color: #ffeb3b;
+    font-size: 0.95rem;
+    font-family: 'Noto Sans Kannada', sans-serif;
+}
+
+.subheading-pill .dot {
+    width: 5px;
+    height: 5px;
+    background-color: #ffeb3b;
+    border-radius: 50%;
+}
