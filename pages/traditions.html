@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಆಚರಣೆಗಳು | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+
+    <!-- Marked.js Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0 30px;
+        }
+
+        .tab-btn {
+            background-color: #ffffff;
+            color: #800000;
+            border: 2px solid #800000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Noto Sans Kannada', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background-color: #800000;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2);
+        }
+
+        .tradition-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #800000;
+            line-height: 1.8;
+            font-size: 1.02rem;
+        }
+
+        .tradition-card h2 {
+            color: #800000;
+            font-family: 'Noto Serif Kannada', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .tradition-card h3 {
+            color: #800000;
+            font-family: 'Noto Serif Kannada', serif;
+            font-size: 1.25rem;
+            margin: 18px 0 10px;
+        }
+
+        .tradition-card p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        .tradition-card ul {
+            margin: 10px 0 18px 20px;
+        }
+
+        .tradition-card li {
+            margin-bottom: 8px;
+        }
+
+        .loading-text {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+        <p class="kn-subheading">ಮೇಲಂಗಡಿ, ಕಳಸ | Amgel Devasthana</p>
+    </header>
+
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link active">ಆಚರಣೆಗಳು</a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ವಿಶೇಷ ಆಚರಣೆಗಳು, ವ್ರತಗಳು ಮತ್ತು ಪೌರಾಣಿಕ ಮಹತ್ವ</h2>
+            <p class="kn-subheading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ವಿಧಿವಿಧಾನಗಳು</p>
+        </div>
+
+        <!-- Filter Buttons Bar -->
+        <div class="filter-tabs">
+            <button class="tab-btn" onclick="filterTraditions('pavitraropana', this)">ಪವಿತ್ರಾರೋಪಣ</button>
+            <button class="tab-btn" onclick="filterTraditions('paschima_jagara', this)">ಪಶ್ಚಿಮ ಜಾಗರ ಪೂಜೆ</button>
+            <button class="tab-btn" onclick="filterTraditions('vishwaroopa', this)">ವಿಶ್ವರೂಪ ದರ್ಶನ</button>
+            <button class="tab-btn" onclick="filterTraditions('kartika_vana_bhojana', this)">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ & ವನ ಭೋಜನ</button>
+            <button class="tab-btn" onclick="filterTraditions('tulasi_vivaha', this)">ತುಳಸೀ ವಿವಾಹ</button>
+            <button class="tab-btn" onclick="filterTraditions('ananta_chaturdashi', this)">ಅನಂತ ಚತುರ್ದಶಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('ratha_saptami', this)">ರಥ ಸಪ್ತಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('mukkoti_dvadashi', this)">ಮುಕ್ಕೋಟಿ ದ್ವಾದಶಿ</button>
+        </div>
+
+        <!-- Dynamic Content Area -->
+        <section id="traditions-display" class="content-section">
+            <div class="loading-text">ಆಚರಣೆಗಳ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ.</p>
+    </footer>
+
+    <!-- Global Floating Navigation JS -->
+    <script src="../js/back-to-top.js"></script>
+
+    <!-- Markdown Fetcher and Parser Script -->
+    <script>
+        let parsedTraditions = [];
+
+        async function loadTraditionsMarkdown() {
+            try {
+                const response = await fetch('../data/traditions.md');
+                const rawMarkdown = await response.text();
+
+                // Split markdown by "---" separator
+                const rawBlocks = rawMarkdown.split('---');
+
+                parsedTraditions = rawBlocks.map(block => {
+                    // Extract category from "# CATEGORY: category_name"
+                    const categoryMatch = block.match(/# CATEGORY:\s*(\w+)/);
+                    const category = categoryMatch ? categoryMatch[1].trim() : 'all';
+
+                    // Remove category tag from raw content before parsing
+                    const cleanMarkdown = block.replace(/# CATEGORY:\s*\w+/, '').trim();
+
+                    return {
+                        category: category,
+                        htmlContent: marked.parse(cleanMarkdown)
+                    };
+                }).filter(item => item.htmlContent.length > 0);
+
+                // Render all items by default on page load
+                renderFilteredTraditions('all');
+
+            } catch (error) {
+                console.error("Markdown fetch error:", error);
+                document.getElementById('traditions-display').innerHTML = 
+                    `<p style="color:red; text-align:center;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ.</p>`;
+            }
+        }
+
+        function filterTraditions(targetCategory, buttonElement) {
+            // Update Active tab styling
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (buttonElement) buttonElement.classList.add('active');
+
+            renderFilteredTraditions(targetCategory);
+        }
+
+        function renderFilteredTraditions(targetCategory) {
+            const displayContainer = document.getElementById('traditions-display');
+
+            const filteredList = (targetCategory === 'all') 
+                ? parsedTraditions 
+                : parsedTraditions.filter(item => item.category === targetCategory);
+
+            if (filteredList.length === 0) {
+                displayContainer.innerHTML = `<p class="loading-text">ಯಾವುದೇ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ.</p>`;
+                return;
+            }
+
+            displayContainer.innerHTML = filteredList.map(item => `
+                <article class="tradition-card">
+                    ${item.htmlContent}
+                </article>
+            `).join('');
+        }
+
+        // Initialize loading on DOM Ready
+        window.onload = loadTraditionsMarkdown;
+    </script>
+</body>
+</html>

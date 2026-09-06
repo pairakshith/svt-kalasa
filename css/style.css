@@ -854,3 +854,44 @@ body {
     color: #800020;
     margin-top: 0.5rem;
 }
+
+/* Header Background with Adjustable Image Transparency */
+/* .site-header {
+    position: relative;
+    overflow: hidden;
+    background-color: #ececec00; 
+    color: #ffffff;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    z-index: 1;
+} */
+
+/* Pseudo-element for background image & opacity control */
+/* .site-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+     */
+    /* REPLACE with your exact image path in the repo */
+    /* background-image: url('../assets/images/icon_image');
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     */
+    /* ADJUST TRANSPARENCY HERE (0.1 = very subtle, 0.5 = medium, 0.8 = vivid) */
+    /* opacity: 0.55; 
+    
+    z-index: -1; /* Keeps image behind header text */ /*
+} */
+
+/* Ensure Header Text stays crisp and readable */
+/* .site-header .kn-heading,
+.site-header .kn-subheading {
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Adds shadow for contrast *//*
+} */

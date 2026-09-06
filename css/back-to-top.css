@@ -3,14 +3,14 @@
 /* 1. Back to Top Button (Bottom-Right) */
 #backToTopBtn {
     position: fixed !important;
-    bottom: 30px !important;
+    bottom: 20px !important;
     right: 25px !important;
     z-index: 999999 !important;
     width: 50px !important;
     height: 50px !important;
-    background-color: #8b0000 !important; /* Deep temple red */
+    background-color: #8b0000 !important;
     color: #ffffff !important;
-    border: 2px solid #ffd700 !important; /* Gold accent border */
+    border: 2px solid #ffd700 !important;
     border-radius: 50% !important;
     cursor: pointer !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
@@ -35,15 +35,15 @@
 /* 2. Back to Home Button (Bottom-Left) */
 .home-btn {
     position: fixed !important;
-    bottom: 30px !important;
-    left: 25px !important;
+    bottom: 25px !important;
+    left: px !important;
     z-index: 999999 !important;
-    width: 50px !important;
-    height: 50px !important;
-    background-color: #8b0000 !important; /* Deep temple red */
+    width: 30px !important;
+    height: 30px !important;
+    background-color: #8b000066 !important;
     color: #ffffff !important;
-    border: 2px solid #ffd700 !important; /* Gold accent border */
-    border-radius: 50% !important;
+    border: 2px solid #ffd700 !important;
+    border-radius: 0% !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
     display: flex !important;
     align-items: center !important;
