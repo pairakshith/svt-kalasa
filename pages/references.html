@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಉಲ್ಲೇಖಗಳು | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
+        <a href="references.html" class="nav-link active">ಉಲ್ಲೇಖಗಳು (References) </a>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2 class="kn-heading">ಉಲ್ಲೇಖಗಳು ಹಾಗೂ ಗ್ರಂಥ ಋಣ</h2>
+            <p class="kn-subheading">ಈ ಜಾಲತಾಣದ ಮಾಹಿತಿಗೆ ಬಳಸಲಾದ ಮೂಲ ಗ್ರಂಥಗಳು ಹಾಗೂ ಆಧಾರಗಳು</p>
+        </div>
+
+        <section class="content-section" id="referencesContent">
+            <p style="text-align: center; color: #666;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
+    </footer>
+
+    <script src="../js/back-to-top.js"></script>
+
+    <script>
+        async function loadReferencesMarkdown() {
+            const contentSection = document.getElementById('referencesContent');
+            try {
+                const response = await fetch('../data/references.md');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                
+                const markdownText = await response.text();
+                
+                // Render raw markdown into HTML
+                let rawHtml = marked.parse(markdownText);
+
+                // Transform blockquotes to note-box highlights
+                rawHtml = rawHtml.replace(/<blockquote>\s*<p>(.*?)<\/p>\s*<\/blockquote>/gi, '<div class="note-box highlight"><p>$1</p></div>');
+
+                contentSection.innerHTML = rawHtml;
+
+            } catch (error) {
+                console.error("Error loading references.md:", error);
+                contentSection.innerHTML = `
+                    <div style="text-align: center; color: #cc0000; padding: 20px;">
+                        <p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
+                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/references.md</code> ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ)</p>
+                    </div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadReferencesMarkdown);
+    </script>
+
+</body>
+</html>
