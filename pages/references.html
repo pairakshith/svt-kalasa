@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ಮಂಗಳ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    <title>ಉಲ್ಲೇಖಗಳು | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
     <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,20 +31,16 @@
 
     <nav class="main-nav">
         <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
-        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
-        <a href="mangala.html" class="nav-link active">ಮಂಗಳ</a>
-        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+        <a href="references.html" class="nav-link active">ಉಲ್ಲೇಖಗಳು (References) </a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ಮಂಗಳ </h2>
-            <p class="kn-subheading"> ದೇವರು ಪೇಟೆ ಉತ್ಸವದಿಂದ ಹಿಂದಿರುಗಿ ಗರ್ಭಗುಡಿಗೆ ಹೋದ ನಂತರ ಹೇಳುವ ಮಂಗಳ </p>
+            <h2 class="kn-heading">ಉಲ್ಲೇಖಗಳು ಹಾಗೂ ಗ್ರಂಥ ಋಣ</h2>
+            <p class="kn-subheading">ಈ ಜಾಲತಾಣದ ಮಾಹಿತಿಗೆ ಬಳಸಲಾದ ಮೂಲ ಗ್ರಂಥಗಳು ಹಾಗೂ ಆಧಾರಗಳು</p>
         </div>
 
-        <section class="content-section" id="mangalaContent">
+        <section class="content-section" id="referencesContent">
             <p style="text-align: center; color: #666;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
         </section>
     </main>
@@ -57,10 +53,10 @@
     <script src="../js/feedback.js"></script>
 
     <script>
-        async function loadMangalaMarkdown() {
-            const contentSection = document.getElementById('mangalaContent');
+        async function loadReferencesMarkdown() {
+            const contentSection = document.getElementById('referencesContent');
             try {
-                const response = await fetch('../data/mangala.md');
+                const response = await fetch('../data/references.md');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 
                 const markdownText = await response.text();
@@ -71,22 +67,19 @@
                 // Transform blockquotes to note-box highlights
                 rawHtml = rawHtml.replace(/<blockquote>\s*<p>(.*?)<\/p>\s*<\/blockquote>/gi, '<div class="note-box highlight"><p>$1</p></div>');
 
-                // Wrap paragraph groups inside verse-blocks
-                rawHtml = rawHtml.replace(/(<p>[\s\S]*?<\/p>)(?=\s*(<hr>|<h3|$))/gi, '<div class="verse-block">$1</div>');
-
                 contentSection.innerHTML = rawHtml;
 
             } catch (error) {
-                console.error("Error loading mangala.md:", error);
+                console.error("Error loading references.md:", error);
                 contentSection.innerHTML = `
                     <div style="text-align: center; color: #cc0000; padding: 20px;">
                         <p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
-                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/mangala.md</code> ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ)</p>
+                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/references.md</code> ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ)</p>
                     </div>`;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadMangalaMarkdown);
+        document.addEventListener('DOMContentLoaded', loadReferencesMarkdown);
     </script>
 
 </body>

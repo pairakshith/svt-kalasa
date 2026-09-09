@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/back-to-top.css">
+    <link rel="stylesheet" href="../css/feedback.css">
 
     <!-- Marked.js Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -98,11 +99,31 @@
     <header class="site-header site-header--glass">
         <div class="header-container">
             <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-            <div class="subheading-pill">
+            <div             class="subheading-pill">
                 <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
             </div>
         </div>
     </header>
+
+    <!--- commented -->
+    <!-- <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+             -->
+            <!-- Clickable Location Pill -->
+            <!-- <a href="https://maps.app.goo.gl/RGkNivay814sF8WE7" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="subheading-pill" 
+            style="text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </a>
+        </div>
+    </header> -->
 
     <nav class="main-nav">
         <a href="../index.html" class="nav-link">ಮುಖ್ಯ ಪುಟ</a>
@@ -119,16 +140,26 @@
             <p class="kn-subheading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ವಿಧಿವಿಧಾನಗಳು</p>
         </div>
 
-        <!-- Filter Buttons Bar -->
+        <!-- Filter Buttons Bar updated with all Markdown categories -->
         <div class="filter-tabs">
+            <button class="tab-btn active" onclick="filterTraditions('all', this)">ಸಂಪೂರ್ಣ ಪುಟ</button>
+            <button class="tab-btn" onclick="filterTraditions('chandramana_yugadi', this)">ಚಾಂದ್ರಮಾನ ಯುಗಾದಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('sri_rama_navami', this)">ಶ್ರೀ ರಾಮ ನವಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('chitra_paurnami', this)">ಚಿತ್ರಾ ಪೌರ್ಣಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('nrusimha_jayanti', this)">ನೃಸಿಂಹ ಜಯಂತಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('vaishakha_paurnami', this)">ವೈಶಾಖ ಪೌರ್ಣಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('rigupakarma', this)">ಋಗುಪಾಕರ್ಮ</button>
+            <button class="tab-btn" onclick="filterTraditions('varamahalakshmi_vrata', this)">ವರಮಹಾಲಕ್ಷ್ಮಿ ವ್ರತ</button>
             <button class="tab-btn" onclick="filterTraditions('pavitraropana', this)">ಪವಿತ್ರಾರೋಪಣ</button>
-            <button class="tab-btn" onclick="filterTraditions('paschima_jagara', this)">ಪಶ್ಚಿಮ ಜಾಗರ ಪೂಜೆ</button>
-            <button class="tab-btn" onclick="filterTraditions('vishwaroopa', this)">ವಿಶ್ವರೂಪ ದರ್ಶನ</button>
-            <button class="tab-btn" onclick="filterTraditions('kartika_vana_bhojana', this)">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ & ವನ ಭೋಜನ</button>
-            <button class="tab-btn" onclick="filterTraditions('tulasi_vivaha', this)">ತುಳಸೀ ವಿವಾಹ</button>
+            <button class="tab-btn" onclick="filterTraditions('sri_krishna_janmashtami', this)">ಶ್ರೀ ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('sri_ganesha_chaturthi', this)">ಶ್ರೀ ಗಣೇಶ ಚತುರ್ಥಿ</button>
             <button class="tab-btn" onclick="filterTraditions('ananta_chaturdashi', this)">ಅನಂತ ಚತುರ್ದಶಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('ratha_saptami', this)">ರಥ ಸಪ್ತಮಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('paschima_jagara', this)">ಪಶ್ಚಿಮ ಜಾಗರ ಪೂಜೆ</button>
+            <button class="tab-btn" onclick="filterTraditions('tulasi_vivaha', this)">ಉತ್ಥಾನ ದ್ವಾದಶಿ - ತುಳಸೀ ವಿವಾಹ</button>
+            <button class="tab-btn" onclick="filterTraditions('kartika_vana_bhojana', this)">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ & ವನ ಭೋಜನ</button>
+            <button class="tab-btn" onclick="filterTraditions('vishwaroopa', this)">ವಿಶ್ವರೂಪ ದರ್ಶನ</button>
             <button class="tab-btn" onclick="filterTraditions('mukkoti_dvadashi', this)">ಮುಕ್ಕೋಟಿ ದ್ವಾದಶಿ</button>
+            <button class="tab-btn" onclick="filterTraditions('ratha_saptami', this)">ರಥ ಸಪ್ತಮಿ</button>
         </div>
 
         <!-- Dynamic Content Area -->
@@ -143,6 +174,7 @@
 
     <!-- Global Floating Navigation JS -->
     <script src="../js/back-to-top.js"></script>
+    <script src="../js/feedback.js"></script>
 
     <!-- Markdown Fetcher and Parser Script -->
     <script>

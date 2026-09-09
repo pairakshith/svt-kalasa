@@ -13,17 +13,41 @@
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/feedback.css">
 </head>
 <body>
 
     <header class="site-header site-header--glass">
         <div class="header-container">
-            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-            <div class="subheading-pill">
-                <span>ಕಳಸ</span>
-                <span class="dot"></span>
-                <span class="eng">Amgel Devasthana</span>
+            <!-- Left Header Photo -->
+            <img src="assets/images/BG_1.jpeg" alt="Left Deity / Temple Photo" class="header-photo header-photo--left">
+
+            <!-- Center Text Content -->
+            <div class="header-text-content">
+                <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+                <div class="subheading-pill">
+                    <!-- 1. English Tagline First -->
+                    <span class="eng">Amgel Devasthana</span>
+                    
+                    <span class="dot">•</span>
+
+                    <!-- 2. Location Second -->
+                    <a href="https://maps.app.goo.gl/RGkNivay814sF8WE7" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    title="ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ನೋಡಿ (View on Google Maps)"
+                    class="location-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+                    </a>
+                </div>
             </div>
+
+            <!-- Right Header Photo -->
+            <img src="assets/images/icon_image.jpg" alt="Right Deity / Temple Photo" class="header-photo header-photo--right">
         </div>
     </header>
 
@@ -56,7 +80,7 @@
                 <a href="pages/temple_background.html" class="feature-card">
                     <div class="feature-info">
                         <h3>ದೇವಸ್ಥಾನದ ಹಿನ್ನೆಲೆ ಮತ್ತು ಇತರ ಮಾಹಿತಿ</h3>
-                        <p>ವಿವೇಕಾನಂದ ಭಟ್ ಇವರ ಭಕ್ತಿ ಮಾಲಾ ಪುಸ್ತಕ ಮತ್ತು ಸ್ಥಳೀಯರ ಮಾಹಿತಿಯ ಮೇರೆಗೆ.</p>
+                        <p>ಪುಸ್ತಕ ಮತ್ತು ಸ್ಥಳೀಯರ ಮಾಹಿತಿಯ ಮೇರೆಗೆ.</p>
                         <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
                     </div>
                 </a>
@@ -81,6 +105,14 @@
                     <div class="feature-info">
                         <h3>ಮಂಗಳ</h3>
                         <p>ದೇವಸ್ಥಾನದ ಉತ್ಸವಗಳ ಮಂಗಳ<div class=""></div></p>
+                        <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
+                    </div>
+                </a>
+
+                <a href="pages/traditions.html" class="feature-card">
+                    <div class="feature-info">
+                        <h3>ಆಚರಣೆಗಳು</h3>
+                        <p>ಕೆಲವು ಆಚರಣೆಗಳು ಮತ್ತು ಹಿನ್ನೆಲೆ<div class=""></div></p>
                         <span class="feature-link">ವಿವರಗಳನ್ನು ವೀಕ್ಷಿಸಿ &rarr;</span>
                     </div>
                 </a>
@@ -114,11 +146,19 @@
             </div>
         </section>
 
-    </main>
+        <a href="pages/references.html" class="feature-card">
+            <div class="feature-info">
+                <h3>References</h3>
+                <p> Sources and references for the shown info</p>
+                <span class="feature-link">See Details &rarr;</span>
+            </div>
+        </a>
 
+    </main>
+    <script src="js/feedback.js"></script>
     <footer class="site-footer">
         <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
     </footer>
-
+    
 </body>
 </html>
