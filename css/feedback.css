@@ -1,56 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Inject Modal & Floating Button HTML into body dynamically
-    const feedbackHTML = `
-        <button id="openFeedbackBtn" class="feedback-float-btn" aria-label="Feedback">
-            💬 <span>ಅಭಿಪ್ರಾಯ</span>
-        </button>
+/* Floating Feedback / WhatsApp Button */
+#feedbackBtn {
+    position: fixed !important;
+    bottom: 80px !important; /* Stacked directly above backToTopBtn (20px + 50px height + 10px spacing) */
+    right: 25px !important;
+    z-index: 999999 !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #8b0000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffd700 !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
 
-        <div id="feedbackModal" class="feedback-modal-overlay">
-            <div class="feedback-modal">
-                <div class="feedback-modal-header">
-                    <h3>ನಿಮ್ಮ ಅನಿಸಿಕೆ / ಸಲಹೆಗಳು</h3>
-                    <button id="closeFeedbackBtn" class="feedback-close-btn">&times;</button>
-                </div>
-                
-                <div class="feedback-info-box">
-                    💡 <strong>ನಿಮ್ಮ ಸಲಹೆ ಅಥವಾ ನೇರ ಸಂಪರ್ಕಕ್ಕಾಗಿ:</strong>
-                    <div>ವಾಟ್ಸಾಪ್ ಸಂಖ್ಯೆ <strong>9483183977</strong> ಮೂಲಕ ನಮಗೆ ತಿಳಿಸಿ.</div>
-                    <a href="https://wa.me/919483183977?text=%E0%B2%A8%E0%B2%AE%E0%B2%B8%E0%B3%8D%E0%B2%A5%E0%B3%87%20%E0%B2%A8%E0%B2%A8%E0%B3%8D%E0%B2%A8%20%E0%B2%85%E0%B2%AD%E0%B2%BF%E0%B2%AA%E0%B3%8D%E0%B2%B0%E0%B2%BE%E0%B2%AF:" target="_blank" class="whatsapp-link" >
-                        📲 WhatsApp ಮೂಲಕ ನೇರ ಸಂದೇಶ ಕಳುಹಿಸಿ
-                    </a>
-                </div>
+#feedbackBtn:hover {
+    transform: translateY(-3px) !important;
+    background-color: #a00000 !important;
+}
 
-                <form id="feedbackForm">
-                    <textarea 
-                        class="feedback-textarea" 
-                        placeholder="ಇಲ್ಲಿ ನಿಮ್ಮ ಸಲಹೆ ಅಥವಾ ಅನಿಸಿಕೆಯನ್ನು ಬರೆಯಿರಿ..." 
-                        required></textarea>
-                    <button type="submit" class="feedback-submit-btn">ಕಳುಹಿಸಿ (Send)</button>
-                </form>
-            </div>
-        </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', feedbackHTML);
-
-    const openBtn = document.getElementById('openFeedbackBtn');
-    const closeBtn = document.getElementById('closeFeedbackBtn');
-    const modal = document.getElementById('feedbackModal');
-    const form = document.getElementById('feedbackForm');
-
-    openBtn.addEventListener('click', () => modal.classList.add('active'));
-    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-
-    // Close when clicking outside content area
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
-    });
-
-    // Form submit action
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಅನಿಸಿಕೆ ಸ್ವೀಕರಿಸಲ್ಪಟ್ಟಿದೆ.');
-        form.reset();
-        modal.classList.remove('active');
-    });
-});
+/* Ensure the SVG scales correctly inside the button */
+#feedbackBtn svg {
+    width: 22px !important;
+    height: 22px !important;
+    display: block !important;
+    fill: none !important;
+    stroke: #ffffff !important;
+    stroke-width: 2.2 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+}
