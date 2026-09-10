@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Auto-detect relative path to index.html
         homeBtn.href = path.includes("/pages/") ? "../index.html" : "index.html";
-        homeBtn.setAttribute("title", "ಮುಖ್ಯ ಪುಟ (Home)");
+        homeBtn.setAttribute("title", "ಮುಖ ಪುಟ (Home)");
         homeBtn.setAttribute("aria-label", "Go to Home");
         homeBtn.innerHTML = `
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

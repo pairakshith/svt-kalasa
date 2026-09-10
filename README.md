@@ -13,11 +13,11 @@ Welcome to the official web repository for **Sri Venkataramana Temple, Melangadi
 
 ## Features
 
-* ** Event Timetables:** Comprehensive festival calendar and daily ritual schedules.
-* ** Traditions & Festivals:** Detailed descriptions of 15+ temple festivals parsed dynamically from Markdown (`traditions.md`).
-* ** Bilingual Support:** Content presented primarily in Kannada with key terms in English for easy accessibility.
-* ** Anonymous Feedback Modal:** A clean, privacy-focused floating feedback mechanism powered by Formspree (protecting contact details).
-* ** Interactive Location:** Embedded Google Maps routing directly from the site header.
-* ** Fully Responsive:** Styled with clean CSS glassmorphism effects and optimized for mobile screens.
+* **Event Timetables:** Comprehensive festival calendar and daily ritual schedules.
+* **Traditions & Festivals:** Detailed descriptions of 15+ temple festivals parsed dynamically from Markdown (`traditions.md`).
+* **Bilingual Support:** Content presented primarily in Kannada with key terms in English for easy accessibility.
+* **Anonymous Feedback Modal:** A clean, privacy-focused floating feedback mechanism powered by Formspree (protecting contact details).
+* **Interactive Location:** Embedded Google Maps routing directly from the site header.
+* **Fully Responsive:** Styled with clean CSS glassmorphism effects and optimized for mobile screens.
 
 ---
