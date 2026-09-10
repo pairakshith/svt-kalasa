@@ -1,26 +1,12 @@
-function filterTable() {
-    // 1. Get input element and search term
-    const input = document.getElementById("tableSearch");
-    const filter = input.value.toLowerCase().trim();
-    
-    // 2. Get table and all body rows
-    const table = document.getElementById("eventsTable");
-    const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+/**
+ * Event Table & Cards Search Filter Logic
+ */
 
-    // 3. Loop through rows and toggle display based on match
-    for (let i = 0; i < rows.length; i++) {
-        const rowText = rows[i].textContent || rows[i].innerText;
-        
-        if (rowText.toLowerCase().indexOf(filter) > -1) {
-            rows[i].style.display = ""; // Show row
-        } else {
-            rows[i].style.display = "none"; // Hide row
-        }
-    }
-}
-
+// 1. Card Filter Function
 function filterCards() {
     const input = document.getElementById("eventSearch");
+    if (!input) return;
+
     const filter = input.value.toLowerCase().trim();
     const cards = document.querySelectorAll(".festival-card");
     let visibleCount = 0;
@@ -31,7 +17,7 @@ function filterCards() {
         const fullContent = text + " " + keywords;
 
         if (fullContent.indexOf(filter) > -1) {
-            card.style.display = "flex"; // Restores flexbox layout
+            card.style.display = "flex";
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -44,6 +30,24 @@ function filterCards() {
     }
 }
 
+// 2. Table Filter Function
+function filterTable() {
+    const input = document.getElementById("tableSearch");
+    if (!input) return;
+
+    const filter = input.value.toLowerCase().trim();
+    const table = document.getElementById("eventsTable");
+    if (!table) return;
+
+    const rows = table.getElementsByTagName("tbody")[0]?.getElementsByTagName("tr") || [];
+
+    for (let i = 0; i < rows.length; i++) {
+        const rowText = rows[i].textContent || rows[i].innerText;
+        rows[i].style.display = (rowText.toLowerCase().indexOf(filter) > -1) ? "" : "none";
+    }
+}
+
+// 3. Highlight Next Upcoming Event
 function initUpcomingEvents() {
     const today = new Date();
     const year = today.getFullYear();
@@ -80,8 +84,17 @@ function initUpcomingEvents() {
     });
 }
 
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initUpcomingEvents);
-} else {
+// Initialize listeners and highlight on DOM ready
+document.addEventListener("DOMContentLoaded", () => {
     initUpcomingEvents();
-}
+
+    const cardSearchInput = document.getElementById("eventSearch");
+    if (cardSearchInput) {
+        cardSearchInput.addEventListener("input", filterCards);
+    }
+
+    const tableSearchInput = document.getElementById("tableSearch");
+    if (tableSearchInput) {
+        tableSearchInput.addEventListener("input", filterTable);
+    }
+});

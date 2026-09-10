@@ -217,31 +217,33 @@ body {
 
 /* Modern Search Input */
 .search-wrapper {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto 2rem auto;
+    position: sticky;
+    top: 15px; /* Distance from top of viewport when scrolling */
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #800000;
+    border-radius: 25px;
+    padding: 8px 16px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px);
 }
 
 .search-wrapper .search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 1.1rem;
-    color: #94a3b8;
+    margin-right: 10px;
 }
 
 .search-wrapper input {
     width: 100%;
-    padding: 14px 18px 14px 48px;
-    font-family: var(--font-sans-kannada);
-    font-size: 1rem;
-    border: 2px solid #cbd5e1;
-    border-radius: 50px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    transition: all 0.25s ease;
-    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 0.95rem;
+    background: transparent;
 }
 
 .search-wrapper input:focus {

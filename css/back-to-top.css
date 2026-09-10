@@ -35,21 +35,21 @@
 /* 2. Back to Home Button (Bottom-Left) */
 .home-btn {
     position: fixed !important;
-    bottom: 25px !important;
-    left: px !important;
+    bottom: 20px !important;
+    left: 5px !important;
     z-index: 999999 !important;
     width: 30px !important;
     height: 30px !important;
-    background-color: #8b000066 !important;
+    background-color: #8b0000 !important;
     color: #ffffff !important;
     border: 2px solid #ffd700 !important;
-    border-radius: 0% !important;
+    border-radius: 10% !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-decoration: none !important;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.3s ease;
 }
 
 .home-btn:hover {
