@@ -1,0 +1,34 @@
+[
+  {
+    "title": "History & Kalasa",
+    "mdUrl": "data/temple_background.md",
+    "pageUrl": "pages/temple_background.html"
+  },
+  {
+    "title": "Ashtaavadhaana",
+    "mdUrl": "data/ashtaavadhaana.md",
+    "pageUrl": "pages/ashtaavadhaana.html"
+  },
+  {
+    "title": "Deevatige Salaam",
+    "mdUrl": "data/deevatige_salaam",
+    "pageUrl": "pages/deevatige_salaam"
+  },
+  {
+    "title": "Mangala",
+    "mdUrl": "data/mangala.md",
+    "pageUrl": "pages/mangala.html"
+  },
+  {
+    "title": "Traditions",
+    "mdUrl": "data/traditions.md",
+    "pageUrl": "pages/traditions.html"
+  },
+  {
+    "title": "Events",
+    "dataUrl": "data/events.json",
+    "pageUrl": "pages/events.html",
+    "type": "json"
+  }
+
+]

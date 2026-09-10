@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/back-to-top.css">
     <link rel="stylesheet" href="../css/feedback.css">
+    <link rel="stylesheet" href="../css/global-search.css">
     
     <!-- Marked.js Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -92,6 +93,9 @@
     <nav class="main-nav">
         <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
         <a href="history.html" class="nav-link active">ಇತಿಹಾಸ</a>
+        <button class="search-trigger-btn" onclick="openSearch()">
+        🔍 Search 
+        </button>
     </nav>
 
     <main class="container">
@@ -121,6 +125,8 @@
     <!-- Global Floating Navigation JS -->
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
+    <script src="../js/transliterate.js"></script>
+    <script src="../js/global-search.js"></script>
 
     <!-- JavaScript Engine to load and parse markdown -->
     <script>
