@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="feedback-modal">
                 <h3>ಮಾಹಿತಿ/ ಅಭಿಪ್ರಾಯ / ಸಲಹೆ (Info / Feedback)</h3>
                 <form id="feedbackForm">
-                    <textarea id="feedbackText" name="message" placeholder="ಯಾವುದೇ ಭಾಷೆಯ ಎಲ್ಲಾದರೂ ಬರೆಯಿರಿ / Write in any language..." required></textarea>
+                    <textarea id="feedbackText" name="message" placeholder="ಯಾವುದೇ ಭಾಷೆಯಲ್ಲಾದರೂ ಬರೆಯಿರಿ / Write in any language..." required></textarea>
                     <div class="feedback-modal-actions">
                         <button type="button" class="feedback-btn-cancel" id="closeFeedback">ರದ್ದುಮಾಡಿ / Exit</button>
                         <button type="submit" class="feedback-btn-submit" id="submitFeedback">ಸಲ್ಲಿಸಿ / Submit</button>
