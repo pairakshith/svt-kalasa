@@ -17,6 +17,45 @@
 
     <!-- Marked.js for rendering markdown bullet lists -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        /* Audio Speaker Button Styling */
+        .audio-play-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .audio-btn {
+            background: linear-gradient(135deg, #7a0016, #b3122e);
+            color: #ffffff;
+            border: 1px solid #ffeb3b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'Noto Sans Kannada', sans-serif;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .audio-btn:hover {
+            background: #ffeb3b;
+            color: #7a0016;
+            transform: translateY(-1px);
+        }
+
+        .audio-btn.playing {
+            background: #2e7d32;
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
 
@@ -58,6 +97,77 @@
     <script src="../js/feedback.js"></script>
 
     <script>
+        let currentAudio = null;
+        let activeAudioBtn = null;
+
+        // Audio Player Logic with Fallback
+        function playVerseAudio(audioPath, plainText, btnEl) {
+            // If clicking the currently playing button, pause it
+            if (currentAudio && activeAudioBtn === btnEl) {
+                currentAudio.pause();
+                resetAudioButton(btnEl);
+                currentAudio = null;
+                activeAudioBtn = null;
+                return;
+            }
+
+            // Stop any ongoing audio/speech
+            if (currentAudio) {
+                currentAudio.pause();
+                if (activeAudioBtn) resetAudioButton(activeAudioBtn);
+            }
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+
+            // Attempt to play pre-recorded MP3
+            currentAudio = new Audio(audioPath);
+            activeAudioBtn = btnEl;
+            btnEl.classList.add('playing');
+            btnEl.innerHTML = '⏸️ ನಿಲ್ಲಿಸಿ (Stop)';
+
+            currentAudio.play().then(() => {
+                currentAudio.onended = () => {
+                    resetAudioButton(btnEl);
+                    currentAudio = null;
+                    activeAudioBtn = null;
+                };
+            }).catch(() => {
+                // Fallback: If MP3 file does not exist, use Web Speech API
+                console.warn(`Audio file missing at ${audioPath}, falling back to Web Speech TTS.`);
+                playSpeechTTS(plainText, btnEl);
+            });
+        }
+
+        function playSpeechTTS(text, btnEl) {
+            if (!('speechSynthesis' in window)) {
+                alert("ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಶ್ರವಣ ಸೌಲಭ್ಯ ಲಭ್ಯವಿಲ್ಲ.");
+                resetAudioButton(btnEl);
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voices = window.speechSynthesis.getVoices();
+            const selectedVoice = voices.find(v => v.lang.startsWith('sa') || v.lang.startsWith('hi') || v.lang.startsWith('kn'));
+            
+            if (selectedVoice) utterance.voice = selectedVoice;
+            utterance.lang = 'kn-IN';
+            utterance.rate = 0.85;
+
+            utterance.onend = () => {
+                resetAudioButton(btnEl);
+                currentAudio = null;
+                activeAudioBtn = null;
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function resetAudioButton(btn) {
+            btn.classList.remove('playing');
+            btn.innerHTML = '🔊 ಶ್ಲೋಕ ಆಲಿಸಿ';
+        }
+
         async function loadMarkdownContent() {
             const container = document.getElementById('sevaContainer');
             
@@ -91,27 +201,37 @@
                         if (trimmedLine.startsWith('*')) {
                             explanationLines.push(line);
                         } else {
-                            // Any line that isn't a bullet point is treated as part of the verse
                             verseLines.push(trimmedLine);
                         }
                     });
 
-                    // Build html for verse lines
+                    // Build HTML for verse lines
                     const verseHtml = verseLines
                         .map(line => `<p class="verse-line">${line}</p>`)
                         .join('');
+
+                    // Plain text version for Web Speech fallback
+                    const versePlainText = verseLines.join(' ');
+
+                    // Define audio path per section (e.g., ../assets/audio/deevatige/salaam_1.mp3)
+                    const audioPath = `../assets/audio/salaam_${index}.mp3`;
 
                     // Parse explanation bullets using marked.js
                     const explanationHtml = typeof marked !== 'undefined' 
                         ? marked.parse(explanationLines.join('\n')) 
                         : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
 
-                    // Build card element matching your original CSS structure
+                    // Build card element
                     const card = document.createElement('article');
                     card.className = 'seva-card';
                     card.innerHTML = `
                         <div class="seva-body">
-                            <h3 style="color: #800000; margin-bottom: 12px; font-family: 'Noto Serif Kannada', serif;">${sectionTitle}</h3>
+                            <div class="audio-play-bar">
+                                <h3 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${sectionTitle}</h3>
+                                <button class="audio-btn" onclick="playVerseAudio('${audioPath}', \`${versePlainText.replace(/`/g, '\\`')}\`, this)">
+                                    🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                                </button>
+                            </div>
                             <div class="verse-box">
                                 ${verseHtml}
                             </div>
