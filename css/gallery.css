@@ -1,0 +1,1062 @@
+/* ==========================================================================
+   Photo Gallery & Submission Modal Styles (css/gallery.css)
+   Sri Venkataramana Temple, Melangadi, Kalasa
+   ========================================================================== */
+
+:root {
+    --gallery-primary: #800020;
+    --gallery-gold: #d97706;
+    --gallery-gold-light: #fef3c7;
+    --gallery-gold-text: #92400e;
+    --gallery-bg: #f8fafc;
+    --gallery-card-bg: #ffffff;
+    --gallery-border: #e2e8f0;
+    --gallery-text-main: #1e293b;
+    --gallery-text-muted: #64748b;
+    --gallery-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
+    --gallery-shadow-md: 0 8px 20px rgba(0, 0, 0, 0.1);
+    --gallery-shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar & Actions
+   -------------------------------------------------------------------------- */
+.gallery-top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #ffffff;
+    padding: 16px 22px;
+    border-radius: 14px;
+    box-shadow: var(--gallery-shadow-sm);
+    border: 1px solid var(--gallery-border);
+    margin-bottom: 24px;
+}
+
+.gallery-stats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gallery-text-muted);
+    font-size: 0.95rem;
+}
+
+.gallery-stats-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gallery-gold-light);
+    color: var(--gallery-gold-text);
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.btn-submit-photo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #800020, #a11132);
+    color: #ffffff;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 30px;
+    font-family: var(--font-sans-kannada);
+    font-size: 0.98rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(128, 0, 32, 0.25);
+    transition: all 0.25s ease;
+    min-height: 44px;
+}
+
+.btn-submit-photo:hover {
+    background: linear-gradient(135deg, #660019, #800020);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(128, 0, 32, 0.35);
+}
+
+.btn-submit-photo:active {
+    transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Sticky Category Filter Tabs
+   -------------------------------------------------------------------------- */
+.gallery-filters-container {
+    margin-bottom: 26px;
+    position: sticky;
+    top: 10px;
+    z-index: 20;
+    background: rgba(244, 247, 246, 0.94);
+    backdrop-filter: blur(8px);
+    padding: 8px 4px;
+    border-radius: 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gallery-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.filter-pill {
+    appearance: none;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: var(--gallery-text-main);
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-family: var(--font-sans-kannada);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    min-height: 42px;
+}
+
+.filter-pill:hover {
+    border-color: var(--gallery-primary);
+    color: var(--gallery-primary);
+    background: #fff5f6;
+}
+
+.filter-pill.active {
+    background: var(--gallery-primary);
+    color: #ffffff;
+    border-color: var(--gallery-primary);
+    box-shadow: 0 4px 12px rgba(128, 0, 32, 0.22);
+}
+
+.filter-pill .pill-badge {
+    background: rgba(0, 0, 0, 0.08);
+    font-size: 0.78rem;
+    padding: 2px 7px;
+    border-radius: 12px;
+}
+
+.filter-pill.active .pill-badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Photo Grid
+   -------------------------------------------------------------------------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.photo-card {
+    background: var(--gallery-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--gallery-border);
+    box-shadow: var(--gallery-shadow-sm);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.photo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--gallery-shadow-md);
+    border-color: #cbd5e1;
+}
+
+.photo-card:focus-visible {
+    outline: 3px solid var(--gallery-gold);
+    outline-offset: 2px;
+}
+
+/* Thumbnail Container with Consistent Aspect Ratio */
+.photo-thumb-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: #e2e8f0;
+}
+
+.photo-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.photo-card:hover .photo-thumb {
+    transform: scale(1.06);
+}
+
+.photo-badge-wrapper {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+.photo-category-badge {
+    background: rgba(20, 20, 20, 0.75);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.2px;
+}
+
+.photo-zoom-hint {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.photo-card:hover .photo-zoom-hint {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Card Body Content */
+.photo-info {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.photo-title {
+    font-family: var(--font-serif-kannada);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--gallery-text-main);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.photo-caption {
+    font-size: 0.86rem;
+    color: var(--gallery-text-muted);
+    line-height: 1.5;
+    margin: 0 0 8px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.photo-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    color: #94a3b8;
+    margin-top: auto;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 6px;
+}
+
+/* Loading & Empty States */
+.gallery-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+    grid-column: 1 / -1;
+}
+
+.gallery-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.gallery-empty-text {
+    font-size: 1.1rem;
+    color: var(--gallery-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox Modal
+   -------------------------------------------------------------------------- */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 14, 0.94);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.lightbox-modal.open {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-dialog {
+    position: relative;
+    max-width: 950px;
+    width: 100%;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 1.8rem;
+    line-height: 1;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.lightbox-close-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.08);
+}
+
+.lightbox-image-wrapper {
+    position: relative;
+    max-width: 100%;
+    max-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--gallery-shadow-lg);
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    border-radius: 6px;
+    display: block;
+    user-select: none;
+}
+
+/* Lightbox Nav Buttons */
+.lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 1.6rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 5;
+    user-select: none;
+}
+
+.lightbox-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: #ffffff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev-btn {
+    left: -20px;
+}
+
+.lightbox-next-btn {
+    right: -20px;
+}
+
+/* Lightbox Info Bar */
+.lightbox-info-bar {
+    width: 100%;
+    background: rgba(24, 24, 27, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 14px;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+
+.lightbox-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.lightbox-title {
+    font-family: var(--font-serif-kannada);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #ffeb3b;
+}
+
+.lightbox-category-tag {
+    background: var(--gallery-primary);
+    color: #ffffff;
+    padding: 3px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.lightbox-caption {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.lightbox-counter {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Photo Submission Modal & Dual Input Box
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.submission-modal-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 620px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    box-shadow: var(--gallery-shadow-lg);
+    position: relative;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    animation: modalSlideUp 0.28s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close-icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: #f1f5f9;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modal-close-icon:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.modal-header {
+    margin-bottom: 18px;
+    padding-right: 32px;
+}
+
+.modal-header h3 {
+    font-family: var(--font-serif-kannada);
+    font-size: 1.35rem;
+    color: var(--gallery-primary);
+    margin: 0 0 6px 0;
+}
+
+.modal-header p {
+    font-size: 0.92rem;
+    color: var(--gallery-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.submission-note {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #14532d;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.submission-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--gallery-text-main);
+}
+
+.optional-tag {
+    font-size: 0.78rem;
+    font-weight: normal;
+    color: #64748b;
+    margin-left: 4px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-family: var(--font-sans-kannada);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    color: #1e293b;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--gallery-primary);
+    box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.12);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.form-help {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+/* Dual Photo Input Container */
+.dual-photo-box {
+    background: #f8fafc;
+    border: 1.5px dashed #94a3b8;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.dual-box-header {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.dual-title {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: #334155;
+}
+
+.photo-choice-group {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.choice-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.choice-badge {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.form-file-input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.88rem;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    background: #fdfdfd;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Instant Thumbnail Preview Styling */
+.preview-container {
+    background: #ffffff;
+    border: 1.5px solid #10b981;
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.preview-wrapper {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid #cbd5e1;
+    background: #f1f5f9;
+}
+
+.preview-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.btn-remove-preview {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-remove-preview:hover {
+    background: #dc2626;
+}
+
+.preview-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.preview-filename {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #0f172a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preview-filesize {
+    font-size: 0.78rem;
+    color: #059669;
+    font-weight: 600;
+}
+
+.dual-separator {
+    text-align: center;
+    position: relative;
+    margin: -4px 0;
+}
+
+.dual-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #cbd5e1;
+    z-index: 1;
+}
+
+.dual-separator span {
+    position: relative;
+    z-index: 2;
+    background: #f8fafc;
+    padding: 0 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #64748b;
+}
+
+/* Status Messages */
+.form-status-msg {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    display: none;
+    margin-top: 4px;
+}
+
+.form-status-msg.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.form-status-msg.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.form-status-msg.info {
+    display: block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.btn-form-submit {
+    background: linear-gradient(135deg, #800020, #a11132);
+    color: #ffffff;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-family: var(--font-sans-kannada);
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(128, 0, 32, 0.2);
+    min-height: 48px;
+}
+
+.btn-form-submit:hover:not(:disabled) {
+    background: linear-gradient(135deg, #660019, #800020);
+    box-shadow: 0 6px 16px rgba(128, 0, 32, 0.3);
+}
+
+.btn-form-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   Fallback Modal (404 / Direct WhatsApp & Email)
+   -------------------------------------------------------------------------- */
+.fallback-modal-container {
+    max-width: 520px;
+    text-align: center;
+}
+
+.fallback-modal-container .modal-header {
+    padding-right: 0;
+}
+
+.fallback-icon {
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+}
+
+.fallback-summary {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px 0 20px;
+    text-align: left;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.fallback-summary-item {
+    margin-bottom: 6px;
+}
+
+.fallback-summary-item strong {
+    color: #0f172a;
+}
+
+.fallback-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.btn-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 30px;
+    font-family: var(--font-sans-kannada);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: var(--gallery-shadow-sm);
+    min-height: 46px;
+}
+
+.btn-whatsapp {
+    background: #25d366;
+    color: #ffffff;
+}
+
+.btn-whatsapp:hover {
+    background: #1eb855;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-email {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+.btn-email:hover {
+    background: #0369a1;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    transform: translateY(-2px);
+}
+
+.fallback-footer {
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 6px 12px;
+}
+
+.btn-secondary:hover {
+    color: #0f172a;
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .gallery-top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .gallery-stats {
+        justify-content: center;
+    }
+
+    .btn-submit-photo {
+        width: 100%;
+    }
+
+    .gallery-filters-container {
+        top: 6px;
+        border-radius: 20px;
+    }
+
+    .gallery-filter-tabs {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 6px;
+    }
+
+    .filter-pill {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+    }
+
+    .photo-info {
+        padding: 10px;
+    }
+
+    .photo-title {
+        font-size: 0.92rem;
+    }
+
+    .photo-caption {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .lightbox-dialog {
+        max-height: 96vh;
+    }
+
+    .lightbox-image-wrapper {
+        max-height: 52vh;
+    }
+
+    .lightbox-image {
+        max-height: 52vh;
+    }
+
+    .lightbox-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .lightbox-prev-btn {
+        left: 4px;
+    }
+
+    .lightbox-next-btn {
+        right: 4px;
+    }
+
+    .lightbox-info-bar {
+        padding: 10px 14px;
+        margin-top: 10px;
+    }
+
+    .lightbox-title {
+        font-size: 1.05rem;
+    }
+
+    .lightbox-caption {
+        font-size: 0.85rem;
+    }
+
+    .submission-modal-container {
+        padding: 20px 16px;
+    }
+
+    .preview-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

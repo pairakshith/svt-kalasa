@@ -1,0 +1,37 @@
+[
+  {
+    "id": "svt-fest-01",
+    "title": "ವಾರ್ಷಿಕ ರಥೋತ್ಸವ ವೈಭವ",
+    "category": "festivals",
+    "categoryKn": "ಉತ್ಸವಗಳು",
+    "imagePath": "../assets/images/vigraha.jpg",
+    "caption": "ಲಕ್ಷ್ಮಿ ಪದಕ ಸಮರ್ಪಣೆಯ ದಿನ.",
+    "date": "2024-05-01"
+  },
+  {
+  "id": "svt-fest-05",
+  "title": "ನವರಾತ್ರಿ ಅಲಂಕಾರ",
+  "category": "festivals",
+  "categoryKn": "ಉತ್ಸವಗಳು",
+  "imagePath": "../assets/images/Navaratri_24.jpg"
+  },
+  {
+  "id": "svt-fest-05",
+  "title": "ಹರಿಹರ ಸಮಾಗಮ",
+  "category": "festivals",
+  "categoryKn": "ಉತ್ಸವಗಳು",
+  "imagePath": "../assets/images/HHS_25.jpeg",
+  "caption": "ಹರಿಹರ ಸಮಾಗಮ",
+  "date": "2025-11-05"
+  },
+  {
+  "id": "svt-fest-05",
+  "title": "ಹಳೆಯ ಚಿತ್ರಗಳು",
+  "category": "archives",
+  "categoryKn": "ಹಳೆಯ ಚಿತ್ರಗಳು",
+  "imagePath": "../assets/images/old_1.jpeg",
+  "caption": "ಹಳೆಯ ಚಿತ್ರಗಳು",
+  "date": "2025-11-05"
+  }
+]
+
