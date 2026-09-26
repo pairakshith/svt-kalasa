@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ದೀವಟಿಗೆ ಸಲಾಂ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    <title>ಅಷ್ಟಾವಧಾನ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
-    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
@@ -16,10 +15,7 @@
     <link rel="stylesheet" href="../css/feedback.css">
     <link rel="stylesheet" href="../css/audio.css">
 
-    <!-- Marked.js for rendering markdown bullet lists -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-
 </head>
 <body>
 
@@ -35,16 +31,16 @@
     <nav class="main-nav">
         <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
         <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link active">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link active">ಅಷ್ಟಾವಧಾನ</a>
         <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
         <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ದೀವಟಿಗೆ ಸಲಾಂ</h2>
-            <p class="kn-subheading">ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ</p>
+            <h2 class="kn-heading">ಅಷ್ಟಾವಧಾನ ಸೇವೆ</h2>
+            <p class="kn-subheading">ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಅಷ್ಟಾವಧಾನ ಸೇವೆಯ ಶ್ಲೋಕಗಳು</p>
         </div>
 
         <div class="seva-list" id="sevaContainer">
@@ -136,7 +132,7 @@
             const container = document.getElementById('sevaContainer');
             
             try {
-                const response = await fetch('../data/deevatige_salaam.md');
+                const response = await fetch('../data/ashtaavadhaana.md');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -144,24 +140,25 @@
                 const markdownText = await response.text();
                 container.innerHTML = '';
 
-                // Split sections by '## ' headers
-                const sections = markdownText.split(/^##\s+/m);
+                const mainSections = markdownText.split(/^##\s+/m);
 
-                sections.forEach((section, index) => {
-                    // Skip the top title block (H1)
+                mainSections.forEach((section, index) => {
                     if (index === 0) return;
 
-                    const rawLines = section.split('\n');
-                    const sectionTitle = rawLines.shift().trim(); // First line is section heading
+                    // Separate main block from sub-sections (###)
+                    const subSections = section.split(/^###\s+/m);
+                    const mainBlock = subSections.shift();
+
+                    const mainLines = mainBlock.split('\n');
+                    const sectionTitle = mainLines.shift().trim();
                     
                     const verseLines = [];
                     const explanationLines = [];
 
-                    rawLines.forEach(line => {
+                    mainLines.forEach(line => {
                         const trimmedLine = line.trim();
-                        if (!trimmedLine) return; // Skip empty lines
+                        if (!trimmedLine) return;
 
-                        // Bullet point lines start with '*'
                         if (trimmedLine.startsWith('*')) {
                             explanationLines.push(line);
                         } else {
@@ -169,46 +166,113 @@
                         }
                     });
 
-                    // Build HTML for verse lines
                     const verseHtml = verseLines
                         .map(line => `<p class="verse-line">${line}</p>`)
                         .join('');
 
-                    // Plain text version for Web Speech fallback
-                    const versePlainText = verseLines.join(' ');
+                    const mainPlainText = verseLines.join(' ');
+                    const mainAudioPath = `../assets/audio/ashta_${index}.mp3`;
 
-                    // Define audio path per section (e.g., ../assets/audio/deevatige/salaam_1.mp3)
-                    const audioPath = `../assets/audio/salaam_${index}.mp3`;
-
-                    // Parse explanation bullets using marked.js
                     const explanationHtml = typeof marked !== 'undefined' 
                         ? marked.parse(explanationLines.join('\n')) 
                         : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
 
-                    // Build card element
+                    let mainCollapsible = '';
+                    if (explanationLines.length > 0) {
+                        mainCollapsible = `
+                            <details class="collapsible-section">
+                                <summary class="collapsible-toggle">
+                                    <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                                    <span class="toggle-icon">▼</span>
+                                </summary>
+                                <div class="collapsible-content">
+                                    ${explanationHtml}
+                                </div>
+                            </details>
+                        `;
+                    }
+
+                    // Process Sub-sections (Extra Verses like Ramayana, Bhagavata, etc.)
+                    let subBodyHtml = '';
+                    if (subSections.length > 0) {
+                        subBodyHtml += `<div class="seva-sub-body">`;
+                        
+                        subSections.forEach((subSec, subIndex) => {
+                            const subLines = subSec.split('\n');
+                            const subTitle = subLines.shift().trim();
+                            
+                            const subVerses = [];
+                            const subExplanations = [];
+                            let isInvocation = false;
+
+                            subLines.forEach(line => {
+                                const trimmed = line.trim();
+                                if (!trimmed) return;
+
+                                if (trimmed.startsWith('>')) {
+                                    isInvocation = true;
+                                    subVerses.push(trimmed.replace('>', '').trim());
+                                } else if (trimmed.startsWith('*')) {
+                                    subExplanations.push(line);
+                                } else {
+                                    subVerses.push(trimmed);
+                                }
+                            });
+
+                            const subVerseHtml = isInvocation
+                                ? `<div class="invocation-box"><p>${subVerses.join(' ')}</p></div>`
+                                : `<div class="verse-box">${subVerses.map(l => `<p class="verse-line">${l}</p>`).join('')}</div>`;
+
+                            const subPlainText = subVerses.join(' ');
+                            const subAudioPath = `../assets/audio/ashtaavadhaana/sub_${index}_${subIndex + 1}.mp3`;
+
+                            const subExpHtml = typeof marked !== 'undefined'
+                                ? marked.parse(subExplanations.join('\n'))
+                                : subExplanations.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
+
+                            subBodyHtml += `
+                                <div class="audio-play-bar" style="margin-top: 15px;">
+                                    <h4 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${subTitle}</h4>
+                                    <button class="audio-btn" onclick="playVerseAudio('${subAudioPath}', \`${subPlainText.replace(/`/g, '\\`')}\`, this)">
+                                        🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                                    </button>
+                                </div>
+                                ${subVerseHtml}
+                                ${subExpHtml ? `
+                                <details class="collapsible-section">
+                                    <summary class="collapsible-toggle">
+                                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                                        <span class="toggle-icon">▼</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        ${subExpHtml}
+                                    </div>
+                                </details>` : ''}
+                            `;
+                        });
+
+                        subBodyHtml += `</div>`;
+                    }
+
+                    // Audio button for main verse section (rendered only if verseLines exist)
+                    const mainAudioButtonHtml = verseLines.length > 0 ? `
+                        <button class="audio-btn" onclick="playVerseAudio('${mainAudioPath}', \`${mainPlainText.replace(/`/g, '\\`')}\`, this)">
+                            🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                        </button>
+                    ` : '';
+
                     const card = document.createElement('article');
                     card.className = 'seva-card';
                     card.innerHTML = `
-                        <div class="seva-body">
-                            <div class="audio-play-bar">
-                                <h3 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${sectionTitle}</h3>
-                                <button class="audio-btn" onclick="playVerseAudio('${audioPath}', \`${versePlainText.replace(/`/g, '\\`')}\`, this)">
-                                    🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
-                                </button>
-                            </div>
-                            <div class="verse-box">
-                                ${verseHtml}
-                            </div>
+                        <div class="seva-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 class="seva-title" style="margin: 0;">${sectionTitle}</h3>
+                            ${mainAudioButtonHtml}
                         </div>
-                        <details class="collapsible-section">
-                            <summary class="collapsible-toggle">
-                                <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                                <span class="toggle-icon">▼</span>
-                            </summary>
-                            <div class="collapsible-content">
-                                ${explanationHtml}
-                            </div>
-                        </details>
+                        <div class="seva-body">
+                            ${verseLines.length > 0 ? `<div class="verse-box">${verseHtml}</div>` : ''}
+                            ${mainCollapsible}
+                            ${subBodyHtml}
+                        </div>
                     `;
 
                     container.appendChild(card);
@@ -219,7 +283,7 @@
                 container.innerHTML = `
                     <div style="text-align: center; color: #cc0000; padding: 20px;">
                         <p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
-                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/deevatige_salaam.md</code> ಸರಿಯಾಗಿದೆಯೇ ಮತ್ತು ಸ್ಥಳೀಯ ಸರ್ವರ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರೀಕ್ಷಿಸಿ)</p>
+                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/ashtaavadhaana.md</code> ಸರಿಯಾಗಿದೆಯೇ ಮತ್ತು ಸ್ಥಳೀಯ ಸರ್ವರ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರೀಕ್ಷಿಸಿ)</p>
                     </div>`;
             }
         }
