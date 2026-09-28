@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಛಾಯಾಚಿತ್ರಗಳು | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
+    
+    <!-- Google Fonts: Noto Sans Kannada & Noto Serif Kannada -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="../assets/images/icon_image.jpg">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="../css/back-to-top.css">
+    <link rel="stylesheet" href="../css/feedback.css">
+</head>
+<body>
+
+    <!-- Site Header with Glassmorphism and Subsections Shortcuts -->
+    <header class="site-header site-header--glass">
+        <div class="header-container">
+            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <div class="subheading-pill">
+                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+            </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
+        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+        <a href="temple_background.html" class="nav-link">ಇತಿಹಾಸ</a>
+        <a href="photos.html" class="nav-link active">ಛಾಯಾಚಿತ್ರಗಳು</a>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container">
+        <!-- Page Header -->
+        <div class="page-header" style="text-align: center; margin-bottom: 2rem;">
+            <h2 class="kn-heading" style="color: #800020; margin-bottom: 0.4rem;">ಛಾಯಾಚಿತ್ರ ಪ್ರದರ್ಶನ</h2>
+            <p class="kn-subheading" style="margin: 0 auto; max-width: 650px;">
+                ಶ್ರೀ ಸನ್ನಿಧಿಯ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು, ನಿತ್ಯ-ನೈಮಿತ್ತಿಕ ಪೂಜೆಗಳು, ದೇವಾಲಯದ ಆವರಣ ಹಾಗೂ ಹಳೆಯ ಅಪರೂಪದ ಕ್ಷಣಗಳ ಚಿತ್ರಸಂಪುಟ.
+            </p>
+        </div>
+
+        <!-- Top Action & Counter Bar -->
+        <section class="gallery-top-bar" aria-label="ಗ್ಯಾಲರಿ ನಿಯಂತ್ರಣ ಫಲಕ">
+            <div class="gallery-stats">
+                <span>ಸಂಗ್ರಹದಲ್ಲಿರುವ ಒಟ್ಟು ಚಿತ್ರಗಳು:</span>
+                <span class="gallery-stats-count" id="photoCount">12 ಚಿತ್ರಗಳು</span>
+            </div>
+            <button type="button" class="btn-submit-photo" id="openSubmitModalBtn">
+                <span>📸</span>
+                <span>ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</span>
+            </button>
+        </section>
+
+        <!-- Sticky Category Filter Tabs -->
+        <section class="gallery-filters-container" aria-label="ವಿಭಾಗಗಳ ಫಿಲ್ಟರ್">
+            <div class="gallery-filter-tabs" role="tablist">
+                <button type="button" class="filter-pill active" data-category="all" role="tab" aria-selected="true">
+                    <span>ಎಲ್ಲಾ ಚಿತ್ರಗಳು</span>
+                    <span class="pill-badge">0</span>
+                </button>
+                <!-- <button type="button" class="filter-pill" data-category="festivals" role="tab" aria-selected="false">
+                    <span> ಉತ್ಸವಗಳು</span>
+                    <span class="pill-badge">0</span>
+                </button>
+                <button type="button" class="filter-pill" data-category="rituals" role="tab" aria-selected="false">
+                    <span> ಪೂಜೆಗಳು</span>
+                    <span class="pill-badge">0</span>
+                </button>
+                <button type="button" class="filter-pill" data-category="premises" role="tab" aria-selected="false">
+                    <span> ದೇವಸ್ಥಾನ</span>
+                    <span class="pill-badge">0</span>
+                </button> -->
+                <button type="button" class="filter-pill" data-category="archives" role="tab" aria-selected="false">
+                    <span> ಹಳೆಯ ಚಿತ್ರಗಳು</span>
+                    <span class="pill-badge">0</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Dynamic Photo Grid Container -->
+        <section class="gallery-grid" id="galleryGrid" aria-live="polite">
+            <div class="gallery-empty-state">
+                <span class="gallery-empty-icon">⏳</span>
+                <div class="gallery-empty-text">ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ವೀಕ್ಷಣೆ">
+        <div class="lightbox-dialog">
+            <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
+            
+            <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" title="ಹಿಂದಿನ ಚಿತ್ರ" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">‹</button>
+            <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" title="ಮುಂದಿನ ಚಿತ್ರ" aria-label="ಮುಂದಿನ ಚಿತ್ರ">›</button>
+
+            <div class="lightbox-image-wrapper">
+                <img src="" alt="" id="lightboxImg" class="lightbox-image" />
+            </div>
+
+            <div class="lightbox-info-bar">
+                <div class="lightbox-info-header">
+                    <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                    <span class="lightbox-category-tag" id="lightboxCategory"></span>
+                </div>
+                <p class="lightbox-caption" id="lightboxCaption"></p>
+                <div class="lightbox-counter" id="lightboxCounter"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Contribution Modal (Zero Budget, Dual Input, Instant Preview) -->
+    <div class="modal-overlay" id="submissionModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ಹಂಚಿಕೊಳ್ಳುವ ಫಾರ್ಮ್">
+        <div class="submission-modal-container">
+            <button type="button" class="modal-close-icon" id="closeSubmitModalBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
+            
+            <div class="modal-header">
+                <h3>📸 ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</h3>
+                <p>ದೇವಸ್ಥಾನದ ಇತಿಹಾಸ, ಉತ್ಸವ ಅಥವಾ ಪೂಜೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಛಾಯಾಚಿತ್ರಗಳನ್ನು ಸುಲಭವಾಗಿ ಹಂಚಿಕೊಳ್ಳಿ.</p>
+            </div>
+
+            <div class="submission-note">
+                <strong>ಮಾಹಿತಿ:</strong> ನಿಮ್ಮ ಮೊಬೈಲ್/ಕಂಪ್ಯೂಟರ್‌ನಿಂದ ನೇರವಾಗಿ ಚಿತ್ರ ಆಯ್ಕೆ ಮಾಡಿ ಅಥವಾ Google Drive / Photos ಲಿಂಕ್ ಹಾಕಿ.
+            </div>
+
+            <!-- Zero-Budget Formspree + Free ImgBB Upload Form -->
+            <form class="submission-form" id="photoSubmissionForm" novalidate>
+                <!-- Festival / Category Name (Optional) -->
+                <div class="form-group">
+                    <label for="photoCategory">ಉತ್ಸವ ಅಥವಾ ವಿಭಾಗದ ಹೆಸರು (Category / Event)
+                    <select id="photoCategory" name="category" class="form-select">
+                        <option value="ಉತ್ಸವಗಳು (Festivals)" selected>ಉತ್ಸವಗಳು (ರಥೋತ್ಸವ, ಪೇಟೆ ಸವಾರಿ ಇತ್ಯಾದಿ)</option>
+                        <option value="ಪೂಜೆಗಳು (Rituals)">ಪೂಜೆಗಳು (ಅಷ್ಟಾವಧಾನ, ದೀವಟಿಗೆ ಸಲಾಂ ಇತ್ಯಾದಿ)</option>
+                        <option value="ದೇವಸ್ಥಾನ ಪರಿಸರ (Premises)">ದೇವಸ್ಥಾನ ಮತ್ತು ಪರಿಸರ</option>
+                        <option value="ಹಳೆಯ ಚಿತ್ರಗಳು (Archives)">ಹಳೆಯ ಅಪರೂಪದ ಛಾಯಾಚಿತ್ರಗಳು</option>
+                        <option value="ಇತರೆ (Other)">ಇತರೆ ವಿಶೇಷ ಕ್ಷಣಗಳು</option>
+                    </select>
+                </div>
+
+                <!-- Dual Photo Input Section -->
+                <div class="dual-photo-box">
+                    <div class="dual-box-header">
+                        <span class="dual-title">🖼️ ಚಿತ್ರವನ್ನು ಹೇಗೆ ನೀಡಲು ಬಯಸುತ್ತೀರಿ? (ಯಾವುದಾದರೂ ಒಂದನ್ನು ಬಳಸಿ)</span>
+                    </div>
+
+                    <!-- Option 1: Local Device File Picker -->
+                    <div class="form-group photo-choice-group">
+                        <label for="localPhotoInput" class="choice-label">
+                            ಮೊಬೈಲ್ / ಗ್ಯಾಲರಿಯಿಂದ ಚಿತ್ರ ಆರಿಸಿ (File Upload)
+                        </label>
+                        <input 
+                            type="file" 
+                            id="localPhotoInput" 
+                            name="local_file" 
+                            accept="image/*" 
+                            class="form-file-input" 
+                        />
+                        <span class="form-help">JPG, PNG, JPEG ಇತ್ಯಾದಿ </span>
+                    </div>
+
+                    <!-- Instant Thumbnail Preview Container -->
+                    <div id="previewContainer" class="preview-container" style="display: none;">
+                        <div class="preview-wrapper">
+                            <img id="previewImage" src="" alt="ಆಯ್ಕೆಮಾಡಿದ ಚಿತ್ರದ ಪ್ರಿವ್ಯೂ" class="preview-thumb" />
+                            <button type="button" id="removePreviewBtn" class="btn-remove-preview" title="ಚಿತ್ರವನ್ನು ತೆಗೆದುಹಾಕಿ">✕</button>
+                        </div>
+                        <div class="preview-meta">
+                            <span id="previewFileName" class="preview-filename"></span>
+                            <span id="previewFileSize" class="preview-filesize"></span>
+                        </div>
+                    </div>
+
+                    <div class="dual-separator">
+                        <span>ಅಥವಾ</span>
+                    </div>
+
+                    <!-- Option 2: Public Image Link -->
+                    <div class="form-group photo-choice-group">
+                        <label for="photoUrlInput" class="choice-label">
+                            ವೆಬ್ ಲಿಂಕ್ ಹಾಕಿ (Drive / Google Photos )
+                        </label>
+                        <input 
+                            type="text" 
+                            id="photoUrlInput" 
+                            name="image_url" 
+                            class="form-input" 
+                            placeholder="https://drive.google.com/... ಅಥವಾ https://ibb.co/..." 
+                        />
+                        <span class="form-help">Google Drive ಲಿಂಕ್ ಆಗಿದ್ದರೆ 'Anyone with the link can view' ಅನುಮತಿ ನೀಡಿರಬೇಕು.</span>
+                    </div>
+                </div>
+
+                <!-- Status Feedback Message -->
+                <div id="formStatusMsg" class="form-status-msg" role="alert"></div>
+
+                <!-- Devotee Name (Optional) -->
+                <div class="form-group">
+                    <label for="devoteeName">ಹೆಸರು </label>
+                    <input 
+                        type="text" 
+                        id="devoteeName" 
+                        name="devotee_name" 
+                        class="form-input" 
+                    />
+                </div>
+
+                <!-- Contact Phone / Email (Optional) -->
+                <div class="form-group">
+                    <label for="devoteeContact">Contact Phone / Email </label>
+                    <input 
+                        type="text" 
+                        id="devoteeContact" 
+                        name="contact_info" 
+                        class="form-input" 
+                    />
+                </div>
+                
+                <!-- Photo Description (Optional) -->
+                <div class="form-group">
+                    <label for="photoDescription">ಚಿತ್ರದ ವಿವರಣೆ / ತೆಗೆದ ವರ್ಷ </label>
+                    <textarea 
+                        id="photoDescription" 
+                        name="description" 
+                        rows="2" 
+                        class="form-textarea" 
+                        placeholder="ಕಾರ್ಯಕ್ರಮದ ವಿವರ ಅಥವಾ ತೆಗೆದ ವರ್ಷ (ಉದಾ: 2026 ರ ರಥೋತ್ಸವ)" 
+                    ></textarea>
+                </div>
+
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-form-submit" id="submitBtn">
+                    <span> ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Friendly Fallback Modal (For Formspree 404 / Direct WhatsApp & Email) -->
+    <div class="modal-overlay" id="fallbackModal" role="dialog" aria-modal="true" aria-label="ಪರ್ಯಾಯ ಸಲ್ಲಿಕೆ ಆಯ್ಕೆಗಳು">
+        <div class="submission-modal-container fallback-modal-container">
+            <button type="button" class="modal-close-icon" id="closeFallbackModalBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
+            
+            <!-- <div class="modal-header">
+                <div class="fallback-icon">📲</div>
+                <h3 id="fallbackModalTitle">ನೇರವಾಗಿ ಕಳುಹಿಸಲು ಸಿದ್ಧವಾಗಿದೆ!</h3>
+                <p id="fallbackModalSubtitle">
+                    ಆನ್‌ಲೈನ್ ಸರ್ವರ್ ಸಂಪರ್ಕಿಸುವುದು ಸಾಧ್ಯವಾಗದಿದ್ದರೂ ಪರವಾಗಿಲ್ಲ. ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಈ ಕೆಳಗಿನ ಒಂದು-ಕ್ಲಿಕ್ ಬಟನ್‌ಗಳ ಮೂಲಕ ನೇರವಾಗಿ ತಲುಪಿಸಬಹುದು:
+                </p>
+            </div> -->
+
+            <!-- Fallback Summary Card -->
+            <div class="fallback-summary" id="fallbackSummary">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Instant One-Click Action Buttons -->
+            <!-- <div class="fallback-actions">
+                <a href="#" id="fallbackWhatsAppBtn" target="_blank" rel="noopener noreferrer" class="btn-fallback btn-whatsapp">
+                    <span class="btn-icon">💬</span>
+                    <span>WhatsApp ಮೂಲಕ ಕಳುಹಿಸಿ</span>
+                </a>
+                <a href="#" id="fallbackEmailBtn" class="btn-fallback btn-email">
+                    <span class="btn-icon">✉️</span>
+                    <span>Email ಮೂಲಕ ಕಳುಹಿಸಿ</span>
+                </a>
+            </div> -->
+
+            <div class="fallback-footer">
+                <button type="button" class="btn-secondary" id="fallbackBackBtn">← ಗ್ಯಾಲರಿಗೆ ಹಿಂತಿರುಗಿ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>© 2026 ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ. ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/back-to-top.js"></script>
+    <script src="../js/feedback.js"></script>
+    <script src="../js/gallery.js"></script>
+</body>
+</html>

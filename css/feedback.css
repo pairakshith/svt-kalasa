@@ -38,3 +38,35 @@
     stroke-linecap: round !important;
     stroke-linejoin: round !important;
 }
+
+/* PDF Download Action Bar Styling */
+.pdf-download-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.btn-download-pdf {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #800000; /* Matching temple maroon theme */
+    color: #ffffff;
+    padding: 1px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-download-pdf:hover {
+    background-color: #a00000;
+    transform: translateY(-1px);
+}
+
+.btn-download-pdf:active {
+    transform: translateY(0);
+}
