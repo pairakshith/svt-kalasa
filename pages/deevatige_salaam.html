@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="kn" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ದೀವಟಿಗೆ ಸಲಾಂ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
@@ -25,30 +26,30 @@
 
     <header class="site-header site-header--glass">
         <div class="header-container">
-            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <h1 class="kn-heading" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
             <div class="subheading-pill">
-                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+                <span data-trans-id="header.location">ಮೇಲಂಗಡಿ, ಕಳಸ</span>
             </div>
         </div>
     </header>
 
     <nav class="main-nav">
-        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
-        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link active">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
-        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
-        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
+        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link active" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ದೀವಟಿಗೆ ಸಲಾಂ</h2>
-            <p class="kn-subheading">ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ</p>
+            <h2 class="kn-heading" data-trans-id="deevatige_page.page_title">ದೀವಟಿಗೆ ಸಲಾಂ</h2>
+            <p class="kn-subheading" data-trans-id="deevatige_page.page_subtitle">ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ</p>
         </div>
 
         <div class="seva-list" id="sevaContainer">
-            <p style="text-align: center; color: #666;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
+            <p style="text-align: center; color: #666;" data-trans-id="common.loading">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
         </div>
     </main>
 
@@ -58,6 +59,8 @@
     <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
 
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
@@ -143,7 +146,10 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                const markdownText = await response.text();
+                let markdownText = await response.text();
+                if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
+                    markdownText = window.LocaleEngine.preprocessMarkdown(markdownText);
+                }
                 container.innerHTML = '';
 
                 // Split sections by '## ' headers
