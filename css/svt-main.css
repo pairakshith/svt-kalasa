@@ -1,0 +1,17 @@
+/* ========================================
+   SVT KALASA - MASTER STYLESHEET
+   ======================================== 
+   
+   Single point of import for all CSS
+   No need to edit individual HTML files
+   
+   ======================================== */
+
+/* ========== BASE STYLES ========== */
+
+@import url('./audio.css');
+@import url('./back-to-top.css');
+@import url('./feedback.css');
+@import url('./gallery.css');
+@import url('./header.css');
+@import url('./style.css');
