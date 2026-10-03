@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalHTML = `
         <div class="feedback-modal-overlay" id="feedbackModal">
             <div class="feedback-modal">
-                <h3>ಮಾಹಿತಿ/ ಅಭಿಪ್ರಾಯ / ಸಲಹೆ (Info / Feedback)</h3>
+                <h3>ಮಾಹಿತಿ, ಅಭಿಪ್ರಾಯ, ಸಲಹೆ (Info / Feedback)</h3>
                 <form id="feedbackForm">
                     <textarea id="feedbackText" name="message" placeholder="ಯಾವುದೇ ಭಾಷೆಯಲ್ಲಾದರೂ ಬರೆಯಿರಿ / Write in any language..." required></textarea>
                     <div class="feedback-modal-actions">
