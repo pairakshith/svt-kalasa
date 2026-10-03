@@ -1,0 +1,51 @@
+﻿/* ==========================================================================
+   CSS Variables & Shared Design Tokens
+   ========================================================================== */
+
+:root {
+    /* Fonts */
+    --font-sans-kannada: 'Noto Sans Kannada', sans-serif;
+    --font-serif-kannada: 'Noto Serif Kannada', serif;
+
+    /* Maroon Palette */
+    --primary-color: #800000;
+    --primary-crimson: #800020;
+    --primary-gradient: linear-gradient(135deg, #7a0016, #b3122e);
+    --primary-dark: #580016;
+
+    /* Golden Accents */
+    --accent-gold: #f59e0b;
+    --accent-gold-dark: #d97706;
+    --accent-gold-light: #fef3c7;
+    --accent-gold-border: #fde68a;
+    --accent-gold-text: #92400e;
+    --accent-yellow: #ffeb3b;
+
+    /* Neutrals & Backgrounds */
+    --bg-color: #f4f7f6;
+    --bg-card: #ffffff;
+    --bg-card-alt: #fffdfa;
+    --text-color: #222222;
+    --text-heading: #111111;
+    --text-subheading: #555555;
+    --text-muted: #64748b;
+    --text-dark: #1e293b;
+    --text-slate: #334155;
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+
+    /* Standard Spacing & Paddings */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    /* Shadows & Transitions */
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+}

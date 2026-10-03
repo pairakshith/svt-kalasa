@@ -1,0 +1,61 @@
+﻿/* ==========================================================================
+   Collapsible Details / Summary Components (css/components/collapsible.css)
+   ========================================================================== */
+
+.collapsible-section {
+    border-top: 1px solid var(--border-color);
+    background-color: #fafafa;
+}
+
+.collapsible-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-gold-dark);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background-color 0.2s ease;
+}
+
+.collapsible-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.collapsible-toggle:hover {
+    background-color: var(--border-light);
+}
+
+.toggle-icon {
+    font-size: 0.8rem;
+    transition: transform 0.25s ease;
+    color: var(--accent-gold-dark);
+}
+
+.collapsible-section[open] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    padding: 1rem 1.5rem 1.25rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-slate);
+    background-color: #ffffff;
+    border-top: 1px dashed var(--border-color);
+}
+
+.collapsible-content p {
+    margin: 0.5rem 0;
+}
+
+.collapsible-content p:first-child {
+    margin-top: 0;
+}
+
+.collapsible-content p:last-child {
+    margin-bottom: 0;
+}

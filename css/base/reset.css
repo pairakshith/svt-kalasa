@@ -1,0 +1,140 @@
+﻿/* ==========================================================================
+   Base Reset & Typography Standards for Kannada
+   ========================================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans-kannada);
+    font-size: 17px;
+    line-height: 1.8;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Kannada Headings Typography */
+.kn-heading {
+    font-family: var(--font-serif-kannada);
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: var(--text-heading);
+}
+
+.kn-subheading {
+    font-size: 1.1rem;
+    color: var(--text-subheading);
+}
+
+/* Common Container Layout */
+.container {
+    max-width: 900px;
+    margin: var(--space-xl) auto;
+    padding: 0 var(--space-md);
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.page-header h2 {
+    font-size: 1.85rem;
+    color: var(--primary-crimson);
+    margin-bottom: var(--space-xs);
+}
+
+.page-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Section Header Divider */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.section-header h2 {
+    font-size: 1.7rem;
+    color: var(--primary-crimson);
+    margin-bottom: 0.3rem;
+}
+
+.heading-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-crimson), var(--accent-gold));
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* General Content Section Helpers */
+.loading-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666666;
+    padding: 40px;
+}
+
+.error-box {
+    text-align: center;
+    color: #cc0000;
+    padding: 20px;
+}
+
+.error-box p {
+    margin: 4px 0;
+}
+
+.error-box .error-help {
+    font-size: 0.85em;
+    color: #666666;
+}
+
+/* Note box highlight */
+.note-box.highlight {
+    background-color: #fff9f0;
+    border-left: 4px solid var(--accent-gold);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 8px;
+    margin: var(--space-md) 0;
+}
+
+.verse-block {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-md);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Responsive adjustment for base */
+@media (max-width: 640px) {
+    body {
+        font-size: 16px;
+    }
+
+    .container {
+        margin: var(--space-md) auto;
+        padding: 0 0.75rem;
+    }
+
+    .page-header {
+        margin-bottom: 1.25rem;
+    }
+
+    .page-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+    }
+}

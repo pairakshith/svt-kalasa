@@ -1,0 +1,134 @@
+﻿/* ==========================================================================
+   Search & Filter Components (css/components/search.css)
+   ========================================================================== */
+
+/* Sticky Search Wrapper */
+.search-wrapper {
+    position: sticky;
+    top: 15px;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid var(--primary-color);
+    border-radius: 25px;
+    padding: 8px 16px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(8px);
+    transition: var(--transition-fast);
+}
+
+.search-wrapper:focus-within {
+    border-color: var(--accent-gold-dark);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.2);
+}
+
+.search-wrapper .search-icon {
+    font-size: 1.1rem;
+    margin-right: 10px;
+    user-select: none;
+}
+
+.search-wrapper input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans-kannada);
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--text-color);
+}
+
+.search-wrapper input:focus {
+    outline: none;
+}
+
+/* Download PDF Action Button inside / next to search */
+.pdf-download-wrapper {
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.btn-download-pdf {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary-gradient);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 18px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-family: var(--font-sans-kannada);
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.btn-download-pdf:hover {
+    background: var(--accent-gold);
+    color: var(--text-dark);
+}
+
+/* Empty Search Results Message */
+.no-events-found {
+    text-align: center;
+    padding: 2.5rem;
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    border: 1px dashed #cbd5e1;
+    margin: 1.5rem auto;
+    max-width: 600px;
+}
+
+/* Category Filter Tabs (temple_background.html & traditions.html) */
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0 30px;
+}
+
+.tab-btn {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-sans-kannada);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+    .search-wrapper {
+        margin-bottom: 1.25rem;
+        padding: 6px 12px;
+    }
+
+    .search-wrapper input {
+        font-size: 0.9rem;
+    }
+
+    .btn-download-pdf {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+
+    .tab-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
