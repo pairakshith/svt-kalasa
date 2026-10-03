@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="kn" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ಅಷ್ಟಾವಧಾನ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
@@ -21,30 +22,30 @@
 
     <header class="site-header site-header--glass">
         <div class="header-container">
-            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <h1 class="kn-heading" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
             <div class="subheading-pill">
-                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+                <span data-trans-id="header.location">ಮೇಲಂಗಡಿ, ಕಳಸ</span>
             </div>
         </div>
     </header>
 
     <nav class="main-nav">
-        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
-        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link active">ಅಷ್ಟಾವಧಾನ</a>
-        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
-        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
+        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
+        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link active" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ಅಷ್ಟಾವಧಾನ ಸೇವೆ</h2>
-            <p class="kn-subheading">ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಅಷ್ಟಾವಧಾನ ಸೇವೆಯ ಶ್ಲೋಕಗಳು</p>
+            <h2 class="kn-heading" data-trans-id="ashta_page.page_title">ಅಷ್ಟಾವಧಾನ ಸೇವೆ</h2>
+            <p class="kn-subheading" data-trans-id="ashta_page.page_subtitle">ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಅಷ್ಟಾವಧಾನ ಸೇವೆಯ ಶ್ಲೋಕಗಳು</p>
         </div>
 
         <div class="seva-list" id="sevaContainer">
-            <p style="text-align: center; color: #666;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
+            <p style="text-align: center; color: #666;" data-trans-id="common.loading">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
         </div>
     </main>
 
@@ -54,6 +55,8 @@
     <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
 
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
@@ -206,30 +209,53 @@
                             const subVerses = [];
                             const subExplanations = [];
                             let isInvocation = false;
+                            let inTransliterateBlock = false;
+                            let blockScript = 'kannada';
 
                             subLines.forEach(line => {
                                 const trimmed = line.trim();
                                 if (!trimmed) return;
 
+                                if (trimmed.startsWith(':::transliterate')) {
+                                    inTransliterateBlock = true;
+                                    const match = trimmed.match(/sourceScript="([^"]+)"/);
+                                    blockScript = match ? match[1] : 'kannada';
+                                    return;
+                                }
+                                if (trimmed === ':::') {
+                                    inTransliterateBlock = false;
+                                    return;
+                                }
+
                                 if (trimmed.startsWith('>')) {
                                     isInvocation = true;
-                                    subVerses.push(trimmed.replace('>', '').trim());
+                                    subVerses.push({ text: trimmed.replace('>', '').trim(), transliterate: false });
                                 } else if (trimmed.startsWith('*')) {
                                     subExplanations.push(line);
                                 } else {
-                                    subVerses.push(trimmed);
+                                    subVerses.push({ text: trimmed, transliterate: inTransliterateBlock, script: blockScript });
                                 }
                             });
 
                             const subVerseHtml = isInvocation
-                                ? `<div class="invocation-box"><p>${subVerses.join(' ')}</p></div>`
-                                : `<div class="verse-box">${subVerses.map(l => `<p class="verse-line">${l}</p>`).join('')}</div>`;
+                                ? `<div class="invocation-box"><p>${subVerses.map(v => v.text).join(' ')}</p></div>`
+                                : `<div class="verse-box">${subVerses.map(v => {
+                                    if (v.transliterate) {
+                                        return `<p class="verse-line" data-trans-type="transliterate" data-source-script="${v.script || 'kannada'}">${v.text}</p>`;
+                                    }
+                                    return `<p class="verse-line">${v.text}</p>`;
+                                }).join('')}</div>`;
 
-                            const subPlainText = subVerses.join(' ');
+                            const subPlainText = subVerses.map(v => v.text).join(' ');
                             const subAudioPath = `../assets/audio/sub_${index}_${subIndex + 1}.mp3`;
 
+                            let expRaw = subExplanations.join('\n');
+                            if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
+                                expRaw = window.LocaleEngine.preprocessMarkdown(expRaw);
+                            }
+
                             const subExpHtml = typeof marked !== 'undefined'
-                                ? marked.parse(subExplanations.join('\n'))
+                                ? marked.parse(expRaw)
                                 : subExplanations.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
 
                             subBodyHtml += `
@@ -243,7 +269,7 @@
                                 ${subExpHtml ? `
                                 <details class="collapsible-section">
                                     <summary class="collapsible-toggle">
-                                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
+                                        <span data-trans-id="common.explanation_title">ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
                                         <span class="toggle-icon">▼</span>
                                     </summary>
                                     <div class="collapsible-content">
@@ -280,6 +306,11 @@
                     container.appendChild(card);
                 });
 
+                // Apply translations/transliterations to dynamic elements
+                if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                    window.LocaleEngine.updateDomElements(container);
+                }
+
             } catch (error) {
                 console.error("Error loading markdown:", error);
                 container.innerHTML = `
@@ -291,6 +322,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', loadMarkdownContent);
+        if (window.LocaleEngine) {
+            window.LocaleEngine.onLanguageChange(function() {
+                loadMarkdownContent();
+            });
+        }
     </script>
 </body>
 </html>

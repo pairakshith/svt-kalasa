@@ -198,3 +198,96 @@
         display: none; /* Hides the separator dot when stacked vertically */
     }
 }
+
+/* ==========================================================================
+   Sticky Top Navbar Language Selector Bar
+   ========================================================================== */
+
+.top-language-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #111827; /* Dark slate matching header theme */
+    color: #f9fafb;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.35);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 0.88rem;
+}
+
+.lang-bar-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.lang-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #ffeb3b;
+    letter-spacing: 0.3px;
+}
+
+.lang-brand .temple-om {
+    font-size: 1.1rem;
+    color: #f59e0b;
+}
+
+.lang-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-label {
+    display: inline-flex;
+    align-items: center;
+    color: #e5e7eb;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.lang-selector-select {
+    background-color: #1f2937;
+    color: #ffffff;
+    border: 1px solid #f59e0b;
+    border-radius: 16px;
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.lang-selector-select:hover,
+.lang-selector-select:focus {
+    background-color: #374151;
+    border-color: #ffeb3b;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+
+@media (max-width: 600px) {
+    .lang-bar-container {
+        padding: 5px 10px;
+    }
+    .lang-brand-text {
+        font-size: 0.78rem;
+    }
+    .lang-label-text {
+        display: none; /* Keep dropdown compact on small screens */
+    }
+    .lang-selector-select {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+}

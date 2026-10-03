@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="kn" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
@@ -82,35 +83,35 @@
 
     <header class="site-header site-header--glass">
         <div class="header-container">
-            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
+            <h1 class="kn-heading" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
             <div class="subheading-pill">
-                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
+                <span data-trans-id="header.location">ಮೇಲಂಗಡಿ, ಕಳಸ</span>
             </div>
         </div>
     </header>
 
     <nav class="main-nav">
-        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
-        <a href="history.html" class="nav-link active">ಇತಿಹಾಸ</a>
+        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
+        <a href="temple_background.html" class="nav-link active" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ಪೌರಾಣಿಕ ಹಾಗೂ ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ</h2>
-            <p class="kn-subheading">ಕಳಸ ಸೀಮೆಯ ವೈಭವ, ಸಾರಸ್ವತರ ಆಗಮನ ಹಾಗೂ ಸಾನ್ನಿಧ್ಯದ ಮಹಿಮೆ</p>
+            <h2 class="kn-heading" data-trans-id="history_page.page_title">ಪೌರಾಣಿಕ ಹಾಗೂ ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ</h2>
+            <p class="kn-subheading" data-trans-id="history_page.page_subtitle">ಕಳಸ ಸೀಮೆಯ ವೈಭವ, ಸಾರಸ್ವತರ ಆಗಮನ ಹಾಗೂ ಸಾನ್ನಿಧ್ಯದ ಮಹಿಮೆ</p>
         </div>
 
         <!-- Filter Buttons Bar -->
         <div class="filter-tabs">
-            <button class="tab-btn" onclick="filterContent('history', this)">ಸಂಕ್ಷಿಪ್ತ ಇತಿಹಾಸ</button>
-            <button class="tab-btn" onclick="filterContent('migration', this)">ಸಾರಸ್ವತರ ಪಯಣ</button>
-            <button class="tab-btn" onclick="filterContent('kalasa', this)">ಕಳಸ ಕ್ಷೇತ್ರ (ದಕ್ಷಿಣ ಕಾಶಿ)</button>
-            <button class="tab-btn" onclick="filterContent('venkataramana', this)">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</button>
+            <button class="tab-btn" onclick="filterContent('history', this)" data-trans-id="history_page.tab_history">ಸಂಕ್ಷಿಪ್ತ ಇತಿಹಾಸ</button>
+            <button class="tab-btn" onclick="filterContent('migration', this)" data-trans-id="history_page.tab_migration">ಸಾರಸ್ವತರ ಪಯಣ</button>
+            <button class="tab-btn" onclick="filterContent('kalasa', this)" data-trans-id="history_page.tab_kalasa">ಕಳಸ ಕ್ಷೇತ್ರ (ದಕ್ಷಿಣ ಕಾಶಿ)</button>
+            <button class="tab-btn" onclick="filterContent('venkataramana', this)" data-trans-id="history_page.tab_venkataramana">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</button>
         </div>
 
         <!-- Dynamic Content Output Area -->
         <div id="content-display">
-            <div class="loading-text">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+            <div class="loading-text" data-trans-id="common.loading">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
         </div>
     </main>
 
@@ -121,6 +122,8 @@
     <script src="../js/footer-loader.js"></script>
 
     <!-- Global Floating Navigation JS -->
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
 
@@ -131,7 +134,11 @@
         async function loadMarkdownData() {
             try {
                 const response = await fetch('../data/temple_background.md');
-                const rawMarkdown = await response.text();
+                let rawMarkdown = await response.text();
+
+                if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
+                    rawMarkdown = window.LocaleEngine.preprocessMarkdown(rawMarkdown);
+                }
 
                 // Split markdown file by "---" separator
                 const rawBlocks = rawMarkdown.split('---');
@@ -185,10 +192,19 @@
                     ${sec.htmlContent}
                 </article>
             `).join('');
+
+            if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                window.LocaleEngine.updateDomElements(displayContainer);
+            }
         }
 
         // Initialize fetching on window load
-        window.onload = loadMarkdownData;
+        window.addEventListener('DOMContentLoaded', loadMarkdownData);
+        if (window.LocaleEngine) {
+            window.LocaleEngine.onLanguageChange(function() {
+                loadMarkdownData();
+            });
+        }
     </script>
 </body>
 </html>

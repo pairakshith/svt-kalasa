@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Home",
+    "events": "Festival Calendar",
+    "deevatige_salaam": "Deevatige Salaam",
+    "ashtaavadhaana": "Ashtaavadhaana",
+    "mangala": "Mangala",
+    "traditions": "Traditions & Rituals",
+    "history": "History & Heritage",
+    "photos": "Photos Gallery",
+    "references": "References"
+  },
+  "header": {
+    "temple_title": "Shri Venkataramana Temple",
+    "location": "Melangadi, Kalasa",
+    "tagline": "Amgel Devasthana"
+  },
+  "common": {
+    "view_details": "View Details →",
+    "see_details": "See Details →",
+    "loading": "Loading information...",
+    "stop_audio": "⏸️ Stop",
+    "listen_audio": "🔊 Listen to Verse",
+    "all_content": "All Content",
+    "search_placeholder": "Search festival, date or seva donor...",
+    "no_events_found": "🔍 No events found",
+    "explanation_title": "Explanation & Meaning",
+    "download_pdf": "Festival Calendar (PDF)",
+    "references_title": "References & Citations"
+  },
+  "home": {
+    "card_events_title": "Festival Calendar",
+    "card_events_desc": "Full details of annual religious festivals, tithis, dates, and seva sponsors.",
+    "card_history_title": "Temple Heritage & Background",
+    "card_history_desc": "Based on books and local oral traditions.",
+    "card_photos_title": "Photo Gallery",
+    "card_photos_desc": "Beautiful collection of festival celebrations, poojas, and cultural events.",
+    "card_deevatige_title": "Deevatige Salaam",
+    "card_deevatige_desc": "Traditional evening torch prayers (Deevatige Salaam) of the temple.",
+    "card_ashta_title": "Ashtaavadhaana Seva",
+    "card_ashta_desc": "Eightfold devotional services and sacred verses offered to the Lord.",
+    "card_mangala_title": "Mangala",
+    "card_mangala_desc": "Mangala prayers offered during temple processions.",
+    "card_traditions_title": "Traditions & Rituals",
+    "card_traditions_desc": "Sacred temple customs, celebrations and their divine significance.",
+    "card_references_title": "References",
+    "card_references_desc": "Sources and historical literature cited across this site.",
+    "about_heading": "Our Temple",
+    "about_p1": "The magnificent and gracefully carved Saligrama deity of Lord Shri Venkataramana, presiding in Melangadi of Kalasa town, presents a spellbinding sight of supreme tranquility.",
+    "about_p2": "Lord Shri Venkataramana has lovingly fulfilled every cherished prayer of the devotees who surrender to His benevolence. Along with the primary deity, statues of Shri Varadaraja Swamy, Shri Anjaneya Swamy, and consecrated Saligramas reside in the sanctuary.",
+    "about_p3": "During major annual celebrations, Shri Varadaraja Swamy and Shri Anjaneya Swamy are joyfully carried on the divine street procession (Pete Utsava). To the right side of the inner sanctum is the shrine of Lord Brahma."
+  },
+  "about": {
+    "book_info": "Based on books and local oral traditions."
+  },
+  "events_page": {
+    "page_title": "Festivals & Special Events",
+    "page_subtitle": "Upcoming religious festivals, sacred tithis, and seva sponsors"
+  },
+  "deevatige_page": {
+    "page_title": "Deevatige Salaam",
+    "page_subtitle": "Devotional hymns recited during the ceremonial torch-light greeting (Deevatige Salaam) before the Lord's town procession"
+  },
+  "ashta_page": {
+    "page_title": "Ashtaavadhaana Seva",
+    "page_subtitle": "Sacred verses recited during the Eightfold Devotional Services of the temple"
+  },
+  "mangala_page": {
+    "page_title": "Mangala",
+    "page_subtitle": "Auspicious Mangala hymns sung after the Lord returns from the town procession to the inner sanctum"
+  },
+  "traditions_page": {
+    "page_title": "Sacred Rituals, Observances & Puranic Significance",
+    "page_subtitle": "Key religious traditions, rituals, and seasonal ceremonies performed at Shri Venkataramana Temple",
+    "all": "Entire Page",
+    "chandramana_yugadi": "Chandramana Yugadi",
+    "sri_rama_navami": "Sri Rama Navami",
+    "chitra_paurnami": "Chitra Poornima",
+    "nrusimha_jayanti": "Narasimha Jayanti",
+    "vaishakha_paurnami": "Vaishakha Poornima"
+  },
+  "history_page": {
+    "page_title": "Mythological & Historical Background",
+    "page_subtitle": "Glory of Kalasa territory, Saraswat migration, and divine presence",
+    "tab_history": "Brief History",
+    "tab_migration": "Saraswat Journey",
+    "tab_kalasa": "Kalasa Kshetra (Dakshina Kashi)",
+    "tab_venkataramana": "Shri Venkataramana Temple"
+  },
+  "references_page": {
+    "page_title": "References & Literature Acknowledgements",
+    "page_subtitle": "Original texts, records, and oral sources consulted for the documentation of this website",
+    "books_heading": "Books & Resources"
+  },
+  "gallery_page": {
+    "page_title": "Photo Gallery",
+    "page_subtitle": "Photographic collection of temple festivals, daily poojas, surroundings, and historic moments.",
+    "total_photos": "Total photos in collection:",
+    "photos_unit": "photos",
+    "submit_photo": "Submit Photo"
+  }
+}
