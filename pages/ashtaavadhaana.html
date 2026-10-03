@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/back-to-top.css">
     <link rel="stylesheet" href="../css/feedback.css">
+    <link rel="stylesheet" href="../css/audio.css">
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -56,6 +57,77 @@
     <script src="../js/feedback.js"></script>
 
     <script>
+        let currentAudio = null;
+        let activeAudioBtn = null;
+
+        // Audio Player Logic with Fallback
+        function playVerseAudio(audioPath, plainText, btnEl) {
+            // If clicking the currently playing button, pause it
+            if (currentAudio && activeAudioBtn === btnEl) {
+                currentAudio.pause();
+                resetAudioButton(btnEl);
+                currentAudio = null;
+                activeAudioBtn = null;
+                return;
+            }
+
+            // Stop any ongoing audio/speech
+            if (currentAudio) {
+                currentAudio.pause();
+                if (activeAudioBtn) resetAudioButton(activeAudioBtn);
+            }
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+
+            // Attempt to play pre-recorded MP3
+            currentAudio = new Audio(audioPath);
+            activeAudioBtn = btnEl;
+            btnEl.classList.add('playing');
+            btnEl.innerHTML = '⏸️ ನಿಲ್ಲಿಸಿ (Stop)';
+
+            currentAudio.play().then(() => {
+                currentAudio.onended = () => {
+                    resetAudioButton(btnEl);
+                    currentAudio = null;
+                    activeAudioBtn = null;
+                };
+            }).catch(() => {
+                // Fallback: If MP3 file does not exist, use Web Speech API
+                console.warn(`Audio file missing at ${audioPath}, falling back to Web Speech TTS.`);
+                playSpeechTTS(plainText, btnEl);
+            });
+        }
+
+        function playSpeechTTS(text, btnEl) {
+            if (!('speechSynthesis' in window)) {
+                alert("ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಶ್ರವಣ ಸೌಲಭ್ಯ ಲಭ್ಯವಿಲ್ಲ.");
+                resetAudioButton(btnEl);
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const voices = window.speechSynthesis.getVoices();
+            const selectedVoice = voices.find(v => v.lang.startsWith('sa') || v.lang.startsWith('hi') || v.lang.startsWith('kn'));
+            
+            if (selectedVoice) utterance.voice = selectedVoice;
+            utterance.lang = 'kn-IN';
+            utterance.rate = 0.85;
+
+            utterance.onend = () => {
+                resetAudioButton(btnEl);
+                currentAudio = null;
+                activeAudioBtn = null;
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function resetAudioButton(btn) {
+            btn.classList.remove('playing');
+            btn.innerHTML = '🔊 ಶ್ಲೋಕ ಆಲಿಸಿ';
+        }
+
         async function loadMarkdownContent() {
             const container = document.getElementById('sevaContainer');
             
@@ -98,6 +170,9 @@
                         .map(line => `<p class="verse-line">${line}</p>`)
                         .join('');
 
+                    const mainPlainText = verseLines.join(' ');
+                    const mainAudioPath = `../assets/audio/ashta_${index}.mp3`;
+
                     const explanationHtml = typeof marked !== 'undefined' 
                         ? marked.parse(explanationLines.join('\n')) 
                         : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
@@ -122,7 +197,7 @@
                     if (subSections.length > 0) {
                         subBodyHtml += `<div class="seva-sub-body">`;
                         
-                        subSections.forEach(subSec => {
+                        subSections.forEach((subSec, subIndex) => {
                             const subLines = subSec.split('\n');
                             const subTitle = subLines.shift().trim();
                             
@@ -148,37 +223,53 @@
                                 ? `<div class="invocation-box"><p>${subVerses.join(' ')}</p></div>`
                                 : `<div class="verse-box">${subVerses.map(l => `<p class="verse-line">${l}</p>`).join('')}</div>`;
 
+                            const subPlainText = subVerses.join(' ');
+                            const subAudioPath = `../assets/audio/sub_${index}_${subIndex + 1}.mp3`;
+
                             const subExpHtml = typeof marked !== 'undefined'
                                 ? marked.parse(subExplanations.join('\n'))
                                 : subExplanations.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
 
                             subBodyHtml += `
+                                <div class="audio-play-bar" style="margin-top: 15px;">
+                                    <h4 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${subTitle}</h4>
+                                    <button class="audio-btn" onclick="playVerseAudio('${subAudioPath}', \`${subPlainText.replace(/`/g, '\\`')}\`, this)">
+                                        🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                                    </button>
+                                </div>
                                 ${subVerseHtml}
+                                ${subExpHtml ? `
                                 <details class="collapsible-section">
                                     <summary class="collapsible-toggle">
-                                        <span>${subTitle}</span>
+                                        <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
                                         <span class="toggle-icon">▼</span>
                                     </summary>
                                     <div class="collapsible-content">
                                         ${subExpHtml}
                                     </div>
-                                </details>
+                                </details>` : ''}
                             `;
                         });
 
                         subBodyHtml += `</div>`;
                     }
 
+                    // Audio button for main verse section (rendered only if verseLines exist)
+                    const mainAudioButtonHtml = verseLines.length > 0 ? `
+                        <button class="audio-btn" onclick="playVerseAudio('${mainAudioPath}', \`${mainPlainText.replace(/`/g, '\\`')}\`, this)">
+                            🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                        </button>
+                    ` : '';
+
                     const card = document.createElement('article');
                     card.className = 'seva-card';
                     card.innerHTML = `
-                        <div class="seva-header">
-                            <h3 class="seva-title">${sectionTitle}</h3>
+                        <div class="seva-header" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3 class="seva-title" style="margin: 0;">${sectionTitle}</h3>
+                            ${mainAudioButtonHtml}
                         </div>
                         <div class="seva-body">
-                            <div class="verse-box">
-                                ${verseHtml}
-                            </div>
+                            ${verseLines.length > 0 ? `<div class="verse-box">${verseHtml}</div>` : ''}
                             ${mainCollapsible}
                             ${subBodyHtml}
                         </div>
