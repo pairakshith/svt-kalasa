@@ -171,15 +171,21 @@
                         }
                     });
 
-                    const verseHtml = verseLines
-                        .map(line => `<p class="verse-line">${line}</p>`)
-                        .join('');
+                    let versesJoined = verseLines.join('\n');
+                    if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
+                        versesJoined = window.LocaleEngine.preprocessMarkdown(versesJoined);
+                    }
+                    const verseHtml = marked.parse(versesJoined);
 
                     const mainPlainText = verseLines.join(' ');
                     const mainAudioPath = `../assets/audio/ashta_${index}.mp3`;
 
+                    let explanationsJoined = explanationLines.join('\n');
+                    if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
+                        explanationsJoined = window.LocaleEngine.preprocessMarkdown(explanationsJoined);
+                    }
                     const explanationHtml = typeof marked !== 'undefined' 
-                        ? marked.parse(explanationLines.join('\n')) 
+                        ? marked.parse(explanationsJoined) 
                         : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
 
                     let mainCollapsible = '';
