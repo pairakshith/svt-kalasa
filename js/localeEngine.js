@@ -9,8 +9,9 @@
  * 3. Semantic translation (translateText) using locales/en.json with Kannada fallback
  * 4. Sloka/Mantra ISO 15919 script transliteration (transliterateText)
  * 5. Full Markdown directive parsing for block (:::) and inline (:) directives
- * 6. HTML DOM translation: elements with data-trans-id or data-trans-type
+ * 6. HTML DOM translation: elements with data-trans-id, data-trans-type, data-trans-attr, or data-trans-placeholder-id
  * 7. LanguageProvider global context / state & sticky navbar Header language dropdown
+ * 8. Dynamic container translation API (translateContainer)
  */
 
 (function (root, factory) {
@@ -189,22 +190,30 @@
         var rootEl = container || document.body;
         if (!rootEl) return;
 
+        // 1. Semantic Translation (data-trans-id)
         var transIdNodes = rootEl.querySelectorAll('[data-trans-id]');
         for (var i = 0; i < transIdNodes.length; i++) {
             var node = transIdNodes[i];
             var key = node.getAttribute('data-trans-id');
+            
             if (!node.hasAttribute('data-trans-fallback')) {
                 node.setAttribute('data-trans-fallback', node.innerHTML.trim());
             }
             var fallback = node.getAttribute('data-trans-fallback');
 
-            if (currentLang === 'kn') {
-                node.innerHTML = fallback;
+            if (node.tagName === 'INPUT' && (node.type === 'button' || node.type === 'submit')) {
+                var translatedVal = (currentLang === 'kn') ? fallback : translateText(key, fallback, 'en');
+                node.value = translatedVal;
             } else {
-                node.innerHTML = translateText(key, fallback, 'en');
+                if (currentLang === 'kn') {
+                    node.innerHTML = fallback;
+                } else {
+                    node.innerHTML = translateText(key, fallback, 'en');
+                }
             }
         }
 
+        // 2. Transliteration (data-trans-type="transliterate")
         var transNodes = rootEl.querySelectorAll('[data-trans-type="transliterate"]');
         for (var j = 0; j < transNodes.length; j++) {
             var tNode = transNodes[j];
@@ -226,6 +235,7 @@
             }
         }
 
+        // 3. Explicit Translate Types
         var typeTransNodes = rootEl.querySelectorAll('[data-trans-type="translate"]:not([data-trans-id])');
         for (var k = 0; k < typeTransNodes.length; k++) {
             var typeNode = typeTransNodes[k];
@@ -239,6 +249,7 @@
             }
         }
 
+        // 4. Placeholders (data-trans-placeholder-id)
         var placeholderNodes = rootEl.querySelectorAll('[data-trans-placeholder-id]');
         for (var p = 0; p < placeholderNodes.length; p++) {
             var pNode = placeholderNodes[p];
@@ -249,6 +260,36 @@
             var pFallback = pNode.getAttribute('data-trans-placeholder-fallback');
             pNode.setAttribute('placeholder', currentLang === 'kn' ? pFallback : translateText(pKey, pFallback, 'en'));
         }
+
+        // 5. Dynamic HTML Attributes (data-trans-attr="attr1:key1,attr2:key2")
+        var attrNodes = rootEl.querySelectorAll('[data-trans-attr]');
+        for (var a = 0; a < attrNodes.length; a++) {
+            var aNode = attrNodes[a];
+            var attrConfig = aNode.getAttribute('data-trans-attr');
+            if (!attrConfig) continue;
+
+            var pairs = attrConfig.split(',');
+            for (var x = 0; x < pairs.length; x++) {
+                var pair = pairs[x].split(':');
+                if (pair.length === 2) {
+                    var attrName = pair[0].trim();
+                    var attrKey = pair[1].trim();
+
+                    var fbAttrKey = 'data-trans-' + attrName + '-fallback';
+                    if (!aNode.hasAttribute(fbAttrKey)) {
+                        aNode.setAttribute(fbAttrKey, aNode.getAttribute(attrName) || '');
+                    }
+                    var attrFallback = aNode.getAttribute(fbAttrKey);
+                    var finalAttrVal = (currentLang === 'kn') ? attrFallback : translateText(attrKey, attrFallback, 'en');
+                    aNode.setAttribute(attrName, finalAttrVal);
+                }
+            }
+        }
+    }
+
+    function translateContainer(container) {
+        if (!container) return;
+        updateDomElements(container);
     }
 
     function triggerReRender() {
@@ -309,36 +350,40 @@
 
         var parsed = markdown;
 
+        // Block :::translate{...}
         parsed = parsed.replace(
-            /:::translate(?:\{id="([^"]+)"\}|\{id='([^']+)'\})?\s*([\s\S]*?):::/g,
-            function (match, id1, id2, content) {
-                var id = id1 || id2 || '';
+            /:::translate(?:\{[^}]*id=["']([^"']+)["'][^}]*\})?\s*([\s\S]*?):::/g,
+            function (match, id, content) {
+                var key = id || '';
                 var inner = content.trim();
-                return '<div data-trans-type="translate" data-trans-id="' + id + '" data-trans-fallback="' + inner.replace(/"/g, '&quot;') + '">' + inner + '</div>';
+                return '<div data-trans-type="translate" data-trans-id="' + key + '" data-trans-fallback="' + inner.replace(/"/g, '&quot;') + '">' + inner + '</div>';
             }
         );
 
+        // Inline :translate[...] {id="..."}
         parsed = parsed.replace(
-            /:translate\[([^\]]+)\](?:\{id="([^"]+)"\}|\{id='([^']+)'\})/g,
-            function (match, text, id1, id2) {
-                var id = id1 || id2 || '';
-                return '<span data-trans-type="translate" data-trans-id="' + id + '" data-trans-fallback="' + text.replace(/"/g, '&quot;') + '">' + text + '</span>';
+            /:translate\[([^\]]+)\](?:\{[^}]*id=["']([^"']+)["'][^}]*\})/g,
+            function (match, text, id) {
+                var key = id || '';
+                return '<span data-trans-type="translate" data-trans-id="' + key + '" data-trans-fallback="' + text.replace(/"/g, '&quot;') + '">' + text + '</span>';
             }
         );
 
+        // Block :::transliterate
         parsed = parsed.replace(
-            /:::transliterate(?:\{sourceScript="([^"]+)"\}|\{sourceScript='([^']+)'\})?\s*([\s\S]*?):::/g,
-            function (match, s1, s2, content) {
-                var script = s1 || s2 || 'kannada';
+            /:::transliterate(?:\{[^}]*sourceScript=["']([^"']+)["'][^}]*\})?\s*([\s\S]*?):::/g,
+            function (match, s1, content) {
+                var script = s1 || 'kannada';
                 var inner = content.trim().replace(/\n/g, '<br>');
                 return '<div data-trans-type="transliterate" data-source-script="' + script + '" data-trans-fallback="' + inner.replace(/"/g, '&quot;') + '">' + inner + '</div>';
             }
         );
 
+        // Inline :transliterate[...]
         parsed = parsed.replace(
-            /:transliterate\[([^\]]+)\](?:\{sourceScript="([^"]+)"\}|\{sourceScript='([^']+)'\})/g,
-            function (match, text, s1, s2) {
-                var script = s1 || s2 || 'kannada';
+            /:transliterate\[([^\]]+)\](?:\{[^}]*sourceScript=["']([^"']+)["'][^}]*\})/g,
+            function (match, text, s1) {
+                var script = s1 || 'kannada';
                 return '<span data-trans-type="transliterate" data-source-script="' + script + '" data-trans-fallback="' + text.replace(/"/g, '&quot;') + '">' + text + '</span>';
             }
         );
@@ -422,6 +467,7 @@
         parseDirectives: parseDirectives,
         preprocessMarkdown: preprocessMarkdown,
         updateDomElements: updateDomElements,
+        translateContainer: translateContainer,
         onLanguageChange: onLanguageChange,
         loadDictionary: loadDictionary
     };

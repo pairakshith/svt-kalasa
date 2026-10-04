@@ -70,7 +70,7 @@
                 .replace(/'/g, '&#39;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
-                .replace(/\n/g, ' ');
+                .replace(/>/g, ' ');
         }
 
         function playVerseAudio(audioPath, plainText, btnEl) {
@@ -154,10 +154,7 @@
                     throw new Error('HTTP error! status: ' + response.status);
                 }
                 
-                let markdownText = await response.text();
-                if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
-                    markdownText = window.LocaleEngine.preprocessMarkdown(markdownText);
-                }
+                const markdownText = await response.text();
                 container.innerHTML = '';
 
                 const sections = markdownText.split(/^##\s+/m);
@@ -228,8 +225,8 @@
                     card.innerHTML = 
                         '<div class="seva-body">' +
                             '<div class="audio-play-bar" style="display: flex; justify-content: space-between; align-items: center;">' +
-                                '<h3 style="color: #800000; margin: 0; font-family: \'Noto Serif Kannada\', serif;" data-trans-type="transliterate" data-source-script="kannada">' + sectionTitle + '</h3>' +
-                                '<button class="audio-btn" data-audio-path="' + audioPath + '" data-plain-text="' + escapeAttr(mainPlainText) + '" onclick="playVerseAudio(this.getAttribute(\'data-audio-path\'), this.getAttribute(\'data-plain-text\'), this)">' +
+                                '<h3 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;" data-trans-type="transliterate" data-source-script="kannada">' + sectionTitle + '</h3>' +
+                                '<button class="audio-btn" data-audio-path="' + audioPath + '" data-plain-text="' + escapeAttr(mainPlainText) + '" onclick="playVerseAudio(this.getAttribute('data-audio-path'), this.getAttribute('data-plain-text'), this)">' +
                                     '<span data-trans-id="common.listen_audio">ಶ್ಲೋಕ ಆಲಿಸಿ</span>' +
                                 '</button>' +
                             '</div>' +
