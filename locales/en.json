@@ -55,7 +55,9 @@
   },
   "events_page": {
     "page_title": "Festivals & Special Events",
-    "page_subtitle": "Upcoming religious festivals, sacred tithis, and seva sponsors"
+    "page_subtitle": "Upcoming religious festivals, sacred tithis, and seva sponsors",
+    "sevadaara_label": "Seva by:",
+    "upcoming_badge": "Next event"
   },
   "deevatige_page": {
     "page_title": "Deevatige Salaam",
