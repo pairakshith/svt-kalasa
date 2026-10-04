@@ -370,7 +370,7 @@
                     '</label>' +
                     '<select id="languageSelect" class="lang-selector-select" aria-label="Select Language">' +
                         '<option value="kn"' + (currentLang === 'kn' ? ' selected' : '') + '>ಕನ್ನಡ (Kannada)</option>' +
-                        '<option value="en"' + (currentLang === 'en' ? ' selected' : '') + '>English (IAST)</option>' +
+                        '<option value="en"' + (currentLang === 'en' ? ' selected' : '') + '>English </option>' +
                     '</select>' +
                 '</div>' +
             '</div>';
