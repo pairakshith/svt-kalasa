@@ -761,9 +761,9 @@ body {
 
 .feature-info p {
     margin: 0 0 0.5rem 0;
-    font-size: 0.92rem;
+    font-size: 0.35rem;
     color: #64748b;
-    line-height: 1.6;
+    line-height: 1;
 }
 
 .feature-link {
@@ -945,4 +945,289 @@ body {
     height: 5px;
     background-color: #ffeb3b;
     border-radius: 50%;
+}
+
+:root {
+    --primary: #8b0000;         /* Deep Temple Crimson */
+    --accent-gold: #d97706;     /* Sacred Gold Accent */
+    --accent-orange: #ea580c;   /* Saffron Accent */
+    --accent-rose: #be123c;     /* Soft Rose Accent */
+    --text-dark: #1f2937;
+    --text-muted: #4b5563;
+    --border-soft: #ebdca8;     /* Warm Gold Border */
+    --shadow-card: 0 4px 14px rgba(180, 83, 9, 0.12); 
+    --shadow-hover: 0 6px 18px rgba(180, 83, 9, 0.20);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    background-color: #f7eed7; /* Warm sandalwood background */
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.site-header {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.header-photo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-text-content {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.kn-heading {
+    font-family: 'Noto Serif Kannada', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+}
+
+.subheading-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 3px;
+    font-size: 0.85rem;
+}
+
+.subheading-pill .eng {
+    font-weight: 600;
+    color: #fef08a;
+}
+
+.subheading-pill .dot {
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+.location-link {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Main Container with CLEAR Light Saffron Background Gradient Fading towards Top-Left */
+main.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 16px 32px 16px;
+    width: 100%;
+    flex: 1;
+    /* Visible Light Amber/Saffron Radial Gradient */
+    background: radial-gradient(circle at 0% 0%, #ffffff 0%, #fff1f2 45%, #f6f6f6 100%);
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Feature Cards with Distinct Warm Radial Gradients (NO pure white) */
+.feature-card {
+    /* Soft light warm yellow-to-peach gradient */
+    background: radial-gradient(circle at 10% 10%, #fffbeb 0%, #fef3c7 65%, #fed7aa 100%);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+/* Alternating Subtle Rose/Amber Radiant Tint for Visual Appeal */
+.feature-card:nth-child(even) {
+    background: radial-gradient(circle at 10% 10%, #fffbeb 0%, #fef3c7 65%, #fed7aa 100%);
+}
+
+/* Decorative Accent Top Border */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+    border-radius: 12px 12px 0 0;
+}
+
+.feature-card:nth-child(even)::before {
+    background: linear-gradient(90deg, var(--accent-orange), var(--accent-rose));
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-gold);
+}
+
+.feature-card:active {
+    transform: scale(0.98);
+}
+
+.feature-info h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.feature-info p {
+    font-size: 0.825rem;
+    color: #374151;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.feature-link {
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    transition: gap 0.15s ease, color 0.15s ease;
+}
+
+.feature-card:hover .feature-link {
+    color: var(--primary);
+    gap: 5px;
+}
+
+/* About Temple Section */
+.about-section {
+    margin-top: 2.5rem;
+}
+
+.section-header .kn-heading {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.heading-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange), transparent);
+    width: 54px;
+    margin: 4px 0 14px 0;
+    border-radius: 2px;
+}
+
+.about-card {
+    background: radial-gradient(circle at 10% 10%, #fffbeb 0%, #fef3c7 65%, #fed7aa 100%);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent-gold));
+}
+
+.about-text {
+    font-size: 0.925rem;
+    color: #374151;
+    margin-bottom: 12px;
+    line-height: 1.65;
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Footer */
+.site-footer {
+    background-color: #1c1917;
+    color: #e7e5e4;
+    padding: 24px 16px;
+    text-align: center;
+    margin-top: auto;
+    border-top: 3px solid var(--accent-gold);
+}
+
+.footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer-sub {
+    font-size: 0.825rem;
+    color: #a8a29e;
+    margin-top: 4px;
+}
+
+@media (min-width: 640px) {
+    .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+    .kn-heading {
+        font-size: 1.4rem;
+    }
 }
