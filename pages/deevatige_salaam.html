@@ -93,7 +93,7 @@
             currentAudio = new Audio(audioPath);
             activeAudioBtn = btnEl;
             btnEl.classList.add('playing');
-            btnEl.innerHTML = '⏸️ ನಿಲ್ಲಿಸಿ (Stop)';
+            btnEl.innerHTML = ' ನಿಲ್ಲಿಸಿ (Stop)';
 
             currentAudio.play().then(() => {
                 currentAudio.onended = () => {
@@ -134,7 +134,7 @@
 
         function resetAudioButton(btn) {
             btn.classList.remove('playing');
-            btn.innerHTML = '🔊 ಶ್ಲೋಕ ಆಲಿಸಿ';
+            btn.innerHTML = ' ಶ್ಲೋಕ ಆಲಿಸಿ';
         }
 
         async function loadMarkdownContent() {
@@ -201,7 +201,7 @@
                             <div class="audio-play-bar">
                                 <h3 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${sectionTitle}</h3>
                                 <button class="audio-btn" onclick="playVerseAudio('${audioPath}', \`${versePlainText.replace(/`/g, '\\`')}\`, this)">
-                                    🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
+                                     ಶ್ಲೋಕ ಆಲಿಸಿ
                                 </button>
                             </div>
                             <div class="verse-box">

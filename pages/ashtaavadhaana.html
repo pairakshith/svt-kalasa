@@ -285,6 +285,7 @@
                                     '</details>';
                             }
 
+                            // add this for PURE IAST trnaslation " data-trans-type="transliterate" data-source-script="kannada" to <h4>
                             subBodyHtml += 
                                 '<div class="audio-play-bar" style="margin-top: 15px;">' +
                                     '<h4 style="color: #800000; margin: 0; font-family: \'Noto Serif Kannada\', serif;">' + subTitle + '</h4>' +
@@ -309,9 +310,10 @@
 
                     const card = document.createElement('article');
                     card.className = 'seva-card';
+                    // add this for PURE IAST trnaslation " data-trans-type="transliterate" data-source-script="kannada" to <h3>
                     card.innerHTML = 
                         '<div class="seva-header" style="display: flex; justify-content: space-between; align-items: center;">' +
-                            '<h3 class="seva-title" style="margin: 0;">' + sectionTitle + '</h3>' +
+                            '<h3 class="seva-title" style="color: #800000; margin: 0; font-family: \'Noto Serif Kannada\', serif;">' + sectionTitle + '</h3>' +
                             mainAudioButtonHtml +
                         '</div>' +
                         '<div class="seva-body">' +
