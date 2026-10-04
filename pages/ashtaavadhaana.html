@@ -49,12 +49,9 @@
         </div>
     </main>
 
-    <!-- Common Footer Placeholder -->
     <div id="footerContainer"></div>
 
-    <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
-
     <script src="../js/vendor/sanscript.min.js"></script>
     <script src="../js/localeEngine.js"></script>
     <script src="../js/main.js"></script>
@@ -65,9 +62,18 @@
         let currentAudio = null;
         let activeAudioBtn = null;
 
-        // Audio Player Logic with Fallback
+        function escapeAttr(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\n/g, ' ');
+        }
+
         function playVerseAudio(audioPath, plainText, btnEl) {
-            // If clicking the currently playing button, pause it
             if (currentAudio && activeAudioBtn === btnEl) {
                 currentAudio.pause();
                 resetAudioButton(btnEl);
@@ -76,7 +82,6 @@
                 return;
             }
 
-            // Stop any ongoing audio/speech
             if (currentAudio) {
                 currentAudio.pause();
                 if (activeAudioBtn) resetAudioButton(activeAudioBtn);
@@ -85,21 +90,22 @@
                 window.speechSynthesis.cancel();
             }
 
-            // Attempt to play pre-recorded MP3
             currentAudio = new Audio(audioPath);
             activeAudioBtn = btnEl;
             btnEl.classList.add('playing');
-            btnEl.innerHTML = '⏸️ ನಿಲ್ಲಿಸಿ (Stop)';
+            btnEl.innerHTML = ' <span data-trans-id="common.stop_audio">ನಿಲ್ಲಿಸಿ</span>';
+            if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                window.LocaleEngine.updateDomElements(btnEl);
+            }
 
-            currentAudio.play().then(() => {
-                currentAudio.onended = () => {
+            currentAudio.play().then(function() {
+                currentAudio.onended = function() {
                     resetAudioButton(btnEl);
                     currentAudio = null;
                     activeAudioBtn = null;
                 };
-            }).catch(() => {
-                // Fallback: If MP3 file does not exist, use Web Speech API
-                console.warn(`Audio file missing at ${audioPath}, falling back to Web Speech TTS.`);
+            }).catch(function(err) {
+                console.warn('Audio file missing or blocked, falling back to Web Speech TTS:', err);
                 playSpeechTTS(plainText, btnEl);
             });
         }
@@ -113,13 +119,15 @@
 
             const utterance = new SpeechSynthesisUtterance(text);
             const voices = window.speechSynthesis.getVoices();
-            const selectedVoice = voices.find(v => v.lang.startsWith('sa') || v.lang.startsWith('hi') || v.lang.startsWith('kn'));
+            const selectedVoice = voices.find(function(v) {
+                return v.lang.startsWith('sa') || v.lang.startsWith('hi') || v.lang.startsWith('kn');
+            });
             
             if (selectedVoice) utterance.voice = selectedVoice;
             utterance.lang = 'kn-IN';
             utterance.rate = 0.85;
 
-            utterance.onend = () => {
+            utterance.onend = function() {
                 resetAudioButton(btnEl);
                 currentAudio = null;
                 activeAudioBtn = null;
@@ -129,8 +137,12 @@
         }
 
         function resetAudioButton(btn) {
+            if (!btn) return;
             btn.classList.remove('playing');
-            btn.innerHTML = '🔊 ಶ್ಲೋಕ ಆಲಿಸಿ';
+            btn.innerHTML = ' <span data-trans-id="common.listen_audio">ಶ್ಲೋಕ ಆಲಿಸಿ</span>';
+            if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                window.LocaleEngine.updateDomElements(btn);
+            }
         }
 
         async function loadMarkdownContent() {
@@ -139,7 +151,7 @@
             try {
                 const response = await fetch('../data/ashtaavadhaana.md');
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error('HTTP error! status: ' + response.status);
                 }
                 
                 const markdownText = await response.text();
@@ -147,10 +159,9 @@
 
                 const mainSections = markdownText.split(/^##\s+/m);
 
-                mainSections.forEach((section, index) => {
+                mainSections.forEach(function(section, index) {
                     if (index === 0) return;
 
-                    // Separate main block from sub-sections (###)
                     const subSections = section.split(/^###\s+/m);
                     const mainBlock = subSections.shift();
 
@@ -160,7 +171,7 @@
                     const verseLines = [];
                     const explanationLines = [];
 
-                    mainLines.forEach(line => {
+                    mainLines.forEach(function(line) {
                         const trimmedLine = line.trim();
                         if (!trimmedLine) return;
 
@@ -175,40 +186,35 @@
                     if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
                         versesJoined = window.LocaleEngine.preprocessMarkdown(versesJoined);
                     }
-                    const verseHtml = marked.parse(versesJoined);
+                    const verseHtml = typeof marked !== 'undefined' ? marked.parse(versesJoined) : versesJoined;
 
                     const mainPlainText = verseLines.join(' ');
-                    const mainAudioPath = `../assets/audio/ashta_${index}.mp3`;
+                    const mainAudioPath = '../assets/audio/ashta_' + index + '.mp3';
 
                     let explanationsJoined = explanationLines.join('\n');
                     if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
                         explanationsJoined = window.LocaleEngine.preprocessMarkdown(explanationsJoined);
                     }
-                    const explanationHtml = typeof marked !== 'undefined' 
-                        ? marked.parse(explanationsJoined) 
-                        : explanationLines.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
+                    const explanationHtml = typeof marked !== 'undefined' ? marked.parse(explanationsJoined) : '';
 
                     let mainCollapsible = '';
                     if (explanationLines.length > 0) {
-                        mainCollapsible = `
-                            <details class="collapsible-section">
-                                <summary class="collapsible-toggle">
-                                    <span>ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                                    <span class="toggle-icon">▼</span>
-                                </summary>
-                                <div class="collapsible-content">
-                                    ${explanationHtml}
-                                </div>
-                            </details>
-                        `;
+                        mainCollapsible = 
+                            '<details class="collapsible-section">' +
+                                '<summary class="collapsible-toggle">' +
+                                    '<span data-trans-id="common.explanation_title">ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>' +
+                                    '<span class="toggle-icon">▼</span>' +
+                                '</summary>' +
+                                '<div class="collapsible-content">' + explanationHtml + '</div>' +
+                            '</details>';
                     }
 
-                    // Process Sub-sections (Extra Verses like Ramayana, Bhagavata, etc.)
+                    // Process Sub-sections
                     let subBodyHtml = '';
                     if (subSections.length > 0) {
-                        subBodyHtml += `<div class="seva-sub-body">`;
+                        subBodyHtml += '<div class="seva-sub-body">';
                         
-                        subSections.forEach((subSec, subIndex) => {
+                        subSections.forEach(function(subSec, subIndex) {
                             const subLines = subSec.split('\n');
                             const subTitle = subLines.shift().trim();
                             
@@ -218,7 +224,7 @@
                             let inTransliterateBlock = false;
                             let blockScript = 'kannada';
 
-                            subLines.forEach(line => {
+                            subLines.forEach(function(line) {
                                 const trimmed = line.trim();
                                 if (!trimmed) return;
 
@@ -243,87 +249,91 @@
                                 }
                             });
 
-                            const subVerseHtml = isInvocation
-                                ? `<div class="invocation-box"><p>${subVerses.map(v => v.text).join(' ')}</p></div>`
-                                : `<div class="verse-box">${subVerses.map(v => {
+                            let subVerseHtml = '';
+                            if (isInvocation) {
+                                const invText = subVerses.map(function(v) { return v.text; }).join(' ');
+                                subVerseHtml = '<div class="invocation-box"><p>' + invText + '</p></div>';
+                            } else {
+                                const verseItems = subVerses.map(function(v) {
                                     if (v.transliterate) {
-                                        return `<p class="verse-line" data-trans-type="transliterate" data-source-script="${v.script || 'kannada'}">${v.text}</p>`;
+                                        return '<p class="verse-line" data-trans-type="transliterate" data-source-script="' + (v.script || 'kannada') + '">' + v.text + '</p>';
                                     }
-                                    return `<p class="verse-line">${v.text}</p>`;
-                                }).join('')}</div>`;
+                                    return '<p class="verse-line">' + v.text + '</p>';
+                                }).join('');
+                                subVerseHtml = '<div class="verse-box">' + verseItems + '</div>';
+                            }
 
-                            const subPlainText = subVerses.map(v => v.text).join(' ');
-                            const subAudioPath = `../assets/audio/sub_${index}_${subIndex + 1}.mp3`;
+                            const subPlainText = subVerses.map(function(v) { return v.text; }).join(' ');
+                            const subAudioPath = '../assets/audio/sub_' + index + '_' + (subIndex + 1) + '.mp3';
 
                             let expRaw = subExplanations.join('\n');
                             if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
                                 expRaw = window.LocaleEngine.preprocessMarkdown(expRaw);
                             }
 
-                            const subExpHtml = typeof marked !== 'undefined'
-                                ? marked.parse(expRaw)
-                                : subExplanations.map(l => `<p>${l.replace('*', '').trim()}</p>`).join('');
+                            const subExpHtml = typeof marked !== 'undefined' ? marked.parse(expRaw) : '';
 
-                            subBodyHtml += `
-                                <div class="audio-play-bar" style="margin-top: 15px;">
-                                    <h4 style="color: #800000; margin: 0; font-family: 'Noto Serif Kannada', serif;">${subTitle}</h4>
-                                    <button class="audio-btn" onclick="playVerseAudio('${subAudioPath}', \`${subPlainText.replace(/`/g, '\\`')}\`, this)">
-                                        🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
-                                    </button>
-                                </div>
-                                ${subVerseHtml}
-                                ${subExpHtml ? `
-                                <details class="collapsible-section">
-                                    <summary class="collapsible-toggle">
-                                        <span data-trans-id="common.explanation_title">ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>
-                                        <span class="toggle-icon">▼</span>
-                                    </summary>
-                                    <div class="collapsible-content">
-                                        ${subExpHtml}
-                                    </div>
-                                </details>` : ''}
-                            `;
+                            let subExpCollapsible = '';
+                            if (subExplanations.length > 0) {
+                                subExpCollapsible = 
+                                    '<details class="collapsible-section">' +
+                                        '<summary class="collapsible-toggle">' +
+                                            '<span data-trans-id="common.explanation_title">ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>' +
+                                            '<span class="toggle-icon">▼</span>' +
+                                        '</summary>' +
+                                        '<div class="collapsible-content">' + subExpHtml + '</div>' +
+                                    '</details>';
+                            }
+
+                            subBodyHtml += 
+                                '<div class="audio-play-bar" style="margin-top: 15px;">' +
+                                    '<h4 style="color: #800000; margin: 0; font-family: \'Noto Serif Kannada\', serif;">' + subTitle + '</h4>' +
+                                    '<button class="audio-btn" data-audio-path="' + subAudioPath + '" data-plain-text="' + escapeAttr(subPlainText) + '" onclick="playVerseAudio(this.getAttribute(\'data-audio-path\'), this.getAttribute(\'data-plain-text\'), this)">' +
+                                        ' <span data-trans-id="common.listen_audio">ಶ್ಲೋಕ ಆಲಿಸಿ</span>' +
+                                    '</button>' +
+                                '</div>' +
+                                subVerseHtml +
+                                subExpCollapsible;
                         });
 
-                        subBodyHtml += `</div>`;
+                        subBodyHtml += '</div>';
                     }
 
-                    // Audio button for main verse section (rendered only if verseLines exist)
-                    const mainAudioButtonHtml = verseLines.length > 0 ? `
-                        <button class="audio-btn" onclick="playVerseAudio('${mainAudioPath}', \`${mainPlainText.replace(/`/g, '\\`')}\`, this)">
-                            🔊 ಶ್ಲೋಕ ಆಲಿಸಿ
-                        </button>
-                    ` : '';
+                    let mainAudioButtonHtml = '';
+                    if (verseLines.length > 0) {
+                        mainAudioButtonHtml = 
+                            '<button class="audio-btn" data-audio-path="' + mainAudioPath + '" data-plain-text="' + escapeAttr(mainPlainText) + '" onclick="playVerseAudio(this.getAttribute(\'data-audio-path\'), this.getAttribute(\'data-plain-text\'), this)">' +
+                                '<span data-trans-id="common.listen_audio">ಶ್ಲೋಕ ಆಲಿಸಿ</span>' +
+                            '</button>';
+                    }
 
                     const card = document.createElement('article');
                     card.className = 'seva-card';
-                    card.innerHTML = `
-                        <div class="seva-header" style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3 class="seva-title" style="margin: 0;">${sectionTitle}</h3>
-                            ${mainAudioButtonHtml}
-                        </div>
-                        <div class="seva-body">
-                            ${verseLines.length > 0 ? `<div class="verse-box">${verseHtml}</div>` : ''}
-                            ${mainCollapsible}
-                            ${subBodyHtml}
-                        </div>
-                    `;
+                    card.innerHTML = 
+                        '<div class="seva-header" style="display: flex; justify-content: space-between; align-items: center;">' +
+                            '<h3 class="seva-title" style="margin: 0;">' + sectionTitle + '</h3>' +
+                            mainAudioButtonHtml +
+                        '</div>' +
+                        '<div class="seva-body">' +
+                            (verseLines.length > 0 ? '<div class="verse-box">' + verseHtml + '</div>' : '') +
+                            mainCollapsible +
+                            subBodyHtml +
+                        '</div>';
 
                     container.appendChild(card);
                 });
 
-                // Apply translations/transliterations to dynamic elements
                 if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
                     window.LocaleEngine.updateDomElements(container);
                 }
 
             } catch (error) {
                 console.error("Error loading markdown:", error);
-                container.innerHTML = `
-                    <div style="text-align: center; color: #cc0000; padding: 20px;">
-                        <p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
-                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/ashtaavadhaana.md</code> ಸರಿಯಾಗಿದೆಯೇ ಮತ್ತು ಸ್ಥಳೀಯ ಸರ್ವರ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರೀಕ್ಷಿಸಿ)</p>
-                    </div>`;
+                container.innerHTML = 
+                    '<div style="text-align: center; color: #cc0000; padding: 20px;">' +
+                        '<p><strong>ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>' +
+                        '<p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/ashtaavadhaana.md</code> ಸರಿಯಾಗಿದೆಯೇ ಮತ್ತು ಸ್ಥಳೀಯ ಸರ್ವರ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರೀಕ್ಷಿಸಿ)</p>' +
+                    '</div>';
             }
         }
 
