@@ -7,12 +7,8 @@
  * 1. Language state management with localStorage persistence (Default: 'kn')
  * 2. Instantaneous DOM re-rendering on language switch without full page reloads
  * 3. Semantic translation (translateText) using locales/en.json with Kannada fallback
- * 4. Sloka/Mantra IAST script transliteration (transliterateText) via Sanscript (kannada -> iast)
- * 5. Full Markdown directive parsing for block (:::) and inline (:) directives:
- *    - :::translate{id="..."} ... :::
- *    - :translate[...]{id="..."}
- *    - :::transliterate{sourceScript="kannada"} ... :::
- *    - :transliterate[...]{sourceScript="kannada"}
+ * 4. Sloka/Mantra ISO 15919 script transliteration (transliterateText)
+ * 5. Full Markdown directive parsing for block (:::) and inline (:) directives
  * 6. HTML DOM translation: elements with data-trans-id or data-trans-type
  * 7. LanguageProvider global context / state & sticky navbar Header language dropdown
  */
@@ -29,9 +25,8 @@
     'use strict';
 
     var STORAGE_KEY = 'svt_kalasa_lang';
-    var DEFAULT_LANG = 'kn'; // Default: ಕನ್ನಡ
+    var DEFAULT_LANG = 'kn';
 
-    // Current State
     var currentLang = (function () {
         try {
             var stored = localStorage.getItem(STORAGE_KEY);
@@ -45,17 +40,11 @@
     var listeners = [];
     var isInitialized = false;
 
-    /**
-     * Resolves root-relative path to locales/en.json regardless of whether page is in / or /pages/
-     */
     function getLocalesPath() {
         var isPages = window.location.pathname.indexOf('/pages/') !== -1;
         return isPages ? '../locales/en.json' : 'locales/en.json';
     }
 
-    /**
-     * Nested key traversal: 'nav.home' -> enDictionary.nav.home
-     */
     function getNestedTranslation(dictionary, key) {
         if (!dictionary || !key) return null;
         var parts = key.split('.');
@@ -70,9 +59,6 @@
         return typeof cur === 'string' ? cur : null;
     }
 
-    /**
-     * Translates a given key id. If key is missing or target is 'kn', falls back to fallbackText.
-     */
     function translateText(id, fallbackText, targetLang) {
         var lang = targetLang || currentLang;
         if (lang === 'kn' || !id) {
@@ -86,8 +72,7 @@
     }
 
     /**
-     * Transliterates text from sourceScript (e.g., 'kannada') to IAST (diacritics) using Sanscript.
-     * If targetLang is 'kn', returns original text.
+     * Precision Kannada to ISO 15919 Transliteration Engine
      */
     function transliterateText(text, sourceScript, targetLang) {
         if (!text) return '';
@@ -95,23 +80,72 @@
         if (lang === 'kn') {
             return text;
         }
-        var script = (sourceScript || 'kannada').toLowerCase();
 
-        // Verify Sanscript engine
-        if (typeof window !== 'undefined' && window.Sanscript && typeof window.Sanscript.t === 'function') {
-            try {
-                return window.Sanscript.t(text, script, 'iast');
-            } catch (err) {
-                console.warn('[LocaleEngine] Sanscript error:', err);
-                return text;
+        var consonants = {
+            'ಕ': 'k', 'ಖ': 'kh', 'ಗ': 'g', 'ಘ': 'gh', 'ಙ': 'ṅ',
+            'ಚ': 'c', 'ಛ': 'ch', 'ಜ': 'j', 'ಝ': 'jh', 'ಞ': 'ñ',
+            'ಟ': 'ṭ', 'ಠ': 'ṭh', 'ಡ': 'ḍ', 'ಢ': 'ḍh', 'ಣ': 'ṇ',
+            'ತ': 't', 'ಥ': 'th', 'ದ': 'd', 'ಧ': 'dh', 'ನ': 'n',
+            'ಪ': 'p', 'ಫ': 'ph', 'ಬ': 'b', 'ಭ': 'bh', 'ಮ': 'm',
+            'ಯ': 'y', 'ರ': 'r', 'ಲ': 'l', 'ವ': 'v', 'ಶ': 'ś',
+            'ಷ': 'ṣ', 'ಸ': 's', 'ಹ': 'h', 'ಳ': 'ḷ', 'ೞ': 'ḻ'
+        };
+
+        var matras = {
+            'ಾ': 'ā', 'ಿ': 'i', 'ೀ': 'ī', 'ು': 'u', 'ೂ': 'ū',
+            'ೃ': 'r̥', 'ೄ': 'r̥̄', 'ೆ': 'e', 'ೇ': 'ē', 'ೈ': 'ai',
+            'ೊ': 'o', 'ೋ': 'ō', 'ೌ': 'au'
+        };
+
+        var vowels = {
+            'ಅ': 'a', 'ಆ': 'ā', 'ಇ': 'i', 'ಈ': 'ī', 'ಉ': 'u', 'ಊ': 'ū',
+            'ಋ': 'r̥', 'ೠ': 'r̥̄', 'ಎ': 'e', 'ಏ': 'ē', 'ಐ': 'ai', 'ಒ': 'o',
+            'ಓ': 'ō', 'ಔ': 'au'
+        };
+
+        var res = [];
+        var i = 0;
+        var n = text.length;
+
+        while (i < n) {
+            var ch = text[i];
+            if (consonants[ch]) {
+                var base = consonants[ch];
+                if (i + 1 < n && text[i + 1] === '್') {
+                    res.push(base);
+                    i += 2;
+                } else if (i + 1 < n && matras[text[i + 1]]) {
+                    res.push(base + matras[text[i + 1]]);
+                    i += 2;
+                } else {
+                    res.push(base + 'a');
+                    i += 1;
+                }
+            } else if (vowels[ch]) {
+                res.push(vowels[ch]);
+                i += 1;
+            } else if (ch === 'ಂ') {
+                res.push('ṃ');
+                i += 1;
+            } else if (ch === 'ಃ') {
+                res.push('ḥ');
+                i += 1;
+            } else {
+                res.push(ch);
+                i += 1;
             }
         }
-        return text;
+
+        var str = res.join('');
+
+        return str
+            .replace(/ṃ(?=[kg]|kh|gh)/g, 'ṅ')
+            .replace(/ṃ(?=[cj]|ch|jh)/g, 'ñ')
+            .replace(/ṃ(?=[ṭḍ]|ṭh|ḍh)/g, 'ṇ')
+            .replace(/ṃ(?=[td]|th|dh)/g, 'n')
+            .replace(/ṃ(?=[pb]|ph|bh)/g, 'm');
     }
 
-    /**
-     * Fetches English dictionary asynchronously
-     */
     function loadDictionary() {
         if (enDictionary) {
             return Promise.resolve(enDictionary);
@@ -132,9 +166,6 @@
             });
     }
 
-    /**
-     * Updates document metadata (<html lang="...">, translate="no", meta notranslate)
-     */
     function updateHtmlAttributes() {
         var html = document.documentElement;
         if (!html) return;
@@ -154,22 +185,14 @@
         }
     }
 
-    /**
-     * Updates all DOM elements bearing translation/transliteration attributes:
-     * - [data-trans-id]: lookup translation in en.json with fallback to original Kannada
-     * - [data-trans-type="translate"]: block/inline semantic translation
-     * - [data-trans-type="transliterate"]: block/inline IAST transliteration
-     */
     function updateDomElements(container) {
         var rootEl = container || document.body;
         if (!rootEl) return;
 
-        // 1. Elements with data-trans-id
         var transIdNodes = rootEl.querySelectorAll('[data-trans-id]');
         for (var i = 0; i < transIdNodes.length; i++) {
             var node = transIdNodes[i];
             var key = node.getAttribute('data-trans-id');
-            // Cache original source text (Kannada)
             if (!node.hasAttribute('data-trans-fallback')) {
                 node.setAttribute('data-trans-fallback', node.innerHTML.trim());
             }
@@ -182,25 +205,27 @@
             }
         }
 
-        // 2. Elements with data-trans-type="transliterate"
         var transNodes = rootEl.querySelectorAll('[data-trans-type="transliterate"]');
         for (var j = 0; j < transNodes.length; j++) {
             var tNode = transNodes[j];
             var script = tNode.getAttribute('data-source-script') || 'kannada';
 
             if (!tNode.hasAttribute('data-trans-fallback')) {
-                tNode.setAttribute('data-trans-fallback', tNode.textContent);
+                tNode.setAttribute('data-trans-fallback', tNode.innerHTML);
             }
             var originalVerse = tNode.getAttribute('data-trans-fallback');
 
             if (currentLang === 'kn') {
-                tNode.textContent = originalVerse;
+                tNode.innerHTML = originalVerse;
             } else {
-                tNode.textContent = transliterateText(originalVerse, script, 'en');
+                var lines = originalVerse.split('<br>');
+                var convertedLines = lines.map(function(line) {
+                    return transliterateText(line, script, 'en');
+                });
+                tNode.innerHTML = convertedLines.join('<br>');
             }
         }
 
-        // 3. Elements with data-trans-type="translate" without explicit data-trans-id
         var typeTransNodes = rootEl.querySelectorAll('[data-trans-type="translate"]:not([data-trans-id])');
         for (var k = 0; k < typeTransNodes.length; k++) {
             var typeNode = typeTransNodes[k];
@@ -214,7 +239,6 @@
             }
         }
 
-        // 4. Update placeholder attributes for inputs with data-trans-placeholder-id
         var placeholderNodes = rootEl.querySelectorAll('[data-trans-placeholder-id]');
         for (var p = 0; p < placeholderNodes.length; p++) {
             var pNode = placeholderNodes[p];
@@ -227,20 +251,15 @@
         }
     }
 
-    /**
-     * Synchronizes state with UI elements and triggers all listeners
-     */
     function triggerReRender() {
         updateHtmlAttributes();
         updateDomElements(document.body);
 
-        // Update language dropdown selects if any exist
         var selectors = document.querySelectorAll('.lang-selector-select');
         for (var s = 0; s < selectors.length; s++) {
             selectors[s].value = currentLang;
         }
 
-        // Update active class on pill buttons if used
         var buttons = document.querySelectorAll('.lang-btn');
         for (var b = 0; b < buttons.length; b++) {
             if (buttons[b].getAttribute('data-lang') === currentLang) {
@@ -250,7 +269,6 @@
             }
         }
 
-        // Notify all registered change listeners
         for (var l = 0; l < listeners.length; l++) {
             try {
                 listeners[l](currentLang);
@@ -260,9 +278,6 @@
         }
     }
 
-    /**
-     * Switch application language instantaneously without page refresh
-     */
     function setLanguage(lang) {
         if (lang !== 'kn' && lang !== 'en') return;
         currentLang = lang;
@@ -289,22 +304,11 @@
         }
     }
 
-    /**
-     * Parse Remark/Unified Directive syntax in Markdown strings:
-     * - Block :::translate{id="..."} ... :::
-     * - Inline :translate[...]{id="..."}
-     * - Block :::transliterate{sourceScript="kannada"} ... :::
-     * - Inline :transliterate[...]{sourceScript="kannada"}
-     * 
-     * Transforms them into standard HTML elements with:
-     * data-trans-type, data-trans-id, and data-source-script attributes.
-     */
     function parseDirectives(markdown) {
         if (!markdown || typeof markdown !== 'string') return '';
 
         var parsed = markdown;
 
-        // 1. Block Level: :::translate{id="about.book_info"} ... :::
         parsed = parsed.replace(
             /:::translate(?:\{id="([^"]+)"\}|\{id='([^']+)'\})?\s*([\s\S]*?):::/g,
             function (match, id1, id2, content) {
@@ -314,7 +318,6 @@
             }
         );
 
-        // 2. Inline Level: :translate[ಪುಸ್ತಕ ಮತ್ತು ಸ್ಥಳೀಯರ ಮಾಹಿತಿಯ ಮೇರೆಗೆ.]{id="about.book_info"}
         parsed = parsed.replace(
             /:translate\[([^\]]+)\](?:\{id="([^"]+)"\}|\{id='([^']+)'\})/g,
             function (match, text, id1, id2) {
@@ -323,17 +326,15 @@
             }
         );
 
-        // 3. Block Level: :::transliterate{sourceScript="kannada"} ... :::
         parsed = parsed.replace(
             /:::transliterate(?:\{sourceScript="([^"]+)"\}|\{sourceScript='([^']+)'\})?\s*([\s\S]*?):::/g,
             function (match, s1, s2, content) {
                 var script = s1 || s2 || 'kannada';
-                var inner = content.trim();
+                var inner = content.trim().replace(/\n/g, '<br>');
                 return '<div data-trans-type="transliterate" data-source-script="' + script + '" data-trans-fallback="' + inner.replace(/"/g, '&quot;') + '">' + inner + '</div>';
             }
         );
 
-        // 4. Inline Level: :transliterate[ವೈದೇಹೀಹರಣಂ]{sourceScript="kannada"}
         parsed = parsed.replace(
             /:transliterate\[([^\]]+)\](?:\{sourceScript="([^"]+)"\}|\{sourceScript='([^']+)'\})/g,
             function (match, text, s1, s2) {
@@ -345,16 +346,10 @@
         return parsed;
     }
 
-    /**
-     * Markdown preprocessing helper to be used before passing markdown to marked.parse()
-     */
     function preprocessMarkdown(markdown) {
         return parseDirectives(markdown);
     }
 
-    /**
-     * Renders sticky top navbar language selector component if not already present
-     */
     function injectLanguageNavbar() {
         if (document.getElementById('topLanguageNav')) return;
 
@@ -371,11 +366,6 @@
                 '</div>' +
                 '<div class="lang-control">' +
                     '<label for="languageSelect" class="lang-label">' +
-                        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;">' +
-                            '<circle cx="12" cy="12" r="10"></circle>' +
-                            '<line x1="2" y1="12" x2="22" y2="12"></line>' +
-                            '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>' +
-                        '</svg>' +
                         '<span class="lang-label-text">ಭಾಷೆ / Language:</span>' +
                     '</label>' +
                     '<select id="languageSelect" class="lang-selector-select" aria-label="Select Language">' +
@@ -385,7 +375,6 @@
                 '</div>' +
             '</div>';
 
-        // Prepend to body so it sticks to the absolute top of every page
         if (document.body.firstChild) {
             document.body.insertBefore(nav, document.body.firstChild);
         } else {
@@ -400,9 +389,6 @@
         }
     }
 
-    /**
-     * Initializes the locale engine
-     */
     function init() {
         if (isInitialized) return;
         isInitialized = true;
@@ -410,7 +396,6 @@
         updateHtmlAttributes();
         injectLanguageNavbar();
 
-        // If English is saved preference, load dictionary and update DOM
         if (currentLang === 'en') {
             loadDictionary().then(function () {
                 triggerReRender();
@@ -420,7 +405,6 @@
         }
     }
 
-    // Auto-init on DOMContentLoaded
     if (typeof document !== 'undefined') {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
