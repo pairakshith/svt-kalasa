@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!-- <html lang="kn" translate="no" class="notranslate"> -->
+<html lang="kn" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="google" content="notranslate"> -->
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ಉತ್ಸವಗಳು ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳು | Festival Events</title>
     
@@ -75,43 +75,62 @@
     <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
 
-    <!-- <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script> -->
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
 
     <script>
-        // Dynamically fetch JSON and construct exact HTML matching main.js expectations
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
         async function loadEventsData() {
             const container = document.getElementById('eventsContainer');
             try {
+                // Ensure event dictionary (en_events.json) is loaded when English active
+                if (window.LocaleEngine && typeof window.LocaleEngine.loadEventTranslations === 'function') {
+                    await window.LocaleEngine.loadEventTranslations();
+                }
+
                 const response = await fetch('../data/events.json');
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
                 const events = await response.json();
                 container.innerHTML = '';
 
-                events.forEach(event => {
+                events.forEach(rawEvent => {
+                    // Translate event properties if active language is English
+                    const event = (window.LocaleEngine && typeof window.LocaleEngine.translateEventData === 'function')
+                        ? window.LocaleEngine.translateEventData(rawEvent)
+                        : rawEvent;
+
                     const article = document.createElement('article');
                     article.className = 'festival-card';
                     article.setAttribute('data-date', event.date);
-                    article.setAttribute('data-keywords', event.keywords);
+                    article.setAttribute('data-keywords', event.keywords || '');
 
                     article.innerHTML = `
                         <div class="date-badge">
-                            <span class="day">${event.day}</span>
-                            <span class="month-year">${event.monthYear}</span>
+                            <span class="day" data-trans-type="transliterate" data-source-script="kannada">${event.day}</span>
+                            <span class="month-year" data-trans-type="transliterate" data-source-script="kannada">${event.monthYear}</span>
                         </div>
                         <div class="card-content">
                             <div class="card-top">
-                                <h3 class="event-title">${event.title}</h3>
-                                <span class="tithi-tag">${event.tithi}</span>
+                                <h3 class="event-title" data-original-kannada="${escapeHtml(rawEvent.title)}">${event.title}</h3>
+                                <span class="tithi-tag" data-original-kannada="${escapeHtml(rawEvent.tithi)}">${event.tithi}</span>
                             </div>
                             <div class="card-bottom">
                                 <div class="sevadaara-info">
-                                    <span class="label"> ಸೇವಾದಾರರು:</span>
-                                    <span class="name">${event.sevadaarara}</span>
+                                    <span class="label" data-trans-id="events_page.sevadaara_label"> ಸೇವಾದಾರರು:</span>
+                                    <span class="name" data-original-kannada="${escapeHtml(rawEvent.sevadaarara)}">${event.sevadaarara}</span>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +139,12 @@
                     container.appendChild(article);
                 });
 
-                // Call your exact main.js initialization function after rendering cards
+                // Apply static element translations (like search bar, buttons, labels)
+                if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                    window.LocaleEngine.updateDomElements(container);
+                }
+
+                // Call main.js initialization function after rendering cards
                 if (typeof initUpcomingEvents === 'function') {
                     initUpcomingEvents();
                 }
@@ -134,13 +158,27 @@
                 console.error("Error loading events JSON:", error);
                 container.innerHTML = `
                     <div style="text-align: center; color: #cc0000; padding: 20px;">
-                        <p><strong>ಕಾರ್ಯಕ್ರಮದ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
+                        <p><strong data-trans-id="events_page.error_loading">ಕಾರ್ಯಕ್ರಮದ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
                         <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/events.json</code> ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ)</p>
                     </div>`;
+                if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
+                    window.LocaleEngine.updateDomElements(container);
+                }
             }
         }
 
         document.addEventListener('DOMContentLoaded', loadEventsData);
+
+        // Re-render and re-translate event cards on language change
+        if (window.LocaleEngine) {
+            window.LocaleEngine.onLanguageChange(function() {
+                if (typeof window.LocaleEngine.retranslateEventCards === 'function') {
+                    window.LocaleEngine.retranslateEventCards();
+                } else {
+                    loadEventsData();
+                }
+            });
+        }
     </script>
 </body>
 </html>

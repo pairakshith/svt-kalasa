@@ -69,7 +69,12 @@ function initUpcomingEvents() {
             if (cardTop && !cardTop.querySelector(".upcoming-badge")) {
                 const badge = document.createElement("span");
                 badge.className = "upcoming-badge";
-                badge.innerHTML = "🌟 ಮುಂದಿನ ಉತ್ಸವ ";
+
+                const badgeText = (window.LocaleEngine && typeof window.LocaleEngine.translateText === "function")
+                    ? window.LocaleEngine.translateText("events_page.upcoming_badge", "ಮುಂದಿನ ಉತ್ಸವ")
+                    : "ಮುಂದಿನ ಉತ್ಸವ";
+
+                badge.innerHTML = `🌟 ${badgeText}`;
                 cardTop.appendChild(badge);
             }
 

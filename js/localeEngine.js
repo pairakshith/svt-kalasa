@@ -12,6 +12,10 @@
  * 6. HTML DOM translation: elements with data-trans-id, data-trans-type, data-trans-attr, or data-trans-placeholder-id
  * 7. LanguageProvider global context / state & sticky navbar Header language dropdown
  * 8. Dynamic container translation API (translateContainer)
+ * 9. translateEventData() for event title/tithi/sevadaarara
+ * 10. Bilingual search support
+ * 11. Language persistence for events
+ * 12. Graceful fallback if translation file missing
  */
 
 (function (root, factory) {
@@ -38,6 +42,7 @@
     })();
 
     var enDictionary = null;
+    var eventTranslations = null;  // [NEW] Cache for event translations
     var listeners = [];
     var isInitialized = false;
 
@@ -167,6 +172,122 @@
             });
     }
 
+    // [NEW] Load event-specific translations
+    function loadEventTranslations() {
+        if (eventTranslations) {
+            return Promise.resolve(eventTranslations);
+        }
+        
+        var translationsPath = (window.location.pathname.indexOf('/pages/') !== -1) 
+            ? '../locales/en_events.json' 
+            : '/en_events.json';
+        
+        return fetch(translationsPath)
+            .then(function (res) {
+                if (!res.ok) throw new Error('Failed to load en_events.json');
+                return res.json();
+            })
+            .then(function (data) {
+                eventTranslations = data;
+                return eventTranslations;
+            })
+            .catch(function (err) {
+                console.warn('[LocaleEngine] en_events.json not found - using Kannada fallback:', err);
+                eventTranslations = {};
+                return eventTranslations;
+            });
+    }
+
+    // [NEW] Get translation for an event field with fallback
+    function getEventFieldTranslation(kannada_text, field_type) {
+        if (currentLang === 'kn' || !eventTranslations || !kannada_text) {
+            return kannada_text;
+        }
+        
+        var cacheKey = field_type + ':' + kannada_text;
+        if (eventTranslations[cacheKey]) {
+            return eventTranslations[cacheKey];
+        }
+        
+        return kannada_text;
+    }
+
+    // [NEW] Translate entire event object
+    function translateEventData(event) {
+        if (currentLang === 'kn' || !event) {
+            return event;
+        }
+        
+        var translated = Object.assign({}, event);
+        
+        if (translated.title) {
+            translated.title = getEventFieldTranslation(translated.title, 'title');
+        }
+        
+        if (translated.tithi) {
+            translated.tithi = getEventFieldTranslation(translated.tithi, 'tithi');
+        }
+        
+        if (translated.sevadaarara) {
+            translated.sevadaarara = getEventFieldTranslation(translated.sevadaarara, 'sevadaarara');
+        }
+        
+        return translated;
+    }
+
+    // [NEW] Re-translate event cards on language switch
+    function retranslateEventCards() {
+        if (currentLang === 'kn') {
+            return;
+        }
+        
+        var cards = document.querySelectorAll('.festival-card');
+        for (var c = 0; c < cards.length; c++) {
+            var card = cards[c];
+            
+            var titleEl = card.querySelector('.event-title');
+            if (titleEl && titleEl.getAttribute('data-original-kannada')) {
+                var originalTitle = titleEl.getAttribute('data-original-kannada');
+                titleEl.textContent = getEventFieldTranslation(originalTitle, 'title');
+            }
+            
+            var tithiEl = card.querySelector('.tithi-tag');
+            if (tithiEl && tithiEl.getAttribute('data-original-kannada')) {
+                var originalTithi = tithiEl.getAttribute('data-original-kannada');
+                tithiEl.textContent = getEventFieldTranslation(originalTithi, 'tithi');
+            }
+            
+            var sevadaaraEl = card.querySelector('.sevadaara-info .name');
+            if (sevadaaraEl && sevadaaraEl.getAttribute('data-original-kannada')) {
+                var originalSevadaara = sevadaaraEl.getAttribute('data-original-kannada');
+                sevadaaraEl.textContent = getEventFieldTranslation(originalSevadaara, 'sevadaarara');
+            }
+        }
+    }
+
+    // [NEW] Build searchable text from event (bilingual)
+    function getEventSearchableText(event) {
+        if (!event) return '';
+        
+        var parts = [];
+        if (event.title) parts.push(event.title);
+        if (event.tithi) parts.push(event.tithi);
+        if (event.sevadaarara) parts.push(event.sevadaarara);
+        if (event.keywords) parts.push(event.keywords);
+        if (event.monthYear) parts.push(event.monthYear);
+        if (event.day) parts.push(event.day);
+        
+        return parts.join(' ').toLowerCase();
+    }
+
+    // [NEW] Check if event matches search query (bilingual)
+    function eventMatchesQuery(event, query) {
+        if (!query) return true;
+        var searchText = getEventSearchableText(event);
+        var queryLower = query.toLowerCase();
+        return searchText.includes(queryLower);
+    }
+
     function updateHtmlAttributes() {
         var html = document.documentElement;
         if (!html) return;
@@ -215,44 +336,42 @@
 
         // 2. Transliteration (data-trans-type="transliterate")
         var transNodes = rootEl.querySelectorAll('[data-trans-type="transliterate"]');
-        for (var j = 0; j < transNodes.length; j++) {
-            var tNode = transNodes[j];
-            var script = tNode.getAttribute('data-source-script') || 'kannada';
-
+        for (var t = 0; t < transNodes.length; t++) {
+            var tNode = transNodes[t];
             if (!tNode.hasAttribute('data-trans-fallback')) {
-                tNode.setAttribute('data-trans-fallback', tNode.innerHTML);
+                tNode.setAttribute('data-trans-fallback', tNode.innerHTML.trim());
             }
-            var originalVerse = tNode.getAttribute('data-trans-fallback');
+            var tFallback = tNode.getAttribute('data-trans-fallback');
+            var tScript = tNode.getAttribute('data-source-script') || 'kannada';
 
             if (currentLang === 'kn') {
-                tNode.innerHTML = originalVerse;
+                tNode.innerHTML = tFallback;
             } else {
-                var lines = originalVerse.split('<br>');
-                var convertedLines = lines.map(function(line) {
-                    return transliterateText(line, script, 'en');
-                });
-                tNode.innerHTML = convertedLines.join('<br>');
+                tNode.innerHTML = transliterateText(tFallback, tScript, 'en');
             }
         }
 
-        // 3. Explicit Translate Types
-        var typeTransNodes = rootEl.querySelectorAll('[data-trans-type="translate"]:not([data-trans-id])');
-        for (var k = 0; k < typeTransNodes.length; k++) {
-            var typeNode = typeTransNodes[k];
-            var typeId = typeNode.getAttribute('data-trans-id');
-            if (typeId) {
-                if (!typeNode.hasAttribute('data-trans-fallback')) {
-                    typeNode.setAttribute('data-trans-fallback', typeNode.innerHTML.trim());
-                }
-                var fb = typeNode.getAttribute('data-trans-fallback');
-                typeNode.innerHTML = (currentLang === 'kn') ? fb : translateText(typeId, fb, 'en');
+        // 3. Translatable Block (data-trans-type="translate")
+        var tBlockNodes = rootEl.querySelectorAll('[data-trans-type="translate"]');
+        for (var b = 0; b < tBlockNodes.length; b++) {
+            var bNode = tBlockNodes[b];
+            var bKey = bNode.getAttribute('data-trans-id');
+            if (!bNode.hasAttribute('data-trans-fallback')) {
+                bNode.setAttribute('data-trans-fallback', bNode.innerHTML.trim());
+            }
+            var bFallback = bNode.getAttribute('data-trans-fallback');
+
+            if (currentLang === 'kn') {
+                bNode.innerHTML = bFallback;
+            } else {
+                bNode.innerHTML = translateText(bKey, bFallback, 'en');
             }
         }
 
-        // 4. Placeholders (data-trans-placeholder-id)
-        var placeholderNodes = rootEl.querySelectorAll('[data-trans-placeholder-id]');
-        for (var p = 0; p < placeholderNodes.length; p++) {
-            var pNode = placeholderNodes[p];
+        // 4. Placeholder Attributes (data-trans-placeholder-id)
+        var pNodes = rootEl.querySelectorAll('[data-trans-placeholder-id]');
+        for (var p = 0; p < pNodes.length; p++) {
+            var pNode = pNodes[p];
             var pKey = pNode.getAttribute('data-trans-placeholder-id');
             if (!pNode.hasAttribute('data-trans-placeholder-fallback')) {
                 pNode.setAttribute('data-trans-placeholder-fallback', pNode.getAttribute('placeholder') || '');
@@ -295,6 +414,7 @@
     function triggerReRender() {
         updateHtmlAttributes();
         updateDomElements(document.body);
+        retranslateEventCards();  // [NEW] Re-translate event cards
 
         var selectors = document.querySelectorAll('.lang-selector-select');
         for (var s = 0; s < selectors.length; s++) {
@@ -319,6 +439,7 @@
         }
     }
 
+    // [UPDATED] setLanguage function with event translation loading
     function setLanguage(lang) {
         if (lang !== 'kn' && lang !== 'en') return;
         currentLang = lang;
@@ -327,7 +448,14 @@
         } catch (e) {}
 
         if (lang === 'en' && !enDictionary) {
-            loadDictionary().then(function () {
+            Promise.all([
+                loadDictionary(),
+                loadEventTranslations()  // [NEW]
+            ]).then(function () {
+                triggerReRender();
+            });
+        } else if (lang === 'en' && !eventTranslations) {
+            loadEventTranslations().then(function () {  // [NEW]
                 triggerReRender();
             });
         } else {
@@ -442,7 +570,10 @@
         injectLanguageNavbar();
 
         if (currentLang === 'en') {
-            loadDictionary().then(function () {
+            Promise.all([
+                loadDictionary(),
+                loadEventTranslations()  // [NEW]
+            ]).then(function () {
                 triggerReRender();
             });
         } else {
@@ -469,6 +600,14 @@
         updateDomElements: updateDomElements,
         translateContainer: translateContainer,
         onLanguageChange: onLanguageChange,
-        loadDictionary: loadDictionary
+        loadDictionary: loadDictionary,
+        
+        // [NEW] Event data translation API
+        translateEventData: translateEventData,
+        getEventFieldTranslation: getEventFieldTranslation,
+        loadEventTranslations: loadEventTranslations,
+        retranslateEventCards: retranslateEventCards,
+        getEventSearchableText: getEventSearchableText,
+        eventMatchesQuery: eventMatchesQuery
     };
 }));
