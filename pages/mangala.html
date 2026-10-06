@@ -18,6 +18,27 @@
 
     <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Headings Highlight & Spacing Fixes */
+        .content-section h3 {
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color, #800000);
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-color, #e0a030);
+            padding-bottom: 0.3rem;
+            clear: both;
+        }
+        .content-section p {
+            margin-bottom: 0.6rem;
+        }
+        .verse-block {
+            margin-bottom: 1.5rem;
+        }
+        .transliterate-block {
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -56,12 +77,47 @@
     <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
 
-    <!-- <script src="../js/vendor/sanscript.min.js"></script> -->
-    <!-- <script src="../js/localeEngine.js"></script> -->
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
 
     <script>
+        function transformBlocksAndVerses(container) {
+            // Apply heading highlight style to generated h3 tags
+            const headings = container.querySelectorAll('h3');
+            headings.forEach(h3 => {
+                h3.classList.add('kn-heading');
+            });
+
+            // Transform blockquotes to note-box highlights
+            const blockquotes = container.querySelectorAll('blockquote');
+            blockquotes.forEach(bq => {
+                const div = document.createElement('div');
+                div.className = 'note-box highlight';
+                div.innerHTML = bq.innerHTML;
+                bq.parentNode.replaceChild(div, bq);
+            });
+
+            // Group sibling paragraphs inside transliterate blocks into verse-block wrappers
+            const transliterateBlocks = container.querySelectorAll('.transliterate-block');
+            transliterateBlocks.forEach(block => {
+                let currentVerse = null;
+                Array.from(block.childNodes).forEach(node => {
+                    if (node.nodeName === 'P') {
+                        if (!currentVerse) {
+                            currentVerse = document.createElement('div');
+                            currentVerse.className = 'verse-block';
+                            block.insertBefore(currentVerse, node);
+                        }
+                        currentVerse.appendChild(node);
+                    } else {
+                        currentVerse = null;
+                    }
+                });
+            });
+        }
+
         async function loadMangalaMarkdown() {
             const contentSection = document.getElementById('mangalaContent');
             try {
@@ -73,17 +129,29 @@
                 if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
                     markdownText = window.LocaleEngine.preprocessMarkdown(markdownText);
                 }
+
+                // Process :::transliterate tags directly in raw markdown text
+                const transliterateRegex = /:::transliterate(?:\{sourceScript="([^"]+)"\})?([\s\S]*?):::/g;
                 
-                // Render raw markdown into HTML
-                let rawHtml = marked.parse(markdownText);
+                let preprocessedMarkdown = markdownText.replace(transliterateRegex, (match, script, content) => {
+                    const sourceScript = script || 'kannada';
+                    let text = content.trim();
 
-                // Transform blockquotes to note-box highlights
-                rawHtml = rawHtml.replace(/<blockquote>\s*<p>(.*?)<\/p>\s*<\/blockquote>/gi, '<div class="note-box highlight"><p>$1</p></div>');
+                    if (window.LocaleEngine && typeof window.LocaleEngine.getScript === 'function') {
+                        const targetScript = window.LocaleEngine.getScript();
+                        if (targetScript && targetScript !== sourceScript && window.Sanscript) {
+                            text = Sanscript.t(text, sourceScript, targetScript);
+                        }
+                    }
 
-                // Wrap paragraph groups inside verse-blocks
-                rawHtml = rawHtml.replace(/(<p>[\s\S]*?<\/p>)(?=\s*(<hr>|<h3|$))/gi, '<div class="verse-block">$1</div>');
+                    return `\n\n<div class="transliterate-block" data-source-script="${sourceScript}">\n\n${text}\n\n</div>\n\n`;
+                });
 
-                contentSection.innerHTML = rawHtml;
+                // Parse markdown into HTML
+                contentSection.innerHTML = marked.parse(preprocessedMarkdown);
+
+                // Perform DOM transformations (add kn-heading class, verse-block wrappers & note-boxes)
+                transformBlocksAndVerses(contentSection);
 
                 if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
                     window.LocaleEngine.updateDomElements(contentSection);
