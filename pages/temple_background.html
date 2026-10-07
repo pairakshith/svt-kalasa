@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<!-- <html lang="kn" translate="no" class="notranslate"> -->
+<html lang="kn" translate="yes">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="google" content="notranslate"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
@@ -16,61 +14,141 @@
     <link rel="stylesheet" href="../css/back-to-top.css">
     <link rel="stylesheet" href="../css/feedback.css">
     
-    <!-- Marked.js Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+    <style>
+        .lang-bar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .lang-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+        .temple-om { font-size: 24px; font-weight: bold; }
+        .lang-brand-text { font-size: 18px; font-weight: 600; color: white; }
+        .lang-control { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+        .lang-label { font-size: 13px; color: rgba(255, 255, 255, 0.9); }
+        .lang-selector-select {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .lang-selector-select option { background-color: #333; color: white; }
+
+        /* Hide Google top banner and widget cleanly without breaking translation */
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function setGoogleTranslateCookie(lang) {
+            document.cookie = "googtrans=/kn/" + lang + "; path=/;";
+            document.cookie = "googtrans=/kn/" + lang + "; domain=" + window.location.hostname + "; path=/;";
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'kn',
+                includedLanguages: 'en,kn',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function switchLanguage(lang) {
+            if (lang === 'en') {
+                setGoogleTranslateCookie('en');
+            } else {
+                setGoogleTranslateCookie('kn');
+            }
+            window.location.reload();
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 
     <header class="site-header site-header--glass">
-        <div class="header-container">
-            <h1 class="kn-heading" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-            <div class="subheading-pill">
-                <span data-trans-id="header.location">ಮೇಲಂಗಡಿ, ಕಳಸ</span>
-            </div>
-        </div>
+        <div class="header-container" id="langHeader"></div>
     </header>
 
     <nav class="main-nav">
-        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
-        <a href="temple_background.html" class="nav-link active" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
+        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
+        <a href="temple_background.html" class="nav-link active">ಇತಿಹಾಸ</a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading" data-trans-id="history_page.page_title">ಪೌರಾಣಿಕ ಹಾಗೂ ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ</h2>
-            <p class="kn-subheading" data-trans-id="history_page.page_subtitle">ಕಳಸ ಸೀಮೆಯ ವೈಭವ, ಸಾರಸ್ವತರ ಆಗಮನ ಹಾಗೂ ಸಾನ್ನಿಧ್ಯದ ಮಹಿಮೆ</p>
+            <h2 class="kn-heading">ಪೌರಾಣಿಕ ಹಾಗೂ ಐತಿಹಾಸಿಕ ಹಿನ್ನೆಲೆ</h2>
+            <p class="kn-subheading">ಕಳಸ ಸೀಮೆಯ ವೈಭವ, ಸಾರಸ್ವತರ ಆಗಮನ ಹಾಗೂ ಸಾನ್ನಿಧ್ಯದ ಮಹಿಮೆ</p>
         </div>
 
-        <!-- Filter Buttons Bar -->
         <div class="filter-tabs">
-            <button class="tab-btn" onclick="filterContent('history', this)" data-trans-id="history_page.tab_history">ಸಂಕ್ಷಿಪ್ತ ಇತಿಹಾಸ</button>
-            <button class="tab-btn" onclick="filterContent('migration', this)" data-trans-id="history_page.tab_migration">ಸಾರಸ್ವತರ ಪಯಣ</button>
-            <button class="tab-btn" onclick="filterContent('kalasa', this)" data-trans-id="history_page.tab_kalasa">ಕಳಸ ಕ್ಷೇತ್ರ (ದಕ್ಷಿಣ ಕಾಶಿ)</button>
-            <button class="tab-btn" onclick="filterContent('venkataramana', this)" data-trans-id="history_page.tab_venkataramana">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</button>
+            <button class="tab-btn" onclick="filterContent('history', this)">ಸಂಕ್ಷಿಪ್ತ ಇತಿಹಾಸ</button>
+            <button class="tab-btn" onclick="filterContent('migration', this)">ಸಾರಸ್ವತರ ಪಯಣ</button>
+            <button class="tab-btn" onclick="filterContent('kalasa', this)">ಕಳಸ ಕ್ಷೇತ್ರ (ದಕ್ಷಿಣ ಕಾಶಿ)</button>
+            <button class="tab-btn" onclick="filterContent('venkataramana', this)">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</button>
         </div>
 
-        <!-- Dynamic Content Output Area -->
         <div id="content-display">
-            <div class="loading-text" data-trans-id="common.loading">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+            <div class="loading-text">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
         </div>
     </main>
 
-    <!-- Common Footer Placeholder -->
+    <div id="google_translate_element"></div>
     <div id="footerContainer"></div>
 
-    <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
-
-    <!-- Global Floating Navigation JS -->
-    <!-- <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script> -->
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
 
-    <!-- JavaScript Engine to load and parse markdown -->
     <script>
         let parsedSections = [];
+
+        function getCurrentLangFromCookie() {
+            const match = document.cookie.match(/googtrans=\/kn\/([a-z]{2})/);
+            return match ? match[1] : 'kn';
+        }
+
+        function initializeHeader() {
+            const headerContainer = document.getElementById('langHeader');
+            const currentLang = getCurrentLangFromCookie();
+            
+            headerContainer.innerHTML = `
+                <div class="lang-bar-container">
+                    <div class="lang-brand">
+                        <span class="temple-om">ॐ</span>
+                        <span class="lang-brand-text">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</span>
+                    </div>
+                    <div class="lang-control">
+                        <label for="languageSelect" class="lang-label">
+                            <span>ಭಾಷೆ / Language:</span>
+                        </label>
+                        <select id="languageSelect" class="lang-selector-select">
+                            <option value="kn" ${currentLang === 'kn' ? 'selected' : ''}>ಕನ್ನಡ (Kannada)</option>
+                            <option value="en" ${currentLang === 'en' ? 'selected' : ''}>English</option>
+                        </select>
+                    </div>
+                </div>`;
+
+            document.getElementById('languageSelect').addEventListener('change', function(e) {
+                switchLanguage(e.target.value);
+            });
+        }
 
         async function loadMarkdownData() {
             try {
@@ -81,15 +159,11 @@
                     rawMarkdown = window.LocaleEngine.preprocessMarkdown(rawMarkdown);
                 }
 
-                // Split markdown file by "---" separator
                 const rawBlocks = rawMarkdown.split('---');
 
                 parsedSections = rawBlocks.map(block => {
-                    // Extract category from tag "# CATEGORY: category_name"
                     const categoryMatch = block.match(/# CATEGORY:\s*(\w+)/);
                     const category = categoryMatch ? categoryMatch[1].trim() : 'all';
-
-                    // Clean out the category tag line before parsing
                     const cleanMarkdown = block.replace(/# CATEGORY:\s*\w+/, '').trim();
 
                     return {
@@ -98,8 +172,7 @@
                     };
                 }).filter(sec => sec.htmlContent.length > 0);
 
-                // Render all categories by default on load
-                renderFilteredHtml('all');
+                renderFilteredHtml('history');
 
             } catch (error) {
                 console.error("Markdown load error:", error);
@@ -109,10 +182,8 @@
         }
 
         function filterContent(targetCategory, buttonElement) {
-            // Update Active tab styling
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             if(buttonElement) buttonElement.classList.add('active');
-
             renderFilteredHtml(targetCategory);
         }
 
@@ -139,13 +210,10 @@
             }
         }
 
-        // Initialize fetching on window load
-        window.addEventListener('DOMContentLoaded', loadMarkdownData);
-        if (window.LocaleEngine) {
-            window.LocaleEngine.onLanguageChange(function() {
-                loadMarkdownData();
-            });
-        }
+        window.addEventListener('DOMContentLoaded', function() {
+            initializeHeader();
+            loadMarkdownData();
+        });
     </script>
 </body>
 </html>
