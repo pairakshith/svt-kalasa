@@ -218,7 +218,7 @@ body {
 /* Modern Search Input */
 .search-wrapper {
     position: sticky;
-    top: 15px; /* Distance from top of viewport when scrolling */
+    top: 80px; /* Distance from top of viewport when scrolling */
     z-index: 99;
     display: flex;
     align-items: center;
@@ -227,7 +227,7 @@ body {
     border-radius: 25px;
     padding: 8px 16px;
     margin: 20px auto;
-    max-width: 500px;
+    max-width: 700px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(8px);
 }

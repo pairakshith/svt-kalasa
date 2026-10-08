@@ -43,7 +43,7 @@
 .pdf-download-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .btn-download-pdf {
@@ -60,6 +60,8 @@
     font-weight: 600;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 150px;   /* or min-width / max-width for a flexible size */
+    height: 30px;   /* or min-height / max-height */
 }
 
 .btn-download-pdf:hover {
