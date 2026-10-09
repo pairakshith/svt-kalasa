@@ -79,27 +79,40 @@ select#languageSelect.lang-selector-select option {
 }
 
 @media (max-width: 600px) {
-    .top-language-bar { padding: 10px 14px; }
-    .lang-bar-container { flex-direction: column; align-items: flex-start; }
-    .lang-brand-text { font-size: 15px; }
-}
-
-/* Headings Highlight & Spacing Fixes */
-.content-section h3 {
-    margin-top: 2rem;
-    margin-bottom: 0.8rem;
-    color: var(--primary-color, #800000);
-    font-weight: 700;
-    border-bottom: 2px solid var(--accent-color, #e0a030);
-    padding-bottom: 0.3rem;
-    clear: both;
-}
-.content-section p {
-    margin-bottom: 0.6rem;
-}
-.verse-block {
-    margin-bottom: 1.5rem;
-}
-.transliterate-block {
-    margin-bottom: 1.5rem;
+    .top-language-bar {
+        padding: 8px 12px;
+    }
+    .lang-bar-container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 8px;
+    }
+    .lang-brand {
+        flex: 1;
+        min-width: 0;
+        gap: 6px;
+    }
+    .temple-om {
+        font-size: 18px;
+    }
+    .lang-brand-text {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+    .lang-control {
+        flex-shrink: 0;
+        gap: 0;
+    }
+    .lang-label {
+        display: none;   /* the select keeps its aria-label, so screen readers still get it */
+    }
+    .top-language-bar .lang-control .lang-selector-select,
+    select#languageSelect.lang-selector-select {
+        min-width: 0;
+        width: 130px;
+        padding: 5px 26px 5px 10px;
+        font-size: 12px;
+        background-position: right 8px center;
+    }
 }

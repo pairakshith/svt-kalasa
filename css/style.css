@@ -1222,12 +1222,16 @@ main.container {
     margin-top: 4px;
 }
 
-@media (min-width: 640px) {
-    .feature-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+@media (max-width: 639px) {
+    .search-wrapper {
+        gap: 0;
     }
-    .kn-heading {
-        font-size: 1.4rem;
+    .search-wrapper .search-icon {
+        margin-right: 4px;
+    }
+    #eventSearch {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        text-indent: 0 !important;
     }
 }

@@ -534,8 +534,8 @@
         nav.innerHTML = '' +
             '<div class="lang-bar-container">' +
                 '<div class="lang-brand">' +
-                    '<span class="temple-om">ॐ</span>' +
-                    '<span class="lang-brand-text" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</span>' +
+                    '<span class="temple-om"></span>' +
+                    '<span class="lang-brand-text" data-trans-id="header.temple_title"></span>' +
                 '</div>' +
                 '<div class="lang-control">' +
                     '<label for="languageSelect" class="lang-label">' +
