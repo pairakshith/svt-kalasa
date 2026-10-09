@@ -124,7 +124,7 @@
             
             <div class="modal-header">
                 <h3>📸 ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</h3>
-                <p>ದೇವಸ್ಥಾನದ ಇತಿಹಾಸ, ಉತ್ಸವ ಅಥವಾ ಪೂಜೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಛಾಯಾಚಿತ್ರಗಳನ್ನು ಸುಲಭವಾಗಿ ಹಂಚಿಕೊಳ್ಳಿ.</p>
+                <!-- <p>ದೇವಸ್ಥಾನದ ಇತಿಹಾಸ, ಉತ್ಸವ ಅಥವಾ ಪೂಜೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಛಾಯಾಚಿತ್ರಗಳನ್ನು ಸುಲಭವಾಗಿ ಹಂಚಿಕೊಳ್ಳಿ.</p> -->
             </div>
 
             <div class="submission-note">
@@ -133,18 +133,7 @@
 
             <!-- Zero-Budget Formspree + Free ImgBB Upload Form -->
             <form class="submission-form" id="photoSubmissionForm" novalidate>
-                <!-- Festival / Category Name (Optional) -->
-                <div class="form-group">
-                    <label for="photoCategory">ಉತ್ಸವ ಅಥವಾ ವಿಭಾಗದ ಹೆಸರು (Category / Event)
-                    <select id="photoCategory" name="category" class="form-select">
-                        <option value="ಉತ್ಸವಗಳು (Festivals)" selected>ಉತ್ಸವಗಳು (ರಥೋತ್ಸವ, ಪೇಟೆ ಸವಾರಿ ಇತ್ಯಾದಿ)</option>
-                        <option value="ಪೂಜೆಗಳು (Rituals)">ಪೂಜೆಗಳು (ಅಷ್ಟಾವಧಾನ, ದೀವಟಿಗೆ ಸಲಾಂ ಇತ್ಯಾದಿ)</option>
-                        <option value="ದೇವಸ್ಥಾನ ಪರಿಸರ (Premises)">ದೇವಸ್ಥಾನ ಮತ್ತು ಪರಿಸರ</option>
-                        <option value="ಹಳೆಯ ಚಿತ್ರಗಳು (Archives)">ಹಳೆಯ ಅಪರೂಪದ ಛಾಯಾಚಿತ್ರಗಳು</option>
-                        <option value="ಇತರೆ (Other)">ಇತರೆ ವಿಶೇಷ ಕ್ಷಣಗಳು</option>
-                    </select>
-                </div>
-
+                
                 <!-- Dual Photo Input Section -->
                 <div class="dual-photo-box">
                     <div class="dual-box-header">
@@ -196,6 +185,18 @@
                         />
                         <span class="form-help">Google Drive ಲಿಂಕ್ ಆಗಿದ್ದರೆ 'Anyone with the link can view' ಅನುಮತಿ ನೀಡಿರಬೇಕು.</span>
                     </div>
+                </div>
+
+                <!-- Festival / Category Name (Optional) -->
+                <div class="form-group">
+                    <label for="photoCategory">ಉತ್ಸವ ಅಥವಾ ವಿಭಾಗದ ಹೆಸರು (Category / Event)
+                    <select id="photoCategory" name="category" class="form-select">
+                        <option value="ಉತ್ಸವಗಳು (Festivals)" selected>ಉತ್ಸವಗಳು (ರಥೋತ್ಸವ, ಪೇಟೆ ಸವಾರಿ ಇತ್ಯಾದಿ)</option>
+                        <option value="ಪೂಜೆಗಳು (Rituals)">ಪೂಜೆಗಳು (ಅಷ್ಟಾವಧಾನ, ದೀವಟಿಗೆ ಸಲಾಂ ಇತ್ಯಾದಿ)</option>
+                        <option value="ದೇವಸ್ಥಾನ ಪರಿಸರ (Premises)">ದೇವಸ್ಥಾನ ಮತ್ತು ಪರಿಸರ</option>
+                        <option value="ಹಳೆಯ ಚಿತ್ರಗಳು (Archives)">ಹಳೆಯ ಅಪರೂಪದ ಛಾಯಾಚಿತ್ರಗಳು</option>
+                        <option value="ಇತರೆ (Other)">ಇತರೆ ವಿಶೇಷ ಕ್ಷಣಗಳು</option>
+                    </select>
                 </div>
 
                 <!-- Status Feedback Message -->

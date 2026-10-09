@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="../css/svt-main.css">
+    <link rel="stylesheet" href="../css/ashtaavadhaana.css">
 
     <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -33,7 +34,8 @@
             <p class="kn-subheading" data-trans-id="mangala_page.page_subtitle"> ದೇವರು ಪೇಟೆ ಉತ್ಸವದಿಂದ ಹಿಂದಿರುಗಿ ಗರ್ಭಗುಡಿಗೆ ಹೋದ ನಂತರ ಹೇಳುವ ಮಂಗಳ </p>
         </div>
 
-        <section class="content-section" id="mangalaContent">
+        <!-- seva-list is the shared card container from ashtaavadhaana.css -->
+        <section class="seva-list" id="mangalaContent">
             <p style="text-align: center; color: #666;" data-trans-id="common.loading">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</p>
         </section>
     </main>
@@ -50,11 +52,33 @@
     <script src="../js/feedback.js"></script>
 
     <script>
+        // Wrap each ### section (its h3 and everything after it, up to the next h3)
+        // in a shared seva-card, so it gets the same look as the Ashtaavadhaana page.
+        function wrapSectionsAsCards(container) {
+            let card = null;
+            let body = null;
+
+            Array.from(container.children).forEach(function (el) {
+                if (el.tagName === 'H3') {
+                    card = document.createElement('article');
+                    card.className = 'seva-card';
+                    body = document.createElement('div');
+                    body.className = 'seva-body';
+
+                    container.insertBefore(card, el);
+                    card.appendChild(el);
+                    card.appendChild(body);
+                } else if (body) {
+                    body.appendChild(el);
+                }
+            });
+        }
+
         function transformBlocksAndVerses(container) {
-            // Apply heading highlight style to generated h3 tags
+            // Apply heading style to generated h3 tags (seva-title comes from ashtaavadhaana.css)
             const headings = container.querySelectorAll('h3');
             headings.forEach(h3 => {
-                h3.classList.add('kn-heading');
+                h3.classList.add('kn-heading', 'seva-title');
             });
 
             // Transform blockquotes to note-box highlights
@@ -66,7 +90,7 @@
                 bq.parentNode.replaceChild(div, bq);
             });
 
-            // Group sibling paragraphs inside transliterate blocks into verse-block wrappers
+            // Group sibling paragraphs inside transliterate blocks into verse-box wrappers
             const transliterateBlocks = container.querySelectorAll('.transliterate-block');
             transliterateBlocks.forEach(block => {
                 let currentVerse = null;
@@ -74,7 +98,7 @@
                     if (node.nodeName === 'P') {
                         if (!currentVerse) {
                             currentVerse = document.createElement('div');
-                            currentVerse.className = 'verse-block';
+                            currentVerse.className = 'verse-box';
                             block.insertBefore(currentVerse, node);
                         }
                         currentVerse.appendChild(node);
@@ -83,6 +107,8 @@
                     }
                 });
             });
+
+            wrapSectionsAsCards(container);
         }
 
         async function loadMangalaMarkdown() {
@@ -117,7 +143,7 @@
                 // Parse markdown into HTML
                 contentSection.innerHTML = marked.parse(preprocessedMarkdown);
 
-                // Perform DOM transformations (add kn-heading class, verse-block wrappers & note-boxes)
+                // Perform DOM transformations (heading style, verse boxes, note-boxes, cards)
                 transformBlocksAndVerses(contentSection);
 
                 if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {

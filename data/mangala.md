@@ -1,3 +1,4 @@
+### <span data-trans-id="mangala_page.sec_verse1">ಹರೇ ರಮಣ ಗೋವಿಂದ</span>
 :::transliterate{sourceScript="kannada"}
 ಹರೇ ರಮಣ ಗೋವಿಂದ |  
 ದಶರಥ ನಂದನ ಗೋವಿಂದ |  
@@ -10,9 +11,9 @@
 ಕಳಸಾಪುರ ವಾಸ ಗೋವಿಂದ |  
 :::
 
-### <span data-trans-id="mangala_page.sec_verse1">ದಶಾವತಾರ ಮಂಗಳ (ಕಾಗಿನೆಲೆ ಆದಿಕೇಶವರಾಯ)</span>
+### <span data-trans-id="mangala_page.sec_verse2">ದಶಾವತಾರ ಮಂಗಳ (ಕಾಗಿನೆಲೆ ಆದಿಕೇಶವರಾಯ)</span>
 
-**<span data-trans-id="mangala_page.sec_verse5">(ಕಾರ್ತಿಕ ಮಾಸದಲ್ಲಿ ಮಾತ್ರ)</span>**
+**<span data-trans-id="mangala_page.sec_verse6">(ಕಾರ್ತಿಕ ಮಾಸದಲ್ಲಿ ಮಾತ್ರ)</span>**
 
 :::transliterate{sourceScript="kannada"}
 ಪರಮಪುರುಷ ಹರಿ ಗೋವಿಂದ | ಶ್ರೀಹರಿ ನಾರಾಯಣ ಗೋವಿಂದ |  
@@ -52,7 +53,7 @@
 ಸಾಧುಗಳಿಗೆ ಸಕಲೈಶ್ವರ್ಯವಾಗಿಹ | ಕಾಗಿನೆಲೆ ಆದಿಕೇಶವರಾಯ ಗೋವಿಂದ || 11 ||  
 :::
 
-### <span data-trans-id="mangala_page.sec_verse2">ಜಯಮಂಗಳಂ</span>
+### <span data-trans-id="mangala_page.sec_verse3">ಜಯಮಂಗಳಂ</span>
 :::transliterate{sourceScript="kannada"}
 ಜಲದಲಿ ಚಲಿಸುವ ಮತ್ಸ್ಯನಿಗೇ । ಗಿರಿಯಬೆನ್ನಲಿಪೊತ್ತ ಕೂರ್ಮನಿಗೇ ॥  
 ಧರೆಯನುದ್ಧರಿಸಿದ ವರಹಾವತಾರಗೇ | ತರಳನ ಕಾಯ್ದ ಶ್ರೀ ನರಸಿಂಹಗೇ ॥  
@@ -67,7 +68,7 @@
 ಜಯಮಂಗಲಂ ನಿತ್ಯ ಶುಭ ಮಂಗಳಂ||  
 :::
 
-### <span data-trans-id="mangala_page.sec_verse3">ನಾಮ ಸಂಕೀರ್ತನೆ</span>
+### <span data-trans-id="mangala_page.sec_verse4">ನಾಮ ಸಂಕೀರ್ತನೆ</span>
 :::transliterate{sourceScript="kannada"}
 ವಿಠಲೇರಖುಮಾಯಿದಯಾಕರ ವಿಠಲೇ ರಖುಮಾಯಿ |  
 ವಿಠೋಬಾರಖುಮಾಯಿ ಜೈ ವಿಠಲೇರಖುಮಾಯಿ ||  
@@ -100,7 +101,7 @@
 ರಾಮರಾಮ ರಾಮರಾಮ ರಮಾ ಪತೇ ರಾಮ ॥  
 :::
 
-### <span data-trans-id="mangala_page.sec_verse4">ಮಂಗಳ ಶ್ಲೋಕಗಳು </span>
+### <span data-trans-id="mangala_page.sec_verse5">ಮಂಗಳ ಶ್ಲೋಕಗಳು </span>
 :::transliterate{sourceScript="kannada"}
 ಮಂಗಳಂ ಭಗವಾನ್‌ ವಿಷ್ಣುಂ ಮಂಗಳಂ ಮಧುಸೂಧನ |  
 ಮಂಗಳಂ ದೇವಕೀ ಪುತ್ರೋ ಮಂಗಳಂ ಗರುಡಧ್ವಜ |।  
