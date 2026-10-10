@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!-- <html lang="kn" translate="no" class="notranslate"> -->
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="google" content="notranslate"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ಉಲ್ಲೇಖಗಳು | ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</title>
     
@@ -15,27 +13,50 @@
 
     <!-- Markdown Parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        /* Additional styling for clean look */
+        .content-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #800000;
+            line-height: 1.8;
+            font-size: 0.75rem;
+        }
+        .content-section h1, .content-section h2 {
+            color: #800000;
+            font-family: 'Noto Serif Kannada', serif;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .content-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .content-section li {
+            margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- <header class="site-header site-header--glass">
-        <div class="header-container">
-            <h1 class="kn-heading" data-trans-id="header.temple_title">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-            <div class="subheading-pill">
-                <span data-trans-id="header.location">ಮೇಲಂಗಡಿ, ಕಳಸ</span>
-            </div>
-        </div>
-    </header> -->
-
     <nav class="main-nav">
         <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
-        <a href="references.html" class="nav-link active" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು (References) </a>
+        <a href="references.html" class="nav-link active" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು (References)</a>
     </nav>
 
     <main class="container">
-        <div class="page-header">
-            <h2 class="kn-heading" data-trans-id="references_page.page_title">ಉಲ್ಲೇಖಗಳು ಹಾಗೂ ಗ್ರಂಥ ಋಣ</h2>
-            <p class="kn-subheading" data-trans-id="references_page.page_subtitle">ಈ ಜಾಲತಾಣದ ಮಾಹಿತಿಗೆ ಬಳಸಲಾದ ಮೂಲ ಗ್ರಂಥಗಳು ಹಾಗೂ ಆಧಾರಗಳು</p>
+        <div class="page-header" style="text-align: center; margin: 30px 0;">
+            <!-- <h2 class="kn-heading" data-trans-id="references_page.page_title" style="color: #800000; font-family: 'Noto Serif Kannada', serif;">ಉಲ್ಲೇಖಗಳು ಹಾಗೂ ಗ್ರಂಥ ಋಣ</h2>
+            <p class="kn-subheading" data-trans-id="references_page.page_subtitle" style="color: #555;">ಈ ಜಾಲತಾಣದ ಮಾಹಿತಿಗೆ ಬಳಸಲಾದ ಮೂಲ ಗ್ರಂಥಗಳು ಹಾಗೂ ತಾಂತ್ರಿಕ ಆಧಾರಗಳು</p> -->
+            <h2 class="kn-heading" data-trans-id="references_page.page_title" style="color: #800000; font-family: 'Noto Serif Kannada', serif;">Refernces</h2>
+            <p class="kn-subheading" data-trans-id="references_page.page_subtitle" style="color: #555;">References and servixes used for this site</p>
         </div>
 
         <section class="content-section" id="referencesContent">
@@ -48,9 +69,6 @@
 
     <!-- JS Loader -->
     <script src="../js/footer-loader.js"></script>
-
-    <!-- <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script> -->
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
 
@@ -63,20 +81,13 @@
                 
                 let markdownText = await response.text();
 
-                // Preprocess directives if LocaleEngine is loaded
                 if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
                     markdownText = window.LocaleEngine.preprocessMarkdown(markdownText);
                 }
                 
-                // Render raw markdown into HTML
                 let rawHtml = marked.parse(markdownText);
-
-                // Transform blockquotes to note-box highlights
-                rawHtml = rawHtml.replace(/<blockquote>\s*<p>(.*?)<\/p>\s*<\/blockquote>/gi, '<div class="note-box highlight"><p>$1</p></div>');
-
                 contentSection.innerHTML = rawHtml;
 
-                // Apply translations to dynamically parsed markdown
                 if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
                     window.LocaleEngine.updateDomElements(contentSection);
                 }

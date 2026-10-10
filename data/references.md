@@ -1,10 +1,32 @@
+# References & Sources
 
-# ಪ್ರಮುಖ ಉಲ್ಲೇಖಗಳು (References)
+This document outlines the background sources, books, and third-party services integrated into the application.
 
-ಪುಸ್ತಕ ಮತ್ತು ಸ್ಥಳೀಯರ ಮಾಹಿತಿಯ ಮೇರೆಗೆ.
+---
 
-ದೇವಸ್ಥಾನದ ಇತಿಹಾಸ, ಪದ್ಧತಿಗಳು ಮತ್ತು ಧಾರ್ಮಿಕ ಕಾರ್ಯಕ್ರಮಗಳ ಕುರಿತಾದ ವಿವರಗಳನ್ನು ಈ ಕೆಳಗಿನ ಆಧಾರಗಳಿಂದ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ:
+## Books & Audio Sources
 
-## ಪುಸ್ತಕಗಳು
-* **ಭಕ್ತಿ ಮಾಲಾ** — ವಿವೇಕಾನಂದ ಭಟ್ ಇವರ ಪುಸ್ತಕ.
-* https://prathosh.in/vagdhenu/
+* **Bhakti Mala (ಭಕ್ತಿ ಮಾಲಾ)** — Written by Vivekananda Bhat.
+* [Prathosh.in Vagdhenu](https://prathosh.in/vagdhenu/) — Platform used for converting stotras and shlokas into MP3 audio format.
+
+---
+
+## External Services & Public Endpoints
+
+This section outlines the third-party services, APIs, and public endpoints integrated into the application.
+
+### 1. Form Handling Service
+
+* **Service Provider:** [Formspree](https://formspree.io)
+* **Purpose:** Manages and processes user input from application forms (contact forms, feedback).
+* **Endpoint / Usage:** `https://formspree.io/f/<key>`
+* **Integration Notes:** Replace `<key>` with your unique Formspree form ID/endpoint token.
+
+### 2. Image Storage & Hosting
+
+* **Service Provider:** [ImgBB](https://imgbb.com)
+* **Purpose:** Handles cloud image hosting, media uploads, and asset management.
+* **Storage Structure:** `https://<account_name>[.imgbb.com/](https://.imgbb.com/)`
+* **Integration Notes:**
+* Requires a valid ImgBB account and an API key for authorized uploads.
+* Uploaded images are routed to your account-specific bucket/domain URL.
