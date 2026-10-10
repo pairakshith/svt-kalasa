@@ -33,7 +33,7 @@
     "card_events_desc": "Full details of annual religious festivals, tithis, dates, and seva sponsors.",
     "card_history_title": "Temple Heritage & Background",
     "card_history_desc": "Based on books and local oral traditions.",
-    "card_photos_title": "Photo Gallery",
+    "card_photos_title": "Photo Gallery (visual poetry)",
     "card_photos_desc": "Beautiful collection of festival celebrations, poojas, and cultural events.",
     "card_deevatige_title": "Deevatige Salaam",
     "card_deevatige_desc": "Traditional evening torch prayers (Deevatige Salaam) of the temple.",
@@ -124,9 +124,11 @@
     "page_title": "Photo Gallery",
     "page_subtitle": "Photographic collection of temple festivals, daily poojas, surroundings, and historic moments.",
     "total_photos": "Total photos in collection:",
+    "share_button":"Share the pictures you have.",
     "photos_unit": "photos",
     "submit_photo": "Submit Photo"
   },
+
   "ds_exp_0": "Shreemat-ramaaramana: Lord who pleases the mind of Lakshmi (Ramaa).",
   "ds_exp_1": "Venkata-shaila-varyaat daagatya: Graciously arrived here from the supreme Venkatachala hill (Tirupati).",
   "ds_exp_2": "Agastya-muni-nirmita-kalashaakhye: Named 'Kalasa', which was established by Agastya Maharishi.",

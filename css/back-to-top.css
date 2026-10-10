@@ -35,7 +35,7 @@
 /* 2. Back to Home Button (Bottom-Left) */
 .home-btn {
     position: fixed !important;
-    top: 150px !important;
+    top: 200px !important;
     right: 2px !important;
     z-index: 999999 !important;
     width: 40px !important;

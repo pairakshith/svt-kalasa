@@ -1,23 +1,150 @@
 # ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ (SVT Kalasa)
 
-https://pairakshith.github.io/svt-kalasa/
+**Live site:** <https://pairakshith.github.io/svt-kalasa/>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](#)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](#)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](#)
+A digital information hub for **Sri Venkataramana Temple, Melangadi, Kalasa**. It gives devotees festival schedules, religious traditions, daily rituals, and the temple's history, in **Kannada** with key terms in **English**.
 
-Welcome to the official web repository for **Sri Venkataramana Temple, Melangadi, Kalasa**. This website serves as a digital information hub providing devotees with festival schedules, religious traditions, daily rituals, and temple heritage in both **Kannada** and **English**.
+[CONTRIBUTIONS ARE WELCOME !!!](#contributions-are-welcome)
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Updating Content](#updating-content)
+- [License](#license)
+- [Contact](#contact)
 
 ---
 
 ## Features
 
-* **Event Timetables:** Comprehensive festival calendar and daily ritual schedules.
-* **Traditions & Festivals:** Detailed descriptions of 15+ temple festivals parsed dynamically from Markdown (`traditions.md`).
-* **Bilingual Support:** Content presented primarily in Kannada with key terms in English for easy accessibility.
-* **Anonymous Feedback Modal:** A clean, privacy-focused floating feedback mechanism powered by Formspree (protecting contact details).
-* **Interactive Location:** Embedded Google Maps routing directly from the site header.
-* **Fully Responsive:** Styled with clean CSS glassmorphism effects and optimized for mobile screens.
+- **Event Timetables:** Festival calendar and daily ritual schedules.
+- **Traditions & Festivals:** Descriptions of 15+ temple festivals, loaded dynamically from Markdown (`traditions.md`).
+- **Photo Gallery:** Browse temple photos with a lightbox viewer, category filters, and a submission form for devotees.
+- **Bilingual Content:** Primarily Kannada, with key terms in English.
+- **Anonymous Feedback:** A floating feedback modal powered by Formspree, which keeps contact details private.
+- **Interactive Location:** Embedded Google Maps routing from the site header.
+- **Responsive Design:** Glassmorphism styling, optimized for mobile screens.
 
 ---
+
+## Project Structure
+
+```
+svt-kalasa/
+├── index.html          # Home page
+├── pages/              # Subpages (events, rituals, history, photos, ...)
+├── css/                # Stylesheets (including gallery styles)
+├── js/                 # Scripts (gallery, feedback, footer loader, back-to-top)
+├── data/               # Content data (gallery.json)
+├── assets/             # Images and other static files
+├── README_GALLERY.md   # Notes on the photo gallery
+├── IMPROVEMENT_POINTS.md
+├── .nojekyll           # Tells GitHub Pages to serve files as-is
+└── LICENSE
+```
+
+---
+
+## Getting Started
+
+The site is plain HTML, CSS, and JavaScript. It needs no build step.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pairakshith/svt-kalasa.git
+   cd svt-kalasa
+   ```
+2. Open `index.html` in a browser.
+
+   The gallery loads its data with `fetch`, so some browsers block it when a page is opened straight from the file system. If the gallery shows "ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ", run a local server instead:
+   ```bash
+   python3 -m http.server 8000
+   ```
+   Then visit <http://localhost:8000>.
+
+**Deployment:** The site is published with GitHub Pages from the `main` branch.
+
+---
+
+## Configuration
+
+The photo submission form in `js/gallery.js` uses three settings at the top of the file:
+
+| Setting | Purpose |
+| --- | --- |
+| `FORMSPREE_ENDPOINT` | Formspree form that receives submission details |
+| `IMGBB_API_KEY` | ImgBB key used to host photos uploaded from a device |
+| `TEMPLE_EMAIL` | Temple address used by the "send by email" fallback |
+
+Replace the placeholder values with the temple's own accounts before going live.
+
+---
+
+## Updating Content
+
+### Adding a photo
+
+Add an entry to `data/gallery.json`:
+
+```json
+{
+  "id": "unique-id-here",
+  "title": "Photo title (Kannada)",
+  "category": "festivals",
+  "categoryKn": "ಉತ್ಸವಗಳು",
+  "imagePath": "../assets/images/your_photo.jpg",
+  "caption": "Optional caption",
+  "date": "2026-01-15"
+}
+```
+
+- `id` should be unique. Each `id` is used for one photo.
+- `categoryKn` is the category name shown on screen. The lightbox filter buttons are built from these values automatically.
+- `imagePath` is relative to `pages/photos.html`.
+- `caption` and `date` are optional.
+
+Photos are sorted into portrait and landscape sections automatically, based on their dimensions.
+
+### Festivals and traditions
+
+Festival descriptions are in `traditions.md`. Edit the Markdown file, and the page updates the next time it loads.
+
+---
+
+## Contributions are welcome 
+
+Especially corrections to religious content, Kannada translations, and fixes for mobile layout.
+
+1. Fork the repository and create a branch for your change.
+2. Make your change and test it in a browser, including on a narrow screen. (e.g.: MobileView extension in VS code)
+3. Open a pull request that describes what you changed and why.
+
+For bugs or suggestions, please [open an issue](https://github.com/pairakshith/svt-kalasa/issues). Check `IMPROVEMENT_POINTS.md` first, since some improvements are already planned.
+
+For religious content (rituals, dates, and traditions), please contact the temple or the below contact.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Contact
+
+**Website feedback:** Use the feedback button on any page of the site. Your details **stay private**.
+
+**Report a bug or suggest a feature:** [GitHub Issues](https://github.com/pairakshith/svt-kalasa/issues)
+
+**Project maintainer:** [@pairakshith](https://github.com/pairakshith)
+
+**Currently maintained by this profile only:**
+
+- Email: `[rakshithpai17@gmail.com]`
+

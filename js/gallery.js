@@ -27,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentFiltered = [];
     let currentLightboxIndex = -1;
     let activeCategory = 'all';
+    let lightboxItems = [];
+    let lightboxActiveCategory = 'all';
+    let displayItems = [];
 
     // Selected Local File State for Instant Preview & Upload
     let selectedLocalFile = null;
@@ -46,6 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
     const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
     const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+
+    // Category filter bar, generated inside the enlarged (lightbox) view
+    const lightboxFilterBar = document.createElement('div');
+    lightboxFilterBar.className = 'lightbox-filter-bar';
+    lightboxFilterBar.setAttribute('role', 'group');
+    lightboxFilterBar.setAttribute('aria-label', 'ವಿಭಾಗಗಳ ಫಿಲ್ಟರ್');
+    if (lightboxModal) {
+        const lightboxDialog = lightboxModal.querySelector('.lightbox-dialog');
+        const lightboxImageWrapper = lightboxModal.querySelector('.lightbox-image-wrapper');
+        if (lightboxDialog && lightboxImageWrapper) {
+            lightboxDialog.insertBefore(lightboxFilterBar, lightboxImageWrapper);
+        }
+    }
 
     // DOM Elements - Submission Modal & Form
     const openSubmitModalBtn = document.getElementById('openSubmitModalBtn');
@@ -75,6 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const fallbackModalSubtitle = document.getElementById('fallbackModalSubtitle');
 
     /**
+     * Scroll lock scoped to this page. Compensates for the scrollbar width so the
+     * page does not shift sideways when the lightbox or a modal opens.
+     */
+    function lockBodyScroll() {
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        if (scrollbarWidth > 0) {
+            const currentPad = parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+            document.body.style.paddingRight = `${currentPad + scrollbarWidth}px`;
+        }
+        document.body.style.overflow = 'hidden';
+    }
+
+    function unlockBodyScroll() {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+    }
+
+    /**
      * ----------------------------------------------------------------------
      * Step 1: Initialize & Fetch gallery.json
      * ----------------------------------------------------------------------
@@ -86,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Failed to load gallery data: ${response.status}`);
             }
             galleryData = await response.json();
+            await Promise.all(galleryData.map(detectOrientation));
             currentFiltered = [...galleryData];
             updateCategoryCounts();
             renderGallery(currentFiltered);
@@ -129,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (photoCountEl) {
-            photoCountEl.textContent = `${galleryData.length} ಚಿತ್ರಗಳು`;
+            photoCountEl.textContent = `${galleryData.length} Photos`;
         }
     }
 
@@ -138,6 +173,104 @@ document.addEventListener('DOMContentLoaded', () => {
      * Step 2: Render Responsive Photo Grid
      * ----------------------------------------------------------------------
      */
+    // Justified-row layout (Google Photos style)
+    const JUSTIFY_GAP = 6;
+    let justifiedGroups = [];
+
+    /**
+     * Fills each row to the full container width by scaling its photos together.
+     * Every photo keeps its exact aspect ratio, so nothing is cropped or padded.
+     * The last row of each group keeps the target height and is not stretched.
+     */
+    function layoutJustifiedRows(group, targetH, gap) {
+        const { container, entries } = group;
+        const W = container.clientWidth;
+        if (!W || entries.length === 0) return;
+
+        // 1. Collect photos into rows until a row at target height would fill the width
+        const rows = [];
+        let current = [];
+        let ratioSum = 0;
+        entries.forEach(entry => {
+            current.push(entry);
+            ratioSum += entry.ratio;
+            const naturalWidth = ratioSum * targetH + (current.length - 1) * gap;
+            if (naturalWidth >= W) {
+                rows.push({ items: current, full: true });
+                current = [];
+                ratioSum = 0;
+            }
+        });
+        if (current.length) rows.push({ items: current, full: false });
+
+        // 2. Scale each full row to span the width exactly; last row uses target height
+        container.innerHTML = '';
+        rows.forEach(row => {
+            const sum = row.items.reduce((s, e) => s + e.ratio, 0);
+            const h = row.full ? (W - (row.items.length - 1) * gap) / sum : targetH;
+
+            const rowEl = document.createElement('div');
+            rowEl.className = 'gallery-row';
+            rowEl.style.gap = `${gap}px`;
+            rowEl.style.marginBottom = `${gap}px`;
+
+            row.items.forEach(({ el, ratio }) => {
+                el.style.width = `${ratio * h}px`;
+                el.style.height = `${h}px`;
+                rowEl.appendChild(el);
+            });
+            container.appendChild(rowEl);
+        });
+    }
+
+    function layoutJustifiedGroups() {
+        const targetH = window.innerWidth <= 640 ? 120 : 220;
+        justifiedGroups.forEach(group => layoutJustifiedRows(group, targetH, JUSTIFY_GAP));
+    }
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(layoutJustifiedGroups, 120);
+    });
+
+    /**
+     * Determine each photo's orientation from its real pixel size, so portrait and
+     * landscape photos can be laid out in their own containers. Uses JSON width/height
+     * when present, otherwise probes the image once.
+     */
+    function detectOrientation(item) {
+        if (item.orientation) return Promise.resolve(item.orientation);
+
+        if (item.width && item.height) {
+            item.orientation = item.height > item.width ? 'portrait' : 'landscape';
+            return Promise.resolve(item.orientation);
+        }
+
+        return new Promise(resolve => {
+            // Never let one slow or broken image hold up the whole gallery
+            const fallback = setTimeout(() => {
+                item.orientation = item.orientation || 'landscape';
+                resolve(item.orientation);
+            }, 8000);
+
+            const probe = new Image();
+            probe.onload = () => {
+                clearTimeout(fallback);
+                item.width = probe.naturalWidth;
+                item.height = probe.naturalHeight;
+                item.orientation = item.height > item.width ? 'portrait' : 'landscape';
+                resolve(item.orientation);
+            };
+            probe.onerror = () => {
+                clearTimeout(fallback);
+                item.orientation = 'landscape';
+                resolve(item.orientation);
+            };
+            probe.src = item.imagePath;
+        });
+    }
+
     function renderGallery(items) {
         if (!galleryGrid) return;
 
@@ -151,25 +284,52 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        galleryGrid.innerHTML = items.map((item, index) => `
-            <article class="photo-card" role="button" tabindex="0" data-index="${index}" aria-label="${escapeHtml(item.title)}">
-                <div class="photo-thumb-wrapper">
-                    <div class="photo-badge-wrapper">
-                        <span class="photo-category-badge">${escapeHtml(item.categoryKn)}</span>
-                    </div>
-                    <img 
-                        src="${escapeHtml(item.imagePath)}" 
-                        alt="${escapeHtml(item.title)}" 
-                        class="photo-thumb" 
-                        loading="lazy"
-                    />
-                    <div class="photo-zoom-hint" title="ದೊಡ್ಡದಾಗಿ ನೋಡಿ">
-                        🔍
-                    </div>
-                </div>
+        const landscape = items.filter(item => item.orientation !== 'portrait');
+        const portrait = items.filter(item => item.orientation === 'portrait');
 
-            </article>
-        `).join('');
+        // Lightbox order matches the order the photos appear on the page
+        displayItems = [...landscape, ...portrait];
+
+        const renderCards = (list, offset) => list.map((item, i) => {
+            const sizeAttrs = item.width && item.height
+                ? `width="${item.width}" height="${item.height}"`
+                : '';
+            return `
+            <article class="photo-card" role="button" tabindex="0" data-index="${offset + i}" aria-label="${escapeHtml(item.title)}">
+                <img
+                    src="${escapeHtml(item.imagePath)}"
+                    alt="${escapeHtml(item.title)}"
+                    class="photo-thumb"
+                    loading="lazy"
+                    ${sizeAttrs}
+                />
+                <div class="photo-zoom-hint" title="ದೊಡ್ಡದಾಗಿ ನೋಡಿ">🔍</div>
+            </article>`;
+        }).join('');
+
+        const renderGroup = (list, orientation, label, offset) => {
+            if (list.length === 0) return '';
+            return `
+            <section class="gallery-group gallery-group--${orientation}" aria-label="${label}">
+                <div class="gallery-justified">
+                    ${renderCards(list, offset)}
+                </div>
+            </section>`;
+        };
+
+        galleryGrid.innerHTML =
+            renderGroup(landscape, 'landscape', 'ಅಡ್ಡ ಚಿತ್ರಗಳು', 0) +
+            renderGroup(portrait, 'portrait', 'ಲಂಬ ಚಿತ್ರಗಳು', landscape.length);
+
+        justifiedGroups = [...galleryGrid.querySelectorAll('.gallery-justified')].map(container => ({
+            container,
+            entries: [...container.querySelectorAll('.photo-card')].map(card => {
+                const item = displayItems[parseInt(card.getAttribute('data-index'), 10)];
+                const ratio = item.width && item.height ? item.width / item.height : 1;
+                return { el: card, ratio };
+            })
+        }));
+        layoutJustifiedGroups();
 
         // Attach Card Click & Keydown
         galleryGrid.querySelectorAll('.photo-card').forEach(card => {
@@ -218,44 +378,111 @@ document.addEventListener('DOMContentLoaded', () => {
      * Step 4: Lightbox Modal & Gestures
      * ----------------------------------------------------------------------
      */
+    function getCategoryLabel(item) {
+        return (item.categoryKn || item.category || 'ಇತರೆ').trim();
+    }
+
+    /** Lightbox navigation set = all photos, or only photos in the active category */
+    function buildLightboxItems() {
+        lightboxItems = lightboxActiveCategory === 'all'
+            ? [...displayItems]
+            : displayItems.filter(item => getCategoryLabel(item) === lightboxActiveCategory);
+    }
+
+    /**
+     * Generates one filter pill per distinct categoryKn value found in gallery.json,
+     * plus an "all" pill. Re-rendered whenever the active category changes.
+     */
+    function renderLightboxFilters() {
+        if (!lightboxFilterBar) return;
+
+        const counts = new Map();
+        displayItems.forEach(item => {
+            const label = getCategoryLabel(item);
+            counts.set(label, (counts.get(label) || 0) + 1);
+        });
+
+        const pills = [{ key: 'all', label: 'ಎಲ್ಲಾ ಚಿತ್ರಗಳು', count: displayItems.length }];
+        counts.forEach((count, label) => pills.push({ key: label, label, count }));
+
+        lightboxFilterBar.innerHTML = pills.map(pill => {
+            const isActive = pill.key === lightboxActiveCategory;
+            return `
+                <button type="button" class="lightbox-filter-pill${isActive ? ' active' : ''}"
+                        data-filter="${escapeHtml(pill.key)}" aria-pressed="${isActive}">
+                    <span>${escapeHtml(pill.label)}</span>
+                    <span class="pill-badge">${pill.count}</span>
+                </button>`;
+        }).join('');
+    }
+
     function openLightbox(index) {
         if (!currentFiltered || currentFiltered.length === 0) return;
-        currentLightboxIndex = index;
+        const clickedItem = displayItems[index];
+
+        // Opening from the grid always starts with the full set
+        lightboxActiveCategory = 'all';
+        buildLightboxItems();
+        currentLightboxIndex = Math.max(0, lightboxItems.indexOf(clickedItem));
+
+        renderLightboxFilters();
         updateLightboxView();
         lightboxModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        lockBodyScroll();
     }
 
     function closeLightbox() {
         if (!lightboxModal) return;
         lightboxModal.classList.remove('open');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
         currentLightboxIndex = -1;
     }
 
+    /** Switch the lightbox to a category, keeping the current photo if it still matches */
+    function setLightboxCategory(category) {
+        const currentItem = lightboxItems[currentLightboxIndex];
+        lightboxActiveCategory = category;
+        buildLightboxItems();
+
+        const newIndex = lightboxItems.indexOf(currentItem);
+        currentLightboxIndex = newIndex >= 0 ? newIndex : 0;
+
+        renderLightboxFilters();
+        updateLightboxView();
+    }
+
     function updateLightboxView() {
-        if (currentLightboxIndex < 0 || currentLightboxIndex >= currentFiltered.length) return;
-        const item = currentFiltered[currentLightboxIndex];
+        if (currentLightboxIndex < 0 || currentLightboxIndex >= lightboxItems.length) return;
+        const item = lightboxItems[currentLightboxIndex];
 
         lightboxImg.src = item.imagePath;
-        lightboxImg.alt = item.title;
-        lightboxTitle.textContent = item.title;
-        lightboxCaption.textContent = item.caption;
-        lightboxCategory.textContent = item.categoryKn;
-        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentFiltered.length}`;
+        lightboxImg.alt = item.title || '';
+        lightboxTitle.textContent = item.title || '';
+        lightboxCategory.textContent = getCategoryLabel(item);
+
+        lightboxCaption.textContent = item.caption || '';
+        lightboxCaption.style.display = item.caption ? '' : 'none';
+
+        const dateText = item.date ? ` · ${formatDate(item.date)}` : '';
+        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxItems.length}${dateText}`;
     }
 
     function prevLightboxImage() {
-        if (currentFiltered.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex - 1 + currentFiltered.length) % currentFiltered.length;
+        if (lightboxItems.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
         updateLightboxView();
     }
 
     function nextLightboxImage() {
-        if (currentFiltered.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex + 1) % currentFiltered.length;
+        if (lightboxItems.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxItems.length;
         updateLightboxView();
     }
+
+    lightboxFilterBar.addEventListener('click', (e) => {
+        const pill = e.target.closest('.lightbox-filter-pill');
+        if (pill) setLightboxCategory(pill.getAttribute('data-filter'));
+    });
 
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
     if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
@@ -342,14 +569,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function openSubmissionModal() {
         if (!submissionModal) return;
         submissionModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        lockBodyScroll();
         hideFormStatus();
     }
 
     function closeSubmissionModal() {
         if (!submissionModal) return;
         submissionModal.classList.remove('open');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
     }
 
     if (openSubmitModalBtn) openSubmitModalBtn.addEventListener('click', openSubmissionModal);
@@ -605,13 +832,13 @@ ${data.name}`;
         }
 
         fallbackModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        lockBodyScroll();
     }
 
     function closeFallbackModal() {
         if (!fallbackModal) return;
         fallbackModal.classList.remove('open');
-        document.body.style.overflow = '';
+        unlockBodyScroll();
     }
 
     if (closeFallbackModalBtn) closeFallbackModalBtn.addEventListener('click', closeFallbackModal);

@@ -16,56 +16,44 @@
 </head>
 <body>
 
-    <!-- Site Header with Glassmorphism and Subsections Shortcuts
-    <header class="site-header site-header--glass">
-        <div class="header-container">
-            <h1 class="kn-heading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ</h1>
-            <div class="subheading-pill">
-                <span>ಮೇಲಂಗಡಿ, ಕಳಸ</span>
-            </div>
-    </header> -->
-
-    <!-- Main Navigation Bar -->
+    <!-- Main Navigation Bar with Translation Keys -->
     <nav class="main-nav">
-        <a href="../index.html" class="nav-link">ಮುಖ ಪುಟ</a>
-        <a href="events.html" class="nav-link">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link">ಅಷ್ಟಾವಧಾನ</a>
-        <a href="mangala.html" class="nav-link">ಮಂಗಳ</a>
-        <a href="traditions.html" class="nav-link">ಆಚರಣೆಗಳು</a>
-        <a href="temple_background.html" class="nav-link">ಇತಿಹಾಸ</a>
-        <a href="photos.html" class="nav-link active">ಛಾಯಾಚಿತ್ರಗಳು</a>
+        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
+        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
+        <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
+        <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
+        <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
+        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
+        <a href="photos.html" class="nav-link active" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
+        <a href="references.html" class="nav-link" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು</a>
     </nav>
 
     <!-- Main Content Container -->
     <main class="container">
         <!-- Page Header -->
         <div class="page-header" style="text-align: center; margin-bottom: 2rem;">
-            <h2 class="kn-heading" style="color: #800020; margin-bottom: 0.4rem;">ಛಾಯಾಚಿತ್ರ ಪ್ರದರ್ಶನ</h2>
-            <p class="kn-subheading" style="margin: 0 auto; max-width: 650px;">
+            <h2 class="kn-heading" style="color: #800020; margin-bottom: 0.4rem;" data-trans-id="gallery_page.page_title">ಛಾಯಾಚಿತ್ರ ಪ್ರದರ್ಶನ</h2>
+            <p class="kn-subheading" style="margin: 0 auto; max-width: 650px;" data-trans-id="gallery_page.page_subtitle">
                 ಶ್ರೀ ಸನ್ನಿಧಿಯ ಧಾರ್ಮಿಕ ಉತ್ಸವಗಳು, ನಿತ್ಯ-ನೈಮಿತ್ತಿಕ ಪೂಜೆಗಳು, ದೇವಾಲಯದ ಆವರಣ ಹಾಗೂ ಹಳೆಯ ಅಪರೂಪದ ಕ್ಷಣಗಳ ಚಿತ್ರಸಂಪುಟ.
             </p>
         </div>
 
         <!-- Top Action & Counter Bar -->
         <section class="gallery-top-bar" aria-label="ಗ್ಯಾಲರಿ ನಿಯಂತ್ರಣ ಫಲಕ">
-            <div class="gallery-stats">
-                <span>ಸಂಗ್ರಹದಲ್ಲಿರುವ ಒಟ್ಟು ಚಿತ್ರಗಳು:</span>
-                <span class="gallery-stats-count" id="photoCount">12 ಚಿತ್ರಗಳು</span>
-            </div>
             <button type="button" class="btn-submit-photo" id="openSubmitModalBtn">
                 <span>📸</span>
-                <span>ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</span>
+                <span data-trans-id="gallery_page.share_button">ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</span>
             </button>
         </section>
 
         <!-- Sticky Category Filter Tabs -->
         <section class="gallery-filters-container" aria-label="ವಿಭಾಗಗಳ ಫಿಲ್ಟರ್">
             <div class="gallery-filter-tabs" role="tablist">
-                <button type="button" class="filter-pill active" data-category="all" role="tab" aria-selected="true">
+                <!-- <button type="button" class="filter-pill active" data-category="all" role="tab" aria-selected="true">
                     <span>ಎಲ್ಲಾ ಚಿತ್ರಗಳು</span>
                     <span class="pill-badge">0</span>
-                </button>
+                </button> -->
                 <!-- <button type="button" class="filter-pill" data-category="festivals" role="tab" aria-selected="false">
                     <span> ಉತ್ಸವಗಳು</span>
                     <span class="pill-badge">0</span>
@@ -78,10 +66,10 @@
                     <span> ದೇವಸ್ಥಾನ</span>
                     <span class="pill-badge">0</span>
                 </button> -->
-                <button type="button" class="filter-pill" data-category="archives" role="tab" aria-selected="false">
+                <!-- <button type="button" class="filter-pill" data-category="archives" role="tab" aria-selected="false">
                     <span> ಹಳೆಯ ಚಿತ್ರಗಳು</span>
                     <span class="pill-badge">0</span>
-                </button>
+                </button> -->
             </div>
         </section>
 
@@ -89,7 +77,7 @@
         <section class="gallery-grid" id="galleryGrid" aria-live="polite">
             <div class="gallery-empty-state">
                 <span class="gallery-empty-icon">⏳</span>
-                <div class="gallery-empty-text">ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+                <div class="gallery-empty-text" data-trans-id="common.loading">ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
             </div>
         </section>
     </main>
@@ -98,7 +86,6 @@
     <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ವೀಕ್ಷಣೆ">
         <div class="lightbox-dialog">
             <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
-            
             <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" title="ಹಿಂದಿನ ಚಿತ್ರ" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">‹</button>
             <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" title="ಮುಂದಿನ ಚಿತ್ರ" aria-label="ಮುಂದಿನ ಚಿತ್ರ">›</button>
 
@@ -117,14 +104,13 @@
         </div>
     </div>
 
-    <!-- Photo Contribution Modal (Zero Budget, Dual Input, Instant Preview) -->
+    <!-- Photo Contribution Modal -->
     <div class="modal-overlay" id="submissionModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ಹಂಚಿಕೊಳ್ಳುವ ಫಾರ್ಮ್">
         <div class="submission-modal-container">
             <button type="button" class="modal-close-icon" id="closeSubmitModalBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
             
             <div class="modal-header">
                 <h3>📸 ನಿಮ್ಮಲ್ಲಿರುವ ಚಿತ್ರಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ</h3>
-                <!-- <p>ದೇವಸ್ಥಾನದ ಇತಿಹಾಸ, ಉತ್ಸವ ಅಥವಾ ಪೂಜೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಛಾಯಾಚಿತ್ರಗಳನ್ನು ಸುಲಭವಾಗಿ ಹಂಚಿಕೊಳ್ಳಿ.</p> -->
             </div>
 
             <div class="submission-note">
@@ -167,11 +153,8 @@
                         </div>
                     </div>
 
-                    <div class="dual-separator">
-                        <span>ಅಥವಾ</span>
-                    </div>
+                    <div class="dual-separator"><span>ಅಥವಾ</span></div>
 
-                    <!-- Option 2: Public Image Link -->
                     <div class="form-group photo-choice-group">
                         <label for="photoUrlInput" class="choice-label">
                             ವೆಬ್ ಲಿಂಕ್ ಹಾಕಿ (Drive / Google Photos )
@@ -187,9 +170,8 @@
                     </div>
                 </div>
 
-                <!-- Festival / Category Name (Optional) -->
                 <div class="form-group">
-                    <label for="photoCategory">ಉತ್ಸವ ಅಥವಾ ವಿಭಾಗದ ಹೆಸರು (Category / Event)
+                    <label for="photoCategory">ಉತ್ಸವ ಅಥವಾ ವಿಭಾಗದ ಹೆಸರು</label>
                     <select id="photoCategory" name="category" class="form-select">
                         <option value="ಉತ್ಸವಗಳು (Festivals)" selected>ಉತ್ಸವಗಳು (ರಥೋತ್ಸವ, ಪೇಟೆ ಸವಾರಿ ಇತ್ಯಾದಿ)</option>
                         <option value="ಪೂಜೆಗಳು (Rituals)">ಪೂಜೆಗಳು (ಅಷ್ಟಾವಧಾನ, ದೀವಟಿಗೆ ಸಲಾಂ ಇತ್ಯಾದಿ)</option>
@@ -199,54 +181,32 @@
                     </select>
                 </div>
 
-                <!-- Status Feedback Message -->
                 <div id="formStatusMsg" class="form-status-msg" role="alert"></div>
 
-                <!-- Devotee Name (Optional) -->
                 <div class="form-group">
-                    <label for="devoteeName">ಹೆಸರು </label>
-                    <input 
-                        type="text" 
-                        id="devoteeName" 
-                        name="devotee_name" 
-                        class="form-input" 
-                    />
+                    <label for="devoteeName">ಹೆಸರು</label>
+                    <input type="text" id="devoteeName" name="devotee_name" class="form-input" />
                 </div>
 
-                <!-- Contact Phone / Email (Optional) -->
                 <div class="form-group">
-                    <label for="devoteeContact">Contact Phone / Email </label>
-                    <input 
-                        type="text" 
-                        id="devoteeContact" 
-                        name="contact_info" 
-                        class="form-input" 
-                    />
+                    <label for="devoteeContact">Contact Phone / Email</label>
+                    <input type="text" id="devoteeContact" name="contact_info" class="form-input" />
                 </div>
                 
-                <!-- Photo Description (Optional) -->
                 <div class="form-group">
-                    <label for="photoDescription">ಚಿತ್ರದ ವಿವರಣೆ / ತೆಗೆದ ವರ್ಷ </label>
-                    <textarea 
-                        id="photoDescription" 
-                        name="description" 
-                        rows="2" 
-                        class="form-textarea" 
-                        placeholder="ಕಾರ್ಯಕ್ರಮದ ವಿವರ ಅಥವಾ ತೆಗೆದ ವರ್ಷ (ಉದಾ: 2026 ರ ರಥೋತ್ಸವ)" 
-                    ></textarea>
+                    <label for="photoDescription">ಚಿತ್ರದ ವಿವರಣೆ / ತೆಗೆದ ವರ್ಷ</label>
+                    <textarea id="photoDescription" name="description" rows="2" class="form-textarea"></textarea>
                 </div>
 
-
-                <!-- Submit Button -->
                 <button type="submit" class="btn-form-submit" id="submitBtn">
-                    <span> ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ</span>
+                    <span>ವಿವರಗಳನ್ನು ಸಲ್ಲಿಸಿ</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Friendly Fallback Modal (For Formspree 404 / Direct WhatsApp & Email) -->
-    <div class="modal-overlay" id="fallbackModal" role="dialog" aria-modal="true" aria-label="ಪರ್ಯಾಯ ಸಲ್ಲಿಕೆ ಆಯ್ಕೆಗಳು">
+    <!-- Fallback Modal -->
+    <div class="modal-overlay" id="fallbackModal" role="dialog" aria-modal="true">
         <div class="submission-modal-container fallback-modal-container">
             <button type="button" class="modal-close-icon" id="closeFallbackModalBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
             
@@ -280,15 +240,16 @@
             </div>
         </div>
     </div>
-
+    <!-- <span>ಸಂಗ್ರಹದಲ್ಲಿರುವ ಒಟ್ಟು ಚಿತ್ರಗಳು:</span> -->
+                <span class="gallery-stats-count" id="photoCount"></span>
     <!-- Footer -->
     <!-- Common Footer Placeholder -->
     <div id="footerContainer"></div>
 
-    <!-- JS Loader -->
+    <!-- JS Loader & Translation Engines -->
     <script src="../js/footer-loader.js"></script>
-
-    <!-- Scripts -->
+    <script src="../js/vendor/sanscript.min.js"></script>
+    <script src="../js/localeEngine.js"></script>
     <script src="../js/back-to-top.js"></script>
     <script src="../js/feedback.js"></script>
     <script src="../js/gallery.js"></script>

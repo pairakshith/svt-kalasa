@@ -158,9 +158,7 @@
    Responsive Photo Grid
    -------------------------------------------------------------------------- */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    display: block;
     margin-bottom: 50px;
 }
 
@@ -170,8 +168,9 @@
     overflow: hidden;
     border: 1px solid var(--gallery-border);
     box-shadow: var(--gallery-shadow-sm);
-    display: flex;
-    flex-direction: column;
+    display: block;
+    margin: 0 0 16px;
+    break-inside: avoid;
     cursor: pointer;
     position: relative;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -188,44 +187,15 @@
     outline-offset: 2px;
 }
 
-/* Thumbnail Container with Consistent Aspect Ratio */
-.photo-thumb-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    background-color: #e2e8f0;
-}
-
 .photo-thumb {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
     transition: transform 0.4s ease;
 }
 
 .photo-card:hover .photo-thumb {
     transform: scale(1.06);
-}
-
-.photo-badge-wrapper {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-}
-
-.photo-category-badge {
-    background: rgba(20, 20, 20, 0.75);
-    backdrop-filter: blur(4px);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    letter-spacing: 0.2px;
 }
 
 .photo-zoom-hint {
@@ -455,6 +425,7 @@
 }
 
 .lightbox-title {
+    display: none;
     font-family: var(--font-serif-kannada);
     font-size: 1.25rem;
     font-weight: 700;
@@ -977,11 +948,6 @@
    Mobile Responsive Adjustments
    -------------------------------------------------------------------------- */
 @media (max-width: 640px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 12px;
-    }
-
     .gallery-top-bar {
         flex-direction: column;
         align-items: stretch;
@@ -1074,4 +1040,111 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox Category Filter (pills generated from categoryKn)
+   -------------------------------------------------------------------------- */
+.lightbox-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+}
+
+.lightbox-filter-pill {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f1f5f9;
+    font-family: var(--font-sans-kannada);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lightbox-filter-pill:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #ffffff;
+}
+
+.lightbox-filter-pill.active {
+    background: #ffffff;
+    color: var(--gallery-primary);
+    border-color: #ffffff;
+}
+
+.lightbox-filter-pill .pill-badge {
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 0.75rem;
+    padding: 1px 7px;
+    border-radius: 12px;
+}
+
+.lightbox-filter-pill.active .pill-badge {
+    background: var(--gallery-gold-light);
+    color: var(--gallery-gold-text);
+}
+
+@media (max-width: 640px) {
+    .lightbox-filter-bar {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Justified Rows (Google Photos style). Row heights and widths are set by
+   gallery.js so each row fills the container width exactly.
+   -------------------------------------------------------------------------- */
+.gallery-group {
+    margin-bottom: 24px;
+}
+
+.gallery-justified {
+    width: 100%;
+}
+
+.gallery-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.gallery-justified .photo-card {
+    flex-shrink: 0;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.gallery-justified .photo-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.gallery-justified .photo-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-justified .photo-card:hover .photo-thumb {
+    transform: scale(1.04);
 }
