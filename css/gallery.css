@@ -512,16 +512,31 @@
     background: #ffffff;
     width: 100%;
     max-width: 620px;
-    max-height: 90vh;
-    overflow-y: auto;
     border-radius: 16px;
     box-shadow: var(--gallery-shadow-lg);
     position: relative;
     padding: 28px 24px;
     box-sizing: border-box;
     animation: modalSlideUp 0.28s ease-out;
+
+    /* Fallback for older browsers, then the visible-area version */
+    max-height: 90vh;
+    max-height: calc(90dvh - env(safe-area-inset-bottom, 0px));
+
+    /* Keep a gap above the bottom edge, and above any safe area */
+    margin-bottom: max(16px, env(safe-area-inset-bottom, 0px));
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
+/* Extra space at the end of the scrolling content, so the submit button
+   can be scrolled clear of the browser toolbar */
+.submission-modal-container::after {
+    content: "";
+    display: block;
+    height: calc(16px + env(safe-area-inset-bottom, 0px));
+}
 @keyframes modalSlideUp {
     from {
         opacity: 0;

@@ -1,0 +1,208 @@
+/* ==========================================================================
+   ashtaavadhaana.css
+   Light, rounded cards for the Ashtaavadhaana seva page.
+   Load after svt-main.css so these rules win.
+   ========================================================================== */
+
+/* ---------- List and card ---------- */
+
+.seva-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+.seva-card {
+    background: #fffdf9;
+    border: 1px solid #f1e4d3;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(128, 0, 0, 0.06);
+}
+
+/* Inline style on this element sets display:flex with no wrap, so !important is needed */
+.seva-header {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.seva-title {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    margin: 0 !important;
+    color: #800000 !important;
+}
+
+.seva-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ---------- Verse and invocation boxes ---------- */
+
+.verse-box {
+    background: #fdf7ee;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.verse-line {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #3a2a20;
+}
+
+.verse-line:last-child {
+    margin-bottom: 0;
+}
+
+.invocation-box {
+    background: #fff5e8;
+    border-left: 4px solid #c9a227;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.invocation-box p {
+    margin: 0;
+    line-height: 1.9;
+}
+
+/* ---------- Listen button ---------- */
+
+.audio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #800000;
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(128, 0, 0, 0.18);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.audio-btn:hover {
+    background: #a00000;
+}
+
+.audio-btn:active {
+    transform: scale(0.97);
+}
+
+.audio-btn.playing {
+    background: #5c0000;
+}
+
+/* ---------- Sub-section heading row ---------- */
+
+.seva-sub-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px dashed #e8d8c0;
+    padding-top: 14px;
+}
+
+/* Inline margin-top:15px on this element is overridden here */
+.audio-play-bar {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 0 !important;
+}
+
+.audio-play-bar h4 {
+    margin: 0 !important;
+    font-size: 1rem;
+    color: #800000 !important;
+}
+
+/* ---------- "ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ" expander ---------- */
+
+.collapsible-section {
+    background: #fffaf2;
+    border: 1px solid #f1e0c2;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.collapsible-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #800000;
+}
+
+.collapsible-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.toggle-icon {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.collapsible-section[open] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    padding: 4px 14px 14px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #4a3a30;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 480px) {
+    .seva-list {
+        gap: 16px;
+        padding: 0 10px;
+    }
+
+    .seva-card {
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .seva-title {
+        font-size: 1.05rem;
+    }
+
+    .verse-box {
+        padding: 12px;
+    }
+
+    .verse-line {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .audio-btn {
+        padding: 6px 12px;
+    }
+}

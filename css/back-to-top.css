@@ -35,13 +35,13 @@
 /* 2. Back to Home Button (Bottom-Left) */
 .home-btn {
     position: fixed !important;
-    bottom: 20px !important;
-    left: 5px !important;
+    top: 150px !important;
+    right: 2px !important;
     z-index: 999999 !important;
-    width: 30px !important;
-    height: 30px !important;
+    width: 40px !important;
+    height: 40px !important;
     background-color: #8b0000 !important;
-    color: #ffffff !important;
+    color: #b40e0e !important;
     border: 2px solid #ffd700 !important;
     border-radius: 10% !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
