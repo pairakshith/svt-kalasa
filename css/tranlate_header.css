@@ -81,37 +81,45 @@ select#languageSelect.lang-selector-select option {
 @media (max-width: 600px) {
     .top-language-bar {
         padding: 8px 12px;
+        height: auto;
+        overflow: visible;
     }
     .lang-bar-container {
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
         gap: 8px;
+        min-height: 40px;
     }
     .lang-brand {
-        flex: 1;
+        flex: 1 1 auto;
         min-width: 0;
         gap: 6px;
+        align-items: center;
     }
     .temple-om {
         font-size: 18px;
+        flex-shrink: 0;
     }
     .lang-brand-text {
+        display: block;
         font-size: 13px;
         line-height: 1.3;
+        white-space: normal;      /* let the name wrap instead of disappearing */
+        overflow: visible;
     }
     .lang-control {
         flex-shrink: 0;
         gap: 0;
     }
     .lang-label {
-        display: none;   /* the select keeps its aria-label, so screen readers still get it */
+        display: none;            /* the select keeps its aria-label for screen readers */
     }
     .top-language-bar .lang-control .lang-selector-select,
     select#languageSelect.lang-selector-select {
         min-width: 0;
-        width: 130px;
-        padding: 5px 26px 5px 10px;
+        width: 120px;
+        padding: 5px 24px 5px 10px;
         font-size: 12px;
         background-position: right 8px center;
     }
