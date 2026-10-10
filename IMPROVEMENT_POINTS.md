@@ -26,4 +26,7 @@
 * Clean up repetitive code and remove unused code to optimize performance.
 * Plan the expansion of this framework to support similar heritage, cultural, or religious institution documentation projects.
 
+## Add site visit counter for thge maintainer
+* check on https://www.goatcounter.com/ or similar , where it should need a minimal setuo
+* Or build a small site visit count function
 ---
