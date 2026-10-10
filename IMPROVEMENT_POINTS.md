@@ -1,5 +1,14 @@
 # Improvement Points & Future Roadmap
 
+
+## Add site visit counter for thge maintainer
+* check on https://www.goatcounter.com/ or similar , where it should need a minimal setuo
+* Or build a small site visit count function
+
+## try to make chat bot 
+* it should tell the info based on the website info
+* also should helo the user to get the required info with ease
+
 ## 1. Open Source & Public Repository Adaptation
 
 * Explore how open-source public repositories and community-driven tools can be adapted. Specifically, integrate or reference tools like [Aksharamukha](https://www.google.com/search?q=https://github.com/auplat/aksharamukha)—an open-source Python library and web tool for script conversion and transliteration across numerous Indic scripts—to enhance multi-script accessibility.
@@ -25,5 +34,7 @@
 * Design a generalized, modular repository template based on this project's structure.
 * Clean up repetitive code and remove unused code to optimize performance.
 * Plan the expansion of this framework to support similar heritage, cultural, or religious institution documentation projects.
+
+
 
 ---
