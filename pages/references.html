@@ -119,6 +119,66 @@
             });
         }
     </script>
+    <!-- 1. The counter display container -->
+<div style="font-family: sans-serif; padding: 10px; border: 1px solid #ccc; display: inline-block; border-radius: 5px;">
+    <strong>Website Visits:</strong> 
+    <span id="visit-count" style="font-weight: bold; color: #007bff;">Loading...</span>
+    
+    <!-- 2. A reset button hidden behind a secret password -->
+    <button id="reset-btn" onclick="resetCounter()" style="margin-left: 10px; font-size: 11px; cursor: pointer; padding: 2px 5px;">
+      Reset Count
+    </button>
+</div>
+
+<!-- 3. Load the CounterAPI browser SDK library -->
+<script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
+
+<!-- 4. The script logic -->
+<script>
+  // CONFIGURATION: Replace these with your own custom, unique names!
+  const MY_WORKSPACE = "svt-kalasa"; // e.g., "alex-portfolio-2026"
+  const COUNTER_NAME = "main-homepage";
+  const SECRET_PASSWORD = "svt_reset"; // Password used to unlock the reset action
+
+  // Initialize the CounterAPI client
+  const counterClient = new Counter({ workspace: MY_WORKSPACE });
+
+  // Function to automatically log a view and display it
+  function trackAndDisplayVisits() {
+    counterClient.up(COUNTER_NAME)
+      .then(result => {
+        document.getElementById("visit-count").textContent = result.value;
+      })
+      .catch(error => {
+        console.error("CounterAPI error:", error.message);
+        document.getElementById("visit-count").textContent = "Unavailable";
+      });
+  }
+
+  // Function that handles your secure administrative reset
+  function resetCounter() {
+    const input = prompt("Enter your admin password to reset the counter:");
+    
+    if (input === SECRET_PASSWORD) {
+      if (confirm("Are you sure you want to completely clear the visit history?")) {
+        counterClient.reset(COUNTER_NAME)
+          .then(result => {
+            alert("Counter has been successfully set back to 0!");
+            document.getElementById("visit-count").textContent = "0";
+          })
+          .catch(error => {
+            alert("Reset failed: " + error.message);
+          });
+      }
+    } else {
+      alert("Incorrect password. Access denied.");
+    }
+  }
+
+  // Run the counter instantly when the page finishes loading
+  window.onload = trackAndDisplayVisits;
+</script>
+
 
 </body>
 </html>
