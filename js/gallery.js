@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (photoCountEl) {
-            photoCountEl.textContent = `${galleryData.length} ಚಿತ್ರಗಳು`;
+            photoCountEl.textContent = `${galleryData.length} Photos`;
         }
     }
 
