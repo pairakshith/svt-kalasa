@@ -8,7 +8,8 @@ This document outlines the background sources, books, and third-party services i
 
 * **Bhakti Mala (ಭಕ್ತಿ ಮಾಲಾ)** — Written by Vivekananda Bhat.
 * [Prathosh.in Vagdhenu](https://prathosh.in/vagdhenu/) — Platform used for converting stotras and shlokas into MP3 audio format.
-
+* [ದಶಾವತಾರ ಮಂಗಳ ](https://kannada.indiaforyou.in/%E0%B2%AA%E0%B2%B0%E0%B2%AE-%E0%B2%AA%E0%B3%81%E0%B2%B0%E0%B3%81%E0%B2%B7-%E0%B2%B9%E0%B2%B0%E0%B2%BF-%E0%B2%97%E0%B3%8B%E0%B2%B5%E0%B2%BF%E0%B2%82%E0%B2%A6/)
+* [ಜಯಮಂಗಳಂ](https://kannadanudi.com/geethavihaara/bhaktisudhe/Mangalam%20Jaya%20Mangalam)
 ---
 
 ## External Services & Public Endpoints
