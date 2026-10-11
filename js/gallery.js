@@ -13,6 +13,10 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjyvjoww';
 // Free ImgBB API Key (Uploads local images and creates a public web link)
 const IMGBB_API_KEY = '66c04660b388ef7e482286c1a9530545';
 
+// ImgBB accepts at most 32 MB per image. ImgBB takes one image per request,
+// so multiple photos are uploaded one after another.
+const IMGBB_MAX_FILE_BYTES = 32 * 1024 * 1024;
+
 // Temple Contact for Fallback Direct Sharing
 // const TEMPLE_PHONE = '+919481234567'; // Replace with temple committee official WhatsApp/Phone
 const TEMPLE_EMAIL = 'test@gmail.com'; // Replace with temple official email
@@ -31,8 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let lightboxActiveCategory = 'all';
     let displayItems = [];
 
-    // Selected Local File State for Instant Preview & Upload
-    let selectedLocalFile = null;
+    // Selected Local Files State for Instant Preview & Upload
+    // Each item: { file: File, previewUrl: string }
+    let selectedLocalFiles = [];
 
     // DOM Elements - Gallery Grid & Filters
     const galleryGrid = document.getElementById('galleryGrid');
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const localPhotoInput = document.getElementById('localPhotoInput');
     const photoUrlInput = document.getElementById('photoUrlInput');
     const previewContainer = document.getElementById('previewContainer');
-    const previewImage = document.getElementById('previewImage');
+    const previewList = document.getElementById('previewList');
     const previewFileName = document.getElementById('previewFileName');
     const previewFileSize = document.getElementById('previewFileSize');
     const removePreviewBtn = document.getElementById('removePreviewBtn');
@@ -521,30 +526,50 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     if (localPhotoInput) {
         localPhotoInput.addEventListener('change', (e) => {
-            const file = e.target.files && e.target.files[0];
-            if (file) {
-                // Verify image mime type
+            // Copy the selection first, then clear the input so the same file can be picked again
+            const picked = Array.from(e.target.files || []);
+            e.target.value = '';
+            if (picked.length === 0) return;
+
+            hideFormStatus();
+
+            const rejectedType = [];
+            const rejectedSize = [];
+
+            picked.forEach(file => {
                 if (!file.type.startsWith('image/')) {
-                    showFormStatus('ದಯವಿಟ್ಟು ಚಿತ್ರದ ಫೈಲ್ (Image file) ಮಾತ್ರ ಆರಿಸಿ.', 'error');
-                    clearLocalPreview();
-                    return;
+                    rejectedType.push(file.name);
+                } else if (file.size > IMGBB_MAX_FILE_BYTES) {
+                    rejectedSize.push(file.name);
+                } else {
+                    selectedLocalFiles.push({ file, previewUrl: URL.createObjectURL(file) });
                 }
+            });
 
-                selectedLocalFile = file;
+            renderLocalPreviews();
 
-                // FileReader for Instant Preview
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    previewImage.src = event.target.result;
-                    previewFileName.textContent = file.name;
-                    previewFileSize.textContent = formatBytes(file.size);
-                    previewContainer.style.display = 'flex';
-                    hideFormStatus();
-                };
-                reader.readAsDataURL(file);
-            } else {
-                clearLocalPreview();
+            const messages = [];
+            if (rejectedType.length) {
+                messages.push('Please select image files only. Skipped: ' + rejectedType.join(', '));
             }
+            if (rejectedSize.length) {
+                messages.push(`These images are larger than 32 MB and have been skipped: ${rejectedSize.join(', ')}`);
+            }
+            if (messages.length) {
+                showFormStatus(messages.join(' | '), 'error');
+            }
+        });
+    }
+
+    // Thumbnail list: each photo has its own remove (✕) button
+    if (previewList) {
+        previewList.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-remove-preview');
+            if (!btn) return;
+            const index = Number(btn.dataset.index);
+            const [removed] = selectedLocalFiles.splice(index, 1);
+            if (removed) URL.revokeObjectURL(removed.previewUrl);
+            renderLocalPreviews();
         });
     }
 
@@ -554,11 +579,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function renderLocalPreviews() {
+        if (!previewList || !previewContainer) return;
+        previewList.innerHTML = '';
+
+        if (selectedLocalFiles.length === 0) {
+            previewContainer.style.display = 'none';
+            return;
+        }
+
+        selectedLocalFiles.forEach((item, index) => {
+            const wrap = document.createElement('div');
+            wrap.style.cssText = 'position: relative; width: 72px; height: 72px;';
+
+            const img = document.createElement('img');
+            img.src = item.previewUrl;
+            img.alt = item.file.name;
+            img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 6px;';
+
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'btn-remove-preview';
+            removeBtn.textContent = '✕';
+            removeBtn.title = item.file.name;
+            removeBtn.dataset.index = index;
+            removeBtn.style.cssText = 'position: absolute; top: 2px; right: 2px;';
+
+            wrap.append(img, removeBtn);
+            previewList.appendChild(wrap);
+        });
+
+        const totalBytes = selectedLocalFiles.reduce((sum, item) => sum + item.file.size, 0);
+        previewFileName.textContent = `Selected count: ${selectedLocalFiles.length}`;
+        previewFileSize.textContent = formatBytes(totalBytes);
+        previewContainer.style.display = 'flex';
+    }
+
     function clearLocalPreview() {
-        selectedLocalFile = null;
+        selectedLocalFiles.forEach(item => URL.revokeObjectURL(item.previewUrl));
+        selectedLocalFiles = [];
         if (localPhotoInput) localPhotoInput.value = '';
-        if (previewImage) previewImage.src = '';
-        if (previewContainer) previewContainer.style.display = 'none';
+        renderLocalPreviews();
     }
 
     /**
@@ -600,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let photoUrl = photoUrlInput?.value.trim() || '';
 
             // Check if user provided at least a local photo OR a link OR text
-            const hasLocalPhoto = Boolean(selectedLocalFile);
+            const hasLocalPhoto = selectedLocalFiles.length > 0;
             const hasUrl = Boolean(photoUrl);
 
             setSubmitButtonState(true, 'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...');
@@ -610,12 +671,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (hasLocalPhoto) {
                     if (IMGBB_API_KEY && IMGBB_API_KEY.trim() !== '') {
                         setSubmitButtonState(true, 'ಸರ್ವರ್‌ಗೆ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ...');
-                        const uploadResult = await uploadToImgBB(selectedLocalFile);
-                        if (uploadResult && uploadResult.url) {
-                            photoUrl = uploadResult.url;
-                        } else {
-                            throw new Error('ImgBB Upload Error');
+                        // ImgBB takes one image per request, so upload them in sequence
+                        const uploadedUrls = [];
+                        for (let i = 0; i < selectedLocalFiles.length; i++) {
+                            setSubmitButtonState(true, `ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ (${i + 1}/${selectedLocalFiles.length})...`);
+                            const uploadResult = await uploadToImgBB(selectedLocalFiles[i].file);
+                            if (!uploadResult || !uploadResult.url) {
+                                throw new Error('ImgBB Upload Error');
+                            }
+                            uploadedUrls.push(uploadResult.url);
                         }
+                        // Multiple links are sent as one comma-separated string
+                        photoUrl = uploadedUrls.join(', ');
                     } else {
                         // Without ImgBB key, Formspree free cannot take binary attachments.
                         // Seamlessly route to WhatsApp/Email fallback modal with pre-filled details!
@@ -702,7 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     contact: devoteeContact,
                     category: photoCategory,
                     description: photoDescription,
-                    imageUrl: photoUrl || (selectedLocalFile ? selectedLocalFile.name : '')
+                    imageUrl: photoUrl || selectedLocalFiles.map(item => item.file.name).join(', ')
                 });
             } finally {
                 setSubmitButtonState(false);
