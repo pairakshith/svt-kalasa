@@ -1,7 +1,7 @@
 # ದೀವಟಿಗೆ ಸಲಾಂ
 ದೇವರು ಪೇಟೆ ಉತ್ಸವಕ್ಕೆ ಬಿಜಯಂಗೈಯುವ ಮೊದಲು ದೀವಟಿಗೆ ಸಲಾಂ (ದೀಪ ನಮಸ್ಕಾರ) ಸಲ್ಲಿಸುವಾಗ ಹೇಳುವ ಶ್ರೀ ದೇವರ ಸ್ತುತಿ.
 
-## <span data-trans-id="deevatige_page.sec_verse1">ದೀವಟಿಗೆ ಸಲಾಂ - ೧</span>
+## <span data-trans-id="deevatige_page.sec_verse1">ದೀವಟಿಗೆ ಸಲಾಂ - 1</span>
 
 :::transliterate{sourceScript="kannada"}
 ಶ್ರೀಮದ್ರಮಾರಮಣ ವೆಂಕಟಶೈಲವರ್ಯಾತ್ ದಾಗತ್ಯ ಅಗಸ್ತ್ಯಮುನಿನಿರ್ಮಿತ ಕಳಶಾಖ್ಯೇ । 
@@ -15,7 +15,7 @@
 * :translate[ತಿಷ್ಠನ್: ನೆಲೆಸಿ ನಿಂತಿರುವವನೇ.]{id="ds_exp_4" file="en.json"}
 * :translate[ತ್ವದೀಯ-ಭಜಕಾನ್-ಅವಲೋಕಯಸ್ವ: ನಿನ್ನನ್ನು ನಂಬಿ ಪೂಜಿಸುತ್ತಿರುವ ಭಕ್ತರನ್ನು ನಿನ್ನ ಕರುಣಾದೃಷ್ಟಿಯಿಂದ ನೋಡು/ರಕ್ಷಿಸು.]{id="ds_exp_5" file="en.json"}
 
-## <span data-trans-id="deevatige_page.sec_verse2">ದೀವಟಿಗೆ ಸಲಾಂ - ೨</span>
+## <span data-trans-id="deevatige_page.sec_verse2">ದೀವಟಿಗೆ ಸಲಾಂ - 2</span>
 
 :::transliterate{sourceScript="kannada"}
 ಶ್ರೀವಾರಿಜೋದ್ಭವಭವೇಂದ್ರಖಗೇಂದ್ರಪೂರ್ವ ಮೌಳಿಸ್ಥಸನ್ಮುಕುಟಘಟ್ಟಿತಪಾದಪೀಠ । 
@@ -30,7 +30,7 @@
 * :translate[ಸಂತಪ್ತ-ಹಾಟಕ-ವಿನಿರ್ಮಿತ-ಮಂಟಪಸ್ಥ: ಚೆನ್ನಾಗಿ ಕಾಯಿಸಿ ಕರಗಿಸಿದ ಶುದ್ಧ ಚಿನ್ನದಿಂದ (ಹಾಟಕ) ನಿರ್ಮಿಸಲಾದ ಭವ್ಯ ಮಂಟಪದಲ್ಲಿ ವಿರಾಜಮಾನನಾಗಿರುವವನೇ.]{id="ds_exp_11" file="en.json"}
 * :translate[ಶ್ರೀಕಳಶಾಖ್ಯಪುರನಾಯಕ ಸನ್ನಮಾಮಿ: ಕಳಸ ಎಂಬ ಸುಂದರ ಪುರಕ್ಕೆ ನಾಯಕನಾದ ನಿನಗೆ ಸಾಷ್ಟಾಂಗ ನಮಸ್ಕಾರಗಳನ್ನು ಅರ್ಪಿಸುತ್ತೇನೆ.]{id="ds_exp_12" file="en.json"}
 
-## <span data-trans-id="deevatige_page.sec_verse3">ದೀವಟಿಗೆ ಸಲಾಂ - ೩</span>
+## <span data-trans-id="deevatige_page.sec_verse3">ದೀವಟಿಗೆ ಸಲಾಂ - 3</span>
 
 :::transliterate{sourceScript="kannada"}
 ಕುಂದೇಂದುಗೋಕ್ಷೀರಸಮಾನವರ್ಣಂ ಸದ್ಧೇಮದಂಡಾನ್ವಿತಚಾಮರದ್ವಯಮ್ । 
@@ -42,7 +42,7 @@
 * :translate[ಭೋಗೀಂದ್ರ-ಭೋಗ-ಉಪಮ-ವೇತ್ರ-ಯುಗ್ಮಂ: ಆದಿಶೇಷನ ವಿಶಾಲವಾದ ದೇಹದಂತೆ ಸುಂದರವಾಗಿರುವ ಎರಡು ರಾಜದಂಡ/ಬೆತ್ತಗಳು (ವೇತ್ರ ಯುಗ್ಮಂ).]{id="ds_exp_15" file="en.json"}
 * :translate[ದಯಾನಿಧೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ: ಎಲೈ ದಯಾಸಾಗರನೇ, ನಿನ್ನ ಮುಂದೆ ನಡೆಯುತ್ತಿರುವ ಈ ಭವ್ಯ ಸೇವೆಯನ್ನು ಕರುಣೆಯಿಂದ ಆಲಿಸು/ನೋಡು.]{id="ds_exp_16" file="en.json"}
 
-## <span data-trans-id="deevatige_page.sec_verse4">ದೀವಟಿಗೆ ಸಲಾಂ - ೪</span>
+## <span data-trans-id="deevatige_page.sec_verse4">ದೀವಟಿಗೆ ಸಲಾಂ - 4</span>
 
 :::transliterate{sourceScript="kannada"}
 ಸಮಸ್ತಪ್ರಧ್ವಾಂತಭಿದೇ ಪ್ರದೀಪ್ತೇ ತಿಗ್ಮಾಂಶುವೈಶ್ವಾನರಸನ್ನಿಕಾಶೇ । 
@@ -56,7 +56,7 @@
 * :translate[ಪಂಚ-ಶಿರಃ-ಪ್ರದೀಪಿಕೇ: ಐದು ಮುಖಗಳನ್ನು/ಶಿರಸ್ಸುಗಳನ್ನು ಹೊಂದಿರುವ ಈ ಮಹಾ ಆರತಿಯನ್ನು.]{id="ds_exp_21" file="en.json"}
 * :translate[ರಮಾಪತೇ ತ್ವಂ ಕೃಪಯಾವಲೋಕಯ: ಲಕ್ಷ್ಮೀರಮಣನೇ, ಈ ಮಂಗಳಕರ ದೀಪಾರತಿಯನ್ನು ಕರುಣೆಯಿಂದ ಸ್ವೀಕರಿಸು.]{id="ds_exp_22" file="en.json"}
 
-## <span data-trans-id="deevatige_page.sec_verse5">ದೀವಟಿಗೆ ಸಲಾಂ - ೫</span>
+## <span data-trans-id="deevatige_page.sec_verse5">ದೀವಟಿಗೆ ಸಲಾಂ - 5</span>
 
 :::transliterate{sourceScript="kannada"}
 ಭೇರೀಮೃದಂಗಾನಕವೇಣುವೀಣಾ ನಿಸ್ಸಾಳಶಂಖಶ್ರುತಿಡಿಂಡಿಮಾನಿ । 
