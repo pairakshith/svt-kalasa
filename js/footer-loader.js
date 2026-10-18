@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', loadCommonFooter);
         gcScript.async = true;
         gcScript.src = '//gc.zgo.at/count.js';
         gcScript.setAttribute('data-goatcounter', 'https://svt-kalasa.goatcounter.com/count');
+        gcScript.onload = function () {
+            if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+                window.goatcounter.count();
+            }
+        };
         document.head.appendChild(gcScript);
     }
 })();
