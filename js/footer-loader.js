@@ -21,9 +21,12 @@ async function loadCommonFooter() {
 document.addEventListener('DOMContentLoaded', loadCommonFooter);
 
 (function () {
-    var host = location.hostname;
-    var isLocal = host === 'localhost' || host === '127.0.0.1' || location.protocol === 'file:';
-    if (isLocal) return;
+    // Skip raw file:// protocol (browsers require http/https to load external scripts)
+    if (location.protocol === 'file:') return;
+
+    // Allow testing on localhost / 127.0.0.1
+    window.goatcounter = window.goatcounter || {};
+    window.goatcounter.allow_local = true;
 
     // GoatCounter Analytics (Private, no UI widgets)
     if (!document.querySelector('script[data-goatcounter]')) {
