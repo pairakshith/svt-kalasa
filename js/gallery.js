@@ -21,6 +21,14 @@ const IMGBB_MAX_FILE_BYTES = 32 * 1024 * 1024;
 // const TEMPLE_PHONE = '+919481234567'; // Replace with temple committee official WhatsApp/Phone
 const TEMPLE_EMAIL = 'test@gmail.com'; // Replace with temple official email
 
+// Published Google Sheet CSV export URL for live gallery management
+// Columns: imagePath,id,title,category,categoryKn,caption,date
+const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTgXwif2SrNyp5FIgrjhDhzMg7jQMFefvqRGl5IPzRRacz0tZyKuUrFwnPpovFBW6d4a2CTfv23RnSm/pub?output=csv';
+
+// Local gallery fallback
+const LOCAL_GALLERY_JSON = '../data/gallery.json';
+const LOCAL_GALLERY_CSV = '../data/gallery.csv';
+
 // ==========================================================================
 // 2. MAIN LOGIC & DOM INITIALIZATION
 // ==========================================================================
@@ -114,23 +122,192 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * Parse CSV text with support for quotes, commas, and linebreaks.
+     * Header row: imagePath,id,title,category,categoryKn,caption,date
+     */
+    function parseGalleryCsv(csvText) {
+        if (!csvText || typeof csvText !== 'string') return [];
+        
+        const rows = [];
+        let currentRow = [];
+        let currentField = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < csvText.length; i++) {
+            const char = csvText[i];
+            const nextChar = csvText[i + 1];
+            
+            if (char === '"') {
+                if (inQuotes && nextChar === '"') {
+                    currentField += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (char === ',' && !inQuotes) {
+                currentRow.push(currentField.trim());
+                currentField = '';
+            } else if ((char === '\r' || char === '\n') && !inQuotes) {
+                if (char === '\r' && nextChar === '\n') {
+                    i++;
+                }
+                currentRow.push(currentField.trim());
+                if (currentRow.some(field => field.length > 0)) {
+                    rows.push(currentRow);
+                }
+                currentRow = [];
+                currentField = '';
+            } else {
+                currentField += char;
+            }
+        }
+        
+        if (currentField.length > 0 || currentRow.length > 0) {
+            currentRow.push(currentField.trim());
+            if (currentRow.some(field => field.length > 0)) {
+                rows.push(currentRow);
+            }
+        }
+        
+        if (rows.length < 2) return [];
+
+        const headers = rows[0].map(h => h.trim().toLowerCase());
+        const headerIndexMap = {};
+        headers.forEach((h, idx) => {
+            headerIndexMap[h] = idx;
+        });
+
+        const items = [];
+        for (let r = 1; r < rows.length; r++) {
+            const rowValues = rows[r];
+            const getVal = (name, fallbackIdx) => {
+                const key = name.toLowerCase();
+                if (headerIndexMap[key] !== undefined) {
+                    return rowValues[headerIndexMap[key]] || '';
+                }
+                return rowValues[fallbackIdx] || '';
+            };
+
+            const imagePath = getVal('imagePath', 0).trim();
+            if (!imagePath) continue;
+
+            // 1. Publish/Draft Control: Skip row if publish is explicitly 'no', 'false', '0', or 'draft'
+            const publishVal = (getVal('publish', -1) || getVal('published', -1) || getVal('status', -1)).trim().toLowerCase();
+            if (publishVal === 'no' || publishVal === 'false' || publishVal === '0' || publishVal === 'draft') {
+                continue;
+            }
+
+            // 2. Category & Auto Localized Name (categoryKn is no longer required in sheet)
+            const category = (getVal('category', 3) || 'festivals').toLowerCase().trim();
+            const categoryKnFallback = {
+                festivals: 'ಉತ್ಸವಗಳು',
+                rituals: 'ಧಾರ್ಮಿಕ ವಿಧಿಗಳು',
+                premises: 'ದೇವಸ್ಥಾನದ ಆವರಣ',
+                archives: 'ಹಳೆಯ ಚಿತ್ರಗಳು'
+            }[category] || 'ಉತ್ಸವಗಳು';
+
+            const categoryKn = getVal('categoryKn', 4).trim() || categoryKnFallback;
+
+            // 3. ID (auto-generated if omitted from sheet)
+            const id = getVal('id', 1).trim() || `svt-${category.slice(0, 4)}-${r}`;
+
+            const entry = {
+                imagePath: imagePath,
+                id: id,
+                title: getVal('title', 2).trim() || '',
+                category: category,
+                categoryKn: categoryKn
+            };
+
+            const caption = getVal('caption', 5).trim();
+            if (caption) entry.caption = caption;
+
+            const date = getVal('date', 6).trim();
+            if (date) entry.date = date;
+
+            items.push(entry);
+        }
+
+        return items;
+    }
+
+    /**
      * ----------------------------------------------------------------------
-     * Step 1: Initialize & Fetch gallery.json
+     * Step 1: Initialize & Fetch Gallery Data
      * ----------------------------------------------------------------------
+     * Priority:
+     * 1. Google Sheets Published CSV (Live remote spreadsheet)
+     * 2. Local gallery.json (if non-empty)
+     * 3. Local gallery.csv (offline backup)
      */
     async function initGallery() {
-        try {
-            const response = await fetch('../data/gallery.json');
-            if (!response.ok) {
-                throw new Error(`Failed to load gallery data: ${response.status}`);
+        let loadedData = null;
+
+        // 1. Try Google Sheets Published CSV (if valid URL provided)
+        if (GOOGLE_SHEET_CSV_URL && !GOOGLE_SHEET_CSV_URL.includes('placeholder')) {
+            try {
+                // Append timestamp to bypass Google CDN and browser 5-minute caching
+                const freshUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
+                const sheetRes = await fetch(freshUrl, { cache: 'no-cache' });
+                if (sheetRes.ok) {
+                    const csvText = await sheetRes.text();
+                    const parsed = parseGalleryCsv(csvText);
+                    if (parsed.length > 0) {
+                        loadedData = parsed;
+                    }
+                }
+            } catch (sheetErr) {
+                console.warn('[Gallery] Google Sheet CSV fetch failed, checking local fallbacks:', sheetErr);
             }
-            galleryData = await response.json();
-            await Promise.all(galleryData.map(detectOrientation));
-            currentFiltered = [...galleryData];
-            updateCategoryCounts();
-            renderGallery(currentFiltered);
+        }
+
+        // 2. Try local gallery.json fallback
+        if (!loadedData) {
+            try {
+                const jsonRes = await fetch(LOCAL_GALLERY_JSON);
+                if (jsonRes.ok) {
+                    const text = await jsonRes.text();
+                    if (text.trim().length > 0) {
+                        const parsedJson = JSON.parse(text);
+                        if (Array.isArray(parsedJson) && parsedJson.length > 0) {
+                            loadedData = parsedJson;
+                        }
+                    }
+                }
+            } catch (jsonErr) {
+                console.warn('[Gallery] Local gallery.json empty or missing:', jsonErr);
+            }
+        }
+
+        // 3. Try local gallery.csv fallback
+        if (!loadedData) {
+            try {
+                const csvRes = await fetch(LOCAL_GALLERY_CSV);
+                if (csvRes.ok) {
+                    const csvText = await csvRes.text();
+                    const parsed = parseGalleryCsv(csvText);
+                    if (parsed.length > 0) {
+                        loadedData = parsed;
+                    }
+                }
+            } catch (csvErr) {
+                console.warn('[Gallery] Local gallery.csv fallback failed:', csvErr);
+            }
+        }
+
+        try {
+            galleryData = loadedData || [];
+            if (galleryData.length > 0) {
+                await Promise.all(galleryData.map(detectOrientation));
+                currentFiltered = [...galleryData];
+                updateCategoryCounts();
+                renderGallery(currentFiltered);
+            } else {
+                updateCategoryCounts();
+                renderGallery([]);
+            }
         } catch (error) {
-            console.error('Error fetching gallery data:', error);
+            console.error('Error rendering gallery data:', error);
             if (galleryGrid) {
                 galleryGrid.innerHTML = `
                     <div class="gallery-empty-state">
@@ -410,15 +587,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const pills = [{ key: 'all', label: 'ಎಲ್ಲಾ ಚಿತ್ರಗಳು', count: displayItems.length }];
         counts.forEach((count, label) => pills.push({ key: label, label, count }));
 
-        lightboxFilterBar.innerHTML = pills.map(pill => {
-            const isActive = pill.key === lightboxActiveCategory;
-            return `
-                <button type="button" class="lightbox-filter-pill${isActive ? ' active' : ''}"
-                        data-filter="${escapeHtml(pill.key)}" aria-pressed="${isActive}">
-                    <span>${escapeHtml(pill.label)}</span>
-                    <span class="pill-badge">${pill.count}</span>
-                </button>`;
-        }).join('');
+        // lightboxFilterBar.innerHTML = pills.map(pill => {
+        //     const isActive = pill.key === lightboxActiveCategory;
+        //     return `
+        //         <button type="button" class="lightbox-filter-pill${isActive ? ' active' : ''}"
+        //                 data-filter="${escapeHtml(pill.key)}" aria-pressed="${isActive}">
+        //             <span>${escapeHtml(pill.label)}</span>
+        //             <span class="pill-badge">${pill.count}</span>
+        //         </button>`;
+        // }).join('');
     }
 
     function openLightbox(index) {
