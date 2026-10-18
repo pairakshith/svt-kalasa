@@ -27,3 +27,30 @@
 * Plan the expansion of this framework to support similar heritage, cultural, or religious institution documentation projects.
 
 ---
+
+
+# Site Visit Tracking (GoatCounter)
+
+## What it does
+Counts site visits and shows them in a private dashboard. Nothing is displayed on the website.
+
+## Setup
+1. Sign up at goatcounter.com and choose a code, e.g. `svt-kalasa`.
+2. Add this tag before `</body>` on each page (or once in `js/footer-loader.js` if every page loads it):
+
+```html
+<script data-goatcounter="https://svt-kalasa.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+```
+
+3. Open the dashboard to view visits, pages, and referrers.
+
+## Reset (before going live)
+Settings → Manage pageviews → enter `%` → delete.
+Verify the counts drop to zero.
+
+## Notes
+- Don't delete the whole site. Deleted sites are kept for about a week and can come back.
+- Deleted data can't be recovered.
+- Free for non-commercial use.
+- Data is privacy-friendly: no cookies, no personal data.
