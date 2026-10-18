@@ -152,23 +152,78 @@
             .replace(/ṃ(?=[pb]|ph|bh)/g, 'm');
     }
 
+    function getPageDictionaryPath() {
+        var path = window.location.pathname.toLowerCase();
+        var prefix = path.indexOf('/pages/') !== -1 ? '../locales/' : 'locales/';
+        if (path.indexOf('ashtaavadhaana') !== -1) {
+            return prefix + 'en_ashtaavadhaana.json';
+        }
+        if (path.indexOf('deevatige_salaam') !== -1) {
+            return prefix + 'en_deevatige_salam.json';
+        }
+        if (path.indexOf('mangala') !== -1) {
+            return prefix + 'en_mangala.json';
+        }
+        return null;
+    }
+
     function loadDictionary() {
         if (enDictionary) {
             return Promise.resolve(enDictionary);
         }
-        return fetch(getLocalesPath())
+
+        var basePromise = fetch(getLocalesPath())
             .then(function (res) {
                 if (!res.ok) throw new Error('Failed to load en.json');
                 return res.json();
             })
+            .catch(function (err) {
+                console.warn('[LocaleEngine] en.json load error:', err);
+                return {};
+            });
+
+        var pageDictPath = getPageDictionaryPath();
+        var pagePromise = pageDictPath
+            ? fetch(pageDictPath)
+                .then(function (res) {
+                    if (!res.ok) throw new Error('Failed to load ' + pageDictPath);
+                    return res.json();
+                })
+                .catch(function (err) {
+                    console.warn('[LocaleEngine] Page dictionary load error:', err);
+                    return {};
+                })
+            : Promise.resolve({});
+
+        return Promise.all([basePromise, pagePromise])
+            .then(function (results) {
+                var baseData = results[0] || {};
+                var pageData = results[1] || {};
+                enDictionary = Object.assign({}, baseData, pageData);
+                return enDictionary;
+            });
+    }
+
+    // Load page-specific file explicitly on demand
+    function loadPageDictionary(filePath) {
+        if (!filePath) return Promise.resolve(enDictionary || {});
+        var isPages = window.location.pathname.indexOf('/pages/') !== -1;
+        var fullPath = filePath;
+        if (filePath.indexOf('/') === -1) {
+            fullPath = (isPages ? '../locales/' : 'locales/') + filePath;
+        }
+        return fetch(fullPath)
+            .then(function (res) {
+                if (!res.ok) throw new Error('Failed to load ' + fullPath);
+                return res.json();
+            })
             .then(function (data) {
-                enDictionary = data;
+                enDictionary = Object.assign(enDictionary || {}, data);
                 return enDictionary;
             })
             .catch(function (err) {
-                console.warn('[LocaleEngine] en.json load error:', err);
-                enDictionary = {};
-                return enDictionary;
+                console.warn('[LocaleEngine] loadPageDictionary error:', err);
+                return enDictionary || {};
             });
     }
 
@@ -601,6 +656,7 @@
         translateContainer: translateContainer,
         onLanguageChange: onLanguageChange,
         loadDictionary: loadDictionary,
+        loadPageDictionary: loadPageDictionary,
         
         // [NEW] Event data translation API
         translateEventData: translateEventData,
