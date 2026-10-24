@@ -83,23 +83,32 @@
     </main>
 
     <!-- Lightbox Modal -->
-    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ವೀಕ್ಷಣೆ">
-        <div class="lightbox-dialog">
-            <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ">×</button>
-            <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" title="ಹಿಂದಿನ ಚಿತ್ರ" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">‹</button>
-            <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" title="ಮುಂದಿನ ಚಿತ್ರ" aria-label="ಮುಂದಿನ ಚಿತ್ರ">›</button>
+    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="ಚಿತ್ರ ವೀಕ್ಷಣೆ" tabindex="-1">
+        <div class="lightbox-dialog" role="document">
+            <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" title="ಮುಚ್ಚಿ (Esc)" aria-label="ಮುಚ್ಚಿ (Esc)">×</button>
+            <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" title="ಹಿಂದಿನ ಚಿತ್ರ (←)" aria-label="ಹಿಂದಿನ ಚಿತ್ರ">‹</button>
+            <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" title="ಮುಂದಿನ ಚಿತ್ರ (→)" aria-label="ಮುಂದಿನ ಚಿತ್ರ">›</button>
 
             <div class="lightbox-image-wrapper">
+                <!-- Blurred LQIP/thumbnail placeholder underneath -->
+                <div class="lightbox-blur-backdrop" id="lightboxBlurBackdrop" aria-hidden="true"></div>
+                <!-- Loading spinner while high-res image streams in -->
+                <div class="lightbox-spinner" id="lightboxSpinner" role="status" aria-label="ಚಿತ್ರ ಲೋಡ್ ಆಗುತ್ತಿದೆ...">
+                    <div class="lightbox-spinner-circle"></div>
+                </div>
+                <!-- High-Resolution Image Element -->
                 <img src="" alt="" id="lightboxImg" class="lightbox-image" />
             </div>
 
             <div class="lightbox-info-bar">
                 <div class="lightbox-info-header">
                     <h3 class="lightbox-title" id="lightboxTitle"></h3>
-                    <span class="lightbox-category-tag" id="lightboxCategory"></span>
                 </div>
                 <p class="lightbox-caption" id="lightboxCaption"></p>
-                <div class="lightbox-counter" id="lightboxCounter"></div>
+                <div class="lightbox-footer-row">
+                    <div class="lightbox-date" id="lightboxDate"></div>
+                    <div class="lightbox-counter" id="lightboxCounter"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -245,14 +254,23 @@
                 <span class="gallery-stats-count" id="photoCount"></span>
     <!-- Footer -->
     <!-- Common Footer Placeholder -->
+    <!-- Upload Waiting Overlay / Processing Popup -->
+    <div class="upload-waiting-overlay" id="uploadWaitingOverlay" role="dialog" aria-modal="true" aria-live="assertive" aria-label="ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಪ್ರಕ್ರಿಯೆ">
+        <div class="upload-waiting-box">
+            <div class="upload-waiting-spinner"></div>
+            <h3 class="upload-waiting-title" id="uploadWaitingTitle">ಚಿತ್ರವನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ...</h3>
+            <p class="upload-waiting-desc" id="uploadWaitingDesc">ದಯವಿಟ್ಟು ಕಾಯಿರಿ, ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಗ್ಯಾಲರಿಗೆ ಸೇರಿಸಲಾಗುತ್ತಿದೆ.</p>
+        </div>
+    </div>
+
     <div id="footerContainer"></div>
 
     <!-- JS Loader & Translation Engines -->
     <script src="../js/footer-loader.js?v=2"></script>
     <script src="../js/vendor/sanscript.min.js"></script>
     <script src="../js/localeEngine.js"></script>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/feedback.js"></script>
+    <!-- <script src="../js/back-to-top.js"></script> -->
+    <!-- <script src="../js/feedback.js"></script> -->
     <script src="../js/public-config.js"></script>
     <script src="../js/gallery.js"></script>
 </body>

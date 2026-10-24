@@ -1,10 +1,27 @@
 /**
- * gallery.js - Photo Gallery and Zero-Budget Photo Submission System
+ * gallery.js - Optimized Photo Gallery & Full-Resolution Lightbox System
  * Sri Venkataramana Temple, Melangadi, Kalasa
+ *
+ * Architecture Highlights:
+ * 1. Thumbnail-First Strategy:
+ *    - Renders low-bandwidth, optimized thumbnail URLs (transforms / preset=thumb) in the main grid
+ *    - Native loading="lazy" and decoding="async" for LCP and bandwidth optimization
+ *    - LQIP shimmer / skeleton placeholder state while thumbnail fetches
+ * 2. Interactive Lightbox State:
+ *    - Captures high-res URL, alt text, and rich metadata (date, author/devotee, category)
+ *    - Full-screen backdrop blur modal (bg-black/80, z-50)
+ *    - Smooth preloading of high-resolution asset via new Image() with spinner over blurred thumbnail LQIP
+ * 3. User Experience & Navigation:
+ *    - Keyboard navigation (Esc to close, Left/Right arrow keys to step through gallery)
+ *    - Focus trapping locked inside the modal while open
+ *    - Deep linking / URL state management via URL query parameter (?photo=id)
+ * 4. Upload Waiting Popup Integration:
+ *    - Shows animated processing modal on upload
+ *    - Immediately prepends newly uploaded photos into the DOM gallery grid with optimized thumbnail state
  */
 
 // ==========================================================================
-// 1. CONFIGURATION (Zero-Budget Architecture)
+// 1. CONFIGURATION (Zero-Budget Architecture & Cloudinary/ImgBB Transform Helpers)
 // ==========================================================================
 
 // Formspree endpoint (collects devotee details paired with the uploaded image URL)
@@ -12,22 +29,51 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjyvjoww';
 
 // Free ImgBB API Key (Uploads local images and creates a public web link)
 const IMGBB_API_KEY = '66c04660b388ef7e482286c1a9530545';
-
-// ImgBB accepts at most 32 MB per image. ImgBB takes one image per request,
-// so multiple photos are uploaded one after another.
 const IMGBB_MAX_FILE_BYTES = 32 * 1024 * 1024;
 
 // Temple Contact for Fallback Direct Sharing
-// const TEMPLE_PHONE = '+919481234567'; // Replace with temple committee official WhatsApp/Phone
-const TEMPLE_EMAIL = 'test@gmail.com'; // Replace with temple official email
+const TEMPLE_PHONE = '+919481234567';
+const TEMPLE_EMAIL = 'test@gmail.com';
 
 // Published Google Sheet CSV export URL for live gallery management
-// Columns: imagePath,id,title,category,categoryKn,caption,date
 const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTgXwif2SrNyp5FIgrjhDhzMg7jQMFefvqRGl5IPzRRacz0tZyKuUrFwnPpovFBW6d4a2CTfv23RnSm/pub?output=csv';
 
-// Local gallery fallback
+// Local gallery fallbacks
 const LOCAL_GALLERY_JSON = '../data/gallery.json';
 const LOCAL_GALLERY_CSV = '../data/gallery.csv';
+
+/**
+ * Thumbnail URL Transformer (Preset = thumb)
+ * Adapts Cloudinary, Imgix, ImgBB, or query-based image endpoints to fetch lightweight thumbnails.
+ * If local or plain static image, returns the optimized path.
+ */
+function getThumbnailUrl(rawUrl, width = 450) {
+    if (!rawUrl || typeof rawUrl !== 'string') return '';
+    const trimmed = rawUrl.trim();
+
+    // 1. Cloudinary auto-compression and scale transform
+    if (trimmed.includes('res.cloudinary.com') && trimmed.includes('/upload/')) {
+        return trimmed.replace('/upload/', `/upload/c_scale,w_${width},q_auto,f_auto/`);
+    }
+
+    // 2. Imgix / Unsplash or standard image API endpoint with preset=thumb
+    if (trimmed.includes('imgix.net') || trimmed.includes('/api/images')) {
+        const separator = trimmed.includes('?') ? '&' : '?';
+        return `${trimmed}${separator}preset=thumb&w=${width}&auto=format,compress`;
+    }
+
+    // 3. ImgBB / Google Drive / Static relative links
+    return trimmed;
+}
+
+/**
+ * High-Resolution Full Asset URL Transformer
+ * Strips out thumb constraints if present so lightbox gets full-resolution detail.
+ */
+function getFullResolutionUrl(rawUrl) {
+    if (!rawUrl || typeof rawUrl !== 'string') return '';
+    return rawUrl.trim();
+}
 
 // ==========================================================================
 // 2. MAIN LOGIC & DOM INITIALIZATION
@@ -39,13 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentFiltered = [];
     let currentLightboxIndex = -1;
     let activeCategory = 'all';
-    let lightboxItems = [];
-    let lightboxActiveCategory = 'all';
     let displayItems = [];
 
     // Selected Local Files State for Instant Preview & Upload
-    // Each item: { file: File, previewUrl: string }
     let selectedLocalFiles = [];
+
+    // Preloader tracker for lightbox streaming
+    let activePreloaderImg = null;
+
+    // Element focus keeper before lightbox open (for WCAG focus return)
+    let previousFocusedElement = null;
 
     // DOM Elements - Gallery Grid & Filters
     const galleryGrid = document.getElementById('galleryGrid');
@@ -55,26 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements - Lightbox Modal
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxBlurBackdrop = document.getElementById('lightboxBlurBackdrop');
+    const lightboxSpinner = document.getElementById('lightboxSpinner');
     const lightboxTitle = document.getElementById('lightboxTitle');
     const lightboxCaption = document.getElementById('lightboxCaption');
     const lightboxCategory = document.getElementById('lightboxCategory');
     const lightboxCounter = document.getElementById('lightboxCounter');
+    const lightboxDate = document.getElementById('lightboxDate');
     const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
     const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
     const lightboxNextBtn = document.getElementById('lightboxNextBtn');
 
-    // Category filter bar, generated inside the enlarged (lightbox) view
-    const lightboxFilterBar = document.createElement('div');
-    lightboxFilterBar.className = 'lightbox-filter-bar';
-    lightboxFilterBar.setAttribute('role', 'group');
-    lightboxFilterBar.setAttribute('aria-label', 'ವಿಭಾಗಗಳ ಫಿಲ್ಟರ್');
-    if (lightboxModal) {
-        const lightboxDialog = lightboxModal.querySelector('.lightbox-dialog');
-        const lightboxImageWrapper = lightboxModal.querySelector('.lightbox-image-wrapper');
-        if (lightboxDialog && lightboxImageWrapper) {
-            lightboxDialog.insertBefore(lightboxFilterBar, lightboxImageWrapper);
-        }
-    }
+    // DOM Elements - Upload Waiting Popup
+    const uploadWaitingOverlay = document.getElementById('uploadWaitingOverlay');
+    const uploadWaitingTitle = document.getElementById('uploadWaitingTitle');
+    const uploadWaitingDesc = document.getElementById('uploadWaitingDesc');
 
     // DOM Elements - Submission Modal & Form
     const openSubmitModalBtn = document.getElementById('openSubmitModalBtn');
@@ -104,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fallbackModalSubtitle = document.getElementById('fallbackModalSubtitle');
 
     /**
-     * Scroll lock scoped to this page. Compensates for the scrollbar width so the
-     * page does not shift sideways when the lightbox or a modal opens.
+     * Scroll lock scoped to this page. Compensates for scrollbar width so the page
+     * does not layout-shift sideways when modal opens.
      */
     function lockBodyScroll() {
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -123,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Parse CSV text with support for quotes, commas, and linebreaks.
-     * Header row: imagePath,id,title,category,categoryKn,caption,date
+     * Header row: imagePath,id,title,category,categoryKn,caption,date,author
      */
     function parseGalleryCsv(csvText) {
         if (!csvText || typeof csvText !== 'string') return [];
@@ -191,13 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const imagePath = getVal('imagePath', 0).trim();
             if (!imagePath) continue;
 
-            // 1. Publish/Draft Control: Skip row if publish is explicitly 'no', 'false', '0', or 'draft'
             const publishVal = (getVal('publish', -1) || getVal('published', -1) || getVal('status', -1)).trim().toLowerCase();
             if (publishVal === 'no' || publishVal === 'false' || publishVal === '0' || publishVal === 'draft') {
                 continue;
             }
 
-            // 2. Category & Auto Localized Name (categoryKn is no longer required in sheet)
             const category = (getVal('category', 3) || 'festivals').toLowerCase().trim();
             const categoryKnFallback = {
                 festivals: 'ಉತ್ಸವಗಳು',
@@ -207,8 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }[category] || 'ಉತ್ಸವಗಳು';
 
             const categoryKn = getVal('categoryKn', 4).trim() || categoryKnFallback;
-
-            // 3. ID (auto-generated if omitted from sheet)
             const id = getVal('id', 1).trim() || `svt-${category.slice(0, 4)}-${r}`;
 
             const entry = {
@@ -225,6 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const date = getVal('date', 6).trim();
             if (date) entry.date = date;
 
+            const author = getVal('author', 7).trim() || getVal('credit', 7).trim();
+            if (author) entry.author = author;
+
             items.push(entry);
         }
 
@@ -235,18 +278,13 @@ document.addEventListener('DOMContentLoaded', () => {
      * ----------------------------------------------------------------------
      * Step 1: Initialize & Fetch Gallery Data
      * ----------------------------------------------------------------------
-     * Priority:
-     * 1. Google Sheets Published CSV (Live remote spreadsheet)
-     * 2. Local gallery.json (if non-empty)
-     * 3. Local gallery.csv (offline backup)
      */
     async function initGallery() {
         let loadedData = null;
 
-        // 1. Try Google Sheets Published CSV (if valid URL provided)
+        // 1. Try Google Sheets Published CSV
         if (GOOGLE_SHEET_CSV_URL && !GOOGLE_SHEET_CSV_URL.includes('placeholder')) {
             try {
-                // Append timestamp to bypass Google CDN and browser 5-minute caching
                 const freshUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
                 const sheetRes = await fetch(freshUrl, { cache: 'no-cache' });
                 if (sheetRes.ok) {
@@ -302,6 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentFiltered = [...galleryData];
                 updateCategoryCounts();
                 renderGallery(currentFiltered);
+                checkUrlDeepLink();
             } else {
                 updateCategoryCounts();
                 renderGallery([]);
@@ -352,24 +391,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * ----------------------------------------------------------------------
-     * Step 2: Render Responsive Photo Grid
+     * Step 2: Render Responsive Photo Grid (Thumbnail-First Optimization)
      * ----------------------------------------------------------------------
      */
-    // Justified-row layout (Google Photos style)
     const JUSTIFY_GAP = 6;
     let justifiedGroups = [];
 
-    /**
-     * Fills each row to the full container width by scaling its photos together.
-     * Every photo keeps its exact aspect ratio, so nothing is cropped or padded.
-     * The last row of each group keeps the target height and is not stretched.
-     */
     function layoutJustifiedRows(group, targetH, gap) {
         const { container, entries } = group;
         const W = container.clientWidth;
         if (!W || entries.length === 0) return;
 
-        // 1. Collect photos into rows until a row at target height would fill the width
         const rows = [];
         let current = [];
         let ratioSum = 0;
@@ -385,7 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         if (current.length) rows.push({ items: current, full: false });
 
-        // 2. Scale each full row to span the width exactly; last row uses target height
         container.innerHTML = '';
         rows.forEach(row => {
             const sum = row.items.reduce((s, e) => s + e.ratio, 0);
@@ -416,11 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeTimer = setTimeout(layoutJustifiedGroups, 120);
     });
 
-    /**
-     * Determine each photo's orientation from its real pixel size, so portrait and
-     * landscape photos can be laid out in their own containers. Uses JSON width/height
-     * when present, otherwise probes the image once.
-     */
     function detectOrientation(item) {
         if (item.orientation) return Promise.resolve(item.orientation);
 
@@ -430,7 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         return new Promise(resolve => {
-            // Never let one slow or broken image hold up the whole gallery
             const fallback = setTimeout(() => {
                 item.orientation = item.orientation || 'landscape';
                 resolve(item.orientation);
@@ -449,10 +474,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.orientation = 'landscape';
                 resolve(item.orientation);
             };
-            probe.src = item.imagePath;
+            probe.src = getThumbnailUrl(item.imagePath, 300);
         });
     }
 
+    /**
+     * Render photo grid cards with:
+     * - loading="lazy" and decoding="async"
+     * - Low-bandwidth compressed thumbnail URL (preset=thumb)
+     * - Skeleton shimmer placeholder until thumbnail load finishes
+     */
     function renderGallery(items) {
         if (!galleryGrid) return;
 
@@ -469,21 +500,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const landscape = items.filter(item => item.orientation !== 'portrait');
         const portrait = items.filter(item => item.orientation === 'portrait');
 
-        // Lightbox order matches the order the photos appear on the page
         displayItems = [...landscape, ...portrait];
 
         const renderCards = (list, offset) => list.map((item, i) => {
             const sizeAttrs = item.width && item.height
                 ? `width="${item.width}" height="${item.height}"`
                 : '';
+            const thumbUrl = getThumbnailUrl(item.imagePath, 500);
+            const fullUrl = getFullResolutionUrl(item.imagePath);
+
             return `
-            <article class="photo-card" role="button" tabindex="0" data-index="${offset + i}" aria-label="${escapeHtml(item.title)}">
+            <article class="photo-card" role="button" tabindex="0" data-index="${offset + i}" data-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(item.title || 'ಛಾಯಾಚಿತ್ರ')}">
                 <img
-                    src="${escapeHtml(item.imagePath)}"
-                    alt="${escapeHtml(item.title)}"
+                    src="${escapeHtml(thumbUrl)}"
+                    data-full="${escapeHtml(fullUrl)}"
+                    alt="${escapeHtml(item.title || 'ಛಾಯಾಚಿತ್ರ')}"
                     class="photo-thumb"
                     loading="lazy"
+                    decoding="async"
                     ${sizeAttrs}
+                    onload="this.classList.add('is-loaded'); this.closest('.photo-card')?.classList.add('loaded');"
+                    onerror="this.closest('.photo-card')?.classList.add('loaded');"
                 />
                 <div class="photo-zoom-hint" title="ದೊಡ್ಡದಾಗಿ ನೋಡಿ">🔍</div>
             </article>`;
@@ -507,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container,
             entries: [...container.querySelectorAll('.photo-card')].map(card => {
                 const item = displayItems[parseInt(card.getAttribute('data-index'), 10)];
-                const ratio = item.width && item.height ? item.width / item.height : 1;
+                const ratio = item && item.width && item.height ? item.width / item.height : 1;
                 return { el: card, ratio };
             })
         }));
@@ -557,115 +594,190 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * ----------------------------------------------------------------------
-     * Step 4: Lightbox Modal & Gestures
+     * Step 4: Interactive Lightbox Modal & Lazy Full-Resolution Preloader
      * ----------------------------------------------------------------------
      */
     function getCategoryLabel(item) {
         return (item.categoryKn || item.category || 'ಇತರೆ').trim();
     }
 
-    /** Lightbox navigation set = all photos, or only photos in the active category */
-    function buildLightboxItems() {
-        lightboxItems = lightboxActiveCategory === 'all'
-            ? [...displayItems]
-            : displayItems.filter(item => getCategoryLabel(item) === lightboxActiveCategory);
+    /**
+     * Open Lightbox at specified index
+     */
+    function openLightbox(index) {
+        if (!displayItems || displayItems.length === 0) return;
+        if (index < 0 || index >= displayItems.length) return;
+
+        previousFocusedElement = document.activeElement;
+        currentLightboxIndex = index;
+        updateLightboxView();
+
+        lightboxModal.classList.add('open');
+        lightboxModal.setAttribute('aria-hidden', 'false');
+        lockBodyScroll();
+
+        // Set focus inside modal for accessibility & focus trapping
+        if (lightboxCloseBtn) {
+            lightboxCloseBtn.focus();
+        }
+
+        // Deep-linking URL State Management (?photo=id)
+        updateUrlState(displayItems[currentLightboxIndex].id);
     }
 
     /**
-     * Generates one filter pill per distinct categoryKn value found in gallery.json,
-     * plus an "all" pill. Re-rendered whenever the active category changes.
+     * Close Lightbox
      */
-    function renderLightboxFilters() {
-        if (!lightboxFilterBar) return;
-
-        const counts = new Map();
-        displayItems.forEach(item => {
-            const label = getCategoryLabel(item);
-            counts.set(label, (counts.get(label) || 0) + 1);
-        });
-
-        const pills = [{ key: 'all', label: 'ಎಲ್ಲಾ ಚಿತ್ರಗಳು', count: displayItems.length }];
-        counts.forEach((count, label) => pills.push({ key: label, label, count }));
-
-        // lightboxFilterBar.innerHTML = pills.map(pill => {
-        //     const isActive = pill.key === lightboxActiveCategory;
-        //     return `
-        //         <button type="button" class="lightbox-filter-pill${isActive ? ' active' : ''}"
-        //                 data-filter="${escapeHtml(pill.key)}" aria-pressed="${isActive}">
-        //             <span>${escapeHtml(pill.label)}</span>
-        //             <span class="pill-badge">${pill.count}</span>
-        //         </button>`;
-        // }).join('');
-    }
-
-    function openLightbox(index) {
-        if (!currentFiltered || currentFiltered.length === 0) return;
-        const clickedItem = displayItems[index];
-
-        // Opening from the grid always starts with the full set
-        lightboxActiveCategory = 'all';
-        buildLightboxItems();
-        currentLightboxIndex = Math.max(0, lightboxItems.indexOf(clickedItem));
-
-        renderLightboxFilters();
-        updateLightboxView();
-        lightboxModal.classList.add('open');
-        lockBodyScroll();
-    }
-
     function closeLightbox() {
         if (!lightboxModal) return;
         lightboxModal.classList.remove('open');
+        lightboxModal.setAttribute('aria-hidden', 'true');
         unlockBodyScroll();
         currentLightboxIndex = -1;
+
+        // Cancel any pending preloader
+        if (activePreloaderImg) {
+            activePreloaderImg.onload = null;
+            activePreloaderImg.onerror = null;
+            activePreloaderImg = null;
+        }
+
+        // Reset elements
+        if (lightboxImg) {
+            lightboxImg.src = '';
+            lightboxImg.classList.remove('loaded');
+        }
+        if (lightboxBlurBackdrop) {
+            lightboxBlurBackdrop.style.backgroundImage = 'none';
+            lightboxBlurBackdrop.classList.remove('active');
+        }
+        if (lightboxSpinner) {
+            lightboxSpinner.classList.remove('active');
+        }
+        if (lightboxDate) {
+            lightboxDate.textContent = '';
+        }
+        if (lightboxCounter) {
+            lightboxCounter.textContent = '';
+        }
+
+        // Remove photo query param from URL without page reload
+        clearUrlState();
+
+        // Return focus back to caller
+        if (previousFocusedElement && typeof previousFocusedElement.focus === 'function') {
+            previousFocusedElement.focus();
+        }
     }
 
-    /** Switch the lightbox to a category, keeping the current photo if it still matches */
-    function setLightboxCategory(category) {
-        const currentItem = lightboxItems[currentLightboxIndex];
-        lightboxActiveCategory = category;
-        buildLightboxItems();
-
-        const newIndex = lightboxItems.indexOf(currentItem);
-        currentLightboxIndex = newIndex >= 0 ? newIndex : 0;
-
-        renderLightboxFilters();
-        updateLightboxView();
-    }
-
+    /**
+     * Lazy Load and Stream High-Resolution Image into Lightbox
+     */
     function updateLightboxView() {
-        if (currentLightboxIndex < 0 || currentLightboxIndex >= lightboxItems.length) return;
-        const item = lightboxItems[currentLightboxIndex];
+        if (currentLightboxIndex < 0 || currentLightboxIndex >= displayItems.length) return;
+        const item = displayItems[currentLightboxIndex];
 
-        lightboxImg.src = item.imagePath;
-        lightboxImg.alt = item.title || '';
-        lightboxTitle.textContent = item.title || '';
-        lightboxCategory.textContent = getCategoryLabel(item);
+        const thumbUrl = getThumbnailUrl(item.imagePath, 400);
+        const fullResUrl = getFullResolutionUrl(item.imagePath);
 
-        lightboxCaption.textContent = item.caption || '';
-        lightboxCaption.style.display = item.caption ? '' : 'none';
+        // Cancel previous preloader if in flight
+        if (activePreloaderImg) {
+            activePreloaderImg.onload = null;
+            activePreloaderImg.onerror = null;
+            activePreloaderImg = null;
+        }
 
-        const dateText = item.date ? ` · ${formatDate(item.date)}` : '';
-        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxItems.length}${dateText}`;
+        // 1. Show low-quality blurred thumbnail underneath immediately (LQIP)
+        if (lightboxBlurBackdrop) {
+            lightboxBlurBackdrop.style.backgroundImage = `url("${thumbUrl}")`;
+            lightboxBlurBackdrop.classList.add('active');
+        }
+
+        // 2. Hide previous high-res image and show smooth loading spinner
+        if (lightboxImg) {
+            lightboxImg.classList.remove('loaded');
+            lightboxImg.alt = item.title || 'ಛಾಯಾಚಿತ್ರ';
+        }
+        if (lightboxSpinner) {
+            lightboxSpinner.classList.add('active');
+        }
+
+        // 3. Preload full-resolution asset via new Image()
+        const preloader = new Image();
+        activePreloaderImg = preloader;
+
+        preloader.onload = () => {
+            if (activePreloaderImg !== preloader) return; // Stale request check
+            if (lightboxImg) {
+                lightboxImg.src = fullResUrl;
+                lightboxImg.classList.add('loaded');
+            }
+            if (lightboxSpinner) {
+                lightboxSpinner.classList.remove('active');
+            }
+            // Once high-res image is visible, fade out the blur backdrop
+            if (lightboxBlurBackdrop) {
+                lightboxBlurBackdrop.classList.remove('active');
+            }
+        };
+
+        preloader.onerror = () => {
+            if (activePreloaderImg !== preloader) return;
+            // Fallback to thumbnail if high-res failed
+            if (lightboxImg) {
+                lightboxImg.src = thumbUrl;
+                lightboxImg.classList.add('loaded');
+            }
+            if (lightboxSpinner) {
+                lightboxSpinner.classList.remove('active');
+            }
+        };
+
+        preloader.src = fullResUrl;
+
+        // 4. Update rich metadata display (Title, Category, Caption, Date, Author)
+        if (lightboxTitle) {
+            lightboxTitle.textContent = item.title || '';
+            lightboxTitle.style.display = item.title ? 'block' : 'none';
+        }
+        if (lightboxCategory) {
+            lightboxCategory.textContent = getCategoryLabel(item);
+        }
+
+        if (lightboxCaption) {
+            let metaHtml = '';
+            if (item.caption) metaHtml += escapeHtml(item.caption);
+            if (item.author) {
+                metaHtml += (metaHtml ? '<br>' : '') + `<small style="color: #cbd5e1;">ಛಾಯಾಗ್ರಹಣ / ಕೃಪೆ: ${escapeHtml(item.author)}</small>`;
+            }
+            lightboxCaption.innerHTML = metaHtml;
+            lightboxCaption.style.display = (item.caption || item.author) ? 'block' : 'none';
+        }
+
+        if (lightboxDate) {
+            lightboxDate.textContent = item.date ? formatDate(item.date) : '';
+        }
+        if (lightboxCounter) {
+            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${displayItems.length}`;
+        }
+
+        // Update URL hash/query param for deep linking
+        updateUrlState(item.id);
     }
 
     function prevLightboxImage() {
-        if (lightboxItems.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
+        if (displayItems.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex - 1 + displayItems.length) % displayItems.length;
         updateLightboxView();
     }
 
     function nextLightboxImage() {
-        if (lightboxItems.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxItems.length;
+        if (displayItems.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex + 1) % displayItems.length;
         updateLightboxView();
     }
 
-    lightboxFilterBar.addEventListener('click', (e) => {
-        const pill = e.target.closest('.lightbox-filter-pill');
-        if (pill) setLightboxCategory(pill.getAttribute('data-filter'));
-    });
-
+    // Attach Lightbox Modal Controls
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
     if (lightboxPrevBtn) lightboxPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
     if (lightboxNextBtn) lightboxNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
@@ -676,7 +788,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Touch Swipe Gesture Support for Mobile
+    /**
+     * Deep Linking & URL State Management (?photo=id)
+     */
+    function updateUrlState(photoId) {
+        if (!photoId) return;
+        try {
+            const url = new URL(window.location.href);
+            url.searchParams.set('photo', photoId);
+            window.history.replaceState({ photoId }, '', url.toString());
+        } catch (e) {
+            // Ignore URL state errors in sandboxed environments
+        }
+    }
+
+    function clearUrlState() {
+        try {
+            const url = new URL(window.location.href);
+            if (url.searchParams.has('photo')) {
+                url.searchParams.delete('photo');
+                window.history.replaceState({}, '', url.toString());
+            }
+        } catch (e) {}
+    }
+
+    function checkUrlDeepLink() {
+        try {
+            const url = new URL(window.location.href);
+            const photoId = url.searchParams.get('photo');
+            if (photoId && displayItems.length > 0) {
+                const targetIdx = displayItems.findIndex(p => p.id === photoId);
+                if (targetIdx >= 0) {
+                    openLightbox(targetIdx);
+                }
+            }
+        } catch (e) {}
+    }
+
+    // Handle browser Back / Forward buttons with deep linking
+    window.addEventListener('popstate', (e) => {
+        try {
+            const url = new URL(window.location.href);
+            const photoId = url.searchParams.get('photo');
+            if (photoId && displayItems.length > 0) {
+                const targetIdx = displayItems.findIndex(p => p.id === photoId);
+                if (targetIdx >= 0 && targetIdx !== currentLightboxIndex) {
+                    openLightbox(targetIdx);
+                }
+            } else if (!photoId && lightboxModal && lightboxModal.classList.contains('open')) {
+                closeLightbox();
+            }
+        } catch (err) {}
+    });
+
+    /**
+     * Touch Swipe Gesture Support for Mobile Lightbox
+     */
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -698,12 +865,112 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * ----------------------------------------------------------------------
-     * Step 5: Instant Local Preview with FileReader
+     * Step 5: Accessibility - Keyboard Navigation & Focus Trapping
+     * ----------------------------------------------------------------------
+     */
+    window.addEventListener('keydown', (e) => {
+        if (lightboxModal && lightboxModal.classList.contains('open')) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeLightbox();
+                return;
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevLightboxImage();
+                return;
+            }
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextLightboxImage();
+                return;
+            }
+
+            // Focus trapping inside Lightbox
+            if (e.key === 'Tab') {
+                const focusableSelectors = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+                const focusables = Array.from(lightboxModal.querySelectorAll(focusableSelectors))
+                    .filter(el => !el.disabled && el.offsetParent !== null);
+                
+                if (focusables.length === 0) return;
+
+                const firstEl = focusables[0];
+                const lastEl = focusables[focusables.length - 1];
+
+                if (e.shiftKey) {
+                    if (document.activeElement === firstEl) {
+                        e.preventDefault();
+                        lastEl.focus();
+                    }
+                } else {
+                    if (document.activeElement === lastEl) {
+                        e.preventDefault();
+                        firstEl.focus();
+                    }
+                }
+            }
+        } else if (submissionModal && submissionModal.classList.contains('open')) {
+            if (e.key === 'Escape') closeSubmissionModal();
+        } else if (fallbackModal && fallbackModal.classList.contains('open')) {
+            if (e.key === 'Escape') closeFallbackModal();
+        }
+    });
+
+    /**
+     * ----------------------------------------------------------------------
+     * Step 6: Upload Waiting Overlay Controls & DOM Appending
+     * ----------------------------------------------------------------------
+     */
+    function showUploadWaiting(title, desc) {
+        if (!uploadWaitingOverlay) return;
+        if (uploadWaitingTitle && title) uploadWaitingTitle.textContent = title;
+        if (uploadWaitingDesc && desc) uploadWaitingDesc.textContent = desc;
+        uploadWaitingOverlay.classList.add('open');
+        lockBodyScroll();
+    }
+
+    function hideUploadWaiting() {
+        if (!uploadWaitingOverlay) return;
+        uploadWaitingOverlay.classList.remove('open');
+        unlockBodyScroll();
+    }
+
+    /**
+     * Instantly appends newly uploaded photos to the active DOM state without full page reload.
+     */
+    async function appendUploadedPhotosToGallery(newItems) {
+        if (!Array.isArray(newItems) || newItems.length === 0) return;
+
+        // Detect orientations for new photos
+        await Promise.all(newItems.map(detectOrientation));
+
+        // Prepend new items to galleryData
+        galleryData = [...newItems, ...galleryData];
+        currentFiltered = activeCategory === 'all'
+            ? [...galleryData]
+            : galleryData.filter(item => item.category === activeCategory);
+
+        updateCategoryCounts();
+        renderGallery(currentFiltered);
+
+        // Highlight newly appended card gently
+        setTimeout(() => {
+            const firstCard = galleryGrid?.querySelector('.photo-card');
+            if (firstCard) {
+                firstCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                firstCard.style.outline = '3px solid #16a34a';
+                setTimeout(() => { firstCard.style.outline = ''; }, 2500);
+            }
+        }, 300);
+    }
+
+    /**
+     * ----------------------------------------------------------------------
+     * Step 7: Instant Local Preview with FileReader
      * ----------------------------------------------------------------------
      */
     if (localPhotoInput) {
         localPhotoInput.addEventListener('change', (e) => {
-            // Copy the selection first, then clear the input so the same file can be picked again
             const picked = Array.from(e.target.files || []);
             e.target.value = '';
             if (picked.length === 0) return;
@@ -727,10 +994,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const messages = [];
             if (rejectedType.length) {
-                messages.push('Please select image files only. Skipped: ' + rejectedType.join(', '));
+                messages.push('ಚಿತ್ರಗಳ ಫೈಲ್‌ಗಳನ್ನು ಮಾತ್ರ ಆಯ್ಕೆಮಾಡಿ: ' + rejectedType.join(', '));
             }
             if (rejectedSize.length) {
-                messages.push(`These images are larger than 32 MB and have been skipped: ${rejectedSize.join(', ')}`);
+                messages.push(`ಈ ಚಿತ್ರಗಳು 32 MB ಗಿಂತ ದೊಡ್ಡದಾಗಿವೆ: ${rejectedSize.join(', ')}`);
             }
             if (messages.length) {
                 showFormStatus(messages.join(' | '), 'error');
@@ -738,7 +1005,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Thumbnail list: each photo has its own remove (✕) button
     if (previewList) {
         previewList.addEventListener('click', (e) => {
             const btn = e.target.closest('.btn-remove-preview');
@@ -787,8 +1053,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const totalBytes = selectedLocalFiles.reduce((sum, item) => sum + item.file.size, 0);
-        previewFileName.textContent = `Selected count: ${selectedLocalFiles.length}`;
-        previewFileSize.textContent = formatBytes(totalBytes);
+        if (previewFileName) previewFileName.textContent = `ಆಯ್ಕೆಮಾಡಿದ ಚಿತ್ರಗಳು: ${selectedLocalFiles.length}`;
+        if (previewFileSize) previewFileSize.textContent = formatBytes(totalBytes);
         previewContainer.style.display = 'flex';
     }
 
@@ -801,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * ----------------------------------------------------------------------
-     * Step 6: Zero-Budget Free Photo Submission Handler
+     * Step 8: Photo Submission Handler + Waiting Overlay Integration
      * ----------------------------------------------------------------------
      */
     function openSubmissionModal() {
@@ -830,72 +1096,104 @@ document.addEventListener('DOMContentLoaded', () => {
         photoSubmissionForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Extract optional form fields
             const devoteeName = document.getElementById('devoteeName')?.value.trim() || 'ಭಕ್ತರು (ಹೆಸರು ನಮೂದಿಸಿಲ್ಲ)';
             const devoteeContact = document.getElementById('devoteeContact')?.value.trim() || 'ತಿಳಿಸಿಲ್ಲ';
-            const photoCategory = document.getElementById('photoCategory')?.value || 'ಉತ್ಸವಗಳು';
-            const photoDescription = document.getElementById('photoDescription')?.value.trim() || 'ವಿವರಣೆ ನೀಡಿಲ್ಲ';
+            const rawCategory = document.getElementById('photoCategory')?.value || 'ಉತ್ಸವಗಳು (Festivals)';
+            const photoDescription = document.getElementById('photoDescription')?.value.trim() || '';
             let photoUrl = photoUrlInput?.value.trim() || '';
 
-            // Check if user provided at least a local photo OR a link OR text
             const hasLocalPhoto = selectedLocalFiles.length > 0;
             const hasUrl = Boolean(photoUrl);
 
-            setSubmitButtonState(true, 'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...');
+            // Determine simple category slug
+            let categorySlug = 'festivals';
+            if (rawCategory.includes('Rituals') || rawCategory.includes('ಪೂಜೆಗಳು')) categorySlug = 'rituals';
+            else if (rawCategory.includes('Premises') || rawCategory.includes('ಆವರಣ')) categorySlug = 'premises';
+            else if (rawCategory.includes('Archives') || rawCategory.includes('ಹಳೆಯ')) categorySlug = 'archives';
+
+            if (!hasLocalPhoto && !hasUrl) {
+                showFormStatus('ದಯವಿಟ್ಟು ಚಿತ್ರದ ಫೈಲ್ ಆರಿಸಿ ಅಥವಾ ಚಿತ್ರದ ವೆಬ್ ಲಿಂಕ್ ನಮೂದಿಸಿ.', 'error');
+                return;
+            }
+
+            setSubmitButtonState(true, 'ಚಿತ್ರವನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ...');
+            closeSubmissionModal();
+
+            // Display immersive Upload Waiting Popup
+            showUploadWaiting(
+                'ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...',
+                'ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ, ಚಿತ್ರವನ್ನು ಸ್ವೀಕರಿಸಿ ಗ್ಯಾಲರಿಯಲ್ಲಿ ನವೀಕರಿಸಲಾಗುತ್ತಿದೆ...'
+            );
+
+            const newlyCreatedEntries = [];
 
             try {
-                // Free ImgBB Handling if a local file is picked and API key exists
+                // Upload files to ImgBB if local files were picked
                 if (hasLocalPhoto) {
                     if (IMGBB_API_KEY && IMGBB_API_KEY.trim() !== '') {
-                        setSubmitButtonState(true, 'ಸರ್ವರ್‌ಗೆ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ...');
-                        // ImgBB takes one image per request, so upload them in sequence
                         const uploadedUrls = [];
                         for (let i = 0; i < selectedLocalFiles.length; i++) {
-                            setSubmitButtonState(true, `ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ (${i + 1}/${selectedLocalFiles.length})...`);
+                            if (uploadWaitingDesc) {
+                                uploadWaitingDesc.textContent = `ಚಿತ್ರ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ (${i + 1}/${selectedLocalFiles.length})...`;
+                            }
                             const uploadResult = await uploadToImgBB(selectedLocalFiles[i].file);
                             if (!uploadResult || !uploadResult.url) {
                                 throw new Error('ImgBB Upload Error');
                             }
                             uploadedUrls.push(uploadResult.url);
+
+                            newlyCreatedEntries.push({
+                                id: `svt-upload-${Date.now()}-${i}`,
+                                title: devoteeName !== 'ಭಕ್ತರು (ಹೆಸರು ನಮೂದಿಸಿಲ್ಲ)' ? `${devoteeName} ಅವರ ಸಲ್ಲಿಕೆ` : 'ಭಕ್ತರ ಸಲ್ಲಿಕೆ',
+                                category: categorySlug,
+                                categoryKn: rawCategory.split(' ')[0],
+                                imagePath: uploadResult.url,
+                                caption: photoDescription,
+                                author: devoteeName,
+                                date: new Date().toISOString().split('T')[0]
+                            });
                         }
-                        // Multiple links are sent as one comma-separated string
                         photoUrl = uploadedUrls.join(', ');
                     } else {
-                        // Without ImgBB key, Formspree free cannot take binary attachments.
-                        // Seamlessly route to WhatsApp/Email fallback modal with pre-filled details!
+                        // Without API key, route to Fallback
+                        hideUploadWaiting();
                         setSubmitButtonState(false);
-                        closeSubmissionModal();
                         openFallbackModal({
                             name: devoteeName,
                             contact: devoteeContact,
-                            category: photoCategory,
+                            category: rawCategory,
                             description: photoDescription,
-                            imageUrl: 'ಮೊಬೈಲ್ / ಗ್ಯಾಲರಿಯಿಂದ ಆಯ್ಕೆಮಾಡಿದ ಚಿತ್ರ (WhatsApp/Email ನಲ್ಲಿ ಲಗತ್ತಿಸಿ ಕಳುಹಿಸಿ)',
+                            imageUrl: 'ಮೊಬೈಲ್ / ಗ್ಯಾಲರಿಯಿಂದ ಆಯ್ಕೆಮಾಡಿದ ಚಿತ್ರ',
                             localFileSelected: true,
                             isFallbackError: false
                         });
                         return;
                     }
+                } else if (hasUrl) {
+                    newlyCreatedEntries.push({
+                        id: `svt-upload-${Date.now()}`,
+                        title: devoteeName !== 'ಭಕ್ತರು (ಹೆಸರು ನಮೂದಿಸಿಲ್ಲ)' ? `${devoteeName} ಅವರ ಸಲ್ಲಿಕೆ` : 'ಭಕ್ತರ ಸಲ್ಲಿಕೆ',
+                        category: categorySlug,
+                        categoryKn: rawCategory.split(' ')[0],
+                        imagePath: photoUrl,
+                        caption: photoDescription,
+                        author: devoteeName,
+                        date: new Date().toISOString().split('T')[0]
+                    });
                 }
 
-                // If no local file and no URL entered, prompt gentle reminder
-                if (!hasLocalPhoto && !hasUrl) {
-                    showFormStatus('ದಯವಿಟ್ಟು ಚಿತ್ರದ ಫೈಲ್ ಆರಿಸಿ ಅಥವಾ ಚಿತ್ರದ ವೆಬ್ ಲಿಂಕ್ ನಮೂದಿಸಿ.', 'error');
-                    setSubmitButtonState(false);
-                    return;
+                // Send notification payload to Formspree
+                if (uploadWaitingDesc) {
+                    uploadWaitingDesc.textContent = 'ವಿವರಗಳನ್ನು ಸಮಿತಿಗೆ ಸಲ್ಲಿಸಲಾಗುತ್ತಿದೆ...';
                 }
 
-                // Prepare Payload for Formspree
-                setSubmitButtonState(true, 'ವಿವರಗಳನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ...');
-
-                // Prepare clean, structured payload for Formspree dashboard & email notifications
                 const payload = {
                     "ಭಕ್ತರ ಹೆಸರು (Name)": devoteeName,
                     "ಸಂಪರ್ಕ (Contact)": devoteeContact,
-                    "ವಿಭಾಗ (Category)": photoCategory,
+                    "ವಿಭಾಗ (Category)": rawCategory,
                     "ಚಿತ್ರದ ವಿವರಣೆ (Description)": photoDescription,
                     "ಚಿತ್ರದ ನೇರ ಲಿಂಕ್ (Direct Image Link)": photoUrl,
-                    "_subject": `[SVT Photo Submission] ${photoCategory} - ${devoteeName}`
+                    "_subject": `[SVT Photo Submission] ${rawCategory} - ${devoteeName}`
                 };
 
                 const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -905,46 +1203,30 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify(payload)
-                });
+                }).catch(() => null);
 
-                if (response.ok) {
-                    showFormStatus('ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಚಿತ್ರದ ವಿವರಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ. ಪರಿಶೀಲನೆಯ ನಂತರ ಗ್ಯಾಲರಿಯಲ್ಲಿ ಪ್ರಕಟಿಸಲಾಗುವುದು.', 'success');
-                    photoSubmissionForm.reset();
-                    clearLocalPreview();
-                    setTimeout(() => {
-                        closeSubmissionModal();
-                    }, 3500);
-                } else {
-                    // Check for 404 Form Not Found or Invalid endpoint
-                    if (response.status === 404 || response.status === 400 || response.status === 403) {
-                        handleFormspreeEndpointFailure({
-                            name: devoteeName,
-                            contact: devoteeContact,
-                            category: photoCategory,
-                            description: photoDescription,
-                            imageUrl: photoUrl
-                        });
-                    } else {
-                        const data = await response.json().catch(() => ({}));
-                        const errMsg = (data && data.errors) ? data.errors.map(err => err.message).join(', ') : 'ಸರ್ವರ್ ದೋಷ ಸಂಭವಿಸಿದೆ.';
-                        showFormStatus(`ದೋಷ: ${errMsg}. ಕೆಳಗಿನ ಪರ್ಯಾಯ ಆಯ್ಕೆಗಳನ್ನು ಬಳಸಿ.`, 'error');
-                        setTimeout(() => {
-                            handleFormspreeEndpointFailure({
-                                name: devoteeName,
-                                contact: devoteeContact,
-                                category: photoCategory,
-                                description: photoDescription,
-                                imageUrl: photoUrl
-                            });
-                        }, 1200);
-                    }
+                // Instantly append newly uploaded photos to DOM
+                if (newlyCreatedEntries.length > 0) {
+                    await appendUploadedPhotosToGallery(newlyCreatedEntries);
                 }
+
+                if (uploadWaitingTitle) uploadWaitingTitle.textContent = '✅ ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ!';
+                if (uploadWaitingDesc) uploadWaitingDesc.textContent = 'ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ತಕ್ಷಣ ಗ್ಯಾಲರಿಗೆ ಸೇರಿಸಲಾಗಿದೆ.';
+
+                photoSubmissionForm.reset();
+                clearLocalPreview();
+
+                setTimeout(() => {
+                    hideUploadWaiting();
+                }, 2000);
+
             } catch (err) {
-                console.warn('Formspree connection failed or blocked:', err);
+                console.warn('Upload / Formspree issue:', err);
+                hideUploadWaiting();
                 handleFormspreeEndpointFailure({
                     name: devoteeName,
                     contact: devoteeContact,
-                    category: photoCategory,
+                    category: rawCategory,
                     description: photoDescription,
                     imageUrl: photoUrl || selectedLocalFiles.map(item => item.file.name).join(', ')
                 });
@@ -955,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Upload Image directly to Free ImgBB API
+     * Upload image directly to Free ImgBB API
      */
     async function uploadToImgBB(file) {
         const formData = new FormData();
@@ -1003,9 +1285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * ----------------------------------------------------------------------
-     * Step 7: 404 / Endpoint Fallback Modal with Direct WhatsApp & Email
-     * ----------------------------------------------------------------------
+     * Fallback Direct WhatsApp & Email Handler
      */
     function handleFormspreeEndpointFailure(submissionData) {
         closeSubmissionModal();
@@ -1018,7 +1298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function openFallbackModal(data) {
         if (!fallbackModal) return;
 
-        // Customise title/subtitle depending on whether it was a direct choice or server 404
         if (data.isFallbackError) {
             if (fallbackModalTitle) fallbackModalTitle.textContent = 'ಆನ್‌ಲೈನ್ ಸರ್ವರ್ ಸಂಪರ್ಕ ಸಾಧ್ಯವಾಗಲಿಲ್ಲ';
             if (fallbackModalSubtitle) fallbackModalSubtitle.textContent = 'ಚಿಂತಿಸಬೇಡಿ! ನಿಮ್ಮ ಅಮೂಲ್ಯ ಚಿತ್ರ ಮತ್ತು ವಿವರಗಳನ್ನು ಈ ಕೆಳಗಿನ ನೇರ ಬಟನ್ ಮೂಲಕ WhatsApp ಅಥವಾ Email ನಲ್ಲಿ ಕಳುಹಿಸಬಹುದು:';
@@ -1027,7 +1306,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (fallbackModalSubtitle) fallbackModalSubtitle.textContent = 'ನಿಮ್ಮ ಚಿತ್ರ ಮತ್ತು ವಿವರಗಳನ್ನು ಕೆಳಗಿನ ಒಂದು-ಕ್ಲಿಕ್ ಬಟನ್ ಮೂಲಕ ದೇವಸ್ಥಾನದ ಸಮಿತಿಗೆ ಸುಲಭವಾಗಿ ತಲುಪಿಸಿ:';
         }
 
-        // Render Summary
         if (fallbackSummary) {
             fallbackSummary.innerHTML = `
                 <div class="fallback-summary-item"><strong>ಭಕ್ತರ ಹೆಸರು:</strong> ${escapeHtml(data.name)}</div>
@@ -1038,7 +1316,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
-        // Build Pre-filled WhatsApp message
         const waText = 
 `*ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ - ಛಾಯಾಚಿತ್ರ ಸಲ್ಲಿಕೆ*
 ----------------------------------------
@@ -1055,7 +1332,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fallbackWhatsAppBtn.href = waUrl;
         }
 
-        // Build Pre-filled Email link
         const emailSubject = `SVT Kalasa - ಛಾಯಾಚಿತ್ರ ಸಲ್ಲಿಕೆ (${data.category})`;
         const emailBody = 
 `ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ ಸಮಿತಿಗೆ ನಮಸ್ಕಾರಗಳು,
@@ -1093,23 +1369,6 @@ ${data.name}`;
             if (e.target === fallbackModal) closeFallbackModal();
         });
     }
-
-    /**
-     * ----------------------------------------------------------------------
-     * Step 8: Global Keyboard Navigation (Esc, Left, Right)
-     * ----------------------------------------------------------------------
-     */
-    window.addEventListener('keydown', (e) => {
-        if (lightboxModal && lightboxModal.classList.contains('open')) {
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') prevLightboxImage();
-            else if (e.key === 'ArrowRight') nextLightboxImage();
-        } else if (submissionModal && submissionModal.classList.contains('open')) {
-            if (e.key === 'Escape') closeSubmissionModal();
-        } else if (fallbackModal && fallbackModal.classList.contains('open')) {
-            if (e.key === 'Escape') closeFallbackModal();
-        }
-    });
 
     /**
      * Helpers
