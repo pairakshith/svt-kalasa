@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="kn" translate="yes">
+<!DOCTYPE html>
+<html lang="kn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,21 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
+        .pn-en { display: none; }
+        html.lang-en .pn-kn { display: none; }
+        html.lang-en .pn-en { display: inline; }
+
+        .lang-notice {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
         .lang-bar-container {
             display: flex;
             justify-content: space-between;
@@ -41,93 +56,64 @@
             cursor: pointer;
         }
         .lang-selector-select option { background-color: #333; color: white; }
-
-        /* Hide Google top banner and widget cleanly without breaking translation */
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-        }
     </style>
-
-    <script type="text/javascript">
-        function setGoogleTranslateCookie(lang) {
-            document.cookie = "googtrans=/kn/" + lang + "; path=/;";
-            document.cookie = "googtrans=/kn/" + lang + "; domain=" + window.location.hostname + "; path=/;";
-        }
-
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'kn',
-                includedLanguages: 'en,kn',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function switchLanguage(lang) {
-            if (lang === 'en') {
-                setGoogleTranslateCookie('en');
-            } else {
-                setGoogleTranslateCookie('kn');
-            }
-            window.location.reload();
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 
-    <header class="site-header site-header--glass">
+    <header class="site-header site-header--glass notranslate" translate="no">
         <div class="header-container" id="langHeader"></div>
     </header>
 
-    <nav class="main-nav">
-        <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
-        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
-        <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
-        <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
-        <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
-        <a href="traditions.html" class="nav-link active" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
-        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
-        <a href="photos.html" class="nav-link" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
-        <a href="references.html" class="nav-link" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು</a>
+    <nav class="main-nav notranslate" translate="no">
+        <a href="../index.html" class="nav-link" data-trans-id="nav.home"><span class="pn-kn">ಮುಖ ಪುಟ</span><span class="pn-en">Home</span></a>
+        <a href="events.html" class="nav-link" data-trans-id="nav.events"><span class="pn-kn">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</span><span class="pn-en">Festival Schedule</span></a>
+        <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam"><span class="pn-kn">ದೀವಟಿಗೆ ಸಲಾಂ</span><span class="pn-en">Deevatige Salaam</span></a>
+        <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana"><span class="pn-kn">ಅಷ್ಟಾವಧಾನ</span><span class="pn-en">Ashtaavadhaana</span></a>
+        <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala"><span class="pn-kn">ಮಂಗಳ</span><span class="pn-en">Mangala</span></a>
+        <a href="traditions.html" class="nav-link active" data-trans-id="nav.traditions"><span class="pn-kn">ಆಚರಣೆಗಳು</span><span class="pn-en">Traditions</span></a>
+        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history"><span class="pn-kn">ಇತಿಹಾಸ</span><span class="pn-en">History</span></a>
+        <a href="photos.html" class="nav-link" data-trans-id="nav.photos"><span class="pn-kn">ದೃಶ್ಯ ಕಾವ್ಯ</span><span class="pn-en">Gallery</span></a>
+        <a href="references.html" class="nav-link" data-trans-id="nav.references"><span class="pn-kn">ಉಲ್ಲೇಖಗಳು</span><span class="pn-en">References</span></a>
     </nav>
 
     <main class="container">
         <div class="page-header">
-            <h2 class="kn-heading">ವಿಶೇಷ ಆಚರಣೆಗಳು, ವ್ರತಗಳು ಮತ್ತು ಪೌರಾಣಿಕ ಮಹತ್ವ</h2>
-            <p class="kn-subheading">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ವಿಧಿವಿಧಾನಗಳು</p>
+            <h2 class="kn-heading">
+                <span class="pn-kn">ವಿಶೇಷ ಆಚರಣೆಗಳು, ವ್ರತಗಳು ಮತ್ತು ಪೌರಾಣಿಕ ಮಹತ್ವ</span>
+                <span class="pn-en">Special Observances, Vratas and Mythological Significance</span>
+            </h2>
+            <p class="kn-subheading" data-protect>
+                <span class="pn-kn">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನದಲ್ಲಿ ನಡೆಯುವ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ವಿಧಿವಿಧಾನಗಳು</span>
+                <span class="pn-en">Major religious observances held at Sri Venkataramana Temple</span>
+            </p>
         </div>
 
-        <div class="filter-tabs">
-            <button class="tab-btn active" onclick="filterTraditions('all', this)">ಸಂಪೂರ್ಣ ಪುಟ</button>
-            <button class="tab-btn" onclick="filterTraditions('chandramana_yugadi', this)">ಚಾಂದ್ರಮಾನ ಯುಗಾದಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('sri_rama_navami', this)">ಶ್ರೀ ರಾಮ ನವಮಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('chitra_paurnami', this)">ಚಿತ್ರಾ ಪೌರ್ಣಮಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('nrusimha_jayanti', this)">ನೃಸಿಂಹ ಜಯಂತಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('vaishakha_paurnami', this)">ವೈಶಾಖ ಪೌರ್ಣಮಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('rigupakarma', this)">ಋಗುಪಾಕರ್ಮ</button>
-            <button class="tab-btn" onclick="filterTraditions('varamahalakshmi_vrata', this)">ವರಮಹಾಲಕ್ಷ್ಮಿ ವ್ರತ</button>
-            <button class="tab-btn" onclick="filterTraditions('pavitraropana', this)">ಪವಿತ್ರಾರೋಪಣ</button>
-            <button class="tab-btn" onclick="filterTraditions('sri_krishna_janmashtami', this)">ಶ್ರೀ ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('sri_ganesha_chaturthi', this)">ಶ್ರೀ ಗಣೇಶ ಚತುರ್ಥಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('ananta_chaturdashi', this)">ಅನಂತ ಚತುರ್ದಶಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('paschima_jagara', this)">ಪಶ್ಚಿಮ ಜಾಗರ ಪೂಜೆ</button>
-            <button class="tab-btn" onclick="filterTraditions('tulasi_vivaha', this)">ಉತ್ಥಾನ ದ್ವಾದಶಿ - ತುಳಸೀ ವಿವಾಹ</button>
-            <button class="tab-btn" onclick="filterTraditions('kartika_vana_bhojana', this)">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ & ವನ ಭೋಜನ</button>
-            <button class="tab-btn" onclick="filterTraditions('vishwaroopa', this)">ವಿಶ್ವರೂಪ ದರ್ಶನ</button>
-            <button class="tab-btn" onclick="filterTraditions('mukkoti_dvadashi', this)">ಮುಕ್ಕೋಟಿ ದ್ವಾದಶಿ</button>
-            <button class="tab-btn" onclick="filterTraditions('ratha_saptami', this)">ರಥ ಸಪ್ತಮಿ</button>
+        <div class="filter-tabs notranslate" translate="no">
+            <button class="tab-btn active" onclick="filterTraditions('all', this)"><span class="pn-kn">ಸಂಪೂರ್ಣ ಪುಟ</span><span class="pn-en">Full Page</span></button>
+            <button class="tab-btn" onclick="filterTraditions('chandramana_yugadi', this)"><span class="pn-kn">ಚಾಂದ್ರಮಾನ ಯುಗಾದಿ</span><span class="pn-en">Chandramana Yugadi</span></button>
+            <button class="tab-btn" onclick="filterTraditions('sri_rama_navami', this)"><span class="pn-kn">ಶ್ರೀ ರಾಮ ನವಮಿ</span><span class="pn-en">Sri Rama Navami</span></button>
+            <button class="tab-btn" onclick="filterTraditions('chitra_paurnami', this)"><span class="pn-kn">ಚಿತ್ರಾ ಪೌರ್ಣಮಿ</span><span class="pn-en">Chitra Paurnami</span></button>
+            <button class="tab-btn" onclick="filterTraditions('nrusimha_jayanti', this)"><span class="pn-kn">ನೃಸಿಂಹ ಜಯಂತಿ</span><span class="pn-en">Nrusimha Jayanti</span></button>
+            <button class="tab-btn" onclick="filterTraditions('vaishakha_paurnami', this)"><span class="pn-kn">ವೈಶಾಖ ಪೌರ್ಣಮಿ</span><span class="pn-en">Vaishakha Paurnami</span></button>
+            <button class="tab-btn" onclick="filterTraditions('rigupakarma', this)"><span class="pn-kn">ಋಗುಪಾಕರ್ಮ</span><span class="pn-en">Rigupakarma</span></button>
+            <button class="tab-btn" onclick="filterTraditions('varamahalakshmi_vrata', this)"><span class="pn-kn">ವರಮಹಾಲಕ್ಷ್ಮಿ ವ್ರತ</span><span class="pn-en">Varamahalakshmi Vrata</span></button>
+            <button class="tab-btn" onclick="filterTraditions('pavitraropana', this)"><span class="pn-kn">ಪವಿತ್ರಾರೋಪಣ</span><span class="pn-en">Pavitraropana</span></button>
+            <button class="tab-btn" onclick="filterTraditions('sri_krishna_janmashtami', this)"><span class="pn-kn">ಶ್ರೀ ಕೃಷ್ಣ ಜನ್ಮಾಷ್ಟಮಿ</span><span class="pn-en">Sri Krishna Janmashtami</span></button>
+            <button class="tab-btn" onclick="filterTraditions('sri_ganesha_chaturthi', this)"><span class="pn-kn">ಶ್ರೀ ಗಣೇಶ ಚತುರ್ಥಿ</span><span class="pn-en">Sri Ganesha Chaturthi</span></button>
+            <button class="tab-btn" onclick="filterTraditions('ananta_chaturdashi', this)"><span class="pn-kn">ಅನಂತ ಚತುರ್ದಶಿ</span><span class="pn-en">Ananta Chaturdashi</span></button>
+            <button class="tab-btn" onclick="filterTraditions('paschima_jagara', this)"><span class="pn-kn">ಪಶ್ಚಿಮ ಜಾಗರ ಪೂಜೆ</span><span class="pn-en">Paschima Jagara Puja</span></button>
+            <button class="tab-btn" onclick="filterTraditions('tulasi_vivaha', this)"><span class="pn-kn">ಉತ್ಥಾನ ದ್ವಾದಶಿ - ತುಳಸೀ ವಿವಾಹ</span><span class="pn-en">Utthana Dwadashi - Tulasi Vivaha</span></button>
+            <button class="tab-btn" onclick="filterTraditions('kartika_vana_bhojana', this)"><span class="pn-kn">ಕಾರ್ತಿಕ ಹುಣ್ಣಿಮೆ & ವನ ಭೋಜನ</span><span class="pn-en">Kartika Hunnime &amp; Vana Bhojana</span></button>
+            <button class="tab-btn" onclick="filterTraditions('vishwaroopa', this)"><span class="pn-kn">ವಿಶ್ವರೂಪ ದರ್ಶನ</span><span class="pn-en">Vishwaroopa Darshana</span></button>
+            <button class="tab-btn" onclick="filterTraditions('mukkoti_dvadashi', this)"><span class="pn-kn">ಮುಕ್ಕೋಟಿ ದ್ವಾದಶಿ</span><span class="pn-en">Mukkoti Dvadashi</span></button>
+            <button class="tab-btn" onclick="filterTraditions('ratha_saptami', this)"><span class="pn-kn">ರಥ ಸಪ್ತಮಿ</span><span class="pn-en">Ratha Saptami</span></button>
         </div>
 
         <div id="content-display">
-            <div class="loading-text">ಆಚರಣೆಗಳ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
+            <div class="loading-text"><span class="pn-kn">ಆಚರಣೆಗಳ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</span><span class="pn-en">Loading traditions information...</span></div>
         </div>
     </main>
 
-    <div id="google_translate_element"></div>
     <div id="footerContainer"></div>
 
     <script src="../js/footer-loader.js?v=2"></script>
@@ -138,20 +124,30 @@
     <script>
         let parsedTraditions = [];
 
-        function getCurrentLangFromCookie() {
-            const match = document.cookie.match(/googtrans=\/kn\/([a-z]{2})/);
-            return match ? match[1] : 'kn';
+        function getLang() {
+            const v = localStorage.getItem('svt_lang');
+            return v === 'en' ? 'en' : 'kn';
         }
+
+        function setLang(lang) {
+            localStorage.setItem('svt_lang', lang === 'en' ? 'en' : 'kn');
+        }
+
+        document.documentElement.lang = getLang();
+        document.documentElement.classList.toggle('lang-en', getLang() === 'en');
 
         function initializeHeader() {
             const headerContainer = document.getElementById('langHeader');
-            const currentLang = getCurrentLangFromCookie();
+            const currentLang = getLang();
 
             headerContainer.innerHTML = `
                 <div class="lang-bar-container">
                     <div class="lang-brand">
                         <span class="temple-om">ॐ</span>
-                        <span class="lang-brand-text">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</span>
+                        <span class="lang-brand-text">
+                            <span class="pn-kn">ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ</span>
+                            <span class="pn-en">Sri Venkataramana Temple, Kalasa</span>
+                        </span>
                     </div>
                     <div class="lang-control">
                         <label for="languageSelect" class="lang-label">
@@ -165,39 +161,61 @@
                 </div>`;
 
             document.getElementById('languageSelect').addEventListener('change', function(e) {
-                switchLanguage(e.target.value);
+                setLang(e.target.value);
+                location.reload();
             });
         }
 
         async function loadTraditionsMarkdown() {
+            const displayContainer = document.getElementById('content-display');
+            let isFallback = false;
+            let rawMarkdown = '';
+            const requestedLang = getLang();
+
             try {
-                const response = await fetch('../data/traditions.md');
-                const rawMarkdown = await response.text();
+                const file = requestedLang === 'en' ? '../data/en/traditions.md' : '../data/traditions.md';
+                let response = await fetch(file, { cache: 'no-store' });
 
-                // Split markdown by "---" separator
-                const rawBlocks = rawMarkdown.split('---');
+                if (!response.ok && requestedLang === 'en') {
+                    isFallback = true;
+                    response = await fetch('../data/traditions.md', { cache: 'no-store' });
+                }
 
-                parsedTraditions = rawBlocks.map(block => {
-                    // Extract category from "# CATEGORY: category_name"
-                    const categoryMatch = block.match(/# CATEGORY:\s*(\w+)/);
-                    const category = categoryMatch ? categoryMatch[1].trim() : 'all';
+                if (!response.ok) {
+                    throw new Error(`Failed to load markdown: ${response.status}`);
+                }
 
-                    // Remove category tag from raw content before parsing
-                    const cleanMarkdown = block.replace(/# CATEGORY:\s*\w+/, '').trim();
-
-                    return {
-                        category: category,
-                        htmlContent: marked.parse(cleanMarkdown)
-                    };
-                }).filter(item => item.htmlContent.length > 0);
-
-                renderFilteredTraditions('all');
-
+                rawMarkdown = await response.text();
             } catch (error) {
                 console.error("Markdown load error:", error);
-                document.getElementById('content-display').innerHTML =
-                    `<p style="color:red; text-align:center;">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ.</p>`;
+                displayContainer.innerHTML =
+                    `<p style="color:red; text-align:center;"><span class="pn-kn">ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ.</span><span class="pn-en">An error occurred while loading information.</span></p>`;
+                return;
             }
+
+            const rawBlocks = rawMarkdown ? rawMarkdown.split(/^\s*---\s*$/m) : [];
+
+            parsedTraditions = rawBlocks.map(block => {
+                const catMatch = block.match(/^#\s*CATEGORY:\s*([\w-]+)\s*$/m);
+                const category = catMatch ? catMatch[1].trim() : 'all';
+                const cleanMarkdown = block.replace(/^#\s*CATEGORY:\s*[\w-]+\s*$/m, '').trim();
+
+                return {
+                    category: category,
+                    htmlContent: cleanMarkdown ? marked.parse(cleanMarkdown) : ''
+                };
+            }).filter(item => item.htmlContent.length > 0);
+
+            let noticeHtml = '';
+            if (isFallback) {
+                noticeHtml = `
+                    <p class="lang-notice">
+                        <span class="pn-kn">ಇಂಗ್ಲಿಷ್ ಆವೃತ್ತಿ ಲಭ್ಯವಿಲ್ಲ</span>
+                        <span class="pn-en">English version not yet available. Showing Kannada.</span>
+                    </p>`;
+            }
+
+            renderFilteredTraditions('all', noticeHtml);
         }
 
         function filterTraditions(targetCategory, buttonElement) {
@@ -206,19 +224,25 @@
             renderFilteredTraditions(targetCategory);
         }
 
-        function renderFilteredTraditions(targetCategory) {
+        function renderFilteredTraditions(targetCategory, noticeHtml = '') {
             const displayContainer = document.getElementById('content-display');
+            if (!displayContainer) return;
+
+            const existingNotice = displayContainer.querySelector('.lang-notice');
+            if (!noticeHtml && existingNotice) {
+                noticeHtml = existingNotice.outerHTML;
+            }
 
             const filteredList = (targetCategory === 'all')
                 ? parsedTraditions
                 : parsedTraditions.filter(item => item.category === targetCategory);
 
             if (filteredList.length === 0) {
-                displayContainer.innerHTML = `<p class="loading-text">ಯಾವುದೇ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ.</p>`;
+                displayContainer.innerHTML = `${noticeHtml}<p class="loading-text"><span class="pn-kn">ಯಾವುದೇ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ</span><span class="pn-en">No information available</span></p>`;
                 return;
             }
 
-            displayContainer.innerHTML = filteredList.map(item => `
+            displayContainer.innerHTML = noticeHtml + filteredList.map(item => `
                 <article class="markdown-card">
                     ${item.htmlContent}
                 </article>
