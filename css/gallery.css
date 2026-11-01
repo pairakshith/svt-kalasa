@@ -450,10 +450,23 @@
     margin: 0;
 }
 
-.lightbox-counter {
+.lightbox-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
     font-size: 0.82rem;
     color: #94a3b8;
-    margin-top: 6px;
+}
+
+.lightbox-date {
+    color: #94a3b8;
+}
+
+.lightbox-counter {
+    margin-left: auto;
+    font-size: 0.82rem;
+    color: #94a3b8;
 }
 
 /* --------------------------------------------------------------------------
@@ -1147,4 +1160,161 @@
 
 .gallery-justified .photo-card:hover .photo-thumb {
     transform: scale(1.04);
+}
+
+/* ==========================================================================
+   PERFORMANCE & LIGHTBOX ENHANCEMENTS
+   Thumbnail shimmer skeleton, blur LQIP backdrop & preloader spinner
+   ========================================================================== */
+
+/* Shimmer skeleton on photo-cards while thumbnail fetches */
+.photo-card {
+    background: #e2e8f0 linear-gradient(90deg, rgba(226, 232, 240, 0.8) 0%, rgba(241, 245, 249, 0.95) 50%, rgba(226, 232, 240, 0.8) 100%) !important;
+    background-size: 200% 100% !important;
+    animation: galleryCardShimmer 1.8s infinite ease-in-out;
+}
+
+@keyframes galleryCardShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.photo-card.loaded {
+    background: var(--gallery-card-bg) !important;
+    animation: none !important;
+}
+
+/* Thumbnail smooth fade-in */
+.photo-thumb {
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.4s ease;
+}
+
+.photo-thumb.is-loaded {
+    opacity: 1;
+}
+
+/* Lightbox viewport enhancements */
+.lightbox-image-wrapper {
+    min-height: 200px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Low-Quality Placeholder / Thumbnail backdrop with blur */
+.lightbox-blur-backdrop {
+    position: absolute;
+    inset: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px) brightness(0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.lightbox-blur-backdrop.active {
+    opacity: 1;
+}
+
+/* Lightbox Spinner overlay */
+.lightbox-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.lightbox-spinner.active {
+    display: flex;
+}
+
+.lightbox-spinner-circle {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-top-color: #f59e0b;
+    border-radius: 50%;
+    animation: lightboxSpin 0.8s linear infinite;
+}
+
+@keyframes lightboxSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Lightbox Image smooth presentation */
+.lightbox-image {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-image.loaded {
+    opacity: 1;
+}
+
+/* Upload Waiting Overlay */
+.upload-waiting-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.upload-waiting-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.upload-waiting-box {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px 24px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+.upload-waiting-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #f3f4f6;
+    border-top-color: var(--gallery-primary);
+    border-radius: 50%;
+    animation: lightboxSpin 0.9s linear infinite;
+    margin: 0 auto 18px;
+}
+
+.upload-waiting-title {
+    font-family: var(--font-serif-kannada);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gallery-primary);
+    margin: 0 0 8px 0;
+}
+
+.upload-waiting-desc {
+    font-size: 0.92rem;
+    color: var(--gallery-text-muted);
+    line-height: 1.5;
+    margin: 0;
 }
