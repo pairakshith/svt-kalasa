@@ -48,6 +48,9 @@ function filterTable() {
 }
 
 // 3. Highlight Next Upcoming Event
+let upcomingListenerAdded = false;
+let hasScrolledToNext = false;
+
 function initUpcomingEvents() {
     const today = new Date();
     const year = today.getFullYear();
@@ -62,11 +65,15 @@ function initUpcomingEvents() {
         const eventDate = card.getAttribute("data-date");
         if (!eventDate) return;
 
+        // Clear the badge from any previous run (e.g. after a language switch)
+        const oldBadge = card.querySelector(".upcoming-badge");
+        if (oldBadge) oldBadge.remove();
+
         if (!foundUpcoming && eventDate >= todayStr) {
             card.classList.add("upcoming-next");
-            
+
             const cardTop = card.querySelector(".card-top");
-            if (cardTop && !cardTop.querySelector(".upcoming-badge")) {
+            if (cardTop) {
                 const badge = document.createElement("span");
                 badge.className = "upcoming-badge";
 
@@ -74,19 +81,29 @@ function initUpcomingEvents() {
                     ? window.LocaleEngine.translateText("events_page.upcoming_badge", "ಮುಂದಿನ ಉತ್ಸವ")
                     : "ಮುಂದಿನ ಉತ್ಸವ";
 
-                badge.innerHTML = `🌟 ${badgeText}`;
+                badge.textContent = `🌟 ${badgeText}`;
                 cardTop.appendChild(badge);
             }
 
             foundUpcoming = true;
 
-            setTimeout(() => {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 300);
+            // Scroll only on the first run, not on every language switch
+            if (!hasScrolledToNext) {
+                hasScrolledToNext = true;
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
         } else if (eventDate < todayStr) {
             card.classList.add("past-event");
         }
     });
+
+    // Register the language listener once, so the badge text updates on switch
+    if (!upcomingListenerAdded && window.LocaleEngine && typeof window.LocaleEngine.onLanguageChange === "function") {
+        upcomingListenerAdded = true;
+        window.LocaleEngine.onLanguageChange(initUpcomingEvents);
+    }
 }
 
 // Initialize listeners and highlight on DOM ready
