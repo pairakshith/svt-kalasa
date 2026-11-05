@@ -40,9 +40,9 @@
 ---
 
 # CATEGORY: more_on_gsb
-## ಗೌಡ ಸಾರಸ್ವತ ಬ್ರಾಹ್ಮಣರ ಇತಿಹಾಸ (GSB History)
+## ಗೌಡ ಸಾರಸ್ವತ ಬ್ರಾಹ್ಮಣರ ಇತಿಹಾಸ
 
-> **ಸಂಪಾದಕೀಯ ಸೂಚನೆ:** ಈ ಲೇಖನವು ಗೌಡ ಸಾರಸ್ವತ ಬ್ರಾಹ್ಮಣರ (GSB) ಇತಿಹಾಸದ ಪ್ರಮುಖ ಅಂಶಗಳನ್ನು ಮಾತ್ರ ನೀಡುತ್ತದೆ. ಸಮುದಾಯದ ಪರಂಪರೆಯಲ್ಲಿ ಉಳಿದಿರುವ ಕಥೆಗಳು, ಪ್ರಕಟಿತ ಇತಿಹಾಸ ಮತ್ತು ಶಾಸನಗಳಿಂದ ದೃಢಪಟ್ಟ ಸಂಗತಿಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಗುರುತಿಸಲಾಗಿದೆ. ಸ್ಥಳೀಯ ಕುಟುಂಬಗಳ ಮೌಖಿಕ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿದ ನಂತರ ಈ ಲೇಖನವನ್ನು ಇನ್ನಷ್ಟು ನಿಖರಗೊಳಿಸಬಹುದು.
+> **ಸೂಚನೆ:** ಈ ಲೇಖನವು ಗೌಡ ಸಾರಸ್ವತ ಬ್ರಾಹ್ಮಣರ (GSB) ಇತಿಹಾಸದ ಪ್ರಮುಖ ಅಂಶಗಳನ್ನು ಮಾತ್ರ ನೀಡುತ್ತದೆ. ಸಮುದಾಯದ ಪರಂಪರೆಯಲ್ಲಿ ಉಳಿದಿರುವ ಕಥೆಗಳು, ಪ್ರಕಟಿತ ಇತಿಹಾಸ ಮತ್ತು ಶಾಸನಗಳಿಂದ ದೃಢಪಟ್ಟ ಸಂಗತಿಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಗುರುತಿಸಲಾಗಿದೆ. ಸ್ಥಳೀಯ ಕುಟುಂಬಗಳ ಮೌಖಿಕ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಿದ ನಂತರ ಈ ಲೇಖನವನ್ನು ಇನ್ನಷ್ಟು ನಿಖರಗೊಳಿಸಬಹುದು.
 
 ## ಸಮುದಾಯದ ಗುರುತು ಮತ್ತು ಮೂಲಪರಂಪರೆ
 
@@ -54,47 +54,25 @@
 ## ಗೋವಾದಿಂದ ಕರಾವಳಿ ಕರ್ನಾಟಕಕ್ಕೆ ವಲಸೆ
 
 - ಗೌಡ ಸಾರಸ್ವತರು ಕರ್ನಾಟಕದ ಕರಾವಳಿಗೆ ಒಂದೇ ಸಂದರ್ಭದಲ್ಲಿ ಬಂದವರಲ್ಲ. ಹಲವು ಹಂತಗಳಲ್ಲಿ ನಡೆದ ವಲಸೆಯ ಇತಿಹಾಸ ಇದಾಗಿದೆ.
-- 2024ರ ಇತಿಹಾಸ-ಮಾನವಶಾಸ್ತ್ರೀಯ ಅಧ್ಯಯನದ ಪ್ರಕಾರ, 13ನೇ ಶತಮಾನಕ್ಕೆ ಮಂಜೇಶ್ವರ ಪ್ರದೇಶದಲ್ಲಿ ಮತ್ತು 14ನೇ ಶತಮಾನಕ್ಕೆ ಮುಳ್ಕಿ ಪ್ರದೇಶದಲ್ಲಿ ಗೌಡ ಸಾರಸ್ವತರು ನೆಲೆಸಿದ್ದರು. ಗೋವಾದಿಂದ ನಡೆದ ದೊಡ್ಡ ಪ್ರಮಾಣದ ವಲಸೆ 16ರಿಂದ 18ನೇ ಶತಮಾನಗಳ ನಡುವೆ ಮುಂದುವರಿಯಿತು. [1]
+- 2024ರ ಇತಿಹಾಸ-ಮಾನವಶಾಸ್ತ್ರೀಯ ಅಧ್ಯಯನದ ಪ್ರಕಾರ, 13ನೇ ಶತಮಾನಕ್ಕೆ ಮಂಜೇಶ್ವರ ಪ್ರದೇಶದಲ್ಲಿ ಮತ್ತು 14ನೇ ಶತಮಾನಕ್ಕೆ ಮೂಲ್ಕಿ ಪ್ರದೇಶದಲ್ಲಿ ಗೌಡ ಸಾರಸ್ವತರು ನೆಲೆಸಿದ್ದರು. ಗೋವಾದಿಂದ ನಡೆದ ದೊಡ್ಡ ಪ್ರಮಾಣದ ವಲಸೆ 16ರಿಂದ 18ನೇ ಶತಮಾನಗಳ ನಡುವೆ ಮುಂದುವರಿಯಿತು. [1]
 - 1510ರಲ್ಲಿ ಪೋರ್ಚುಗೀಸರು ಗೋವೆಯನ್ನು ವಶಪಡಿಸಿಕೊಂಡ ನಂತರ, ಧಾರ್ಮಿಕ ನಿರ್ಬಂಧಗಳು, ರಾಜಕೀಯ ಒತ್ತಡಗಳು ಮತ್ತು ಜೀವನೋಪಾಯದ ಕಾರಣಗಳಿಂದ ಅನೇಕ ಹಿಂದೂ ಕುಟುಂಬಗಳು ಗೋವೆಯಿಂದ ಹೊರಟವು. ಕೆಲವು ಸಾರಸ್ವತ ಕುಟುಂಬಗಳು ಉತ್ತರ ಕನ್ನಡ, ದಕ್ಷಿಣ ಕನ್ನಡ ಮತ್ತು ಇತರ ಕರಾವಳಿ ಪ್ರದೇಶಗಳತ್ತ ತೆರಳಿದವು. [2]
 - ಈ ವಲಸೆಗೆ ಒಂದೇ ಕಾರಣವಿರಲಿಲ್ಲ. ಧಾರ್ಮಿಕ ಒತ್ತಡಗಳ ಜೊತೆಗೆ ವ್ಯಾಪಾರ, ಉದ್ಯೋಗ, ಭದ್ರತೆ ಮತ್ತು ಕುಟುಂಬ ಸಂಬಂಧಗಳೂ ಜನರ ಸ್ಥಳಾಂತರಕ್ಕೆ ಕಾರಣವಾಗಿದ್ದವು. [1][2]
 
-## ಕಾರ್ಕಳ ಮತ್ತು ಮಲೆನಾಡಿನೊಂದಿಗೆ ಸಂಬಂಧ
-
-- ಕರಾವಳಿ ಕರ್ನಾಟಕದ ವ್ಯಾಪಾರ ಕೇಂದ್ರಗಳು ಮತ್ತು ಪಶ್ಚಿಮ ಘಟ್ಟದ ಒಳನಾಡಿನ ಊರುಗಳ ನಡುವೆ ಹಳೆಯ ಕಾಲದಿಂದ ವ್ಯಾಪಾರ ಮತ್ತು ಜನರ ಸಂಚಾರವಿತ್ತು.
-- ಕಾರ್ಕಳದ ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನದ ಪ್ರಕಟಿತ ಇತಿಹಾಸವು, ಗೋವಾದಿಂದ ಬಂದ ಸೋಮ ಶರ್ಮರು ವೆಂಕಟರಮಣನ ವಿಗ್ರಹವನ್ನು ತಂದರು ಮತ್ತು ಸೊಹಿರೆ ಪ್ರಭು ಕುಟುಂಬವು ಅವರಿಗೆ ಆಶ್ರಯ ನೀಡಿತು ಎಂಬ ಸಮುದಾಯ ಪರಂಪರೆಯನ್ನು ದಾಖಲಿಸುತ್ತದೆ. ಇದನ್ನು ದೇವಸ್ಥಾನದ ಇತಿಹಾಸದಲ್ಲಿ ಉಳಿದಿರುವ ಸ್ಥಳೀಯ ಪರಂಪರೆಯಾಗಿ ಉಲ್ಲೇಖಿಸಬೇಕು. [5]
-- ಚಿಕ್ಕಮಗಳೂರು ಜಿಲ್ಲಾ ಜನಗಣತಿ ಕೈಪಿಡಿ (1981) ಪ್ರಕಾರ, ಹಳೆಯ ಕಳಸ ಪಟ್ಟಣದ ವ್ಯಾಪ್ತಿಯಲ್ಲಿ ಇಂದಿನ ಮೇಲಂಗಡಿ, ಕಿಳಂಗಡಿ ಮತ್ತು ರುದ್ರಪಾದ ಪ್ರದೇಶಗಳು ಸೇರಿದ್ದವು. ಕಳಸವು ಹೂಂಚ ಮತ್ತು ಕಾರ್ಕಳದ ಅರಸರ ಆಳ್ವಿಕೆಗೆ ಒಳಪಟ್ಟಿದ್ದುದನ್ನೂ ಈ ಕೈಪಿಡಿ ದಾಖಲಿಸುತ್ತದೆ. [3]
-- ಕಳಸ–ಕಾರ್ಕಳ ಪ್ರದೇಶದ ಭೈರರಸ/ಬೀರರಸ ಅರಸರ ಕುರಿತು ಶಾಸನಾಧಾರಗಳಿವೆ. 1586ರ ಕಾರ್ಕಳದ ಭೈರವ IIರ ಶಾಸನವು ಜೈನ ಚತುರ್ಮುಖ ಬಸದಿ ಮತ್ತು ಅದಕ್ಕೆ ನೀಡಿದ ದಾನಗಳನ್ನು ದಾಖಲಿಸುತ್ತದೆ. ಈ ಶಾಸನವು ಆ ಕಾಲದ ಸ್ಥಳೀಯ ಆಡಳಿತ ಮತ್ತು ಧಾರ್ಮಿಕ ಪರಿಸರಕ್ಕೆ ಸಾಕ್ಷಿ; ಆದರೆ ಕಳಸ ಅಥವಾ ಕಾರ್ಕಳದಲ್ಲಿ GSB ಕುಟುಂಬಗಳಿಗೆ ನೀಡಿದ ನಿರ್ದಿಷ್ಟ ಭೂದಾನದ ಸಾಕ್ಷಿಯಲ್ಲ. [4]
-- ಕಳಸದ ಮೇಲಂಗಡಿಯಲ್ಲಿ GSB ಕುಟುಂಬಗಳು ನೆಲೆಸಿ, ತಮ್ಮ ಆರಾಧ್ಯ ದೈವವಾದ ಶ್ರೀ ವೆಂಕಟರಮಣ ಸ್ವಾಮಿಗೆ ದೇವಸ್ಥಾನ ನಿರ್ಮಿಸಿ ಆರಾಧನೆ ಆರಂಭಿಸಿದವು ಎಂಬುದು ಸ್ಥಳೀಯ ಸಮುದಾಯದ ಇತಿಹಾಸದಲ್ಲಿ ಉಳಿದಿರುವ ಮಾಹಿತಿ. ಮೊದಲ ಕುಟುಂಬ, ಸ್ಥಾಪನೆಯ ವರ್ಷ ಮತ್ತು ಆಶ್ರಯ ನೀಡಿದ ಅರಸರ ಹೆಸರುಗಳಿಗೆ ಇನ್ನಷ್ಟು ದಾಖಲೆಗಳ ಪರಿಶೀಲನೆ ಅಗತ್ಯ. [6]
-
 ## ಭಾಷೆ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಗುರುತು
 
-- ಕೊಂಕಣಿ ಭಾಷೆ GSB ಸಮುದಾಯದ ಪ್ರಮುಖ ಸಾಂಸ್ಕೃತಿಕ ಗುರುತುಗಳಲ್ಲಿ ಒಂದು. ಕರ್ನಾಟಕದಲ್ಲಿ ನೆಲೆಸಿದ ಕೊಂಕಣಿ ಭಾಷಿಕರು ಕನ್ನಡ ಮತ್ತು ತುಳು ಭಾಷೆಗಳ ಸಂಪರ್ಕದಲ್ಲಿದ್ದು, ಸ್ಥಳೀಯ ಭಾಷೆಗಳ ಪ್ರಭಾವವೂ ಅವರ ಮಾತಿನ ಬಳಕೆಯಲ್ಲಿ ಕಾಣುತ್ತದೆ. [1][7]
-- ಗೋವಾದಲ್ಲಿರುವ ಕುಲದೇವತೆಗಳ ದೇವಾಲಯಗಳೊಂದಿಗೆ ಅನೇಕ ಕುಟುಂಬಗಳು ಇಂದಿಗೂ ಧಾರ್ಮಿಕ ಮತ್ತು ಕುಟುಂಬ ಸಂಬಂಧವನ್ನು ಉಳಿಸಿಕೊಂಡಿವೆ. ಕುಲದೇವತೆ, ಗೋತ್ರ, ಕುಟುಂಬ ಸಂಪ್ರದಾಯ ಮತ್ತು ಮಠದ ಸಂಬಂಧಗಳು ಸಮುದಾಯದ ಗುರುತಿನ ಭಾಗವಾಗಿವೆ. [2][8]
-- GSB ಸಮುದಾಯದಲ್ಲಿ ಶೈವ, ಸ್ಮಾರ್ತ ಮತ್ತು ವೈಷ್ಣವ ಪರಂಪರೆಗಳೂ, ವಿವಿಧ ಮಠಗಳ ಅನುಯಾಯಿಗಳೂ ಇದ್ದಾರೆ. ಕಾಶೀ ಮಠ ಮತ್ತು ಗೋಕರ್ಣ–ಪರ್ತಗಾಳಿ ಜೀವೋತ್ತಮ ಮಠಗಳು ವೈಷ್ಣವ ಗೌಡ ಸಾರಸ್ವತ ಪರಂಪರೆಯಲ್ಲಿ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ಸಂಸ್ಥೆಗಳು. ಎಲ್ಲ ಕುಟುಂಬಗಳ ಆಚರಣೆ ಒಂದೇ ರೀತಿಯದ್ದೆಂದು ಭಾವಿಸಬಾರದು. [1][8]
-- ಮದುವೆ, ಉಪನಯನ, ನಾಮಕರಣ, ಹಬ್ಬ-ಹರಿದಿನಗಳು ಮತ್ತು ಕುಟುಂಬದ ಧಾರ್ಮಿಕ ಆಚರಣೆಗಳಲ್ಲಿ ಪ್ರಾದೇಶಿಕ ಹಾಗೂ ಕುಟುಂಬದ ಪ್ರಕಾರ ವ್ಯತ್ಯಾಸಗಳಿವೆ. [8]
-
-## ವ್ಯಾಪಾರ ಮತ್ತು ಸಮಾಜದಲ್ಲಿ ಪಾತ್ರ
-
-- ದಕ್ಷಿಣ ಕನ್ನಡದ ವ್ಯಾಪಾರ, ಹಣಕಾಸು ಮತ್ತು ಕರಾವಳಿ ವಾಣಿಜ್ಯದಲ್ಲಿ ಗೌಡ ಸಾರಸ್ವತ ಕುಟುಂಬಗಳು ಪ್ರಮುಖ ಪಾತ್ರ ವಹಿಸಿದ್ದವು ಎಂದು ಅಧ್ಯಯನಗಳು ದಾಖಲಿಸುತ್ತವೆ.
-- ಕೆಲವು ಕುಟುಂಬಗಳು ವ್ಯಾಪಾರ, ಕೃಷಿ, ಹಣಕಾಸು ಮತ್ತು ಇತರ ವೃತ್ತಿಗಳಲ್ಲಿ ತೊಡಗಿದ್ದವು. ಈ ವೃತ್ತಿಪರ ಹಿನ್ನೆಲೆಯನ್ನು ಸಮುದಾಯದ ಎಲ್ಲ ಕುಟುಂಬಗಳಿಗೂ ಒಂದೇ ರೀತಿಯಲ್ಲಿ ಅನ್ವಯಿಸಬಾರದು. [1]
-
-## ಕಳಸ ಮತ್ತು ಮೇಲಂಗಡಿಗೆ ಸಂಬಂಧಿಸಿದ ಸ್ಥಳೀಯ ಇತಿಹಾಸ
-
-- ಮೇಲಂಗಡಿ ಹಳೆಯ ಕಳಸ ಪಟ್ಟಣದ ಭಾಗವಾಗಿತ್ತು ಎಂಬುದಕ್ಕೆ 1981ರ ಜಿಲ್ಲಾ ಜನಗಣತಿ ಕೈಪಿಡಿ ಆಧಾರವಾಗಿದೆ. [3]
-- ಕಳಸದ ಮೇಲಂಗಡಿಯಲ್ಲಿ GSB ಕುಟುಂಬಗಳು ಯಾವಾಗ ನೆಲೆಸಿದವು, ಮೊದಲ ಕುಟುಂಬಗಳು ಯಾವುವು, ದೇವಸ್ಥಾನದ ಮೂಲ ಪ್ರತಿಷ್ಠಾಪನೆ ಯಾವಾಗ ನಡೆಯಿತು ಮತ್ತು ಯಾರು ಆಶ್ರಯ ನೀಡಿದರು ಎಂಬುದನ್ನು ದೃಢಪಡಿಸಲು ದೇವಸ್ಥಾನದ ಹಳೆಯ ದಾಖಲೆಗಳು, ಕುಟುಂಬ ವಂಶಾವಳಿಗಳು, ಶಾಸನಗಳು ಮತ್ತು ಹಿರಿಯರ ಮೌಖಿಕ ಸಾಕ್ಷ್ಯಗಳನ್ನು ಸಂಗ್ರಹಿಸಬೇಕು.
-- ಈ ವಿಷಯಗಳಿಗೆ ದಾಖಲೆ ಸಿಗುವವರೆಗೆ ನಿಖರ ವರ್ಷ, ವ್ಯಕ್ತಿ ಅಥವಾ ರಾಜನ ಹೆಸರನ್ನು ಖಚಿತ ಇತಿಹಾಸವಾಗಿ ಪ್ರಕಟಿಸಬಾರದು.
+- ಕೊಂಕಣಿ ಭಾಷೆ GSB ಸಮುದಾಯದ ಪ್ರಮುಖ ಸಾಂಸ್ಕೃತಿಕ ಗುರುತುಗಳಲ್ಲಿ ಒಂದು. ಕರ್ನಾಟಕದಲ್ಲಿ ನೆಲೆಸಿದ ಕೊಂಕಣಿ ಭಾಷಿಕರು ಕನ್ನಡ ಮತ್ತು ತುಳು ಭಾಷೆಗಳ ಸಂಪರ್ಕದಲ್ಲಿದ್ದು, ಸ್ಥಳೀಯ ಭಾಷೆಗಳ ಪ್ರಭಾವವೂ ಅವರ ಮಾತಿನ ಬಳಕೆಯಲ್ಲಿ ಕಾಣುತ್ತದೆ. [1][6]
+- ಗೋವಾದಲ್ಲಿರುವ ಕುಲದೇವತೆಗಳ ದೇವಾಲಯಗಳೊಂದಿಗೆ ಅನೇಕ ಕುಟುಂಬಗಳು ಇಂದಿಗೂ ಧಾರ್ಮಿಕ ಮತ್ತು ಕುಟುಂಬ ಸಂಬಂಧವನ್ನು ಉಳಿಸಿಕೊಂಡಿವೆ. ಕುಲದೇವತೆ, ಗೋತ್ರ, ಕುಟುಂಬ ಸಂಪ್ರದಾಯ ಮತ್ತು ಮಠದ ಸಂಬಂಧಗಳು ಸಮುದಾಯದ ಗುರುತಿನ ಭಾಗವಾಗಿವೆ. [2][7]
+- GSB ಸಮುದಾಯದಲ್ಲಿ ಶೈವ, ಸ್ಮಾರ್ತ ಮತ್ತು ವೈಷ್ಣವ ಪರಂಪರೆಗಳೂ, ವಿವಿಧ ಮಠಗಳ ಅನುಯಾಯಿಗಳೂ ಇದ್ದಾರೆ. ಕಾಶೀ ಮಠ ಮತ್ತು ಗೋಕರ್ಣ–ಪರ್ತಗಾಳಿ ಜೀವೋತ್ತಮ ಮಠಗಳು ವೈಷ್ಣವ ಗೌಡ ಸಾರಸ್ವತ ಪರಂಪರೆಯಲ್ಲಿ ಪ್ರಮುಖ ಧಾರ್ಮಿಕ ಸಂಸ್ಥೆಗಳು. ಎಲ್ಲ ಕುಟುಂಬಗಳ ಆಚರಣೆ ಒಂದೇ ರೀತಿಯದ್ದೆಂದು ಭಾವಿಸಬಾರದು. [1][7]
+- ಮದುವೆ, ಉಪನಯನ, ನಾಮಕರಣ, ಹಬ್ಬ-ಹರಿದಿನಗಳು ಮತ್ತು ಕುಟುಂಬದ ಧಾರ್ಮಿಕ ಆಚರಣೆಗಳಲ್ಲಿ ಪ್ರಾದೇಶಿಕ ಹಾಗೂ ಕುಟುಂಬದ ಪ್ರಕಾರ ವ್ಯತ್ಯಾಸಗಳಿವೆ. [7]
 
 ## ಉಲ್ಲೇಖಗಳು (References)
 
-1. Harald Tambs-Lyche, “The Bourgeoisie Comes from Elsewhere: The Gauḍa Sāraswat Brahmins and Catholics of South Kanara,” *Asian Ethnology*, Vol. 83, No. 1, 2024, pp. 103–121. https://doi.org/10.15119/0002000759
-2. V. R. Mitragotri, *A Socio-Cultural History of Goa from the Bhojas to the Vijayanagara*, PhD thesis, Goa University, 1992. https://irgu.unigoa.ac.in/drs/handle/unigoa/3890
-3. Census of India 1981, *District Census Handbook: Chikmagalur District*, Part XIII-A & B, “Brief Notes on Places of Religious, Historical or Archaeological Importance,” entry on Kalasa. https://censusindia.gov.in/nada/index.php/catalog/28943/download/32124/46550_1981_CHI.pdf
-4. H. Krishna Sastri, “Karkala Inscription of Bhairava II, Saka-Samvat 1508,” *Epigraphia Indica*, Vol. VIII (1905–06), pp. 122–137. https://library.bjp.org/jspui/bitstream/123456789/1910/37/epigraphia-indica-vol-08-1905-1906.pdf
-5. Sri Venkataramana Temple, Karkala, “History of the Temple” (temple-published account; use as a source for the temple's own tradition). https://www.svtkarkala.com/history/
-6. Sri Venkataramana Devasthana, Melangadi, Kalasa, `data/temple_background.md` (project's local-history account; community information requiring confirmation from temple records and elders).
-7. Office of the Registrar General, India, *Census of India 1971: Survey of Konkani in Karnataka, Goa and Maharashtra*, Language Monograph No. 8. https://censusindia.gov.in/nada/index.php/catalog/30972/download/34153/27618_1971_KON.pdf
-8. Jyoti G. Nayak, “A Study on Culture of Goud Saraswat Brahmins—Special Reference on Uttar Kannada District,” *International Journal of History and Cultural Studies*, Vol. 3, No. 1, 2017, pp. 32–38. https://arcjournals.org/international-journal-of-history-and-cultural-studies/volume-3-issue-1/4
-
-> **ಸೂಚನೆ:** ಈ ಉಲ್ಲೇಖಗಳು GSB ಸಮುದಾಯದ ವಿಶಾಲ ಇತಿಹಾಸ ಮತ್ತು ಕರಾವಳಿ ಕರ್ನಾಟಕದ ಹಿನ್ನೆಲೆಗೆ ಸಹಾಯ ಮಾಡುತ್ತವೆ. ಮೇಲಂಗಡಿ ದೇವಸ್ಥಾನದ ಸ್ಥಾಪನೆಯ ನಿಖರ ದಿನಾಂಕ, ಸ್ಥಾಪಕರು ಅಥವಾ GSB ಕುಟುಂಬಗಳಿಗೆ ನೀಡಿದ ನಿರ್ದಿಷ್ಟ ರಾಜದಾನದ ಬಗ್ಗೆ ಈ ಮೂಲಗಳು ನೇರ ಸಾಕ್ಷಿ ನೀಡುವುದಿಲ್ಲ.
+1. Harald Tambs-Lyche, [“The Bourgeoisie Comes from Elsewhere: The Gauḍa Sāraswat Brahmins and Catholics of South Kanara,” *Asian Ethnology*, Vol. 83, No. 1, 2024, pp. 103–121.](https://doi.org/10.15119/0002000759)
+2. V. R. Mitragotri, [*A Socio-Cultural History of Goa from the Bhojas to the Vijayanagara*, PhD thesis, Goa University, 1992.](https://irgu.unigoa.ac.in/drs/handle/unigoa/3890)
+3. Census of India 1981, [*District Census Handbook: Chikmagalur District*, Part XIII-A & B, “Brief Notes on Places of Religious, Historical or Archaeological Importance,” entry on Kalasa.](https://censusindia.gov.in/nada/index.php/catalog/28943/download/32124/46550_1981_CHI.pdf)
+4. H. Krishna Sastri, [“Karkala Inscription of Bhairava II, Saka-Samvat 1508,” *Epigraphia Indica*, Vol. VIII (1905–06), pp. 122–137.](https://library.bjp.org/jspui/bitstream/123456789/1910/37/epigraphia-indica-vol-08-1905-1906.pdf)
+5. Sri Venkataramana Temple, Karkala, [“History of the Temple”](https://www.svtkarkala.com/history/) (temple-published account; use as a source for the temple's own tradition). 
+6. Office of the Registrar General, India, [*Census of India 1971: Survey of Konkani in Karnataka, Goa and Maharashtra*, Language Monograph No. 8.](https://censusindia.gov.in/nada/index.php/catalog/30972/download/34153/27618_1971_KON.pdf)
+7. Jyoti G. Nayak, [“A Study on Culture of Goud Saraswat Brahmins—Special Reference on Uttar Kannada District,” *International Journal of History and Cultural Studies*, Vol. 3, No. 1, 2017, pp. 32–38.](https://arcjournals.org/international-journal-of-history-and-cultural-studies/volume-3-issue-1/4)
 
 ---
