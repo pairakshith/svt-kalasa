@@ -6,15 +6,13 @@
                 "ashtaavadhaana":  "Ashtaavadhaana",
                 "mangala":  "Mangala",
                 "traditions":  "Traditions \u0026 Rituals",
-                "history":  "History \u0026 Heritage",
+                "history":  "History",
                 "photos":  "Photos Gallery",
                 "references":  "References"
             },
-    "header":  {
-                   "temple_title":  "Shri Venkataramana Temple",
-                   "location":  "Melangadi, Kalasa",
-                   "tagline":  "Amgel Devasthana"
-               },
+    "header": {
+                "temple_title": "Shree Venkataramana Temple, Kalasa"
+            },
     "common":  {
                    "view_details":  "View Details →",
                    "see_details":  "See Details →",

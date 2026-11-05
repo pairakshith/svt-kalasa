@@ -26,4 +26,9 @@
 * Clean up repetitive code and remove unused code to optimize performance.
 * Plan the expansion of this framework to support similar heritage, cultural, or religious institution documentation projects.
 
+## 6. Improve code structure
+
+* traditions.html and temple_backgroud.html code need to be refactored
+* translation related mess need to be cleared
+
 ---
