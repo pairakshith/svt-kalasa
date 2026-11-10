@@ -265,6 +265,27 @@ body {
     max-width: 600px;
 }
 
+.no-events-found .btn-reset-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1rem;
+    padding: 8px 18px;
+    background: #800000;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.no-events-found .btn-reset-search:hover {
+    background: #a00000;
+    transform: translateY(-1px);
+}
+
 /* Festival Event Cards List */
 .festival-card-list {
     display: flex;
