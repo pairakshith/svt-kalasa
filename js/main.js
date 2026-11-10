@@ -443,6 +443,19 @@
     }
 
     /**
+     * Update search wrapper UI typing state (hides icon & PDF button while user is typing)
+     */
+    function updateSearchWrapperState(query) {
+        const wrapper = document.getElementById('searchWrapper');
+        if (!wrapper) return;
+        if (query && query.trim().length > 0) {
+            wrapper.classList.add('is-typing');
+        } else {
+            wrapper.classList.remove('is-typing');
+        }
+    }
+
+    /**
      * Reset search query, input field, and restore full event view
      */
     function resetSearch() {
@@ -452,6 +465,7 @@
             searchInput.value = '';
             searchInput.focus();
         }
+        updateSearchWrapperState('');
         applyFilter();
     }
 
@@ -468,6 +482,7 @@
      */
     function onSearchInput(event) {
         const query = event ? event.target.value : (document.getElementById('eventSearch')?.value || '');
+        updateSearchWrapperState(query);
         debouncedFilter(query);
     }
 
@@ -607,6 +622,7 @@
             // If user cleared input with 'x' (or keyboard delete), restore full view immediately
             searchInput.addEventListener('search', () => {
                 state.searchQuery = searchInput.value;
+                updateSearchWrapperState(searchInput.value);
                 applyFilter();
             });
         }

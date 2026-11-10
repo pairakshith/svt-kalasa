@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../css/svt-main.css">
+    <link rel="stylesheet" href="../css/svt-main.css?v=1.1">
 </head>
 <body>
 <!-- 
@@ -43,16 +43,17 @@
         </div>
 
         <!-- Sticky Search Bar -->
-        <div class="search-wrapper">
-            <span class="search-icon">🔍</span>
+        <div class="search-wrapper" id="searchWrapper">
+            <span class="search-icon" id="searchIcon">🔍</span>
             <input 
                 type="text" 
                 id="eventSearch" 
                 data-trans-placeholder-id="common.search_placeholder"
                 placeholder="ಉತ್ಸವ, ದಿನಾಂಕ ಅಥವಾ ಸೇವಾದಾರರ ಹೆಸರನ್ನು ಹುಡುಕಿ..." 
+                autocomplete="off"
             />
             <!-- Download PDF Action Button -->
-            <div class="pdf-download-wrapper">
+            <div class="pdf-download-wrapper" id="pdfWrapper">
                 <a href="../assets/SVT_calendar_25-26.pdf" download="Venkataramana_Temple_Events.pdf" class="btn-download-pdf" data-trans-id="common.download_pdf">
                      ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ (PDF)
                 </a>
@@ -75,12 +76,12 @@
     <div id="footerContainer"></div>
     <!-- JS Loader -->
     <script src="../js/footer-loader.js?v=2"></script>
-    <script src="../js/header.js"></script>
+    <script src="../js/header.js?v=1.1"></script>
     <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/feedback.js"></script>
+    <script src="../js/localeEngine.js?v=1.1"></script>
+    <script src="../js/main.js?v=1.1"></script>
+    <script src="../js/back-to-top.js?v=1.1"></script>
+    <script src="../js/feedback.js?v=1.1"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
