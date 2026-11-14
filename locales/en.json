@@ -1,4 +1,4 @@
-﻿{
+{
     "nav":  {
                 "home":  "Home",
                 "events":  "Festival Calendar",
@@ -6,15 +6,13 @@
                 "ashtaavadhaana":  "Ashtaavadhaana",
                 "mangala":  "Mangala",
                 "traditions":  "Traditions \u0026 Rituals",
-                "history":  "History \u0026 Heritage",
+                "history":  "History",
                 "photos":  "Photos Gallery",
                 "references":  "References"
             },
-    "header":  {
-                   "temple_title":  "Shri Venkataramana Temple",
-                   "location":  "Melangadi, Kalasa",
-                   "tagline":  "Amgel Devasthana"
-               },
+    "header": {
+                "temple_title": "Shree Venkataramana Temple, Kalasa"
+            },
     "common":  {
                    "view_details":  "View Details →",
                    "see_details":  "See Details →",
@@ -24,6 +22,7 @@
                    "all_content":  "All Content",
                    "search_placeholder":  "Search festival, date or seva donor...",
                    "no_events_found":  "🔍 No events found",
+                   "reset_search":  "Reset search",
                    "explanation_title":  "Explanation \u0026 Meaning",
                    "download_pdf":  "Festival Calendar (PDF)",
                    "references_title":  "References \u0026 Citations"
