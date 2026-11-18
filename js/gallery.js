@@ -45,7 +45,7 @@ const LOCAL_GALLERY_CSV = '../data/gallery.csv';
 /**
  * Thumbnail URL Transformer (Preset = thumb)
  * Adapts Cloudinary, Imgix, ImgBB, or query-based image endpoints to fetch lightweight thumbnails.
- * If local or plain static image, returns the optimized path.
+ * For local assets, serves optimized thumbnails from thumbs/ directory.
  */
 function getThumbnailUrl(rawUrl, width = 450) {
     if (!rawUrl || typeof rawUrl !== 'string') return '';
@@ -62,7 +62,12 @@ function getThumbnailUrl(rawUrl, width = 450) {
         return `${trimmed}${separator}preset=thumb&w=${width}&auto=format,compress`;
     }
 
-    // 3. ImgBB / Google Drive / Static relative links
+    // 3. Local assets with generated thumbs (e.g., ../assets/images/filename.jpg -> ../assets/images/thumbs/filename.jpg)
+    if (trimmed.includes('/assets/images/') && !trimmed.includes('/assets/images/thumbs/')) {
+        return trimmed.replace('/assets/images/', '/assets/images/thumbs/');
+    }
+
+    // 4. ImgBB / Google Drive / Static relative links
     return trimmed;
 }
 
@@ -282,8 +287,24 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initGallery() {
         let loadedData = null;
 
-        // 1. Try Google Sheets Published CSV
-        if (GOOGLE_SHEET_CSV_URL && !GOOGLE_SHEET_CSV_URL.includes('placeholder')) {
+        // 1. Try pre-compiled local gallery.json first for instant rendering
+        try {
+            const jsonRes = await fetch(LOCAL_GALLERY_JSON);
+            if (jsonRes.ok) {
+                const text = await jsonRes.text();
+                if (text.trim().length > 0) {
+                    const parsedJson = JSON.parse(text);
+                    if (Array.isArray(parsedJson) && parsedJson.length > 0) {
+                        loadedData = parsedJson;
+                    }
+                }
+            }
+        } catch (jsonErr) {
+            console.warn('[Gallery] Local gallery.json empty or missing:', jsonErr);
+        }
+
+        // 2. Try Google Sheets Published CSV if local JSON wasn't available
+        if (!loadedData && GOOGLE_SHEET_CSV_URL && !GOOGLE_SHEET_CSV_URL.includes('placeholder')) {
             try {
                 const freshUrl = GOOGLE_SHEET_CSV_URL + (GOOGLE_SHEET_CSV_URL.includes('?') ? '&' : '?') + 't=' + Date.now();
                 const sheetRes = await fetch(freshUrl, { cache: 'no-cache' });
@@ -296,24 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (sheetErr) {
                 console.warn('[Gallery] Google Sheet CSV fetch failed, checking local fallbacks:', sheetErr);
-            }
-        }
-
-        // 2. Try local gallery.json fallback
-        if (!loadedData) {
-            try {
-                const jsonRes = await fetch(LOCAL_GALLERY_JSON);
-                if (jsonRes.ok) {
-                    const text = await jsonRes.text();
-                    if (text.trim().length > 0) {
-                        const parsedJson = JSON.parse(text);
-                        if (Array.isArray(parsedJson) && parsedJson.length > 0) {
-                            loadedData = parsedJson;
-                        }
-                    }
-                }
-            } catch (jsonErr) {
-                console.warn('[Gallery] Local gallery.json empty or missing:', jsonErr);
             }
         }
 
@@ -508,15 +511,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '';
             const thumbUrl = getThumbnailUrl(item.imagePath, 500);
             const fullUrl = getFullResolutionUrl(item.imagePath);
+            const globalIndex = offset + i;
+            // Eagerly load the first 4-6 above-the-fold images with high priority
+            const isEager = globalIndex < 6;
+            const loadingAttr = isEager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
 
             return `
-            <article class="photo-card" role="button" tabindex="0" data-index="${offset + i}" data-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(item.title || 'ಛಾಯಾಚಿತ್ರ')}">
+            <article class="photo-card" role="button" tabindex="0" data-index="${globalIndex}" data-id="${escapeHtml(item.id)}" aria-label="${escapeHtml(item.title || 'ಛಾಯಾಚಿತ್ರ')}">
                 <img
                     src="${escapeHtml(thumbUrl)}"
                     data-full="${escapeHtml(fullUrl)}"
                     alt="${escapeHtml(item.title || 'ಛಾಯಾಚಿತ್ರ')}"
                     class="photo-thumb"
-                    loading="lazy"
+                    ${loadingAttr}
                     decoding="async"
                     ${sizeAttrs}
                     onload="this.classList.add('is-loaded'); this.closest('.photo-card')?.classList.add('loaded');"

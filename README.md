@@ -42,7 +42,7 @@ svt-kalasa/
 ├── js/                 # Scripts (gallery, feedback, footer loader, back-to-top)
 ├── data/               # Content data (gallery.json)
 ├── assets/             # Images and other static files
-├── README_GALLERY.md   # Notes on the photo gallery
+├── how_to/             # Information on updatig data/image
 ├── IMPROVEMENT_POINTS.md
 ├── .nojekyll           # Tells GitHub Pages to serve files as-is
 └── LICENSE
@@ -70,45 +70,6 @@ The site is plain HTML, CSS, and JavaScript. It needs no build step.
 **Deployment:** The site is published with GitHub Pages from the `main` branch.
 
 ---
-
-## Configuration
-
-The photo submission form in `js/gallery.js` uses three settings at the top of the file:
-
-| Setting | Purpose |
-| --- | --- |
-| `FORMSPREE_ENDPOINT` | Formspree form that receives submission details |
-| `IMGBB_API_KEY` | ImgBB key used to host photos uploaded from a device |
-| `TEMPLE_EMAIL` | Temple address used by the "send by email" fallback |
-
-Replace the placeholder values with the temple's own accounts before going live.
-
----
-
-## Updating Content
-
-### Adding a photo
-
-Add an entry to `data/gallery.json`:
-
-```json
-{
-  "id": "unique-id-here",
-  "title": "Photo title (Kannada)",
-  "category": "festivals",
-  "categoryKn": "ಉತ್ಸವಗಳು",
-  "imagePath": "../assets/images/your_photo.jpg",
-  "caption": "Optional caption",
-  "date": "2026-01-15"
-}
-```
-
-- `id` should be unique. Each `id` is used for one photo.
-- `categoryKn` is the category name shown on screen. The lightbox filter buttons are built from these values automatically.
-- `imagePath` is relative to `pages/photos.html`.
-- `caption` and `date` are optional.
-
-Photos are sorted into portrait and landscape sections automatically, based on their dimensions.
 
 ### Festivals and traditions
 

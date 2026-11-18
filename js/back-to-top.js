@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.style.scrollBehavior = "smooth";
 
     // --- 1. Create Back to Top Button ---
-    const topBtn = document.createElement("button");
-    topBtn.id = "backToTopBtn";
-    topBtn.setAttribute("type", "button");
-    topBtn.setAttribute("aria-label", "Back to top");
-    topBtn.setAttribute("title", "ಮೇಲಕ್ಕೆ ಹೋಗಿ (Back to Top)");
-    topBtn.innerHTML = `
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    `;
-    document.body.appendChild(topBtn);
+    // const topBtn = document.createElement("button");
+    // topBtn.id = "backToTopBtn";
+    // topBtn.setAttribute("type", "button");
+    // topBtn.setAttribute("aria-label", "Back to top");
+    // topBtn.setAttribute("title", "ಮೇಲಕ್ಕೆ ಹೋಗಿ (Back to Top)");
+    // topBtn.innerHTML = `
+    //     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    //         <path d="M18 15l-6-6-6 6"/>
+    //     </svg>
+    // `;
+    // document.body.appendChild(topBtn);
 
     // --- 2. Create Home Button (For Inner Pages) ---
     const path = window.location.pathname;

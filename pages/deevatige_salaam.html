@@ -28,12 +28,12 @@
     <nav class="main-nav">
         <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
         <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
+        <a href="photos.html" class="nav-link" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="deevatige_salaam.html" class="nav-link active" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
         <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
         <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
         <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
-        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
-        <a href="photos.html" class="nav-link" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="references.html" class="nav-link" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು</a>
     </nav>
 
@@ -203,7 +203,8 @@
                     }).join('');
 
                     const mainPlainText = verseLines.map(function(v) { return v.text; }).join(' ');
-                    const audioPath = '../assets/audio/salaam_' + index + '.mp3';
+                    const hasAudio = index <= 5;
+                    const audioPath = hasAudio ? '../assets/audio/salaam_' + index + '.mp3' : '';
 
                     let explanationsJoined = explanationLines.join('\n');
                     if (window.LocaleEngine && typeof window.LocaleEngine.preprocessMarkdown === 'function') {
@@ -216,7 +217,7 @@
                         explanationCollapsible = 
                             '<details class="collapsible-section">' +
                                 '<summary class="collapsible-toggle">' +
-                                    '<span data-trans-id="common.explanation_title">ವಿವರಣೆ ಮತ್ತು ಭಾವಾರ್ಥ</span>' +
+                                    '<span data-trans-id="common.explanation_title">ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆ</span>' +
                                     '<span class="toggle-icon">▼</span>' +
                                 '</summary>' +
                                 '<div class="collapsible-content">' + explanationHtml + '</div>' +
@@ -229,9 +230,9 @@
                         '<div class="seva-body">' +
                             '<div class="audio-play-bar" style="display: flex; justify-content: space-between; align-items: center;">' +
                                 '<h3 style="color: #800000; margin: 0; font-family: \'Noto Serif Kannada\', serif;" data-trans-type="transliterate" data-source-script="kannada">' + sectionTitle + '</h3>' +
-                                '<button class="audio-btn" data-audio-path="' + audioPath + '" data-plain-text="' + escapeAttr(mainPlainText) + '" onclick="playVerseAudio(this.getAttribute(\'data-audio-path\'), this.getAttribute(\'data-plain-text\'), this)">' +
+                                (hasAudio ? '<button class="audio-btn" data-audio-path="' + audioPath + '" data-plain-text="' + escapeAttr(mainPlainText) + '" onclick="playVerseAudio(this.getAttribute(\'data-audio-path\'), this.getAttribute(\'data-plain-text\'), this)">' +
                                     '<span data-trans-id="common.listen_audio">ಶ್ಲೋಕ ಆಲಿಸಿ</span>' +
-                                '</button>' +
+                                '</button>' : '') +
                             '</div>' +
                             (verseLines.length > 0 ? '<div class="verse-box">' + verseItems + '</div>' : '') +
                         '</div>' +

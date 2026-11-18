@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="kn">
 <head>
     <meta charset="UTF-8">
@@ -12,20 +12,20 @@
     <link rel="icon" type="image/jpeg" href="../assets/images/icon_image.jpg">
     
     <!-- CSS Stylesheets -->
-    <link rel="stylesheet" href="../css/svt-main.css">
+    <link rel="stylesheet" href="../css/svt-main.css?v=1.2">
 </head>
 <body>
 
     <!-- Main Navigation Bar with Translation Keys -->
     <nav class="main-nav">
         <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
-        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="events.html" class="nav-link" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>        
+        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
+        <a href="photos.html" class="nav-link active" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
         <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
         <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
         <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
-        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
-        <a href="photos.html" class="nav-link active" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="references.html" class="nav-link" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು</a>
     </nav>
 
@@ -75,7 +75,24 @@
 
         <!-- Dynamic Photo Grid Container -->
         <section class="gallery-grid" id="galleryGrid" aria-live="polite">
-            <div class="gallery-empty-state">
+            <div class="gallery-skeleton-container" id="gallerySkeleton" aria-hidden="true">
+                <div class="gallery-row" style="gap: 6px; margin-bottom: 6px;">
+                    <div class="photo-card skeleton-card" style="width: 320px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 280px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 250px; height: 220px;"></div>
+                </div>
+                <div class="gallery-row" style="gap: 6px; margin-bottom: 6px;">
+                    <div class="photo-card skeleton-card" style="width: 260px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 340px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 250px; height: 220px;"></div>
+                </div>
+                <div class="gallery-row" style="gap: 6px; margin-bottom: 6px;">
+                    <div class="photo-card skeleton-card" style="width: 300px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 290px; height: 220px;"></div>
+                    <div class="photo-card skeleton-card" style="width: 260px; height: 220px;"></div>
+                </div>
+            </div>
+            <div class="gallery-empty-state" style="display: none;">
                 <span class="gallery-empty-icon">⏳</span>
                 <div class="gallery-empty-text" data-trans-id="common.loading">ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...</div>
             </div>
@@ -267,12 +284,10 @@
 
     <!-- JS Loader & Translation Engines -->
     <script src="../js/footer-loader.js?v=2"></script>
-    <script src="../js/header.js"></script>
+    <script src="../js/header.js?v=1.2"></script>
     <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script>
-    <!-- <script src="../js/back-to-top.js"></script> -->
-    <!-- <script src="../js/feedback.js"></script> -->
-    <script src="../js/public-config.js"></script>
-    <script src="../js/gallery.js"></script>
+    <script src="../js/localeEngine.js?v=1.2"></script>
+    <script src="../js/public-config.js?v=1.2"></script>
+    <script src="../js/gallery.js?v=1.2"></script>
 </body>
 </html>

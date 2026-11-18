@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="kn" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700&family=Noto+Serif+Kannada:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../css/svt-main.css">
+    <link rel="stylesheet" href="../css/svt-main.css?v=1.1">
 </head>
 <body>
 <!-- 
@@ -27,12 +27,12 @@
     <nav class="main-nav">
         <a href="../index.html" class="nav-link" data-trans-id="nav.home">ಮುಖ ಪುಟ</a>
         <a href="events.html" class="nav-link active" data-trans-id="nav.events">ಉತ್ಸವಗಳ ವೇಳಾಪಟ್ಟಿ</a>
+        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
+        <a href="photos.html" class="nav-link" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="deevatige_salaam.html" class="nav-link" data-trans-id="nav.deevatige_salaam">ದೀವಟಿಗೆ ಸಲಾಂ</a>
         <a href="ashtaavadhaana.html" class="nav-link" data-trans-id="nav.ashtaavadhaana">ಅಷ್ಟಾವಧಾನ</a>
         <a href="mangala.html" class="nav-link" data-trans-id="nav.mangala">ಮಂಗಳ</a>
         <a href="traditions.html" class="nav-link" data-trans-id="nav.traditions">ಆಚರಣೆಗಳು</a>
-        <a href="temple_background.html" class="nav-link" data-trans-id="nav.history">ಇತಿಹಾಸ</a>
-        <a href="photos.html" class="nav-link" data-trans-id="nav.photos">ದೃಶ್ಯ ಕಾವ್ಯ</a>
         <a href="references.html" class="nav-link" data-trans-id="nav.references">ಉಲ್ಲೇಖಗಳು</a>
     </nav>
 
@@ -43,16 +43,17 @@
         </div>
 
         <!-- Sticky Search Bar -->
-        <div class="search-wrapper">
-            <span class="search-icon">🔍</span>
+        <div class="search-wrapper" id="searchWrapper">
+            <span class="search-icon" id="searchIcon">🔍</span>
             <input 
                 type="text" 
                 id="eventSearch" 
                 data-trans-placeholder-id="common.search_placeholder"
                 placeholder="ಉತ್ಸವ, ದಿನಾಂಕ ಅಥವಾ ಸೇವಾದಾರರ ಹೆಸರನ್ನು ಹುಡುಕಿ..." 
+                autocomplete="off"
             />
             <!-- Download PDF Action Button -->
-            <div class="pdf-download-wrapper">
+            <div class="pdf-download-wrapper" id="pdfWrapper">
                 <a href="../assets/SVT_calendar_25-26.pdf" download="Venkataramana_Temple_Events.pdf" class="btn-download-pdf" data-trans-id="common.download_pdf">
                      ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ (PDF)
                 </a>
@@ -60,8 +61,9 @@
         </div>
 
         <!-- Empty Results Message -->
-        <div id="noResultsMsg" class="no-events-found" style="display: none;" data-trans-id="common.no_events_found">
-            🔍 ಯಾವುದೇ ಕಾರ್ಯಕ್ರಮಗಳು ಕಂಡುಬಂದಿಲ್ಲ
+        <div id="noResultsMsg" class="no-events-found" style="display: none;">
+            <div data-trans-id="common.no_events_found">🔍 ಯಾವುದೇ ಕಾರ್ಯಕ್ರಮಗಳು ಕಂಡುಬಂದಿಲ್ಲ</div>
+            <button type="button" class="btn-reset-search" data-trans-id="common.reset_search">ಹುಡುಕಾಟವನ್ನು ಮರುಹೊಂದಿಸಿ</button>
         </div>
 
         <!-- Festival Event Cards Container -->
@@ -74,111 +76,21 @@
     <div id="footerContainer"></div>
     <!-- JS Loader -->
     <script src="../js/footer-loader.js?v=2"></script>
-    <script src="../js/header.js"></script>
+    <script src="../js/header.js?v=1.1"></script>
     <script src="../js/vendor/sanscript.min.js"></script>
-    <script src="../js/localeEngine.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/back-to-top.js"></script>
-    <script src="../js/feedback.js"></script>
+    <script src="../js/localeEngine.js?v=1.1"></script>
+    <script src="../js/main.js?v=1.1"></script>
+    <script src="../js/back-to-top.js?v=1.1"></script>
+    <script src="../js/feedback.js?v=1.1"></script>
 
     <script>
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str
-                .replace(/&/g, '&amp;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-        }
-
-        async function loadEventsData() {
-            const container = document.getElementById('eventsContainer');
-            try {
-                // Ensure event dictionary (en_events.json) is loaded when English active
-                if (window.LocaleEngine && typeof window.LocaleEngine.loadEventTranslations === 'function') {
-                    await window.LocaleEngine.loadEventTranslations();
-                }
-
-                const response = await fetch('../data/events.json');
-                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-                const events = await response.json();
-                container.innerHTML = '';
-
-                events.forEach(rawEvent => {
-                    // Translate event properties if active language is English
-                    const event = (window.LocaleEngine && typeof window.LocaleEngine.translateEventData === 'function')
-                        ? window.LocaleEngine.translateEventData(rawEvent)
-                        : rawEvent;
-
-                    const article = document.createElement('article');
-                    article.className = 'festival-card';
-                    article.setAttribute('data-date', event.date);
-                    article.setAttribute('data-keywords', event.keywords || '');
-
-                    article.innerHTML = `
-                        <div class="date-badge">
-                            <span class="day" data-trans-type="transliterate" data-source-script="kannada">${event.day}</span>
-                            <span class="month-year" data-trans-type="transliterate" data-source-script="kannada">${event.monthYear}</span>
-                        </div>
-                        <div class="card-content">
-                            <div class="card-top">
-                                <h3 class="event-title" data-original-kannada="${escapeHtml(rawEvent.title)}">${event.title}</h3>
-                                <span class="tithi-tag" data-original-kannada="${escapeHtml(rawEvent.tithi)}">${event.tithi}</span>
-                            </div>
-                            <div class="card-bottom">
-                                <div class="sevadaara-info">
-                                    <span class="label" data-trans-id="events_page.sevadaara_label"> ಸೇವಾದಾರರು:</span>
-                                    <span class="name" data-original-kannada="${escapeHtml(rawEvent.sevadaarara)}">${event.sevadaarara}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                    container.appendChild(article);
-                });
-
-                // Apply static element translations (like search bar, buttons, labels)
-                if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
-                    window.LocaleEngine.updateDomElements(container);
-                }
-
-                // Call main.js initialization function after rendering cards
-                if (typeof initUpcomingEvents === 'function') {
-                    initUpcomingEvents();
-                }
-
-                // Apply active filter if user typed before data finished fetching
-                if (typeof filterCards === 'function') {
-                    filterCards();
-                }
-
-            } catch (error) {
-                console.error("Error loading events JSON:", error);
-                container.innerHTML = `
-                    <div style="text-align: center; color: #cc0000; padding: 20px;">
-                        <p><strong data-trans-id="events_page.error_loading">ಕಾರ್ಯಕ್ರಮದ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</strong></p>
-                        <p style="font-size: 0.85em; color: #666;">(ಫೈಲ್ ಮಾರ್ಗ <code>../data/events.json</code> ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ)</p>
-                    </div>`;
-                if (window.LocaleEngine && typeof window.LocaleEngine.updateDomElements === 'function') {
-                    window.LocaleEngine.updateDomElements(container);
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.EventManager && typeof window.EventManager.initEventsPage === 'function') {
+                window.EventManager.initEventsPage();
+            } else if (typeof loadEventsData === 'function') {
+                loadEventsData();
             }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadEventsData);
-
-        // Re-render and re-translate event cards on language change
-        if (window.LocaleEngine) {
-            window.LocaleEngine.onLanguageChange(function() {
-                if (typeof window.LocaleEngine.retranslateEventCards === 'function') {
-                    window.LocaleEngine.retranslateEventCards();
-                } else {
-                    loadEventsData();
-                }
-            });
-        }
+        });
     </script>
 </body>
 </html>

@@ -1,16 +1,16 @@
 /*
- * temple-name.js
- * Keeps the temple name in the language bar from being blanked by localeEngine.js.
- * The name is the same in both languages, so the engine doesn't need to change it.
- * Load this after localeEngine.js on any page that shows the language bar.
+ * header.js
+ * Sets the temple name in the language bar.
+ * Keeps data-trans-id so localeEngine.js can translate it to English.
+ * The Kannada name is stored as the fallback, so Kannada mode and any missing key show it.
  */
 (function () {
-    var TEMPLE_NAME = 'ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ';
+    var TEMPLATE_NAME = 'ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ';
 
     function fixName(el) {
-        el.removeAttribute('data-trans-id');
-        el.removeAttribute('data-trans-fallback');
-        el.textContent = TEMPLE_NAME;
+        // Overwrite the fallback: the engine may already have stored an empty one
+        el.setAttribute('data-trans-fallback', TEMPLATE_NAME);
+        el.textContent = TEMPLATE_NAME;
     }
 
     var existing = document.querySelector('.lang-brand-text');
@@ -29,3 +29,12 @@
     });
     observer.observe(document.body, { childList: true, subtree: true });
 })();
+
+function fixName(el) {
+    // Page already provides bilingual spans (pn-kn / pn-en): don't overwrite them
+    if (el.querySelector('.pn-kn, .pn-en')) return;
+
+    el.setAttribute('data-trans-fallback', TEMPLATE_NAME);
+    el.textContent = TEMPLATE_NAME;
+}
+// <span class="temple-om">ॐ</span>
