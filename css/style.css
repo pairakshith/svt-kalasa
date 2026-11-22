@@ -1339,3 +1339,113 @@ main.container {
         font-size: 0.65rem;
     }
 }
+
+
+/* ==========================================================================
+   Progressive Web App (PWA) Offline & Update Toasts
+   ========================================================================== */
+.pwa-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #ffffff;
+    max-width: 90vw;
+    animation: pwaSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pwaSlideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.pwa-toast--update {
+    background: linear-gradient(135deg, #800020, #4a0012);
+    border: 1px solid #d4af37;
+}
+
+.pwa-toast--offline {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.pwa-toast__content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pwa-toast__icon {
+    font-size: 1.2rem;
+}
+
+.pwa-toast__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pwa-toast__btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.pwa-toast__btn--refresh {
+    background: #d4af37;
+    color: #1a1a1a;
+    padding: 6px 14px;
+}
+
+.pwa-toast__btn--refresh:hover {
+    background: #e5c158;
+    transform: scale(1.04);
+}
+
+.pwa-toast__btn--close {
+    background: transparent;
+    color: #ffffff;
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 0 6px;
+    opacity: 0.8;
+}
+
+.pwa-toast__btn--close:hover {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .pwa-toast {
+        bottom: 16px;
+        width: calc(100% - 32px);
+        max-width: none;
+        border-radius: 16px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+}
