@@ -295,7 +295,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (text.trim().length > 0) {
                     const parsedJson = JSON.parse(text);
                     if (Array.isArray(parsedJson) && parsedJson.length > 0) {
-                        loadedData = parsedJson;
+                        loadedData = parsedJson.filter(item => {
+                            if (!item) return false;
+                            const pub = (item.publish !== undefined ? item.publish : (item.published !== undefined ? item.published : item.status));
+                            if (pub !== undefined && pub !== null) {
+                                const val = String(pub).trim().toLowerCase();
+                                if (val === 'no' || val === 'false' || val === '0' || val === 'draft') {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
                     }
                 }
             }
@@ -500,8 +510,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const landscape = items.filter(item => item.orientation !== 'portrait');
-        const portrait = items.filter(item => item.orientation === 'portrait');
+        const sortByOrderOrIndex = (a, b) => {
+            const orderA = (a.order !== undefined && a.order !== null && a.order !== '') ? Number(a.order) : Infinity;
+            const orderB = (b.order !== undefined && b.order !== null && b.order !== '') ? Number(b.order) : Infinity;
+            if (orderA !== orderB) return orderA - orderB;
+            return 0; // keeps original order if order is not specified or equal
+        };
+
+        const landscape = items.filter(item => item.orientation !== 'portrait').sort(sortByOrderOrIndex);
+        const portrait = items.filter(item => item.orientation === 'portrait').sort(sortByOrderOrIndex);
 
         displayItems = [...landscape, ...portrait];
 

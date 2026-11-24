@@ -1,0 +1,102 @@
+{
+  "name": "ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ (SVT Kalasa)",
+  "short_name": "SVT Kalasa",
+  "description": "ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಮೇಲಂಗಡಿ, ಕಳಸ - ಅಧಿಕೃತ ಜಾಲತಾಣ. ಇತಿಹಾಸ, ಆಚರಣೆಗಳು, ಅಷ್ಟಾವಧಾನ, ದೀವಟಿಗೆ ಸಲಾಂ, ಮಂಗಳಾರತಿ ಮತ್ತು ಕಾರ್ಯಕ್ರಮಗಳ ವಿವರಗಳು.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121212",
+  "theme_color": "#800020",
+  "lang": "kn",
+  "dir": "ltr",
+  "categories": ["lifestyle", "culture", "education"],
+  "icons": [
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ಆಚರಣೆಗಳು (Traditions)",
+      "url": "/pages/traditions.html",
+      "description": "ದೇವಸ್ಥಾನದ ಆಚರಣೆಗಳು ಮತ್ತು ಸಂಪ್ರದಾಯಗಳು"
+    },
+    {
+      "name": "ಅಷ್ಟಾವಧಾನ ಸೇವೆ (Ashtaavadhaana)",
+      "url": "/pages/ashtaavadhaana.html",
+      "description": "ಅಷ್ಟಾವಧಾನ ಸೇವಾ ವಿವರಣೆ ಮತ್ತು ಶ್ಲೋಕಗಳು"
+    },
+    {
+      "name": "ದೀವಟಿಗೆ ಸಲಾಂ (Deevatige Salaam)",
+      "url": "/pages/deevatige_salaam.html",
+      "description": "ದೀವಟಿಗೆ ಸಲಾಂ ಮತ್ತು ನಾದಸ್ವರ ಸೇವೆ"
+    },
+    {
+      "name": "ಮಂಗಳಾರತಿ (Mangala)",
+      "url": "/pages/mangala.html",
+      "description": "ದೇವರಿಗೆ ಮಂಗಳಾರತಿ ಶ್ಲೋಕಗಳು"
+    },
+    {
+      "name": "ಕಾರ್ಯಕ್ರಮಗಳು (Events)",
+      "url": "/pages/events.html",
+      "description": "ದೇವಸ್ಥಾನದ ವಾರ್ಷಿಕ ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ"
+    },
+    {
+      "name": "ದೃಶ್ಯ ಕಾವ್ಯ (Photos)",
+      "url": "/pages/photos.html",
+      "description": "ದೇವಸ್ಥಾನದ ಛಾಯಾಚಿತ್ರಗಳು"
+    }
+  ]
+}

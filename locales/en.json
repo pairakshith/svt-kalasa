@@ -11,7 +11,9 @@
         "references": "References"
     },
     "header": {
-        "temple_title": "Shree Venkataramana Temple, Kalasa"
+        "temple_title": "Shree Venkataramana Temple, Kalasa",
+        "tagline": "Our Temple",
+        "location": "Melangadi, Kalasa"
     },
     "common": {
         "view_details": "View Details →",

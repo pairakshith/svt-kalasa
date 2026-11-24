@@ -46,7 +46,7 @@ Bathing in holy rivers and worshiping Lord Lakshminarayan will fulfill all wishe
 # CATEGORY: rigupakarma
 ## Rigupakarma
 
-Rigvedis celebrate 'Rigupakarma' (upakarma / thread full moon) on Sravana Nakshatra or Poornami in the month of Sravana. It is a sign of resumption of Vedadhyana.
+Rigvedis celebrate 'Rigupakarma' (upakarma / thread full moon) on Sravana Nakshatra or Poornami in the month of Sravana. It is a symbol of the resumption of Vedadhyana.
 
 On this day celibates and householders remove the old yajnopaveeta (Janivara) and wear new yajnopaveeta with mantra. The sage resolves to perform his sacred duties faithfully by doing tarpana, chanting Gayatri and remembering Veda Vyasa.
 
@@ -115,9 +115,9 @@ Vishwarupa Darshan is a special festival celebrated in the month of Kartika duri
 
 On the night of Karthika Shuddha Chaturdashi, after returning to the temple from the town festival and offering service to Sri Varadaraja Swami Ashtaavadhaana, fruit offerings are made to Sri God by ten members of the town and prayers are performed for the success of the upcoming festival.
 
-On Kartika Shuddha Purnima, Agrodaka is brought from Rudratheerth for the anointing of Shri God on Brahmi Muhurta. Then Pavamanabhisheka, Panchamritabhisheka, Mahanaivedya and MahaMangalaarati (three-time worship) are performed. Sri Varadaraja Swami, decked in Atta Prabhavali, goes out to the forest (Ambatirtha) on the full moon of Kartika along with the Samaj Bandhavar, as if "Bhakuta Jana is behind you".
+On Kartika Shuddha Purnima, Agrodaka is brought from Rudratheerth for the anointing of Shri God on Brahmi Muhurta. Then Pavamanabhisheka, Panchamritabhisheka, Mahanaivedya and MahaMangalaarati (three-time worship) are performed. Sri Varadaraja Swami, decked in Atta Prabhavali, goes out to the forest (Ambatirtha) on the full moon of Kartika along with the Samaj Bandhavar, as if "Bhakuta Jana is behind you". Then the sanctum is sealed.
 
-Kalasa The field is surrounded by Panchatirthas, Ambathirtha has its own mythological and geographical features. Sri Venkataramana Temple Utsav Murthy is mesmerizing towards the Ambathirtha with chhatra, chamara, Mangalainstrument and impada bhajanavali. After abhisheka and puja, the sanctum sanctorum is sealed.
+Kalasa The field is surrounded by Panchatirthas, Ambathirtha has its own mythological and geographical features. Sri Venkataramana Temple Utsav Murthy is mesmerizing towards the Ambathirtha with chhatra, chamara, Mangalainstrument and impada bhajanavali.
 
 ### Dhatri Havan (Amalaka Puja)
 From time to time Dhatri Havan is held at Sri Chennakesava Temple and Vanabhojana at the temple. In the month of Kartika, Dhatri (gooseberry) tree is worshiped and worship of Kartika Damodar is done with shodashopacharas, jaggery, tovve, ghee with Dhatri namana mantra, homa etc.
@@ -146,7 +146,7 @@ On Kartika Bahula Padya, after the opening of the gates, the festival proceeds t
 
 Srimannarayana, who goes into yogic sleep on Asadha Shuddha Ekadashi, awakens on Dwadashi of Kartika month. We celebrate that day as 'Utthana Dwadashi'. On this day, prayers are offered to Lord Damodar in a forest full of chuta (mango), ashwaththa, champaka, ala, dhatri (nelli) and tulsi.
 
-**Legendary Background:** Tulsi has the name 'Vrinda'. Vrinda is the wife of Jalandhara, a demon. When no one is able to kill Jalandhara due to the influence of her chastity, Vrinde's chastity is broken when Vishnu comes disguised as Jalandhara and Jalandhara collapses. When Vrinda, knowing the matter, was on the pyre, Parvati built tulsi-nelli plants around the pyre and created Vrindavan, while Vishnu worshiped the tulsi. The same Vrinde was later born as Rukmini and married Lord Krishna on the day of Kartika Shuddha Dwadashi. The memory of this divine marriage festival is 'Utthana Dwadashi - Tulsee Vivah'.
+**Legendary Background:** Tulsi has the name 'Vrinda'. Vrinda is the wife of a demon called Jalandhara. When no one is able to kill Jalandhara due to the influence of her chastity, Vrinde's chastity is broken when Vishnu comes disguised as Jalandhara and Jalandhara collapses. When Vrinda, knowing the matter, was on the pyre, Parvati built tulsi-nelli plants around the pyre and created Vrindavan, while Vishnu worshiped the tulsi. The same Vrinde was later born as Rukmini and married Lord Krishna on the day of Kartika Shuddha Dwadashi. The memory of this divine marriage festival is 'Utthana Dwadashi - Tulsee Vivah'.
 
 ---
 

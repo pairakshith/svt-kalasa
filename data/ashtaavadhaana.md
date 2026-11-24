@@ -86,7 +86,7 @@
 
 ## <span data-trans-id="ashta_page.sec_gadya"> ಗದ್ಯಸೇವೆ </span>
 :::transliterate{sourceScript="kannada"}
-ಶ್ರದ್ಧಾನ್ವಿತನೆನಿಸಿ ಅನವರತವು ಹೃನ್ಮನದೊಳಿದ್ದು ಸಲಹಿದಾತನೇ|
+ಶ್ರದ್ಧಾನ್ವಿತನೆನಿಸಿ ಅನವರತವು  ಹೃನ್ಮನದೊಳಿದ್ದು ವಾಂಛಿತವನ್ನಿತ್ತು ಸಲಹಿದಾತನೇ|
 ಉದ್ಧರಿಸಿ ಕಾವ ದೇವನೇ ಗದ್ಯವನೇ ಕೇಳು ಕೃಪಾಂಗವರ ಶ್ರೀರಂಗ ||
 ಬಹುಪರಾಕ್ ಸ್ವಾಮಿ ಗದ್ಯಸೇವ ಸೇವಪ್ರಿಯ ಗದ್ಯಸೇವಮವಧಾರಯ ||
 :::
@@ -94,6 +94,7 @@
 * :translate[ಶ್ರದ್ಧಾನ್ವಿತನೆನಿಸಿ: ಭಕ್ತರ ಶ್ರದ್ಧೆಯನ್ನು ಮೆಚ್ಚುವವನಾಗಿ.]{id="exp_33" file="en_ashtaavadhaana.json"}
 * :translate[ಅನವರತವು: ಯಾವುದೇ ಬಿಡುವಿಲ್ಲದೆ ನಿರಂತರವಾಗಿ.]{id="exp_34" file="en_ashtaavadhaana.json"}
 * :translate[ಹೃನ್-ಮನದೊಳಿದ್ದು: ಹೃದಯ ಮತ್ತು ಮನಸ್ಸುಗಳ ಒಳಗೆ ಅಂತರ್ಯಾಮಿಯಾಗಿ ನೆಲೆಸಿ.]{id="exp_35" file="en_ashtaavadhaana.json"}
+* :translate[ವಾಂಛಿತವನ್ನಿತ್ತು: ಬಯಸಿದ್ದನ್ನು ನೀಡಿ]{id="exp_130" file="en_ashtaavadhaana.json"}
 * :translate[ಸಲಹಿದಾತನೇ: ನಮ್ಮನ್ನು ಸಾಕಿ ಸಲಹುವವನೇ.]{id="exp_36" file="en_ashtaavadhaana.json"}
 * :translate[ಉದ್ಧರಿಸಿ ಕಾವ: ಸಂಸಾರದ ಸಾಗರದಿಂದ ಮೇಲಕ್ಕೆತ್ತಿ (ಉದ್ಧರಿಸಿ) ರಕ್ಷಿಸುವ ದೇವನೇ.]{id="exp_37" file="en_ashtaavadhaana.json"}
 * :translate[ಗದ್ಯವನೇ ಕೇಳು: ಛಂದಸ್ಸಿನ ಬಂಧನವಿಲ್ಲದ, ನೇರವಾದ ಭಕ್ತಿಭಾವದ ಗದ್ಯ ಕಾವ್ಯವನ್ನು ಆಲಿಸು.]{id="exp_38" file="en_ashtaavadhaana.json"}

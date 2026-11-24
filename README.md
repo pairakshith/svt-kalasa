@@ -1,6 +1,6 @@
 # ಶ್ರೀ ವೆಂಕಟರಮಣ ದೇವಸ್ಥಾನ, ಕಳಸ (SVT Kalasa)
 
-**Live site:** <https://pairakshith.github.io/svt-kalasa/>
+**Live site:** [svtkalasa.org](https://svtkalasa.org)
 
 A digital information hub for **Sri Venkataramana Temple, Melangadi, Kalasa**. It gives devotees festival schedules, religious traditions, daily rituals, and the temple's history, in **Kannada** with key terms in **English**.
 

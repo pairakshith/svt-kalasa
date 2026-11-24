@@ -10,13 +10,14 @@ I extend our deepest gratitude to everyone who lent a hand, shared feedback, or 
 
 ---
 
-## Books & Audio Sources
+## Books, Audio and other sources
 
 - **Bhakti Mala (ಭಕ್ತಿ ಮಾಲಾ)** — Written by Vivekananda Bhat.
 - [Prathosh.in: Vagdhenu](https://prathosh.in/vagdhenu/) — Platform used for converting stotras and shlokas into MP3 audio format.
 - [ದಶಾವತಾರ ಮಂಗಳ](https://kannada.indiaforyou.in/)
 - [ಜಯಮಂಗಳಂ](https://kannadanudi.com/geethavihaara/bhaktisudhe/Mangalam%20Jaya%20Mangalam)
 - **Photo Credits** (Home page & icon): [paiz_shutter](https://www.instagram.com/paiz_shutter?psln=NTl1dHR6aWI1cDhl)
+- Domain name and site hosting support: Gnanesh Pai, Rudrapaada
 
 ---
 
